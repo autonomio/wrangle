@@ -1,2 +1,4 @@
+<img src='https://raw.githubusercontent.com/autonomio/wrangle/master/logo.png' width=300px>
+
 # wrangle
-A data transformation package for deep learning with Autonomio, Keras and TensorFlow.
+Wrangle solves the problem of spending disproportionate in redundant, easy-to-automate, data preparation tasks. 
