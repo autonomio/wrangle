@@ -48,8 +48,11 @@ def mean_zero(data, retain=None):
     retain :: if some column should be excluded from rescaling
     '''
     # avoiding transformation of y, labels, etc
-
-    data = data.copy(deep=True)
+    try:
+        data = data.copy(deep=True)
+    except TypeError:
+        data = pd.DataFrame(data)
+        is_array = True
 
     try:
         col_list = list(data.columns)
@@ -69,4 +72,8 @@ def mean_zero(data, retain=None):
         col_data = data[col] - data_mean
         data[col] = col_data / data_std
 
-    return data
+    try:
+        len(is_array)
+        return data.values
+    except UnboundLocalError:
+        return data

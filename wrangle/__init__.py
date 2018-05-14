@@ -15,5 +15,6 @@ from .value_starts_with import value_starts_with
 from .wrangler_utils import string_contains_to_binary
 from .x_transform import x_transform
 from .y_transform import y_transform
+from .val_split import val_split
 
 __version__ = "0.3.0"
