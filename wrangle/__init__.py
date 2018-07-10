@@ -16,5 +16,6 @@ from .wrangler_utils import string_contains_to_binary
 from .x_transform import x_transform
 from .y_transform import y_transform
 from .val_split import val_split
+from .shuffle import shuffle
 
 __version__ = "0.3.0"

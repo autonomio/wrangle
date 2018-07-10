@@ -72,8 +72,8 @@ def mean_zero(data, retain=None):
         col_data = data[col] - data_mean
         data[col] = col_data / data_std
 
-    try:
-        len(is_array)
+    try: 
+        is_array == True
         return data.values
     except UnboundLocalError:
         return data
