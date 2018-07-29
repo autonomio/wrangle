@@ -4,7 +4,7 @@
 
 DESCRIPTION = "Wrangle - Data Preparation for Deep Learning"
 LONG_DESCRIPTION = """\
-Wrangle takes the headache away from most common data preparation 
+Wrangle takes the headache away from most common data preparation
 and wrangling tasks.
 """
 
@@ -14,7 +14,7 @@ MAINTAINER_EMAIL = 'mailme@mikkokotila.com'
 URL = 'http://autonom.io'
 LICENSE = 'MIT'
 DOWNLOAD_URL = 'https://github.com/autonomio/wrangle/'
-VERSION = '0.3'
+VERSION = '0.3.1'
 
 try:
     from setuptools import setup
