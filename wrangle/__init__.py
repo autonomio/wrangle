@@ -18,4 +18,4 @@ from .y_transform import y_transform
 from .val_split import val_split
 from .shuffle import shuffle
 
-__version__ = "0.3.0"
+__version__ = "0.3.1"
