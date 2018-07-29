@@ -1,28 +1,27 @@
 dist: trusty
 sudo: required
-before_install:
+before_install: 
 language: python
 python:
- - '2.7'
- - '3.4'
- - '3.5'
- - '3.6'
+- '2.7'
+- '3.4'
+- '3.5'
+- '3.6'
 install:
- - pip install -r requirements.txt
- - python setup.py install
- - pip install coveralls
+- pip install -r requirements.txt
+- python setup.py install
+- pip install coveralls
 before_script:
- - export DISPLAY=:99.0
- - sh -e /etc/init.d/xvfb start
- - sleep 3
+- export DISPLAY=:99.0
+- sh -e /etc/init.d/xvfb start
+- sleep 3
 script:
- - coverage run --source=wrangle ./test_script.py
+- coverage run --source=wrangle ./test_script.py
 after_success: coveralls
-
 deploy:
   provider: pypi
-  user: "mikkokotila"
+  user: mikkokotila
   password:
-    secure: "bqg8QBOP4QnrmNt0rXzTLv2r4oyhgdtRqvlGl2IDOH9LAnRrcRSXeZrdXBQc9d4wMQ1cwtn8q/cXeF6HHxIvvX+HaD+V0G16kCjgA5nz0+D5xSeqlwYZO2V/uzhPFpVGp8DCeDRR5spNFtkH9A5U6qga/Bm8wASlYod2GSi2BKCwApwG2xfiVEuET3+5hS9j2F4wAcwHOihZu7H33YNyZ9/gCEJBYkshSJxqCo0/aVJHWth6ja1YJ1T6EMWLHsJdCkEZk5cT2Dx/HO5D/vqzUe2kTrdqFjhcvpyk6yGH7CgxkS1x9MdjAFbrcqxA9wJjbpNHgyMd0kHzvDgPc5ZWr3yyCkb5FHLk+qlPSy6uuvs3+0e+9Sm/SctFgCN0HfznGoXSUxANDKl2tvgtkVBQUZzqhOtQ6PxlmcFbTYhJhmbnIO3qoGec7FN+Apz0c7RV/0e/ZqZMLhG60eybUCeBMElzq2rGlYEmceSI1VAIkqf68fdfsWyFr9t0naJXbQDr3q09Vyx9Cy011DtwgWUN9Xy/dlZmGvAA9IDGsxUfBp8R5eEhiduleHPn0nJDwyJo16XOJR7c+JGMZmQdd/bKtLpR/fr40AFsK52Z6ynRs1XKyBFQxifIfnt68f1CWwbSaoKAKVZbCJZq0gGhA4mPzuJaIzfJ3/6GA5eh5tyfnRw="
+    secure: puck8pvLknVtyMb51AWTmez1SYTWkEw8OYOvsiq9zTq2ufbP3JhW/CavRRxnqEPz+IdpJYb2mRyVFEv0kj/a+bn+7dSSe+QxZ5tLlbDuw8/rT9Iw8Mx11gajo5Vl/3R/VWdmbO7G6ndoSuJRHIDo80F7TL9Yp1ngriqouG+FGMfmEnwu+w0HlW64dzrdnOa9yy8gmHRDeEQa8i/Xd65g8VG1jhBIE6at0dK6XZmWCcpY73yZo2nPDIxuQp7dU+chmfupzNSDRuad+O/MY+ZeorEHiKg+WOYiks6EvLkKhad3gjXKTOCnH7ZgRboOKk7hKDinK29bTAgtgjoLlPwStXgrsy+TsXlJyHm9kjOE+lXbGVOZIL9yYXHGWgMOcN5/o5jPoU6hHtwDCVoQSA3zBMApr168ZHncS8k5E1J2UkfZwbKTAS7GQ6KnpcSYsGoyvr6kye31gOjL/ahi7eo5u0POekj/pf3elTiCdc7YqppLKPArUS3b5Dm1GZO5md8OE7mNyw5/D+us+HShzwpKSlNj/LIdIwKEKoGNQLcdgh49WLZuyOcwzwCNUvvCmlhxkwvbA/ds3o9gGOWuNJs2UNdT26au330eZTzZL6FQ/O2tv9IsrX7XOkZyyjpHUnIGY9be3/tLDKnCmlzMLeVztl2T9fh7OkpfXYtKkOBjUgQ=
   on:
     branch: production
