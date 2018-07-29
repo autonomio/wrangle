@@ -1,16 +1,15 @@
-import numpy as np
-
 from wrangle.shuffle import shuffle
 
-def val_split(x, y, split, shuffle=True):
+
+def val_split(x, y, split, shuffled=True):
 
     '''VALIDATION SPLIT OF X AND Y
     Based on the Scan() parameter val_split
     both 'x' and 'y' are split.
     '''
 
-    if shuffle == True:
-        random_shuffle(self)
+    if shuffled is True:
+        x, y = shuffle(x, y)
 
     len_x = len(x)
     limit = int(len_x * (1 - split))
@@ -22,4 +21,3 @@ def val_split(x, y, split, shuffle=True):
     y_val = y[limit:]
 
     return x_train, y_train, x_val, y_val
-    

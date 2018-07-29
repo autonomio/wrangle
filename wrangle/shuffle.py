@@ -1,7 +1,7 @@
 from numpy import arange, random
 
 
-def shuffle(x,y):
+def shuffle(x, y):
 
     '''Randomize two arrays in same order'''
 
