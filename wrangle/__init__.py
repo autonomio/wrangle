@@ -1,5 +1,5 @@
 from .category_labeling import to_category_labels
-from .clean_colnames import clean_header
+from .clean_colnames import clean_colnames
 from .col_name_generator import col_name_generator
 from .column_handler import column_mover
 from .dataframe import df_merge
@@ -17,5 +17,11 @@ from .x_transform import x_transform
 from .y_transform import y_transform
 from .val_split import val_split
 from .shuffle import shuffle
+from .to_multiclass import to_multiclass
+from .to_multilabel import to_multilabel
+from .unique_per_col import unique_per_col
+from .keep_strong import keep_strong
 
-__version__ = "0.3.1"
+from pandas import read_csv
+
+__version__ = "0.3.2"
