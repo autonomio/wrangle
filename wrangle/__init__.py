@@ -21,6 +21,8 @@ from .to_multiclass import to_multiclass
 from .to_multilabel import to_multilabel
 from .unique_per_col import unique_per_col
 from .keep_strong import keep_strong
+from .ols_corr import ols_corr
+from .corr import corr
 
 from pandas import read_csv
 
