@@ -26,4 +26,4 @@ from .corr import corr
 
 from pandas import read_csv
 
-__version__ = "0.3.2"
+__version__ = "0.4.0"
