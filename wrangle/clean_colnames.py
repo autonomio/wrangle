@@ -1,7 +1,7 @@
 import pandas as pd
 
 
-def clean_header(data, modify_df=True):
+def clean_colnames(data, modify_df=True):
 
     temp = pd.Series(data.columns)
 
