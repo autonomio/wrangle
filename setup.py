@@ -34,7 +34,10 @@ def check_dependencies():
         import pandas
     except ImportError:
         install_requires.append('pandas')
-
+    try:
+        import statsmodels
+    except ImportError:
+        install_requires.append('statsmodels')
 
     return install_requires
 
