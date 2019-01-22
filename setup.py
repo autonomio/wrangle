@@ -22,32 +22,9 @@ try:
 except ImportError:
     from distutils.core import setup
 
-def check_dependencies():
-
-    install_requires = []
-
-    try:
-        import numpy
-    except ImportError:
-        install_requires.append('numpy')
-    try:
-        import pandas
-    except ImportError:
-        install_requires.append('pandas')
-    try:
-        import statsmodels
-    except ImportError:
-        install_requires.append('statsmodels')
-    try:
-        import scipy
-    except ImportError:
-        install_requires.append('scipy')
-
-    return install_requires
+install_requires = ['numpy', 'pandas', 'statsmodels', 'scipy', 'sklearn']
 
 if __name__ == "__main__":
-
-    install_requires = check_dependencies()
 
     setup(name=DISTNAME,
           author=MAINTAINER,
