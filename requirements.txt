@@ -3,3 +3,5 @@ numpy
 statsmodels
 scipy
 sklearn
+keras
+tensorflow
