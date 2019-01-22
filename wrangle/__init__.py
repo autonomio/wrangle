@@ -17,13 +17,17 @@ from .x_transform import x_transform
 from .y_transform import y_transform
 from .val_split import val_split
 from .shuffle import shuffle
-from .to_multiclass import to_multiclass
-from .to_multilabel import to_multilabel
+from .to_multiclass import to_multiclass as df_to_multiclass
+from .to_multilabel import to_multilabel as df_to_multilabel
 from .unique_per_col import unique_per_col
 from .keep_strong import keep_strong
-from .ols_corr import ols_corr
-from .corr import corr
+from .ols_corr import ols_corr as correlation_ols
+from .corr import corr as correlation_spearman
+from .array_to_multilabel import array_to_multilabel
+from .create_synth_model import *
+from .create_synth_data import create_synth_data
+from .correlations import *
 
 from pandas import read_csv
 
-__version__ = "0.4.0"
+__version__ = "0.5.0"
