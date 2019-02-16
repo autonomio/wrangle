@@ -4,12 +4,6 @@
   <br>
 </h1>
 
-<h1 align="center">
-  <br>
-  <a href="http://autonom.io"><img src="https://raw.githubusercontent.com/autonomio/talos/master/logo.png" alt="Talos" width="350"></a>
-  <br>
-</h1>
-
 <h3 align="center">Data preparation for deep learning</h3>
 
 <p align="center">
@@ -25,20 +19,17 @@
 </p>
 
 <p align="center">
-  <a href="#Wrangle">Wrangle</a> â¢
-  <a href="#Key-Features">Key Features</a> â¢
-  <a href="#Install">Install</a> â¢
-  <a href="#Support">Support</a> â¢
-  <a href="https://github.com/autonomio/wrangle/issues">Issues</a> â¢
-  <a href="#License">License</a> â¢
+  <a href="#Wrangle">Wrangle</a> •
+  <a href="#Key-Features">Key Features</a> •
+  <a href="#Install">Install</a> •
+  <a href="#Support">Support</a> •
+  <a href="https://github.com/autonomio/wrangle/issues">Issues</a> •
+  <a href="#License">License</a> •
   <a href="https://github.com/autonomio/wrangle/archive/master.zip">Download</a>
 </p>
 <hr>
 <p align="center">
 Wrangle provides the building blocks for entirely avoiding redundant, easy-to-automate, data preparation tasks.
-</p>
-<p align="center">
-<img src='https://i.ibb.co/3NFH646/keras-model-to-talos.gif' width=550px>
 </p>
 
 ### Wrangle
