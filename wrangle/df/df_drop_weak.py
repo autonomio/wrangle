@@ -1,5 +1,3 @@
-
-
 def df_drop_weak(data,
                  y,
                  min_correlation=.2,

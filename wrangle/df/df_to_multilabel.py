@@ -1,5 +1,5 @@
 from pandas import get_dummies
-from .unique_per_col import unique_per_col
+from .df_count_uniques import df_count_uniques
 
 
 def df_to_multilabel(data, max_uniques=30, ignore_y=None, destructive=False):
@@ -29,7 +29,7 @@ def df_to_multilabel(data, max_uniques=30, ignore_y=None, destructive=False):
     if destructive is False:
         data = data.copy(deep=True)
 
-    keys = list(unique_per_col(data).index)
+    keys = list(df_count_uniques(data).index)
 
     if ignore_y is not None:
         keys.remove(ignore_y)

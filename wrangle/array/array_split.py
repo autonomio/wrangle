@@ -1,4 +1,4 @@
-from .array_shuffle_random import array_shuffle_random
+from .array_random_shuffle import array_random_shuffle
 
 
 def array_split(x, y, split, shuffled=True):
@@ -9,7 +9,7 @@ def array_split(x, y, split, shuffled=True):
     '''
 
     if shuffled is True:
-        x, y = array_shuffle_random(x, y)
+        x, y = array_random_shuffle(x, y)
 
     len_x = len(x)
     limit = int(len_x * (1 - split))

@@ -1,9 +1,9 @@
 import pandas as pd
 
-from .col_name_generator import col_name_generator
-from .nan_imputer import nan_imputer
-from .col_to_binary import col_to_binary
-from .nan_handler import nan_filler
+from .df_rename_cols import df_rename_cols
+from .df_impute_nan import df_impute_nan
+from ..col.col_to_binary import col_to_binary
+from ..col.col_fill_nan import col_fill_nan
 
 
 def df_to_binary(data, y):
@@ -39,14 +39,14 @@ def df_to_binary(data, y):
             # handle columns with nans
             else:
                 if data[col].dtype != 'O':
-                    imputed = nan_imputer(data[col])
+                    imputed = df_impute_nan(data[col])
                     temp = _concat_df(imputed, temp)
                 else:
-                    filled = nan_filler(data, col, 0)
+                    filled = col_fill_nan(data, col, 0)
                     labeled = pd.Categorical(filled).codes
                     temp = _concat_df(labeled, temp)
 
-    temp = col_name_generator(temp)
+    temp = df_rename_cols(temp)
     temp = temp.astype(int)
     temp = pd.concat([ind_var, temp], axis=1)
 

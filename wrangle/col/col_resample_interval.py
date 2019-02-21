@@ -1,5 +1,5 @@
 import pandas as pd
-from .utils.groupby_func import groupby_func
+from ..utils.groupby_func import groupby_func
 
 
 def col_resample_interval(data, x, dt_col, mode='first', freq=60):

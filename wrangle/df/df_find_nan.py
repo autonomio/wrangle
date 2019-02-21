@@ -52,27 +52,3 @@ def nan_dropper(data, treshold=.9):
     data.dropna(inplace=True)
 
     return data
-
-
-def nan_filler(data, cols, fill_with):
-
-    '''
-    Fills nans in a specific column or a range of
-    columns, using np.isnull() through pandas.
-
-    This is for the cases where some nans are dropped,
-    but some nans are converted in to zero (or other)
-    first.
-
-    '''
-
-    if data[cols].dtype == 'O':
-        fill_with = str(fill_with)
-
-    if type(cols) != list:
-        cols = [cols]
-    for col in cols:
-        cols = [cols]
-        data = data[col].fillna(fill_with)
-
-    return data

@@ -1,7 +1,7 @@
 from types import FunctionType
 from inspect import isclass
 
-from .utils.is_number import is_number
+from ..utils.is_number import is_number
 
 
 def df_to_numeric(data, destructive=False):

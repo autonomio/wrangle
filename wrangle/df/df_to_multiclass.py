@@ -1,5 +1,5 @@
 from pandas import Categorical
-from .unique_per_col import unique_per_col
+from .df_count_uniques import df_count_uniques
 
 
 def df_to_multiclass(data, max_uniques=30, ignore_y=None, destructive=False):
@@ -23,7 +23,7 @@ def df_to_multiclass(data, max_uniques=30, ignore_y=None, destructive=False):
     if destructive is False:
         data = data.copy(deep=True)
 
-    temp = unique_per_col(data)
+    temp = df_count_uniques(data)
     keys = list(temp.index)
 
     if ignore_y is not None:

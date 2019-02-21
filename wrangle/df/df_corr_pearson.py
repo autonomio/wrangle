@@ -1,14 +1,17 @@
 def df_corr_pearson(data, y, excluded_list=False):
     '''One-by-One Correlation
 
-    Based on the input data, returns a dictionary and list where the
-    dictionary contains pearson correlation coefficient and the list
-    contains columns that are not in numeric form.
+    Based on the input data, returns a dictionary where each column
+    is provided a correlation coefficient and number of unique values.
+    Columns with non-numeric values will have None as their coefficient.
 
     data : dataframe
         A Pandas dataframe with the data
     y : str
         The prediction variable
+    excluded_list : bool
+        If True, then also a list will be returned with column labels for
+        non-numeric columns.
 
     '''
 

@@ -36,7 +36,7 @@ Wrangle provides the building blocks for entirely avoiding redundant, easy-to-au
 
 TL;DR
 
-Wrangle dramatically simplifies 95% of data preparation tasks involved in advanced deep learning practice and provides the required building blocks for near-future automated machine intelligence workflows.
+Wrangle dramatically simplifies 95% of data preparation tasks involved in advanced deep learning practice and provides the required building blocks for near-future automated machine intelligence workflows. Wrangle is created to solve the problem of avoiding beneficial workflow steps due to complexity, cognitive overhead, and the anxiety that comes with it.
 
 ### Key Features
 

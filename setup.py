@@ -38,7 +38,11 @@ if __name__ == "__main__":
           version=VERSION,
           download_url=DOWNLOAD_URL,
           install_requires=install_requires,
-          packages=['wrangle', 'wrangle.utils'],
+          packages=['wrangle',
+                    'wrangle.utils',
+                    'wrangle.df',
+                    'wrangle.col',
+                    'wrangle.array'],
 
           classifiers=[
                      'Intended Audience :: Science/Research',

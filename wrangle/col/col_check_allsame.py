@@ -1,7 +1,7 @@
 from numpy import unique
 
 
-def col_has_allsame(x):
+def col_check_allsame(x):
 
     '''Checks if all values in a column
     have the same value. This can be detrimental

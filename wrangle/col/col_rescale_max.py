@@ -2,7 +2,7 @@ import math
 import numpy as np
 
 
-def max_rescale(values, scale=1, to_int=False):
+def col_rescale_max(values, scale=1, to_int=False):
 
     '''MinMax Rescaler
 

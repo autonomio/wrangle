@@ -1,7 +1,7 @@
-from .utils.groupby_func import groupby_func
+from ..utils.groupby_func import groupby_func
 
 
-def df_groupby(data, by, func):
+def df_to_groupby(data, by, func):
 
     '''Takes in a dataframe and returns it in a grouped by format.
 
