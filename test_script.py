@@ -38,3 +38,30 @@ _null = wr.df_to_lower(df)
 _null = wr.df_to_multiclass(df)
 _null = wr.df_to_multilabel(df)
 _null = wr.df_to_numeric(df)
+
+# test all the attributes starting with col_
+
+_null = wr.col_check_allsame(df, 'category')
+_null = wr.col_corr_ols(df.head(50), 'bouncerate1', 'bouncerate1')
+_null = wr.col_drop_outliers(df, 'bouncerate1', threshold=1)
+_null = wr.col_fill_nan(df, 'admin_city')
+_null = wr.col_impute_nan(df.bouncerate1)
+_null = wr.col_move_place(df, 'bouncerate1', 'first')
+_null = wr.col_move_place(df, 'bouncerate1', 'last')
+_null = wr.col_resample_equal(df.head(50), 'adnetworks', 1)
+_null = wr.col_rescale_max(df.bouncerate1.values)
+_null = wr.col_to_binary(df, 'bouncerate1')
+_null = wr.col_to_cols(df[['adnetworks', 'bouncerate1']].reset_index(), 'adnetworks', 'index')
+_null = wr.col_to_multilabel(df, 'category')
+_null = wr.col_to_split(df.head(10), 'top_downstream', sep='.')
+
+# test all the attributes starting with array_
+
+_null = wr.array_random_shuffle(df.bouncerate1, df.bouncerate2)
+_null = wr.array_random_weighted(df.bouncerate1.head(10), 'normal', 10)
+_null = wr.array_reshape_conv1d(df.values)
+_null = wr.array_reshape_lstm(df.bouncerate1, 10, 10)
+_null = wr.array_split(df.values, df.bouncerate1.values, .1)
+_null = wr.array_to_generator(df.values, df.bouncerate1, 20)
+_null = wr.array_to_kfold(df.values, df.bouncerate1)
+_nulll = wr.array_to_multilabel(df.head(5).adnetworks.values)

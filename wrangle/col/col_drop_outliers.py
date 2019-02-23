@@ -27,7 +27,7 @@ def col_drop_outliers(data,
     if destructive is False:
         data = data.copy(deep=True)
 
-    data = data[data[col].isna() is False]
+    data = data[data[col].isna() == False]
 
     if mode == 'zscore':
         data['zscore'] = sc.zscore(data[col].astype(float))

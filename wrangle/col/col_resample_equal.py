@@ -12,6 +12,5 @@ def col_resample_equal(data, col, sample_size):
     for col_label in data[col].unique():
         sample = data[data[col] == col_label].sample(sample_size)
         new_data = new_data.append(sample)
-    out = new_data
 
-    return out
+    return new_data
