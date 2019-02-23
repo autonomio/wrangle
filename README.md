@@ -13,7 +13,7 @@
   </a>
 
   <a href="https://coveralls.io/github/autonomio/wrangle">
-    <img src="https://img.shields.io/coveralls/github/wrangle/talos.svg?style=for-the-badge&logo=appveyor" alt="Talos Coveralls">
+    <img src="https://img.shields.io/coveralls/github/autonomio/wrangle.svg?style=for-the-badge&logo=appveyor" alt="Talos Coveralls">
   </a>
 
 </p>
