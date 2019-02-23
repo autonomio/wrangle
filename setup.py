@@ -22,7 +22,8 @@ try:
 except ImportError:
     from distutils.core import setup
 
-install_requires = ['numpy', 'pandas', 'statsmodels', 'scipy', 'sklearn', 'keras', 'tensorflow']
+install_requires = ['numpy', 'pandas', 'statsmodels',
+                    'scipy', 'sklearn', 'keras']
 
 if __name__ == "__main__":
 

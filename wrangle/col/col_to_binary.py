@@ -1,7 +1,7 @@
 import pandas as pd
 
 
-def col_to_binary(data, col, func, destructive=False):
+def col_to_binary(data, col, func='median', destructive=False):
 
     '''Takes in a continuous feature and transforms into
     a binary class.

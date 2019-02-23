@@ -1,55 +1,40 @@
-import numpy as np
-import random
+import wrangle as wr
 
 
-def df_impute_nan(data, impute_mode='mean_by_std'):
+def df_impute_nan(data,
+                  cols='all',
+                  impute_mode='mean_by_std',
+                  destructive=False):
 
-    '''NaN Imputer
+    '''Impute NaN values in a dataframe
 
     Provides five different options for imputing nan
     values within a a series / array of data.
 
-    USE: nan_imputer(titanic.Age,'mean')
-
-    OPTIONS: The default is 'mean_by_std', with other
-    options 'mean', 'median', 'mode', and 'common'.
+    data : DataFrame
+        A pandas dataframe with the data.
+    cols : 'all' or list
+        By default all columns will be imputed. Alternatively
+        accepts a list of columns as input.
+    impute_mode : str
+        The default is 'mean_by_std', with other
+        options 'mean', 'median', 'mode', and 'common'.
+    destructive : bool
+        If set to True, will make changes directly to the dataframe which
+        may be useful with very large dataframes instead of making a copy.
 
     '''
 
-    l = []
+    if destructive is False:
+        data = data.copy(deep=True)
 
-    if impute_mode == 'mean':
-        val = data.mean()
+    if cols == 'all':
+        cols = data.columns
 
-    if impute_mode == 'median':
-        val = data.median()
+    for col in cols:
+        try:
+            data[col] = wr.col_impute_nan(data[col])
+        except TypeError:
+            pass
 
-    if impute_mode == 'mode':
-        val = data.mode()
-
-    if impute_mode == 'common':
-        val = data.value_counts().index[0]
-
-    if impute_mode == 'mean_by_std':
-        val = data.mean()
-        std = data.std()
-        lo = val - std
-        hi = val + std
-
-    else:
-        # create dummmy values for random pick
-        lo = val
-        hi = val
-
-    c = len(data)
-
-    for i in range(c):
-
-        if np.isnan(data[i]) == True:
-
-            l.append(random.randint(int(lo), int(hi)))
-
-        else:
-            l.append(data[i])
-
-    return l
+    return data

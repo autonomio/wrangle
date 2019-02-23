@@ -4,4 +4,3 @@ statsmodels
 scipy
 sklearn
 keras
-tensorflow

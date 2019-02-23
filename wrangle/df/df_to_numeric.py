@@ -29,9 +29,15 @@ def df_to_numeric(data, destructive=False):
             continue
 
         # perform the conversion to int or float
-        try:
-            data[col] = data[col].astype(int)
-        except ValueError:
-            data[col] = data[col].astype(float)
+        if data[col].apply(is_number).sum() == len(data):
+            try:
+                data[col] = data[col].astype(int)
+            except ValueError:
+                try:
+                    data[col] = data[col].astype(float)
+                except ValueError:
+                    data[col] = data[col]
+        else:
+            data[col] = data[col]
 
     return data

@@ -1,10 +1,10 @@
-from keras.models import Sequential
-from keras.layers import Dense
-
 from .create_synth_data import create_synth_data
 
 
 def _base_for_model(mode, n=50, neurons=50):
+
+    from keras.models import Sequential
+    from keras.layers import Dense
 
     x, y = create_synth_data(mode, n=n)
     model = Sequential()
@@ -17,6 +17,8 @@ def _base_for_model(mode, n=50, neurons=50):
 
 def create_synth_multi_class_model(n=50, neurons=50):
 
+    from keras.layers import Dense
+
     x, y, model = _base_for_model('multi_class', n=n, neurons=neurons)
 
     model.add(Dense(4))
@@ -27,6 +29,8 @@ def create_synth_multi_class_model(n=50, neurons=50):
 
 
 def create_synth_regression_model(n=50, neurons=50):
+
+    from keras.layers import Dense
 
     x, y, model = _base_for_model('regression', n=n, neurons=neurons)
 
@@ -39,6 +43,8 @@ def create_synth_regression_model(n=50, neurons=50):
 
 def create_synth_multi_label_model(n=50, neurons=50):
 
+    from keras.layers import Dense
+
     x, y, model = _base_for_model('multi_label', n=n, neurons=neurons)
 
     model.add(Dense(4, activation='softmax'))
@@ -49,6 +55,8 @@ def create_synth_multi_label_model(n=50, neurons=50):
 
 
 def create_synth_binary_model(n=50, neurons=50):
+
+    from keras.layers import Dense
 
     x, y, model = _base_for_model('binary', n=n, neurons=neurons)
 

@@ -30,6 +30,12 @@ def df_rescale_meanzero(data, retain=None):
     if retain is not None:
         col_list.remove(retain)
 
+    numeric = data.select_dtypes(exclude=['int', 'float', 'category'])
+    numeric = list(numeric.columns)
+
+    for col in numeric:
+        col_list.remove(col)
+
     for col in col_list:
 
         # storing the temp values

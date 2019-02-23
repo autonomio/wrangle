@@ -4,7 +4,8 @@ import pandas as pd
 
 def df_rescale_log(data, retain_cols=None, destructive=False):
 
-    '''
+    '''Transform dataframe to log1p.
+
     data : pandas dataframe
          A dataframe to be rescaled
     retain_cols : str or list
@@ -21,7 +22,9 @@ def df_rescale_log(data, retain_cols=None, destructive=False):
         data = data.drop(retain_cols, 1)
         temp = data[retain_cols]
 
-    data = data.apply(np.log1p)
+    numeric = data.select_dtypes(include=['int', 'float']).columns
+
+    data[numeric] = data[numeric].apply(np.log1p)
 
     if retain_cols is not None:
         return pd.merge(data, temp, left_index=True, right_index=True)

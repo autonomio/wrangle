@@ -21,7 +21,9 @@ def df_rescale_sqrt(data, retain_cols=None, destructive=False):
         data = data.drop(retain_cols, 1)
         temp = data[retain_cols]
 
-    data = data.apply(np.sqrt)
+    numeric = data.select_dtypes(include=['int', 'float']).columns
+
+    data[numeric] = data[numeric].apply(np.sqrt)
 
     if retain_cols is not None:
         return pd.merge(data, temp, left_index=True, right_index=True)

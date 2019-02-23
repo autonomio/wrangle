@@ -7,7 +7,8 @@ from .df_corr_randomforest import df_corr_randomforest
 from .df_count_uniques import df_count_uniques
 from .df_drop_col import df_drop_col
 from .df_drop_duplicates import df_drop_duplicates
-from .df_drop_nanrow import df_drop_nanrow
+from .df_drop_nanrows import df_drop_nanrows
+from .df_drop_nancols import df_drop_nancols
 from .df_drop_weak import df_drop_weak
 from .df_find_nan import df_find_nan
 from .df_impute_nan import df_impute_nan

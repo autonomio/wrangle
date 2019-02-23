@@ -1,32 +1,34 @@
-import pandas as pd
-import numpy as np
-import statsmodels.api as sm
-
-
-def df_corr_ols(data, y):
+def df_corr_ols(data, y, destructive=False):
 
     '''1-by-1 correlation with OLS for categorical values as strings.
 
-    Takes in string values of categories, and ranks them based on
-    strenght of relationship with 'y' and returns an ordinal
-    category representation.
+    Takes in a single column DataFrame where some columns are string
+    values of categories. Then performs an OLS test individually on
+    values of column returning an ordinal category representation (the greater
+    the value, the higher the correlation coefficient.)
 
     data : dataframe
         A Pandas dataframe with the data
     y : str
-        The prediction variable
+        The prediction variable.
+    destructive : bool
+        If set to True, will make changes directly to the dataframe which
+        may be useful with very large dataframes instead of making a copy.
+
     '''
 
-    y = np.array(y)
-    dummies = pd.get_dummies(data).values
+    import wrangle as wr
+    import warnings
 
-    model = sm.OLS(y, dummies)
-    results = model.fit()
-    r = results.summary2()
+    warnings.simplefilter('ignore')
 
-    ordinal = list(np.argpartition(r.tables[1]['Coef.'], 0) + 1)
+    if destructive is False:
+        data = data.copy(deep=True)
 
-    temp = data.astype('category')
-    temp.cat.categories = ordinal
+    for col in data.columns:
+        try:
+            wr.col_corr_ols(data, col, y, destructive=True)
+        except ValueError:
+            pass
 
-    return temp.astype(float)
+    return data
