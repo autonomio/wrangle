@@ -1,6 +1,6 @@
 dist: trusty
 sudo: required
-before_install: 
+before_install:
 language: python
 python:
 - '2.7'
