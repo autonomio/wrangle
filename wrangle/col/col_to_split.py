@@ -6,8 +6,7 @@ def col_to_split(data, col, col_names=None, sep=' ', destructive=False):
     '''Splits a single column to multiple columns. Replaces
     the original column so use destructive=True accordingly.
 
-    Note that each row needs to have the same number of items
-    after splitting.
+    NOTE: each row has to have the same number of items after splitting.
 
     data : pandas dataframe
         The dataframe to be modified.

@@ -11,11 +11,9 @@ def col_move_place(data, col, position='first', destructive=False):
         The column or columns to be moved
     position : str
         Either 'first' or 'last'
-
     destructive : bool
         If set to True, will make changes directly to the dataframe which
         may be useful with very large dataframes instead of making a copy.
-
     '''
 
     if destructive is False:

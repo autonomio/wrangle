@@ -1,4 +1,5 @@
 from .col_check_allsame import col_check_allsame
+from .col_corr_category import col_corr_category
 from .col_corr_ols import col_corr_ols
 from .col_drop_outliers import col_drop_outliers
 from .col_fill_nan import col_fill_nan
