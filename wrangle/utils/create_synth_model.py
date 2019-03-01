@@ -1,10 +1,9 @@
-from .create_synth_data import create_synth_data
-
-
 def _base_for_model(mode, n=50, neurons=50):
 
     from keras.models import Sequential
     from keras.layers import Dense
+
+    from .create_synth_data import create_synth_data
 
     x, y = create_synth_data(mode, n=n)
     model = Sequential()

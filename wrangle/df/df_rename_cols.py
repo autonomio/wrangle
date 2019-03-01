@@ -1,10 +1,8 @@
 def df_rename_cols(data, exclude=None, prefix='C', destructive=False):
 
     '''Generate sequential alphabetic names for columns
-
     Takes in a dataframe and generates alphabetic
     column names automatically.
-
     data : pandas dataframe
         A dataframe with one or more columns to be renamed.
     exclude : str
@@ -14,7 +12,6 @@ def df_rename_cols(data, exclude=None, prefix='C', destructive=False):
     destructive : bool
         If set to True, will make changes directly to the dataframe which
         may be useful with very large dataframes instead of making a copy.
-
     '''
 
     if destructive is False:

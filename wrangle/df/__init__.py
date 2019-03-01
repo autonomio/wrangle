@@ -13,12 +13,15 @@ from .df_drop_weak import df_drop_weak
 from .df_find_nan import df_find_nan
 from .df_impute_nan import df_impute_nan
 from .df_merge import df_merge
+from .df_rename_col import df_rename_col
 from .df_rename_cols import df_rename_cols
+from .df_resample_id import df_resample_id
 from .df_resample_stratified import df_resample_stratified
 from .df_rescale_log import df_rescale_log
 from .df_rescale_meanzero import df_rescale_meanzero
 from .df_rescale_sqrt import df_rescale_sqrt
 from .df_to_binary import df_to_binary
+from .df_to_dfs import df_to_dfs
 from .df_to_groupby import df_to_groupby
 from .df_to_lower import df_to_lower
 from .df_to_multiclass import df_to_multiclass

@@ -1,4 +1,7 @@
-def col_to_buckets(data, col, cuts=5):
+import pandas as pd
+
+
+def col_to_buckets(data, col, cuts=5, rounding=False):
 
     '''Cut continuous feature into equally sized buckets
 
