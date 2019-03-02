@@ -41,6 +41,7 @@ if __name__ == "__main__":
           install_requires=install_requires,
           packages=['wrangle',
                     'wrangle.utils',
+                    'wrangle.dic',
                     'wrangle.df',
                     'wrangle.col',
                     'wrangle.array'],
