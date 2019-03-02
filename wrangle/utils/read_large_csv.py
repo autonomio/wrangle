@@ -1,4 +1,4 @@
-def read_large_csv(file_path, n, cols=None, chunks=None):
+def read_large_csv(file_path, n, cols=None, chunks=None, dtype='float64'):
 
     '''Handles reading a very large CSV file in 
     a highly memory efficient way. Returns a numpy 
@@ -13,6 +13,8 @@ def read_large_csv(file_path, n, cols=None, chunks=None):
     chunks : None or int
         Unless a value is provided, 1/100 of n will be set as 
         a the chunksize.
+    dtype : str
+        A numpy datatype. Default is 'float64'.
     '''
 
     import gc
@@ -30,16 +32,14 @@ def read_large_csv(file_path, n, cols=None, chunks=None):
     else:
         cols_n = len(cols)
         
-    out = np.zeros([n, cols_n])
+    out = np.zeros([n, cols_n], dtype)
 
     start = 0
     end = chunks
 
     for chunk in tqdm(pd.read_csv(file_path, chunksize=chunks, nrows=n)):
 
-        temp = chunk[cols].values
-
-        out[start:end] = temp
+        out[start:end] = chunk[cols].values
 
         start += chunks
         end += chunks
