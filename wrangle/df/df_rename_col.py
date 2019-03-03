@@ -19,7 +19,7 @@ def df_rename_col(data, col, rename_to, destructive=False):
         data = data.copy(deep=True)
 
     cols = list(data.columns)
-    loc = cols.index('index')
+    loc = cols.index(col)
     cols.insert(loc, rename_to)
     cols.remove(col)
     data.columns = cols
