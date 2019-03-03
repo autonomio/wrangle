@@ -9,4 +9,4 @@ from .array.array_random_shuffle import array_random_shuffle as shuffle
 
 del array, col, df, dic
 
-__version__ = "0.6.1"
+__version__ = "0.6.2"
