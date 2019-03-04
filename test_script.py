@@ -1,10 +1,12 @@
 #!/usr/bin/env python
 import wrangle as wr
 import pandas as pd
+import numpy as np
 
 # get some data first
 df = pd.read_csv('https://raw.githubusercontent.com/autonomio/datasets/master/autonomio-datasets/programmatic_ad_fraud.csv')
 df_cont_cat = wr.df_drop_nanrows(df[['bouncerate1', 'bouncerate2', 'category']])
+df_cont_cat['binary'] = np.random.randint(0, 2, len(df_cont_cat))
 df_cont_cont = wr.df_drop_nanrows(df[['bouncerate1', 'bouncerate2', 'score_median']])
 
 # test all the attributes starting with df_
@@ -67,3 +69,9 @@ _null = wr.array_split(df.values, df.bouncerate1.values, .1)
 _null = wr.array_to_generator(df.values, df.bouncerate1, 20)
 _null = wr.array_to_kfold(df.values, df.bouncerate1)
 _nulll = wr.array_to_multilabel(df.head(5).adnetworks.values)
+
+# test dict of dataframes (a 3d dataframe basically) attributes
+
+_null = wr.dic_corr_perc(df, )
+
+
