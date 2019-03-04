@@ -7,7 +7,7 @@ def df_to_dfs(data, groupers, y):
     and returns a dictionary with corresponding keys
     for each subset dataframe.
 
-    USE: df_to_dfs(df, handler=['First', 'Last', 'Median', 'Max', 'Min'])
+    USE: df_to_dfs(df, handler=['First', 'Last', 'Median'], 'expire_flag')
 
     data : pandas DataFrame
         A pandas dataframe with an outcome feature and more than one
@@ -23,15 +23,24 @@ def df_to_dfs(data, groupers, y):
 
     import re
 
+    if isinstance(groupers, list) is False:
+        groupers = [groupers]
+
     out = {}
 
     for label in groupers:
 
+        # find the columns with a handler
         cols = [i for i in data.columns if len(re.findall(label, i)) > 0]
         temp = data[cols]
+
+        # remove the handler from the columns
         temp.columns = [i.replace(label, '') for i in temp.columns]
+
+        # add the outcome feature
         temp[y] = data[y]
 
+        # add dataframe to output dictionary
         out[label] = temp
 
     return out

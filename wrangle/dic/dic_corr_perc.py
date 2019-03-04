@@ -21,7 +21,7 @@ def dic_corr_perc(data, y):
         for col in data[label].columns:
             if col != y:
 
-                # avoid destruction (yes this is hacky)
+                # avoid destruction
                 buckets = wr.col_to_buckets(data[label], col)
                 temp_df = pd.DataFrame({col: buckets, y: data[label][y]})
 
