@@ -1,5 +1,4 @@
 import pandas as pd
-import numpy as np
 
 
 def col_to_buckets(data, col, cuts=5, rounding=False):
@@ -20,9 +19,9 @@ def col_to_buckets(data, col, cuts=5, rounding=False):
     '''
 
     out = []
-    
+
     temp = pd.cut(data[col], cuts)
-    
+
     for i in temp:
 
         try:
@@ -34,10 +33,9 @@ def col_to_buckets(data, col, cuts=5, rounding=False):
                 right = int(right)
 
             out.append(str(left) + ' to ' + str(right))
-        
+
         # where interval was not produced (value was nan etc.)
         except AttributeError:
             out.append('')
 
     return out
-
