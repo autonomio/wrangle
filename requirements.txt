@@ -1,6 +1,6 @@
 pandas
 numpy
-statsmodels
 scipy==1.2
+statsmodels
 sklearn
 keras
