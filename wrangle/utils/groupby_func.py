@@ -1,6 +1,3 @@
-import numpy as np
-
-
 def groupby_func(data, func):
 
     '''Streamlines the process of creating various
@@ -23,11 +20,15 @@ def groupby_func(data, func):
     'sum'
     'random'
     'freq'
+    'string'
 
     All are standard Pandas functions, except 'random'
     and 'freq' are custom.
 
     '''
+
+    import numpy as np
+    import pandas as pd
 
     if func == 'median':
         out = data.median()
@@ -51,6 +52,9 @@ def groupby_func(data, func):
         out = data.agg(np.random.choice)
     elif func == 'freq':
         out = data.agg(lambda x: x.value_counts().index[0])
+    elif func == 'string':
+        out = data.apply(lambda x: "%s" % ' '.join(x))
+        out = pd.DataFrame(out).reset_index()
 
     out = out.reset_index()
 

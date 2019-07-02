@@ -10,6 +10,7 @@ from .df_drop_duplicates import df_drop_duplicates
 from .df_drop_nanrows import df_drop_nanrows
 from .df_drop_nancols import df_drop_nancols
 from .df_drop_weak import df_drop_weak
+from .df_fill_empty import df_fill_empty
 from .df_find_nan import df_find_nan
 from .df_impute_nan import df_impute_nan
 from .df_merge import df_merge
@@ -27,3 +28,4 @@ from .df_to_lower import df_to_lower
 from .df_to_multiclass import df_to_multiclass
 from .df_to_multilabel import df_to_multilabel
 from .df_to_numeric import df_to_numeric
+from .df_to_xy import df_to_xy
