@@ -11,7 +11,7 @@ def df_to_groupby(data, by, func):
         The column by which the grouping is done
     func : str
         The function to be used for grouping by: 'median', 'mean', 'first',
-        'last', 'std', 'mode', 'max', 'min', 'sum', 'random', 'freq'.
+        'last', 'std', 'mode', 'max', 'min', 'sum', 'random', 'freq', 'string'.
     '''
 
     temp = data.groupby(by)

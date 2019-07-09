@@ -9,6 +9,7 @@ from .col_move_place import col_move_place
 from .col_resample_equal import col_resample_equal
 from .col_resample_interval import col_resample_interval
 from .col_rescale_max import col_rescale_max
+from .col_to_biclass import col_to_biclass
 from .col_to_binary import col_to_binary
 from .col_to_buckets import col_to_buckets
 from .col_to_cols import col_to_cols
