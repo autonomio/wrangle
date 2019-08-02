@@ -1,3 +1,4 @@
+from .array_detect_task import array_detect_task
 from .array_random_shuffle import array_random_shuffle
 from .array_random_weighted import array_random_weighted
 from .array_reshape_conv1d import array_reshape_conv1d
