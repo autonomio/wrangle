@@ -3,6 +3,8 @@ from .col_corr_category import col_corr_category
 from .col_corr_ols import col_corr_ols
 from .col_drop_outliers import col_drop_outliers
 from .col_fill_nan import col_fill_nan
+from .col_groupby_cdf import col_groupby_cdf
+from .col_groupby_pdf import col_groupby_pdf
 from .col_groupby_stats import col_groupby_stats
 from .col_impute_nan import col_impute_nan
 from .col_move_place import col_move_place

@@ -3,7 +3,7 @@ def create_synth_data(mode='binary', n=1000, features=20, classes=4):
     '''Create a 2-dimensional dataset in one of the four formats.
 
     mode : string
-        'binary', 'multi_class', 'multi_label', or 'regression'
+        'binary', 'multi_class', 'multi_label', or 'continuous'
     n : int
         Number of samples / observations in the data (i.e. rows)
     features : int
@@ -24,7 +24,7 @@ def create_synth_data(mode='binary', n=1000, features=20, classes=4):
     elif mode == 'multi_label':
         x, y = data.make_multilabel_classification(n, features, classes)
 
-    elif mode == 'regression':
+    elif mode == 'continuous':
         x, y = data.make_regression(n, features)
 
     return x, y
