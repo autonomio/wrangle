@@ -4,4 +4,3 @@ scipy==1.2
 statsmodels
 sklearn
 keras
-signs

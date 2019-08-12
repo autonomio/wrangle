@@ -27,8 +27,7 @@ install_requires = ['numpy',
                     'scipy==1.2',
                     'statsmodels',
                     'sklearn',
-                    'keras',
-                    'signs']
+                    'keras']
 
 if __name__ == "__main__":
 
