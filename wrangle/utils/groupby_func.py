@@ -14,21 +14,21 @@ def groupby_func(data, func):
     'first'
     'last'
     'std'
-    'mode'
     'max'
     'min'
     'sum'
     'random'
     'freq'
     'string'
+    'entropy'
 
-    All are standard Pandas functions, except 'random'
-    and 'freq' are custom.
+    ...or you can simply input any custom function.
 
     '''
 
     import numpy as np
     import pandas as pd
+    import scipy as sc
 
     if func == 'median':
         out = data.median()
@@ -40,8 +40,6 @@ def groupby_func(data, func):
         out = data.last()
     elif func == 'std':
         out = data.std()
-    elif func == 'mode':
-        out = data.mode()
     elif func == 'max':
         out = data.max()
     elif func == 'min':
@@ -55,7 +53,15 @@ def groupby_func(data, func):
     elif func == 'string':
         out = data.apply(lambda x: "%s" % ' '.join(x))
         out = pd.DataFrame(out).reset_index()
+    elif func == 'entropy':
+        out = data.apply(lambda x: sc.stats.entropy(x)[0])
+    elif callable(func):
+        out = data.apply(func)
 
-    out = out.reset_index()
+    if isinstance(out, type(pd.Series())):
+        out = pd.DataFrame(out)
+        out.columns = [1]
+
+    out.reset_index(inplace=True)
 
     return out

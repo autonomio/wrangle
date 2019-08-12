@@ -1,3 +1,4 @@
+from .df_add_scorecol import df_add_scorecol
 from .df_clean_colnames import df_clean_colnames
 from .df_corr_any import df_corr_any
 from .df_corr_extratrees import df_corr_extratrees
@@ -12,6 +13,7 @@ from .df_drop_nancols import df_drop_nancols
 from .df_drop_weak import df_drop_weak
 from .df_fill_empty import df_fill_empty
 from .df_find_nan import df_find_nan
+from .df_groupby_params import df_groupby_params
 from .df_impute_nan import df_impute_nan
 from .df_merge import df_merge
 from .df_rename_col import df_rename_col
@@ -21,6 +23,7 @@ from .df_resample_stratified import df_resample_stratified
 from .df_rescale_log import df_rescale_log
 from .df_rescale_meanzero import df_rescale_meanzero
 from .df_rescale_sqrt import df_rescale_sqrt
+from .df_restructure_values import df_restructure_values
 from .df_to_binary import df_to_binary
 from .df_to_dfs import df_to_dfs
 from .df_to_groupby import df_to_groupby

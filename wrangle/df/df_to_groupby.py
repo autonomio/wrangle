@@ -14,6 +14,4 @@ def df_to_groupby(data, by, func):
         'last', 'std', 'mode', 'max', 'min', 'sum', 'random', 'freq', 'string'.
     '''
 
-    temp = data.groupby(by)
-
-    return groupby_func(data=temp, func=func)
+    return groupby_func(data=data.groupby(by), func=func)
