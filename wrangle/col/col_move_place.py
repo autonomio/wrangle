@@ -27,7 +27,7 @@ def col_move_place(data, col, position='first', destructive=False):
         temp_col = pd.DataFrame(temp_col)
         data = data.drop(col, axis=1)
 
-        if position is 'first':
+        if position == 'first':
             data = pd.merge(temp_col, data, left_index=True, right_index=True)
         else:
             data = pd.merge(data, temp_col, left_index=True, right_index=True)

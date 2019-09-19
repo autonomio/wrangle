@@ -34,38 +34,38 @@ def datetime_handler(data, datetime_mode='pass'):
     datetime_cols_len = len(datetime_cols)
 
     # case where there is no datetime
-    if datetime_cols_len is 0:
+    if datetime_cols_len == 0:
         return data
 
     # case where there is a single datetime column
-    if datetime_cols_len is 1:
+    if datetime_cols_len == 1:
 
-        if datetime_mode is 'drop':
+        if datetime_mode == 'drop':
             data = data.drop(datetime_cols, axis=1)
             return data
 
-        elif datetime_mode is 'sequence':
+        elif datetime_mode == 'sequence':
             data = datetime_to_sequence(data, datetime_cols)
             return data
 
-        elif datetime_mode is 'retain':
+        elif datetime_mode == 'retain':
             data = column_mover(data, datetime_cols)
             return data
 
     # case where there are more than one datetime column
     if datetime_cols_len > 1:
 
-        if datetime_mode is 'drop':
+        if datetime_mode == 'drop':
             data = data.drop(datetime_cols, axis=1)
             return data
 
-        elif datetime_mode is 'sequence':
+        elif datetime_mode == 'sequence':
 
             for col in datetime_cols:
                 data = datetime_to_sequence(data, col)
             return data
 
-        elif datetime_mode is 'retain':
+        elif datetime_mode == 'retain':
             data = column_mover(data, datetime_cols)
             return data
 
