@@ -24,8 +24,8 @@ except ImportError:
 
 install_requires = ['numpy',
                     'pandas',
-                    'scipy==1.2',
-                    'statsmodels',
+                    'statsmodels>=0.11.0',
+                    'scipy',
                     'sklearn',
                     'keras']
 
