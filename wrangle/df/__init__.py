@@ -16,6 +16,7 @@ from .df_find_nan import df_find_nan
 from .df_groupby_params import df_groupby_params
 from .df_impute_nan import df_impute_nan
 from .df_merge import df_merge
+from .df_parallelize_process import df_parallelize_process
 from .df_print_values import df_print_values
 from .df_rename_col import df_rename_col
 from .df_rename_cols import df_rename_cols
