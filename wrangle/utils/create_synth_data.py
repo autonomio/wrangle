@@ -22,7 +22,9 @@ def create_synth_data(mode='binary', n=1000, features=20, classes=4):
         x, y = np.random.rand(n, features), np.random.randint(0, classes, n)
 
     elif mode == 'multi_label':
-        x, y = data.make_multilabel_classification(n, features, classes)
+        x, y = data.make_multilabel_classification(n_samples=n,
+                                                   n_features=features, 
+                                                   n_classes=classes)
 
     elif mode == 'continuous':
         x, y = data.make_regression(n, features)
