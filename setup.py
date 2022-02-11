@@ -27,7 +27,7 @@ install_requires = ['numpy',
                     'statsmodels>=0.11.0',
                     'scipy',
                     'sklearn',
-                    'keras']
+                    'tensorflow']
 
 if __name__ == "__main__":
 
@@ -51,13 +51,13 @@ if __name__ == "__main__":
                     'wrangle.array'],
 
           classifiers=[
-                     'Intended Audience :: Science/Research',
-                     'Programming Language :: Python :: 3.6',
-                     'License :: OSI Approved :: MIT License',
-                     'Topic :: Scientific/Engineering :: Human Machine Interfaces',
-                     'Topic :: Scientific/Engineering :: Artificial Intelligence',
-                     'Topic :: Scientific/Engineering :: Mathematics',
-                     'Operating System :: POSIX',
-                     'Operating System :: Unix',
-                     'Operating System :: MacOS'],
-)
+              'Intended Audience :: Science/Research',
+              'Programming Language :: Python :: 3.6',
+              'License :: OSI Approved :: MIT License',
+              'Topic :: Scientific/Engineering :: Human Machine Interfaces',
+              'Topic :: Scientific/Engineering :: Artificial Intelligence',
+              'Topic :: Scientific/Engineering :: Mathematics',
+              'Operating System :: POSIX',
+              'Operating System :: Unix',
+              'Operating System :: MacOS'],
+          )

@@ -1,7 +1,7 @@
 def _base_for_model(mode, n=50, neurons=50):
 
-    from keras.models import Sequential
-    from keras.layers import Dense
+    from tensorflow.keras.models import Sequential
+    from tensorflow.keras.layers import Dense
 
     from .create_synth_data import create_synth_data
 
