@@ -1,20 +1,46 @@
-from numpy import arange, random
+def array_random_shuffle(x, y=None, multi_input=False):
+    
+    '''Shuffles single or multi-input data. Note that
+    only x can be multi-input.
+    
+    x | array or list | the x data to be shuffled
+    y | array | the y data to be shuffled (optional)
+    multi_input | bool | set to True if multi-input model data
+    
+    '''
+    
+    import numpy as np
+    
+    rng = np.random.default_rng()
+    state = rng.bit_generator.state
 
-
-def array_random_shuffle(x, y):
-
-    '''Randomize two arrays in same order'''
-
-    x_shape = x.shape
-    y_shape = y.shape
-
-    random_index = arange(len(x))
-    random.shuffle(random_index)
-
-    x = x[random_index]
-    y = y[random_index]
-
-    if (x_shape == x.shape) and (y_shape == y.shape):
+    # data input is list but multi_input is not set to True
+    if isinstance(x, list) and multi_input == False:
+        
+        raise TypeError("For multi-input x, set multi_input to True")
+        
+    # data input is list and multi_input is set to True
+    elif isinstance(x, list) and multi_input == True:
+        
+        out = []
+        
+        for ar in x:
+            
+            rng.bit_generator.state = state
+            rng.shuffle(ar)
+        
+        rng.bit_generator.state = state
+        rng.shuffle(y)
+        
         return x, y
-    else:
-        print("The output shapes do not match")
+        
+    # data input is assumably an array (not multi-input)
+    elif isinstance(x, list) == False:
+        
+        rng.bit_generator.state = state
+        rng.shuffle(x)
+        
+        rng.bit_generator.state = state
+        rng.shuffle(y)
+        
+        return x, y
