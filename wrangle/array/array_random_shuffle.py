@@ -1,12 +1,12 @@
 def array_random_shuffle(x, y=None, multi_input=False):
 
     '''Shuffles single or multi-input data. Note that
-    only x can be multi-input.
+    only x can be multi-input and x has to be more than one
+    column of data.
 
     x | array or list | the x data to be shuffled
     y | array | the y data to be shuffled (optional)
     multi_input | bool | set to True if multi-input model data
-
     '''
 
     import numpy as np
@@ -22,25 +22,46 @@ def array_random_shuffle(x, y=None, multi_input=False):
     # data input is list and multi_input is set to True
     elif isinstance(x, list) and multi_input == True:
 
-        out = []
+        x_out = []
 
         for ar in x:
 
             rng.bit_generator.state = state
-            rng.shuffle(ar)
+            rng.shuffle(ar, axis=1)
+            x_out.append(ar)
 
-        rng.bit_generator.state = state
-        rng.shuffle(y)
+        x = x_out
 
-        return x, y
+        if y is not None:
+            rng.bit_generator.state = state
+
+            try:
+                y.shape[1]
+                rng.shuffle(y, axis=1)
+            except IndexError:
+                rng.shuffle(y)
+
+            return x, y
+
+        else:
+            return x
 
     # data input is assumably an array (not multi-input)
     elif isinstance(x, list) == False:
 
         rng.bit_generator.state = state
-        rng.shuffle(x)
+        rng.shuffle(x, axis=1)
 
-        rng.bit_generator.state = state
-        rng.shuffle(y)
+        if y is not None:
+            rng.bit_generator.state = state
 
-        return x, y
+            try:
+                y.shape[1]
+                rng.shuffle(y, axis=1)
+            except IndexError:
+                rng.shuffle(y)
+
+            return x, y
+
+        else:
+            return x

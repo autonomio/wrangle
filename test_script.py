@@ -78,7 +78,7 @@ _null = wr.col_to_multilabel(df, 'category')
 _null = wr.col_to_split(df.head(10), 'top_downstream', sep='.')
 
 # test all the attributes starting with array_
-_null = wr.array_random_shuffle(df.bouncerate1, df.bouncerate2)
+_null = wr.array_random_shuffle(df[['bouncerate1', 'bouncerate2']].values, df.bouncerate2)
 _null = wr.array_random_weighted(df.bouncerate1.head(10), 'normal', 10)
 _null = wr.array_reshape_conv1d(df.values)
 _null = wr.array_reshape_lstm(df.bouncerate1, 10, 10)
