@@ -1,9 +1,9 @@
 def array_random_shuffle(x, y=None, multi_input=False):
 
     '''Shuffles single or multi-input data. Note that
-    only x can be multi-input and x has to be more than one 
+    only x can be multi-input and x has to be more than one
     column of data.
-    
+
     x | array or list | the x data to be shuffled
     y | array | the y data to be shuffled (optional)
     multi_input | bool | set to True if multi-input model data
@@ -31,18 +31,18 @@ def array_random_shuffle(x, y=None, multi_input=False):
             x_out.append(ar)
 
         x = x_out
-            
+
         if y is not None:
             rng.bit_generator.state = state
-            
+
             try:
                 y.shape[1]
                 rng.shuffle(y, axis=1)
             except IndexError:
                 rng.shuffle(y)
-            
+
             return x, y
-        
+
         else:
             return x
 
@@ -54,14 +54,14 @@ def array_random_shuffle(x, y=None, multi_input=False):
 
         if y is not None:
             rng.bit_generator.state = state
-            
+
             try:
                 y.shape[1]
                 rng.shuffle(y, axis=1)
             except IndexError:
                 rng.shuffle(y)
-            
+
             return x, y
-        
+
         else:
             return x
