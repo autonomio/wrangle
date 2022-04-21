@@ -27,7 +27,7 @@ def array_random_shuffle(x, y=None, multi_input=False):
         for ar in x:
 
             rng.bit_generator.state = state
-            rng.shuffle(ar, axis=1)
+            rng.shuffle(ar, axis=0)
             x_out.append(ar)
 
         x = x_out
@@ -37,7 +37,7 @@ def array_random_shuffle(x, y=None, multi_input=False):
 
             try:
                 y.shape[1]
-                rng.shuffle(y, axis=1)
+                rng.shuffle(y, axis=0)
             except IndexError:
                 rng.shuffle(y)
 
@@ -50,14 +50,14 @@ def array_random_shuffle(x, y=None, multi_input=False):
     elif isinstance(x, list) == False:
 
         rng.bit_generator.state = state
-        rng.shuffle(x, axis=1)
+        rng.shuffle(x, axis=0)
 
         if y is not None:
             rng.bit_generator.state = state
 
             try:
                 y.shape[1]
-                rng.shuffle(y, axis=1)
+                rng.shuffle(y, axis=0)
             except IndexError:
                 rng.shuffle(y)
 
