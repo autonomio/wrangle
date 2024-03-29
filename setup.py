@@ -26,7 +26,7 @@ install_requires = ['numpy',
                     'pandas',
                     'statsmodels>=0.11.0',
                     'scipy',
-                    'sklearn',
+                    'scikit-learn',
                     'tensorflow']
 
 if __name__ == "__main__":
