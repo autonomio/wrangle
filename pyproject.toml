@@ -1,0 +1,47 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "wrangle"
+dynamic = ["version"]
+description = "Wrangle - Data Preparation for Deep Learning"
+readme = "README.md"
+license = "MIT"
+authors = [
+    { name = "Mikko Kotila", email = "mailme@mikkokotila.com" },
+]
+maintainers = [
+    { name = "Mikko Kotila", email = "mailme@mikkokotila.com" },
+]
+classifiers = [
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: MacOS",
+    "Operating System :: POSIX",
+    "Operating System :: Unix",
+    "Programming Language :: Python :: 3.6",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Scientific/Engineering :: Human Machine Interfaces",
+    "Topic :: Scientific/Engineering :: Mathematics",
+]
+dependencies = [
+    "numpy",
+    "pandas",
+    "scikit-learn",
+    "scipy",
+    "statsmodels>=0.11.0",
+    "tensorflow",
+]
+
+[project.urls]
+Download = "https://github.com/autonomio/wrangle/"
+Homepage = "http://autonom.io"
+
+[tool.hatch.version]
+path = "wrangle/__init__.py"
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "/wrangle",
+]
