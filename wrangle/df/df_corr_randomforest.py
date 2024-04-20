@@ -22,7 +22,7 @@ def df_corr_randomforest(data, y, destructive=True):
         data = data.copy(deep=True)
 
     x = data.drop(y, 1).values
-    labels = data.drop(y, 1).columns
+    labels = data.drop(y, axis=1).columns
     y = data[y].values
 
     reg = RandomForestRegressor(max_depth=3, n_estimators=100)

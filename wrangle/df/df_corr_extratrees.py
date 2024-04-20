@@ -13,8 +13,8 @@ def df_corr_extratrees(data, y):
 
     '''
 
-    x = data.drop(y, 1).values
-    labels = data.drop(y, 1).columns
+    x = data.drop(y, axis=1).values
+    labels = data.drop(y, axis=1).columns
     y = data[y].values
 
     reg = ExtraTreesClassifier(max_depth=3, n_estimators=100)

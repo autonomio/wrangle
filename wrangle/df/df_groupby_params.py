@@ -19,7 +19,7 @@ def df_groupby_params(data,
     import signs
 
     from .df_restructure_values import df_restructure_values
-    docs = df_restructure_values(data.drop(metric, 1), 'tuple').values
+    docs = df_restructure_values(data.drop(metric, axis=1), 'tuple').values
 
     out = []
 
