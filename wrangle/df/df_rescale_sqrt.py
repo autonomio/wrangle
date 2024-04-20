@@ -18,7 +18,7 @@ def df_rescale_sqrt(data, retain_cols=None, destructive=False):
         data = data.copy(deep=True)
 
     if retain_cols is not None:
-        data = data.drop(retain_cols, 1)
+        data = data.drop(retain_cols, axis=1)
         temp = data[retain_cols]
 
     numeric = data.select_dtypes(include=['int', 'float']).columns

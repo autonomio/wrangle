@@ -18,7 +18,7 @@ def df_rename_cols(data, exclude=None, prefix='C', destructive=False):
         data = data.copy(deep=True)
 
     if exclude is not None:
-        data = data.drop(exclude, 1)
+        data = data.drop(exclude, axis=1)
         temp = data[exclude].values
 
     no_of_cols = data.shape[1]
