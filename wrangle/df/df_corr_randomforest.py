@@ -21,7 +21,7 @@ def df_corr_randomforest(data, y, destructive=True):
     if destructive is False:
         data = data.copy(deep=True)
 
-    x = data.drop(y, 1).values
+    x = data.drop(y, axis=1).values
     labels = data.drop(y, axis=1).columns
     y = data[y].values
 
