@@ -58,7 +58,7 @@ def workspace(tmp_path):
 
 @pytest.mark.parametrize("format", ["csv", "tsv", "parquet", "ipc"])
 def test_disk_files_are_captured_before_scanning_and_do_not_rescan_live_input(tmp_path, workspace, format):
-    path = tmp_path / f"measurements*.{format}"
+    path = tmp_path / f"measurements[1].{format}"
     original = pl.DataFrame({"id": ["001", "002"], "value": ["1.25", None]})
     if format in {"csv", "tsv"}:
         original.write_csv(path, separator="\t" if format == "tsv" else ",")
@@ -285,7 +285,7 @@ def test_evidence_files_remain_stable_during_bundle_snapshot(tmp_path, workspace
 
 def test_disk_ipc_directory_wildcards_cannot_select_neighbor_files(tmp_path, monkeypatch):
     from wrangle import _sources
-    workspace = _Workspace(tmp_path / "disk*snapshots")
+    workspace = _Workspace(tmp_path / "disk[X]snapshots")
     neighbor = tmp_path / "diskXsnapshots"
     neighbor.mkdir()
     path = tmp_path / "source.ipc"

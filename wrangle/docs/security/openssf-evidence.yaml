@@ -1,5 +1,6 @@
 # Criterion answers are drafts; project 15135 is registered, no badge attainment claimed.
 # Criterion answers are drafts; project 15135 is registered, no badge attainment claimed.
+# Criterion answers are drafts; project 15135 is registered, no badge attainment claimed.
 # OpenSSF Best Practices answer draft. No form has been submitted.
 # IDs/categories come from the pinned official criteria; explanations are Wrangle-specific.
 format: wrangle-openssf-evidence-draft-v1
@@ -1378,7 +1379,7 @@ levels:
       na_allowed: false
       criterion_url: https://www.bestpractices.dev/en/criteria/0#0.dynamic_analysis
       group: Analysis / Dynamic code analysis
-      status: '?'
+      status: Unmet
       kind: implementation
       evidence:
         public_urls: []
@@ -1387,15 +1388,14 @@ levels:
         - tests/
         - CONTRIBUTING.md
         - .github/workflows/ci-push.yml
-      justification: Coverage.py instruments production-code execution while pytest exercises
-        untrusted inputs and failure/recovery paths. The coverage command and actual result must be
-        verified as part of release checks; functional test count alone is not dynamic-analysis
-        evidence.
-      unresolved:
-      - publish_current_evidence
-      - record_coverage_result
+      justification: The native package has meaningful automated regression tests. Actual production
+        branch-only coverage is 79.92%, below the 80% criterion; 89.60% statement coverage and
+        86.51% combined coverage do not substitute. Qualifying fuzzing is not currently run. This
+        SUGGESTED practice was considered; the project prioritizes correctness and boundary
+        regressions and does not claim qualifying dynamic analysis.
+      unresolved: []
       after_publication:
-        candidate_status: Met
+        candidate_status: Unmet
         required_checks:
         - Verify the referenced files and checks exist, succeed, and are publicly accessible.
         - Verify runtime coverage instrumentation executes before each production release.
@@ -1453,12 +1453,13 @@ levels:
         local_paths:
         - tests/
         - SECURITY.md
-      justification: Review confirmed runtime security findings and their remediation times. Passing
-        functional tests alone does not establish the absence of exploitable findings.
+      justification: No qualifying dynamic analysis is currently being run under this criterion; the
+        official details permit N/A in that case. Ordinary regression tests and warnings-as-errors
+        remain active.
       unresolved:
       - review_dynamic_analysis_findings_and_remediation_history
       after_publication:
-        candidate_status: Met
+        candidate_status: N/A
         required_checks: []
   silver:
     achieve_passing:
@@ -1820,14 +1821,15 @@ levels:
       status: '?'
       kind: maintainer_attestation
       evidence:
-        public_urls: []
+        public_urls:
+        - https://github.com/autonomio/wrangle
+        - https://www.bestpractices.dev/en/criteria/1?details=true&rationale=true#1.sites_password_security
         local_paths:
         - SECURITY.md
         - wrangle/docs/security.md
-      justification: GitHub and PyPI authenticate site users; Wrangle does not operate its own
-        password database. Verify host-side security documentation or provide an appropriate
-        third-party-service justification rather than claiming Wrangle controls hosted password
-        storage.
+      justification: GitHub hosts repository and project web services; the official Silver details
+        explicitly state that use of GitHub meets this criterion. The local data-preparation package
+        has no authentication service.
       unresolved:
       - verify_hosted_site_password_storage_evidence
       after_publication:
@@ -2216,11 +2218,15 @@ levels:
         local_paths:
         - tests/
         - CHANGELOG.md
-      justification: The new suite includes regression tests, but a list of bugs fixed in the last
-        six months must be mapped to tests to establish the required proportion. Do not derive it
-        from total test count.
+        - wrangle/docs/security/regressions.yaml
+      justification: The six-month correction inventory maps 20 known behavior fixes to named,
+        meaningful regression tests, including corrected legacy science behavior and Windows
+        bundle/timezone defects. Feature/type migrations and test-only fixes are excluded from the
+        denominator. Review the inventory and publish passing CI; do not infer this percentage from
+        total test count.
       unresolved:
-      - map_last_six_months_bug_fixes_to_regression_tests
+      - publish_current_evidence
+      - verify_regression_inventory_and_public_checks
       after_publication:
         candidate_status: Met
         required_checks: []
@@ -2681,6 +2687,11 @@ repository_controls:
   open_secret_scanning_alerts: 0
   repository_security_advisories: 0
   public_non_pr_issues_created_since_2025_10_01: 0
+  master_ruleset_id: 24318302
+  master_ruleset_url: https://github.com/autonomio/wrangle/rules/24318302
+  merge_controls: Pull requests and trusted-app quality, seven OS/version jobs and CodeQL required
+    against latest master; no bypass actors, deletion or force-push; all review threads resolved.
+    Required human approval count remains the existing zero; no independent human review is claimed.
 local_measurements:
   repeat_build: Two consecutive wheel/sdist builds produced identical SHA-256 hashes in the same
     environment. scripts/check_reproducible_build.py enforces this with a fixed SOURCE_DATE_EPOCH
@@ -2689,8 +2700,11 @@ local_measurements:
   coverage_scope: wrangle production package; only duplicated executable documentation excluded.
     Await final successful suite/public CI.
   runtime_suite:
-    passed: 977
+    passed: 980
     warnings: errors
     statement_coverage_percent: 89.6
     minimum_statement_coverage_percent: 80
     public_ci: pending
+  branch_coverage_percent: 79.92334905660377
+  branch_coverage_revision: Windows fixes before the final portable-evidence-path regression; 980
+    tests passed. The 86.51% combined figure is not branch-only coverage.

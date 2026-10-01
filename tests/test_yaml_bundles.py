@@ -50,6 +50,29 @@ def test_yaml_and_python_match_and_report_hash_uses_canonical_receipt_order(prot
 
 
 @pytest.mark.parametrize("execution", ["memory", "disk"])
+def test_report_bytes_ignore_platform_text_newline_translation(protocol, tmp_path, monkeypatch, execution):
+    source, _, recipe = protocol
+    recipe["steps"][-1]["reason"] = "Instrument µ-QC exclusion"
+    native_write_text = Path.write_text
+
+    def platform_text_write(path, text, *args, **kwargs):
+        if path.name == "report.txt":
+            # Emulate Windows text mode even when this test runs on POSIX.
+            return path.write_bytes(text.replace("\n", "\r\n").encode("utf-8"))
+        return native_write_text(path, text, *args, **kwargs)
+
+    monkeypatch.setattr(Path, "write_text", platform_text_write)
+    output = tmp_path / "prepared"
+    result = wrangle.prepare(source, recipe, execution=execution, output=output)
+    report = (output / "report.txt").read_bytes()
+    assert "µ-QC".encode("utf-8") in report
+    assert b"\r\n" not in report
+    assert report == (result.summary() + "\n").encode("utf-8")
+    assert hashlib.sha256(report).hexdigest() == result.receipt["report_sha256"]
+    assert wrangle.prepare(output, {}).receipt["output"] == result.receipt["output"]
+
+
+@pytest.mark.parametrize("execution", ["memory", "disk"])
 def test_public_prepare_rejects_json_authoring_without_publication(protocol, tmp_path, execution):
     source, _, recipe = protocol
     path = tmp_path / "recipe.json"

@@ -1,9 +1,9 @@
 """The shell surface preserves Python engine semantics and publication evidence."""
 import json
-from pathlib import Path
 import shutil
 import subprocess
 import sys
+import sysconfig
 
 import polars as pl
 from polars.testing import assert_frame_equal
@@ -187,7 +187,7 @@ def test_module_and_installed_console_entrypoints(research_files, tmp_path):
     assert module.returncode == 0, module.stderr
     assert not module.stderr
     assert json.loads(module.stdout) == wrangle.prepare(sources, protocol).receipt
-    executable = shutil.which("wrangle", path=str(Path(sys.executable).parent))
+    executable = shutil.which("wrangle", path=sysconfig.get_path("scripts"))
     assert executable is not None, "Install the package to verify its console entrypoint."
     console = subprocess.run([executable, "--json", "inspect", str(sources["measurements"])], cwd=tmp_path, capture_output=True, text=True, check=False)
     assert console.returncode == 0, console.stderr
@@ -213,7 +213,7 @@ def test_inspect_summary_group_and_baseline_controls_match_python(tmp_path, caps
     assert expected["groups"]["items"][0]["values"] == {"group": "b", "batch": 2}
     assert expected["schema_changes"]["type_changed"] == [{"name": "value", "before": "Int64", "after": "Float64"}]
     assert {path: path.read_bytes() for path in before} == before
-    executable = shutil.which("wrangle", path=str(Path(sys.executable).parent))
+    executable = shutil.which("wrangle", path=sysconfig.get_path("scripts"))
     assert executable is not None
     console = subprocess.run([executable, *arguments], cwd=tmp_path, capture_output=True, text=True, check=False)
     assert console.returncode == 0, console.stderr

@@ -18,6 +18,7 @@ def test_catalog_matches_execution_definitions_and_points_to_existing_sources():
     assert documented == catalog()
     for entry in documented["operations"]:
         assert entry["description"]
+        assert "\\" not in entry["source"]
         assert (PACKAGE / entry["source"]).is_file()
         assert callable(resolve(entry["name"]))
 

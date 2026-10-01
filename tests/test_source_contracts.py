@@ -2,7 +2,6 @@
 from datetime import date, datetime, time, timedelta, timezone
 from decimal import Decimal
 import json
-from pathlib import Path
 import sys
 
 import polars as pl
@@ -254,8 +253,8 @@ def test_null_recipe_file_is_not_accepted_as_retained_intent(prepared, tmp_path)
 
 @pytest.mark.parametrize("format", ["csv", "parquet"])
 def test_source_paths_are_literal_files_not_implicit_glob_sets(tmp_path, format):
-    literal = tmp_path / f"samples*.{format}"
-    other = tmp_path / f"samples-other.{format}"
+    literal = tmp_path / f"samples[1].{format}"
+    other = tmp_path / f"samples1.{format}"
     wanted = pl.DataFrame({"id": ["001"]})
     extra = pl.DataFrame({"id": ["999"]})
     if format == "csv":

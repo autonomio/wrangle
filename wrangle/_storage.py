@@ -204,7 +204,7 @@ class DiskWorkspace:
         path = directory / f"{len(self.evidence_files):06d}-{kind}.parquet"
         plan.sink_parquet(path, maintain_order=True, engine="streaming", row_group_size=65536)
         table = DiskTable(pl.scan_parquet(path, glob=False), path=path)
-        entry = {"path": str(path.relative_to(self.root)), "format": "parquet", "rows": table.height, "columns": {name: str(dtype) for name, dtype in table.schema.items()}, "sha256": file_digest(path), "snapshot_sha256": table.logical_digest}
+        entry = {"path": path.relative_to(self.root).as_posix(), "format": "parquet", "rows": table.height, "columns": {name: str(dtype) for name, dtype in table.schema.items()}, "sha256": file_digest(path), "snapshot_sha256": table.logical_digest}
         self.evidence_files.append(entry)
         return dict(entry)
 
@@ -231,7 +231,7 @@ class DiskWorkspace:
         from ._protocol import dump_recipe
         from ._presentation import render_prepare
         (final / "recipe.yaml").write_text(dump_recipe(receipt["recipe"]), encoding="utf-8")
-        (final / "report.txt").write_text(render_prepare(receipt) + "\n", encoding="utf-8")
+        (final / "report.txt").write_bytes((render_prepare(receipt) + "\n").encode("utf-8"))
         verify_report(final, receipt)
         if self.destination.exists():
             raise WrangleError("OUTPUT_EXISTS", "The output destination appeared during writing.", {"path": str(self.destination)})

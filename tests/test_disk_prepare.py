@@ -1,5 +1,7 @@
 """Integration contracts for disk preparation, publication and engine parity."""
 import json
+from pathlib import Path, PurePosixPath, PureWindowsPath
+import shutil
 import subprocess
 import sys
 
@@ -100,6 +102,40 @@ def test_disk_identity_maps_are_complete_evidence_and_verified_on_reuse(tmp_path
         wr.prepare(tmp_path / "result", {}, execution="disk", output=tmp_path / "reused")
     assert failure.value.code == "BUNDLE_MISMATCH"
     assert not (tmp_path / "reused").exists()
+
+
+def test_disk_evidence_manifest_is_portable_between_windows_and_posix(tmp_path, monkeypatch):
+    native_relative_to = Path.relative_to
+
+    def windows_relative_path(path, *other):
+        # Exercise Windows serialization on every CI host, using real files.
+        return PureWindowsPath(*native_relative_to(path, *other).parts)
+
+    monkeypatch.setattr(Path, "relative_to", windows_relative_path)
+    source = pl.DataFrame({"id": ["001", "002"], "qc": ["pass", "fail"]})
+    parent = tmp_path / "parent"
+    result = wr.prepare(source, {"key": ["id"], "steps": [{
+        "op": "filter", "where": {"eq": [{"col": "qc"}, "pass"]},
+        "reason": "Predeclared instrument QC",
+    }]}, execution="disk", output=parent)
+    entries = result.receipt["evidence_files"]
+    assert entries
+    for entry in entries:
+        path = entry["path"]
+        assert path.startswith("evidence/") and "\\" not in path
+        assert PurePosixPath(path).parts == PureWindowsPath(path).parts
+    saved = json.loads((parent / "receipt.json").read_text(encoding="utf-8"))
+    assert saved["evidence_files"] == entries
+    reference = saved["steps"][0]["excluded_keys"]
+    assert reference["path"] in {entry["path"] for entry in entries}
+    assert pl.read_parquet(parent / reference["path"]).to_dicts() == [{"id": "002"}]
+    moved = tmp_path / "collaborator-copy"
+    shutil.copytree(parent, moved)
+    assert wr.inspect(moved)["rows"] == 1
+    replay = wr.prepare(moved, {})
+    assert replay.receipt["output"] == result.receipt["output"]
+    retained_files = replay.receipt["sources"]["data"]["files"]
+    assert all(retained_files[entry["path"]] == entry["sha256"] for entry in entries)
 
 
 @pytest.mark.parametrize("execution,output,code", [("invalid", None, "INVALID_EXECUTION"), ([], None, "INVALID_EXECUTION"), ("disk", None, "OUTPUT_REQUIRED")])

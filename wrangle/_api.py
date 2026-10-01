@@ -451,7 +451,7 @@ class Prepared:
             from ._protocol import dump_recipe
             from ._presentation import render_prepare
             (temporary / "recipe.yaml").write_text(dump_recipe(receipt["recipe"]), encoding="utf-8")
-            (temporary / "report.txt").write_text(render_prepare(receipt) + "\n", encoding="utf-8")
+            (temporary / "report.txt").write_bytes((render_prepare(receipt) + "\n").encode("utf-8"))
             from ._storage import verify_report
             verify_report(temporary, receipt)
             if destination.exists():

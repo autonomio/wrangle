@@ -18,6 +18,8 @@ agents. This is a breaking change from the legacy pandas/NumPy package; follow
   new directory. Failed checks publish no result.
 - Ship generated operation contracts, a short agent entrypoint and executable
   human/agent workflows verified from the installed package.
+- Keep reports as exact UTF-8/LF bytes, package timezone data and use portable
+  evidence paths so prepared bundles can move between operating systems.
 - Add security/contribution policies, measured test coverage, dependency/static
   analysis and a workflow for signed release-artifact provenance.
 
