@@ -1,7 +1,4 @@
 # Criterion answers are drafts; project 15135 is registered, no badge attainment claimed.
-# Criterion answers are drafts; project 15135 is registered, no badge attainment claimed.
-# Criterion answers are drafts; project 15135 is registered, no badge attainment claimed.
-# Criterion answers are drafts; project 15135 is registered, no badge attainment claimed.
 # OpenSSF Best Practices answer draft. No form has been submitted.
 # IDs/categories come from the pinned official criteria; explanations are Wrangle-specific.
 format: wrangle-openssf-evidence-draft-v1
@@ -61,9 +58,10 @@ priority_blockers:
   action: Registered as project 15135; questionnaire answers remain drafts until submitted.
   state: complete
 - id: confirm_continuity_person_and_consent
-  action: EnergyGuy3 is owner-confirmed. Verify one-week continuity scope and publishing/recovery
-    access; do not claim an independent rehearsal.
-  state: person_owner_confirmed_access_recovery_pending
+  action: The owner confirms EnergyGuy3 can take over issues, merges and releases within one week.
+    GitHub administrator access is verified; publish the governance statement. No rehearsal is
+    claimed.
+  state: owner_confirmed_admin_access_verified
 - id: primary_developer_secure_design_confirmation
   action: Owner identifies EnergyGuy3 as the backup maintainer with secure-development expertise;
     publish the role and retain the owner-affirmed basis.
@@ -2220,7 +2218,7 @@ levels:
         - tests/
         - CHANGELOG.md
         - wrangle/docs/security/regressions.yaml
-      justification: The six-month correction inventory maps 19 known behavior fixes to named,
+      justification: The six-month correction inventory maps 20 known behavior fixes to named,
         meaningful regression tests, including corrected legacy science behavior and Windows
         bundle/timezone defects. Feature/type migrations and test-only fixes are excluded from the
         denominator. Review the inventory and publish passing CI; do not infer this percentage from
@@ -2674,7 +2672,7 @@ registration_draft:
   repo_url: https://github.com/autonomio/wrangle
   license: MIT
   entry_locale: en
-  current_project_id:
+  current_project_id: 15135
   submission_state: draft_only_not_submitted
 repository_controls:
   verified_on: '2026-10-01'
@@ -2698,14 +2696,16 @@ local_measurements:
     environment. scripts/check_reproducible_build.py enforces this with a fixed SOURCE_DATE_EPOCH
     and PYTHONHASHSEED. Re-run after changes; this does not assert cross-platform identity.
   runtime_statement_coverage_percent: 89.6
-  coverage_scope: wrangle production package; only duplicated executable documentation excluded.
-    Await final successful suite/public CI.
+  coverage_scope: Wrangle production package; only duplicated executable documentation excluded.
+    Coverage measurement below is the earlier 980-test revision; final public CI is pending.
   runtime_suite:
-    passed: 980
+    passed: 991
     warnings: errors
-    statement_coverage_percent: 89.6
     minimum_statement_coverage_percent: 80
     public_ci: pending
+    minimum_polars_affected_tests_passed: 111
+    utf8_cli_piped_cases_passed: 8
+    standalone_examples_passed: 8
   branch_coverage_percent: 79.92334905660377
   branch_coverage_revision: Windows fixes before the final portable-evidence-path regression; 980
     tests passed. The 86.51% combined figure is not branch-only coverage.

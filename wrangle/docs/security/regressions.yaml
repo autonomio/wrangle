@@ -9,8 +9,8 @@ scope: Known behavior corrections in the first public native 1.0 development cha
 source_changes:
 - https://github.com/autonomio/wrangle/pull/46
 - ../migration.md#corrected-behavior-that-can-change-results
-known_fixes: 19
-fixes_with_regression: 19
+known_fixes: 20
+fixes_with_regression: 20
 mapping:
 - id: fold-remainder
   corrected_behavior: K-fold division lost remainder observations.
@@ -80,9 +80,14 @@ mapping:
   corrected_behavior: Windows disk evidence manifests could not be verified and reused on POSIX.
   regression:
     tests/test_disk_prepare.py::test_disk_evidence_manifest_is_portable_between_windows_and_posix
-execution_evidence: Local 980-test suites passed on current and minimum Polars; the last cross-OS
-  manifest regression plus 81 affected tests pass on both. Public Windows rerun pending; publish
-  successful CI before claiming release validation.
+- id: unicode-cli-output
+  corrected_behavior: Windows CLI pipes could not emit scientific labels and paths outside the
+    legacy locale encoding.
+  regression: tests/test_platform_boundaries.py::test_cli_pipes_use_utf8_under_legacy_locale
+execution_evidence: The current local 991-test suite passes with warnings as errors. The earlier
+  980-test suite passed on current and minimum Polars; 111 affected tests, including the byte-level
+  UTF-8 regressions, pass on minimum Polars. All eight standalone examples execute. Public OS matrix
+  validation is pending.
 review_basis: Legacy correction rows were checked against source at
   166e4a41e4dd071ddb333d0ef2158d723ff02b99. Pairwise Pearson behavior was already provided by pandas
   and is excluded from the bug denominator; its native replacement remains tested.
