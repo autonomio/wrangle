@@ -1,5 +1,7 @@
 # Wrangle
 
+[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/autonomio/wrangle/badge)](https://scorecard.dev/viewer/?uri=github.com/autonomio/wrangle)
+
 Turn research files into a checked analysis table. Keep the preparation protocol
 in a readable YAML file, reuse it for the next batch, and see what changed.
 Wrangle serves researchers directly and agents working on their behalf.
