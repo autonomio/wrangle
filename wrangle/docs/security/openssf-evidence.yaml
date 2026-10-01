@@ -26,6 +26,45 @@ verified_publication:
     attestation_bundle: attestation.json
     verified_identity: repository, release workflow, source/signer revision, tag, GitHub OIDC issuer, hosted runner
     verification_instructions: wrangle/docs/security/releases.md
+security_owner_attestation:
+  confirmed_on: '2026-10-01'
+  basis: Project owner attestation of criterion compliance; distinct from independently measured
+    checks.
+  scope: No report counts, incident absence or private incident details are asserted.
+  criteria:
+    release_notes_vulns:
+      status: Met
+      justification: The project owner confirms release notes identify every applicable publicly
+        known Wrangle runtime vulnerability fix that already had a CVE or equivalent identifier when
+        the release was created. Report counts and incident absence are not inferred.
+    vulnerability_report_response:
+      status: Met
+      justification: The project owner confirms every applicable vulnerability report received in
+        the last six months received an initial response within fourteen days. Report counts,
+        existence and private details are not inferred.
+    vulnerabilities_fixed_60_days:
+      status: Met
+      justification: The project owner confirms there is currently no unpatched medium-or-higher
+        vulnerability publicly known for more than sixty days.
+    vulnerabilities_critical_fixed:
+      status: Met
+      justification: The project owner confirms applicable reported critical vulnerabilities were
+        fixed rapidly. No incident count or absence is inferred.
+    no_leaked_credentials:
+      status: Met
+      justification: The project owner confirms the public repositories leak no currently valid
+        private credential intended to limit public access. Enabled secret scanning and push
+        protection support this attestation; they do not establish historical absence.
+    static_analysis_fixed:
+      status: Met
+      justification: The project owner confirms applicable confirmed exploitable medium-or-higher
+        static-analysis findings were fixed in a timely way. Current Bandit and CodeQL results are
+        clean; no historical finding count is inferred.
+    vulnerability_report_credit:
+      status: Met
+      justification: The project owner confirms every applicable vulnerability report resolved in
+        the last twelve months credited its reporter, except where anonymity was requested. No
+        resolved-report count or absence is inferred.
 project:
   name: Wrangle
   repository: https://github.com/autonomio/wrangle
