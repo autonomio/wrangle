@@ -74,8 +74,9 @@ def test_disk_files_are_captured_before_scanning_and_do_not_rescan_live_input(tm
     assert info["path"] == str(path.resolve())
     assert info["snapshot_sha256"] == _digest(original)
     assert len(info["sha256"]) == 64
-    assert str(path) not in workspace.plans[0]
-    assert str(workspace.root) in workspace.plans[0]
+    plan = workspace.plans[0].replace("\\", "/")
+    assert path.as_posix() not in plan
+    assert workspace.root.as_posix() in plan
 
 
 def test_disk_csv_retains_declared_dialect_schema_and_missing_codes(tmp_path, workspace):
