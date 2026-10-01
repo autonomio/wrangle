@@ -1,6 +1,7 @@
 # Wrangle
 
 [![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/autonomio/wrangle/badge)](https://scorecard.dev/viewer/?uri=github.com/autonomio/wrangle)
+[![OpenSSF Best Practices](https://www.bestpractices.dev/projects/15135/badge)](https://www.bestpractices.dev/en/projects/15135)
 
 Turn research files into a checked analysis table. Keep the preparation protocol
 in a readable YAML file, reuse it for the next batch, and see what changed.
@@ -147,7 +148,7 @@ Read [migration](migration.md) when upgrading from older Wrangle.
 ## Development and security
 
 [OpenSSF Best Practices progress](https://www.bestpractices.dev/en/projects/15135)
-records the project assessment; badge attainment depends on verified evidence.
+records the published Silver answers, measured checks and owner attestations.
 
 [Contributing](project/CONTRIBUTING.md) covers installation, required checks and review;
 [governance](project/GOVERNANCE.md), [conduct](project/CODE_OF_CONDUCT.md), the [roadmap](project/ROADMAP.md)
