@@ -1,0 +1,2696 @@
+# Criterion answers are drafts; project 15135 is registered, no badge attainment claimed.
+# Criterion answers are drafts; project 15135 is registered, no badge attainment claimed.
+# OpenSSF Best Practices answer draft. No form has been submitted.
+# IDs/categories come from the pinned official criteria; explanations are Wrangle-specific.
+format: wrangle-openssf-evidence-draft-v1
+assessed_on: '2026-10-01'
+project:
+  name: Wrangle
+  repository: https://github.com/autonomio/wrangle
+  homepage: https://github.com/autonomio/wrangle
+  registered_project_id: 15135
+  registration_state: registered_criteria_submission_pending
+  registration_lookup: 
+    https://www.bestpractices.dev/en/projects.json?url=https%3A%2F%2Fgithub.com%2Fautonomio%2Fwrangle
+  public_revision: 166e4a41e4dd071ddb333d0ef2158d723ff02b99
+  public_release: v0.7.6
+  public_last_push: '2024-04-20T14:29:16Z'
+  local_candidate_version: 1.0.0
+  badge_page: https://www.bestpractices.dev/en/projects/15135
+official_criteria:
+  source_url: 
+    https://raw.githubusercontent.com/ossf/best-practices-badge/e1b85623fd6ccad3283943db5957f3130e6bb84b/criteria/criteria.yml
+  source_revision: e1b85623fd6ccad3283943db5957f3130e6bb84b
+  source_sha256: ca39078ee02032152210f0816add8b096a78d5c6d2f31f90e1de948ec190b1b9
+  passing_count: 67
+  silver_count: 55
+  passing_url: https://www.bestpractices.dev/en/criteria/0?details=true&rationale=true
+  silver_url: https://www.bestpractices.dev/en/criteria/1?details=true&rationale=true
+interpretation:
+  purpose: Human-reviewed answer draft, not a submitted certification or a claim that any badge has 
+    been achieved.
+  status_scope: Status evaluates currently available public evidence or explicitly unresolved 
+    history. Unpublished files cannot promote a criterion to Met.
+  candidate_scope: after_publication.candidate_status is a review proposal, not a result. Complete 
+    required checks, publish evidence and obtain required human confirmations before promotion.
+  path_base: Checkout root. Paths beginning wrangle/docs/ refer to documents shipped in the 
+    installed package.
+  local_documents: Some referenced documents/workflows are being added in this change. Verify their 
+    existence and contents; their mention is not evidence of completion.
+  submission_values:
+  - Met
+  - Unmet
+  - N/A
+  - '?'
+  passing_rule: Meet every MUST; meet each SHOULD or give an acceptable unmet justification; 
+    consider every SUGGESTED.
+  silver_rule: Achieve Passing and meet the additional Silver criteria. Do not substitute 
+    documentation for actual coverage, release signatures or continuity access.
+  na_rule: Use N/A only where official criteria allow it and the applicability argument is verified.
+  legal_policy: This draft does not adopt a DCO, impose retroactive sign-off, assert contributor 
+    legal authority or make a new maintainer commitment.
+  assessment_windows: Recompute rolling report/vulnerability/bug-fix windows at submission time. 
+    Confirm private records with the maintainer.
+priority_blockers:
+- id: publish_current_evidence
+  action: Publish the reviewed modernization, docs, tests and CI; replace draft URLs with a stable 
+    public revision.
+- id: register_project
+  action: Registered as project 15135; questionnaire answers remain drafts until submitted.
+  state: complete
+- id: confirm_continuity_person_and_consent
+  action: EnergyGuy3 is owner-confirmed. Verify one-week continuity scope and publishing/recovery 
+    access; do not claim an independent rehearsal.
+  state: person_owner_confirmed_access_recovery_pending
+- id: primary_developer_secure_design_confirmation
+  action: Owner identifies EnergyGuy3 as the backup maintainer with secure-development expertise; 
+    publish the role and retain the owner-affirmed basis.
+  state: owner_confirmed
+- id: confirm_vulnerability_history_and_current_findings
+  action: Review public advisories and private maintainer records, including response times, credits
+    and credential incidents.
+- id: record_coverage_result_at_least_80_percent
+  action: Publish measured statement coverage >=80% and enforce the threshold against the production
+    package.
+- id: record_clean_static_analysis_runs
+  action: Run and review Bandit/CodeQL/Ruff findings; publish successful CI evidence.
+- id: verify_bit_for_bit_generated_catalog_and_build_repetition
+  action: Verify repeated generated catalogs and builds with controlled timestamps and dependencies.
+- id: publish_actual_signed_release
+  action: Publish a real signed release, then independently verify the wheel/sdist and document 
+    trust roots and identity checks.
+levels:
+  passing:
+    description_good:
+      requirement: MUST
+      na_allowed: false
+      criterion_url: https://www.bestpractices.dev/en/criteria/0#0.description_good
+      group: Basics / Basic project website content
+      status: Met
+      kind: implementation
+      evidence:
+        public_urls:
+        - https://github.com/autonomio/wrangle/blob/166e4a41e4dd071ddb333d0ef2158d723ff02b99/README.md
+        local_paths:
+        - README.md
+      justification: The public README describes the data preparation problem in ordinary language. 
+        Its deep-learning scope describes the legacy release; the 1.0 wording must be published 
+        before it is used as evidence.
+      unresolved: []
+      after_publication:
+        candidate_status:
+        required_checks: []
+    interact:
+      requirement: MUST
+      na_allowed: false
+      criterion_url: https://www.bestpractices.dev/en/criteria/0#0.interact
+      group: Basics / Basic project website content
+      status: '?'
+      kind: implementation
+      evidence:
+        public_urls: []
+        local_paths:
+        - README.md
+        - CONTRIBUTING.md
+        - .github/ISSUE_TEMPLATE/bug-report.md
+      justification: The local README and contribution instructions will link installation, issue 
+        reporting and pull requests. Public legacy instructions do not establish the complete modern
+        contribution path.
+      unresolved:
+      - publish_current_evidence
+      after_publication:
+        candidate_status: Met
+        required_checks:
+        - Verify the referenced files and checks exist, succeed, and are publicly accessible.
+    contribution:
+      requirement: MUST
+      na_allowed: false
+      criterion_url: https://www.bestpractices.dev/en/criteria/0#0.contribution
+      group: Basics / Basic project website content
+      status: Met
+      kind: implementation
+      evidence:
+        public_urls:
+        - https://github.com/autonomio/wrangle/blob/166e4a41e4dd071ddb333d0ef2158d723ff02b99/.github/PULL_REQUEST_TEMPLATE.md
+        local_paths:
+        - CONTRIBUTING.md
+        - .github/PULL_REQUEST_TEMPLATE.md
+      justification: The public pull-request template describes a pull-request contribution process.
+        The modern instructions and commands still require publication.
+      unresolved: []
+      after_publication:
+        candidate_status:
+        required_checks: []
+    contribution_requirements:
+      requirement: SHOULD
+      na_allowed: false
+      criterion_url: https://www.bestpractices.dev/en/criteria/0#0.contribution_requirements
+      group: Basics / Basic project website content
+      status: Met
+      kind: implementation
+      evidence:
+        public_urls:
+        - https://github.com/autonomio/wrangle/blob/166e4a41e4dd071ddb333d0ef2158d723ff02b99/.github/PULL_REQUEST_TEMPLATE.md
+        local_paths:
+        - CONTRIBUTING.md
+        - pyproject.toml
+      justification: The public pull-request template asks for PEP 8 code and updated tests. 
+        Replacement requirements must be published with 1.0.
+      unresolved: []
+      after_publication:
+        candidate_status:
+        required_checks: []
+    floss_license:
+      requirement: MUST
+      na_allowed: false
+      criterion_url: https://www.bestpractices.dev/en/criteria/0#0.floss_license
+      group: Basics / FLOSS license
+      status: Met
+      kind: implementation
+      evidence:
+        public_urls:
+        - https://github.com/autonomio/wrangle/blob/166e4a41e4dd071ddb333d0ef2158d723ff02b99/LICENSE
+        - https://github.com/autonomio/wrangle/blob/166e4a41e4dd071ddb333d0ef2158d723ff02b99/pyproject.toml
+        local_paths:
+        - LICENSE
+        - pyproject.toml
+      justification: Wrangle is publicly licensed under the OSI-approved MIT license; the repository
+        has a top-level LICENSE.
+      unresolved: []
+      after_publication:
+        candidate_status:
+        required_checks: []
+    floss_license_osi:
+      requirement: SUGGESTED
+      na_allowed: false
+      criterion_url: https://www.bestpractices.dev/en/criteria/0#0.floss_license_osi
+      group: Basics / FLOSS license
+      status: Met
+      kind: implementation
+      evidence:
+        public_urls:
+        - https://github.com/autonomio/wrangle/blob/166e4a41e4dd071ddb333d0ef2158d723ff02b99/LICENSE
+        - https://github.com/autonomio/wrangle/blob/166e4a41e4dd071ddb333d0ef2158d723ff02b99/pyproject.toml
+        local_paths:
+        - LICENSE
+        - pyproject.toml
+      justification: Wrangle is publicly licensed under the OSI-approved MIT license; the repository
+        has a top-level LICENSE.
+      unresolved: []
+      after_publication:
+        candidate_status:
+        required_checks: []
+    license_location:
+      requirement: MUST
+      na_allowed: false
+      criterion_url: https://www.bestpractices.dev/en/criteria/0#0.license_location
+      group: Basics / FLOSS license
+      status: Met
+      kind: implementation
+      evidence:
+        public_urls:
+        - https://github.com/autonomio/wrangle/blob/166e4a41e4dd071ddb333d0ef2158d723ff02b99/LICENSE
+        - https://github.com/autonomio/wrangle/blob/166e4a41e4dd071ddb333d0ef2158d723ff02b99/pyproject.toml
+        local_paths:
+        - LICENSE
+        - pyproject.toml
+      justification: Wrangle is publicly licensed under the OSI-approved MIT license; the repository
+        has a top-level LICENSE.
+      unresolved: []
+      after_publication:
+        candidate_status:
+        required_checks: []
+    documentation_basics:
+      requirement: MUST
+      na_allowed: true
+      criterion_url: https://www.bestpractices.dev/en/criteria/0#0.documentation_basics
+      group: Basics / Documentation
+      status: '?'
+      kind: implementation
+      evidence:
+        public_urls: []
+        local_paths:
+        - README.md
+        - wrangle/docs/getting_started.md
+        - wrangle/docs/security.md
+      justification: The modern README and shipped guide cover installation, starting with local 
+        files and preparation. Security expectations are being documented; none of these local 
+        documents is yet public 1.0 evidence.
+      unresolved:
+      - publish_current_evidence
+      after_publication:
+        candidate_status: Met
+        required_checks:
+        - Verify the referenced files and checks exist, succeed, and are publicly accessible.
+    documentation_interface:
+      requirement: MUST
+      na_allowed: true
+      criterion_url: https://www.bestpractices.dev/en/criteria/0#0.documentation_interface
+      group: Basics / Documentation
+      status: '?'
+      kind: implementation
+      evidence:
+        public_urls: []
+        local_paths:
+        - wrangle/docs/operations.json
+        - wrangle/docs/recipes.md
+        - scripts/build_catalog.py
+        - wrangle/_cli.py
+      justification: The generated operation catalog, recipe manual and CLI help describe inputs, 
+        outputs, errors and boundaries. Publish and verify the release-matched documentation.
+      unresolved:
+      - publish_current_evidence
+      after_publication:
+        candidate_status: Met
+        required_checks:
+        - Verify the referenced files and checks exist, succeed, and are publicly accessible.
+    sites_https:
+      requirement: MUST
+      na_allowed: false
+      criterion_url: https://www.bestpractices.dev/en/criteria/0#0.sites_https
+      group: Basics / Other
+      status: Unmet
+      kind: implementation
+      evidence:
+        public_urls:
+        - https://github.com/autonomio/wrangle/blob/166e4a41e4dd071ddb333d0ef2158d723ff02b99/README.md
+        - https://github.com/autonomio/wrangle/blob/166e4a41e4dd071ddb333d0ef2158d723ff02b99/pyproject.toml
+        local_paths:
+        - README.md
+        - pyproject.toml
+      justification: GitHub and PyPI use HTTPS, but the public legacy pyproject and README still 
+        advertise http://autonom.io. Local metadata uses the HTTPS repository; publish it and verify
+        every advertised project/download URL.
+      unresolved:
+      - publish_current_evidence
+      - verify_advertised_urls_https
+      after_publication:
+        candidate_status: Met
+        required_checks:
+        - Ensure project, repository and download URLs all support HTTPS.
+    discussion:
+      requirement: MUST
+      na_allowed: false
+      criterion_url: https://www.bestpractices.dev/en/criteria/0#0.discussion
+      group: Basics / Other
+      status: Met
+      kind: implementation
+      evidence:
+        public_urls:
+        - https://github.com/autonomio/wrangle/issues
+        - https://github.com/autonomio/wrangle/pulls
+        local_paths: []
+      justification: Public GitHub issues and pull requests provide searchable URL-addressable 
+        discussion without requiring installation of proprietary client software.
+      unresolved: []
+      after_publication:
+        candidate_status:
+        required_checks: []
+    english:
+      requirement: SHOULD
+      na_allowed: false
+      criterion_url: https://www.bestpractices.dev/en/criteria/0#0.english
+      group: Basics / Other
+      status: Met
+      kind: implementation
+      evidence:
+        public_urls:
+        - https://github.com/autonomio/wrangle/blob/166e4a41e4dd071ddb333d0ef2158d723ff02b99/README.md
+        - https://github.com/autonomio/wrangle/issues
+        local_paths:
+        - README.md
+        - CONTRIBUTING.md
+      justification: The public documentation and issue/PR templates are English. Issues and code 
+        comments can be submitted in English.
+      unresolved: []
+      after_publication:
+        candidate_status:
+        required_checks: []
+    maintained:
+      requirement: MUST
+      na_allowed: false
+      criterion_url: https://www.bestpractices.dev/en/criteria/0#0.maintained
+      group: Basics / Other
+      status: '?'
+      kind: maintainer_attestation
+      evidence:
+        public_urls: []
+        local_paths:
+        - GOVERNANCE.md
+        - SECURITY.md
+      justification: Active local redevelopment is evidence of current work, but it is unpublished. 
+        The maintainer must confirm ongoing handling of significant defects and vulnerability 
+        reports.
+      unresolved:
+      - confirm_ongoing_maintenance
+      - publish_current_evidence
+      after_publication:
+        candidate_status: Met
+        required_checks: []
+    repo_public:
+      requirement: MUST
+      na_allowed: false
+      criterion_url: https://www.bestpractices.dev/en/criteria/0#0.repo_public
+      group: Change Control / Public version-controlled source repository
+      status: Met
+      kind: implementation
+      evidence:
+        public_urls:
+        - https://github.com/autonomio/wrangle
+        - https://github.com/autonomio/wrangle/commits/master
+        local_paths: []
+      justification: The public GitHub repository exposes the source and history.
+      unresolved: []
+      after_publication:
+        candidate_status:
+        required_checks: []
+    repo_track:
+      requirement: MUST
+      na_allowed: false
+      criterion_url: https://www.bestpractices.dev/en/criteria/0#0.repo_track
+      group: Change Control / Public version-controlled source repository
+      status: Met
+      kind: implementation
+      evidence:
+        public_urls:
+        - https://github.com/autonomio/wrangle
+        - https://github.com/autonomio/wrangle/commits/master
+        local_paths: []
+      justification: Public git commits record authors, dates and changes.
+      unresolved: []
+      after_publication:
+        candidate_status:
+        required_checks: []
+    repo_interim:
+      requirement: MUST
+      na_allowed: false
+      criterion_url: https://www.bestpractices.dev/en/criteria/0#0.repo_interim
+      group: Change Control / Public version-controlled source repository
+      status: Met
+      kind: implementation
+      evidence:
+        public_urls:
+        - https://github.com/autonomio/wrangle
+        - https://github.com/autonomio/wrangle/commits/master
+        local_paths: []
+      justification: Public commit history contains intermediate changes and pull-request merges 
+        between tagged releases.
+      unresolved: []
+      after_publication:
+        candidate_status:
+        required_checks: []
+    repo_distributed:
+      requirement: SUGGESTED
+      na_allowed: false
+      criterion_url: https://www.bestpractices.dev/en/criteria/0#0.repo_distributed
+      group: Change Control / Public version-controlled source repository
+      status: Met
+      kind: implementation
+      evidence:
+        public_urls:
+        - https://github.com/autonomio/wrangle
+        - https://github.com/autonomio/wrangle/commits/master
+        local_paths: []
+      justification: The project uses git, a common distributed version-control system.
+      unresolved: []
+      after_publication:
+        candidate_status:
+        required_checks: []
+    version_unique:
+      requirement: MUST
+      na_allowed: false
+      criterion_url: https://www.bestpractices.dev/en/criteria/0#0.version_unique
+      group: Change Control / Unique version numbering
+      status: Met
+      kind: implementation
+      evidence:
+        public_urls:
+        - https://github.com/autonomio/wrangle/releases
+        - https://github.com/autonomio/wrangle/tags
+        local_paths:
+        - pyproject.toml
+      justification: Public releases have distinct version numbers and git references.
+      unresolved: []
+      after_publication:
+        candidate_status:
+        required_checks: []
+    version_semver:
+      requirement: SUGGESTED
+      na_allowed: false
+      criterion_url: https://www.bestpractices.dev/en/criteria/0#0.version_semver
+      group: Change Control / Unique version numbering
+      status: Met
+      kind: implementation
+      evidence:
+        public_urls:
+        - https://github.com/autonomio/wrangle/releases
+        - https://github.com/autonomio/wrangle/tags
+        local_paths:
+        - pyproject.toml
+      justification: Public releases use v0.x.y version labels; the local candidate is 1.0.0.
+      unresolved: []
+      after_publication:
+        candidate_status:
+        required_checks: []
+    version_tags:
+      requirement: SUGGESTED
+      na_allowed: false
+      criterion_url: https://www.bestpractices.dev/en/criteria/0#0.version_tags
+      group: Change Control / Unique version numbering
+      status: Met
+      kind: implementation
+      evidence:
+        public_urls:
+        - https://github.com/autonomio/wrangle/releases
+        - https://github.com/autonomio/wrangle/tags
+        local_paths:
+        - pyproject.toml
+      justification: Public releases are identified by git tags, including v0.7.6.
+      unresolved: []
+      after_publication:
+        candidate_status:
+        required_checks: []
+    release_notes:
+      requirement: MUST
+      na_allowed: true
+      criterion_url: https://www.bestpractices.dev/en/criteria/0#0.release_notes
+      group: Change Control / Release notes
+      status: Unmet
+      kind: public_history
+      evidence:
+        public_urls:
+        - https://github.com/autonomio/wrangle/releases/tag/v0.6.10
+        - https://github.com/autonomio/wrangle/releases/tag/v0.7.6
+        local_paths:
+        - CHANGELOG.md
+      justification: CHANGELOG.md now documents every existing public release and version tag, plus 
+        the unreleased native 1.0 change. The previously empty v0.6.10 notes are explicitly 
+        reconstructed from its tagged source diff. Publish this evidence before claiming the 
+        criterion.
+      unresolved:
+      - repair_missing_historical_release_notes
+      - publish_current_evidence
+      - publish_approved_release_notes
+      after_publication:
+        candidate_status: Met
+        required_checks:
+        - Review notes for each release and include all significant changes and upgrade impacts.
+    release_notes_vulns:
+      requirement: MUST
+      na_allowed: true
+      criterion_url: https://www.bestpractices.dev/en/criteria/0#0.release_notes_vulns
+      group: Change Control / Release notes
+      status: '?'
+      kind: public_history
+      evidence:
+        public_urls: []
+        local_paths:
+        - CHANGELOG.md
+        - SECURITY.md
+      justification: No public runtime advisory was established by this audit. The maintainer must 
+        determine whether any fixed publicly known runtime vulnerability already had a CVE or 
+        equivalent identifier when each release was made.
+      unresolved:
+      - confirm_public_vulnerability_and_release_history
+      after_publication:
+        candidate_status:
+        required_checks: []
+    report_process:
+      requirement: MUST
+      na_allowed: false
+      criterion_url: https://www.bestpractices.dev/en/criteria/0#0.report_process
+      group: Reporting / Bug-reporting process
+      status: Met
+      kind: implementation
+      evidence:
+        public_urls:
+        - https://github.com/autonomio/wrangle/issues
+        - https://github.com/autonomio/wrangle/blob/166e4a41e4dd071ddb333d0ef2158d723ff02b99/README.md
+        local_paths:
+        - CONTRIBUTING.md
+      justification: The public README directs users to GitHub issues for bug reports.
+      unresolved: []
+      after_publication:
+        candidate_status:
+        required_checks: []
+    report_tracker:
+      requirement: SHOULD
+      na_allowed: false
+      criterion_url: https://www.bestpractices.dev/en/criteria/0#0.report_tracker
+      group: Reporting / Bug-reporting process
+      status: Met
+      kind: implementation
+      evidence:
+        public_urls:
+        - https://github.com/autonomio/wrangle/issues
+        - https://github.com/autonomio/wrangle/blob/166e4a41e4dd071ddb333d0ef2158d723ff02b99/README.md
+        local_paths:
+        - CONTRIBUTING.md
+      justification: The project has a public GitHub issue tracker.
+      unresolved: []
+      after_publication:
+        candidate_status:
+        required_checks: []
+    report_responses:
+      requirement: MUST
+      na_allowed: false
+      criterion_url: https://www.bestpractices.dev/en/criteria/0#0.report_responses
+      group: Reporting / Bug-reporting process
+      status: Met
+      kind: public_history
+      evidence:
+        public_urls:
+        - https://github.com/autonomio/wrangle/issues?q=is%3Aissue+created%3A%3E%3D2025-10-01
+        local_paths:
+        - CONTRIBUTING.md
+      justification: GitHub issues are the public report channel. The repository API returns zero 
+        non-PR reports created since 2025-10-01, covering the current 2–12 month assessment window. 
+        There are no reports in that window on which to calculate a delayed-response rate. This does
+        not assert private vulnerability response history.
+      unresolved: []
+      after_publication:
+        candidate_status: Met
+        required_checks: []
+    enhancement_responses:
+      requirement: SHOULD
+      na_allowed: false
+      criterion_url: https://www.bestpractices.dev/en/criteria/0#0.enhancement_responses
+      group: Reporting / Bug-reporting process
+      status: Met
+      kind: public_history
+      evidence:
+        public_urls:
+        - https://github.com/autonomio/wrangle/issues?q=is%3Aissue+created%3A%3E%3D2025-10-01
+        local_paths:
+        - CONTRIBUTING.md
+      justification: GitHub issues are the public report channel. The repository API returns zero 
+        non-PR reports created since 2025-10-01, covering the current 2–12 month assessment window. 
+        There are no reports in that window on which to calculate a delayed-response rate. This does
+        not assert private vulnerability response history.
+      unresolved: []
+      after_publication:
+        candidate_status: Met
+        required_checks: []
+    report_archive:
+      requirement: MUST
+      na_allowed: false
+      criterion_url: https://www.bestpractices.dev/en/criteria/0#0.report_archive
+      group: Reporting / Bug-reporting process
+      status: Met
+      kind: implementation
+      evidence:
+        public_urls:
+        - https://github.com/autonomio/wrangle/issues
+        - https://github.com/autonomio/wrangle/blob/166e4a41e4dd071ddb333d0ef2158d723ff02b99/README.md
+        local_paths:
+        - CONTRIBUTING.md
+      justification: Public issues retain reports and comments in a searchable archive.
+      unresolved: []
+      after_publication:
+        candidate_status:
+        required_checks: []
+    vulnerability_report_process:
+      requirement: MUST
+      na_allowed: false
+      criterion_url: https://www.bestpractices.dev/en/criteria/0#0.vulnerability_report_process
+      group: Reporting / Vulnerability report process
+      status: '?'
+      kind: implementation
+      evidence:
+        public_urls: []
+        local_paths:
+        - SECURITY.md
+      justification: SECURITY.md will document the reporting route and appropriate handling of 
+        sensitive research data.
+      unresolved:
+      - publish_current_evidence
+      - Verify the documented reporting route is active.
+      after_publication:
+        candidate_status: Met
+        required_checks:
+        - Verify the referenced files and checks exist, succeed, and are publicly accessible.
+        - Verify the documented reporting route is active.
+    vulnerability_report_private:
+      requirement: MUST
+      na_allowed: true
+      criterion_url: https://www.bestpractices.dev/en/criteria/0#0.vulnerability_report_private
+      group: Reporting / Vulnerability report process
+      status: '?'
+      kind: implementation
+      evidence:
+        public_urls: []
+        local_paths:
+        - SECURITY.md
+      justification: GitHub private vulnerability reporting is now enabled and was read back through
+        the repository API. SECURITY.md documents the private report URL; publish that policy before
+        claiming the full documented process.
+      unresolved:
+      - publish_current_evidence
+      after_publication:
+        candidate_status: Met
+        required_checks:
+        - Verify the public security policy and active private report route.
+    vulnerability_report_response:
+      requirement: MUST
+      na_allowed: true
+      criterion_url: https://www.bestpractices.dev/en/criteria/0#0.vulnerability_report_response
+      group: Reporting / Vulnerability report process
+      status: '?'
+      kind: maintainer_attestation
+      evidence:
+        public_urls: []
+        local_paths:
+        - SECURITY.md
+      justification: The maintainer must confirm whether any vulnerability reports arrived in the 
+        last six months and, if so, whether every initial response was within 14 days. N/A is 
+        allowed only if none arrived.
+      unresolved:
+      - confirm_private_vulnerability_reports_and_response_times
+      after_publication:
+        candidate_status:
+        required_checks: []
+    build:
+      requirement: MUST
+      na_allowed: true
+      criterion_url: https://www.bestpractices.dev/en/criteria/0#0.build
+      group: Quality / Working build system
+      status: Met
+      kind: implementation
+      evidence:
+        public_urls:
+        - https://github.com/autonomio/wrangle/blob/166e4a41e4dd071ddb333d0ef2158d723ff02b99/pyproject.toml
+        local_paths:
+        - pyproject.toml
+        - scripts/verify_distribution.py
+      justification: Public pyproject.toml selects the standard Hatchling Python build backend. The 
+        1.0 wheel/sdist and installed workflows have local verification that still needs public CI 
+        evidence.
+      unresolved: []
+      after_publication:
+        candidate_status:
+        required_checks: []
+    build_common_tools:
+      requirement: SUGGESTED
+      na_allowed: true
+      criterion_url: https://www.bestpractices.dev/en/criteria/0#0.build_common_tools
+      group: Quality / Working build system
+      status: Met
+      kind: implementation
+      evidence:
+        public_urls:
+        - https://github.com/autonomio/wrangle/blob/166e4a41e4dd071ddb333d0ef2158d723ff02b99/pyproject.toml
+        local_paths:
+        - pyproject.toml
+      justification: Hatchling and Python packaging are common build tools.
+      unresolved: []
+      after_publication:
+        candidate_status:
+        required_checks: []
+    build_floss_tools:
+      requirement: SHOULD
+      na_allowed: true
+      criterion_url: https://www.bestpractices.dev/en/criteria/0#0.build_floss_tools
+      group: Quality / Working build system
+      status: Met
+      kind: implementation
+      evidence:
+        public_urls:
+        - https://github.com/autonomio/wrangle/blob/166e4a41e4dd071ddb333d0ef2158d723ff02b99/pyproject.toml
+        local_paths:
+        - pyproject.toml
+      justification: The project can be built with FLOSS Python, pip and Hatchling tools.
+      unresolved: []
+      after_publication:
+        candidate_status:
+        required_checks: []
+    test:
+      requirement: MUST
+      na_allowed: false
+      criterion_url: https://www.bestpractices.dev/en/criteria/0#0.test
+      group: Quality / Automated test suite
+      status: Met
+      kind: implementation
+      evidence:
+        public_urls:
+        - https://github.com/autonomio/wrangle/blob/166e4a41e4dd071ddb333d0ef2158d723ff02b99/test_script.py
+        - https://github.com/autonomio/wrangle/blob/166e4a41e4dd071ddb333d0ef2158d723ff02b99/.github/workflows/ci-push.yml
+        local_paths:
+        - tests/
+        - README.md
+        - .github/workflows/ci-push.yml
+      justification: The public MIT-licensed test_script.py is an automated smoke-test suite and 
+        public CI documents its invocation. The much larger modern pytest suite is local and must be
+        published before it can be cited.
+      unresolved: []
+      after_publication:
+        candidate_status:
+        required_checks: []
+    test_invocation:
+      requirement: SHOULD
+      na_allowed: false
+      criterion_url: https://www.bestpractices.dev/en/criteria/0#0.test_invocation
+      group: Quality / Automated test suite
+      status: '?'
+      kind: implementation
+      evidence:
+        public_urls: []
+        local_paths:
+        - README.md
+        - CONTRIBUTING.md
+        - pyproject.toml
+        - .github/workflows/ci-push.yml
+      justification: The modern suite uses the conventional python -m pytest command; the public 
+        legacy suite uses a project-specific script.
+      unresolved:
+      - publish_current_evidence
+      after_publication:
+        candidate_status: Met
+        required_checks:
+        - Verify the referenced files and checks exist, succeed, and are publicly accessible.
+    test_most:
+      requirement: SUGGESTED
+      na_allowed: false
+      criterion_url: https://www.bestpractices.dev/en/criteria/0#0.test_most
+      group: Quality / Automated test suite
+      status: '?'
+      kind: implementation
+      evidence:
+        public_urls: []
+        local_paths:
+        - tests/
+        - pyproject.toml
+        - .github/workflows/ci-push.yml
+      justification: Local tests cover data contracts, preparation, guided decisions, source 
+        integrity and publication. Coverage measurement is being added; report real results, not an 
+        assumed percentage.
+      unresolved:
+      - publish_current_evidence
+      - record_coverage_result
+      after_publication:
+        candidate_status: Met
+        required_checks:
+        - Verify the referenced files and checks exist, succeed, and are publicly accessible.
+        - record_coverage_result
+    test_continuous_integration:
+      requirement: SUGGESTED
+      na_allowed: false
+      criterion_url: https://www.bestpractices.dev/en/criteria/0#0.test_continuous_integration
+      group: Quality / Automated test suite
+      status: Met
+      kind: implementation
+      evidence:
+        public_urls:
+        - https://github.com/autonomio/wrangle/blob/166e4a41e4dd071ddb333d0ef2158d723ff02b99/.github/workflows/ci-push.yml
+        local_paths:
+        - .github/workflows/ci-push.yml
+      justification: The public workflow runs its automated suite on pushes. The modern matrix and 
+        pull-request checks still need publication and a successful public run.
+      unresolved: []
+      after_publication:
+        candidate_status:
+        required_checks: []
+    test_policy:
+      requirement: MUST
+      na_allowed: false
+      criterion_url: https://www.bestpractices.dev/en/criteria/0#0.test_policy
+      group: Quality / New functionality testing
+      status: Met
+      kind: implementation
+      evidence:
+        public_urls:
+        - https://github.com/autonomio/wrangle/blob/166e4a41e4dd071ddb333d0ef2158d723ff02b99/.github/PULL_REQUEST_TEMPLATE.md
+        local_paths:
+        - CONTRIBUTING.md
+      justification: The public pull-request checklist requires tests to be updated for changes. The
+        formal 1.0 policy will be published in CONTRIBUTING.md.
+      unresolved: []
+      after_publication:
+        candidate_status:
+        required_checks: []
+    tests_are_added:
+      requirement: MUST
+      na_allowed: false
+      criterion_url: https://www.bestpractices.dev/en/criteria/0#0.tests_are_added
+      group: Quality / New functionality testing
+      status: '?'
+      kind: implementation
+      evidence:
+        public_urls: []
+        local_paths:
+        - tests/
+        - CHANGELOG.md
+        - .github/PULL_REQUEST_TEMPLATE.md
+      justification: The largest current change is the Polars/YAML/CLI port; its accompanying tests 
+        are local. Publish both the implementation and tests so major additions can be checked 
+        together.
+      unresolved:
+      - publish_current_evidence
+      after_publication:
+        candidate_status: Met
+        required_checks:
+        - Verify the referenced files and checks exist, succeed, and are publicly accessible.
+    tests_documented_added:
+      requirement: SUGGESTED
+      na_allowed: false
+      criterion_url: https://www.bestpractices.dev/en/criteria/0#0.tests_documented_added
+      group: Quality / New functionality testing
+      status: Met
+      kind: implementation
+      evidence:
+        public_urls:
+        - https://github.com/autonomio/wrangle/blob/166e4a41e4dd071ddb333d0ef2158d723ff02b99/.github/PULL_REQUEST_TEMPLATE.md
+        local_paths:
+        - CONTRIBUTING.md
+        - .github/PULL_REQUEST_TEMPLATE.md
+      justification: The public pull-request checklist says tests must reflect the changes; the 
+        formal replacement remains pending publication.
+      unresolved: []
+      after_publication:
+        candidate_status:
+        required_checks: []
+    warnings:
+      requirement: MUST
+      na_allowed: true
+      criterion_url: https://www.bestpractices.dev/en/criteria/0#0.warnings
+      group: Quality / Warning flags
+      status: Met
+      kind: implementation
+      evidence:
+        public_urls:
+        - https://github.com/autonomio/wrangle/blob/166e4a41e4dd071ddb333d0ef2158d723ff02b99/.github/workflows/ci-push.yml
+        local_paths:
+        - .github/workflows/ci-push.yml
+        - .github/workflows/codeql.yml
+        - .github/workflows/dependency-audit.yml
+        - pyproject.toml
+      justification: Public CI already invokes flake8 and fails on selected syntax errors and 
+        undefined names. The new Ruff and strict warning configuration still needs publication.
+      unresolved: []
+      after_publication:
+        candidate_status:
+        required_checks: []
+    warnings_fixed:
+      requirement: MUST
+      na_allowed: true
+      criterion_url: https://www.bestpractices.dev/en/criteria/0#0.warnings_fixed
+      group: Quality / Warning flags
+      status: '?'
+      kind: implementation
+      evidence:
+        public_urls: []
+        local_paths:
+        - .github/workflows/ci-push.yml
+        - .github/workflows/codeql.yml
+        - .github/workflows/dependency-audit.yml
+        - pyproject.toml
+      justification: The new selected lint rules and Python warnings must have a clean documented 
+        run. Historical exit-zero lint reporting does not prove all relevant warnings were 
+        addressed.
+      unresolved:
+      - publish_current_evidence
+      - record_clean_lint_and_warning_runs
+      after_publication:
+        candidate_status: Met
+        required_checks:
+        - Verify the referenced files and checks exist, succeed, and are publicly accessible.
+        - record_clean_lint_and_warning_runs
+    warnings_strict:
+      requirement: SUGGESTED
+      na_allowed: true
+      criterion_url: https://www.bestpractices.dev/en/criteria/0#0.warnings_strict
+      group: Quality / Warning flags
+      status: '?'
+      kind: implementation
+      evidence:
+        public_urls: []
+        local_paths:
+        - .github/workflows/ci-push.yml
+        - .github/workflows/codeql.yml
+        - .github/workflows/dependency-audit.yml
+        - pyproject.toml
+        - CONTRIBUTING.md
+      justification: The modern CI is intended to enforce selected Ruff rules and pytest warnings as
+        errors. Verify practical strictness and any justified per-site exclusions.
+      unresolved:
+      - publish_current_evidence
+      - record_clean_lint_and_warning_runs
+      after_publication:
+        candidate_status: Met
+        required_checks:
+        - Verify the referenced files and checks exist, succeed, and are publicly accessible.
+        - record_clean_lint_and_warning_runs
+    know_secure_design:
+      requirement: MUST
+      na_allowed: false
+      criterion_url: https://www.bestpractices.dev/en/criteria/0#0.know_secure_design
+      group: Security / Secure development knowledge
+      status: Met
+      kind: maintainer_attestation
+      evidence:
+        public_urls: []
+        local_paths:
+        - GOVERNANCE.md
+        - wrangle/docs/security/assurance.md
+        owner_confirmation: backup_and_secure_development
+      justification: The project owner identifies EnergyGuy3 as the secure-development expertise 
+        contact and backup maintainer. This is an explicit owner attestation, not inferred from 
+        account permissions or automated testing.
+      unresolved: []
+      after_publication:
+        candidate_status: Met
+        required_checks:
+        - Publish the owner-confirmed role and secure-development responsibility in GOVERNANCE.md.
+      submission_answer:
+        status: Met
+        justification: The project owner confirms EnergyGuy3, an authorized project maintainer and 
+          designated backup, has secure-development expertise covering applicable secure design 
+          principles and common vulnerability classes with their mitigations.
+    know_common_errors:
+      requirement: MUST
+      na_allowed: false
+      criterion_url: https://www.bestpractices.dev/en/criteria/0#0.know_common_errors
+      group: Security / Secure development knowledge
+      status: Met
+      kind: maintainer_attestation
+      evidence:
+        public_urls: []
+        local_paths:
+        - GOVERNANCE.md
+        - wrangle/docs/security/assurance.md
+        owner_confirmation: backup_and_secure_development
+      justification: The project owner identifies EnergyGuy3 as the secure-development expertise 
+        contact and backup maintainer. This is an explicit owner attestation, not inferred from 
+        account permissions or automated testing.
+      unresolved: []
+      after_publication:
+        candidate_status: Met
+        required_checks:
+        - Publish the owner-confirmed role and secure-development responsibility in GOVERNANCE.md.
+      submission_answer:
+        status: Met
+        justification: The project owner confirms EnergyGuy3, an authorized project maintainer and 
+          designated backup, has secure-development expertise covering applicable secure design 
+          principles and common vulnerability classes with their mitigations.
+    crypto_published:
+      requirement: MUST
+      na_allowed: true
+      criterion_url: https://www.bestpractices.dev/en/criteria/0#0.crypto_published
+      group: Security / Use basic good cryptographic practices
+      status: '?'
+      kind: implementation
+      evidence:
+        public_urls: []
+        local_paths:
+        - wrangle/_api.py
+        - wrangle/_sources.py
+        - wrangle/_storage.py
+        - wrangle/docs/security.md
+      justification: The modern engine uses the standard SHA-256 algorithm for evidence hashes; no 
+        home-grown cryptographic protocol is used. Publish the actual implementation and its 
+        documented integrity limits.
+      unresolved:
+      - publish_current_evidence
+      after_publication:
+        candidate_status: Met
+        required_checks:
+        - Verify the referenced files and checks exist, succeed, and are publicly accessible.
+    crypto_call:
+      requirement: SHOULD
+      na_allowed: true
+      criterion_url: https://www.bestpractices.dev/en/criteria/0#0.crypto_call
+      group: Security / Use basic good cryptographic practices
+      status: '?'
+      kind: implementation
+      evidence:
+        public_urls: []
+        local_paths:
+        - wrangle/_api.py
+        - wrangle/_sources.py
+        - wrangle/_storage.py
+        - wrangle/docs/security.md
+      justification: The modern engine calls Python hashlib for SHA-256 instead of reimplementing 
+        cryptography. Publish the actual implementation and its documented integrity limits.
+      unresolved:
+      - publish_current_evidence
+      after_publication:
+        candidate_status: Met
+        required_checks:
+        - Verify the referenced files and checks exist, succeed, and are publicly accessible.
+    crypto_floss:
+      requirement: MUST
+      na_allowed: true
+      criterion_url: https://www.bestpractices.dev/en/criteria/0#0.crypto_floss
+      group: Security / Use basic good cryptographic practices
+      status: '?'
+      kind: implementation
+      evidence:
+        public_urls: []
+        local_paths:
+        - wrangle/_api.py
+        - wrangle/_sources.py
+        - wrangle/_storage.py
+        - wrangle/docs/security.md
+      justification: SHA-256 hashing is implemented through the FLOSS Python standard library. 
+        Publish the actual implementation and its documented integrity limits.
+      unresolved:
+      - publish_current_evidence
+      after_publication:
+        candidate_status: Met
+        required_checks:
+        - Verify the referenced files and checks exist, succeed, and are publicly accessible.
+    crypto_keylength:
+      requirement: MUST
+      na_allowed: true
+      criterion_url: https://www.bestpractices.dev/en/criteria/0#0.crypto_keylength
+      group: Security / Use basic good cryptographic practices
+      status: '?'
+      kind: implementation
+      evidence:
+        public_urls: []
+        local_paths:
+        - wrangle/_api.py
+        - wrangle/docs/security.md
+      justification: Wrangle has no encryption, key agreement or user-configurable security key 
+        lengths; its SHA-256 content digests do not use cryptographic keys.
+      unresolved:
+      - publish_current_evidence
+      after_publication:
+        candidate_status: N/A
+        required_checks:
+        - Verify the referenced files and checks exist, succeed, and are publicly accessible.
+    crypto_working:
+      requirement: MUST
+      na_allowed: true
+      criterion_url: https://www.bestpractices.dev/en/criteria/0#0.crypto_working
+      group: Security / Use basic good cryptographic practices
+      status: '?'
+      kind: implementation
+      evidence:
+        public_urls: []
+        local_paths:
+        - wrangle/_api.py
+        - wrangle/_sources.py
+        - wrangle/_storage.py
+        - wrangle/docs/security.md
+      justification: The modern evidence format uses SHA-256 and does not depend on the broken 
+        algorithms named by the criterion. Publish the actual implementation and its documented 
+        integrity limits.
+      unresolved:
+      - publish_current_evidence
+      after_publication:
+        candidate_status: Met
+        required_checks:
+        - Verify the referenced files and checks exist, succeed, and are publicly accessible.
+    crypto_weaknesses:
+      requirement: SHOULD
+      na_allowed: true
+      criterion_url: https://www.bestpractices.dev/en/criteria/0#0.crypto_weaknesses
+      group: Security / Use basic good cryptographic practices
+      status: '?'
+      kind: implementation
+      evidence:
+        public_urls: []
+        local_paths:
+        - wrangle/_api.py
+        - wrangle/_sources.py
+        - wrangle/_storage.py
+        - wrangle/docs/security.md
+      justification: The modern evidence mechanism uses SHA-256, with no SHA-1 or weak cipher 
+        dependency. Publish the actual implementation and its documented integrity limits.
+      unresolved:
+      - publish_current_evidence
+      after_publication:
+        candidate_status: Met
+        required_checks:
+        - Verify the referenced files and checks exist, succeed, and are publicly accessible.
+    crypto_pfs:
+      requirement: SHOULD
+      na_allowed: true
+      criterion_url: https://www.bestpractices.dev/en/criteria/0#0.crypto_pfs
+      group: Security / Use basic good cryptographic practices
+      status: '?'
+      kind: implementation
+      evidence:
+        public_urls: []
+        local_paths:
+        - wrangle/_api.py
+        - wrangle/docs/security.md
+      justification: Wrangle implements no key-agreement protocol or network session.
+      unresolved:
+      - publish_current_evidence
+      after_publication:
+        candidate_status: N/A
+        required_checks:
+        - Verify the referenced files and checks exist, succeed, and are publicly accessible.
+    crypto_password_storage:
+      requirement: MUST
+      na_allowed: true
+      criterion_url: https://www.bestpractices.dev/en/criteria/0#0.crypto_password_storage
+      group: Security / Use basic good cryptographic practices
+      status: '?'
+      kind: implementation
+      evidence:
+        public_urls: []
+        local_paths:
+        - wrangle/_api.py
+        - wrangle/docs/security.md
+      justification: Wrangle does not authenticate external users or store their passwords.
+      unresolved:
+      - publish_current_evidence
+      after_publication:
+        candidate_status: N/A
+        required_checks:
+        - Verify the referenced files and checks exist, succeed, and are publicly accessible.
+    crypto_random:
+      requirement: MUST
+      na_allowed: true
+      criterion_url: https://www.bestpractices.dev/en/criteria/0#0.crypto_random
+      group: Security / Use basic good cryptographic practices
+      status: '?'
+      kind: implementation
+      evidence:
+        public_urls: []
+        local_paths:
+        - wrangle/_api.py
+        - wrangle/docs/security.md
+      justification: Wrangle creates no cryptographic keys or security nonces. Statistical sampling 
+        seeds are not security credentials.
+      unresolved:
+      - publish_current_evidence
+      after_publication:
+        candidate_status: N/A
+        required_checks:
+        - Verify the referenced files and checks exist, succeed, and are publicly accessible.
+    delivery_mitm:
+      requirement: MUST
+      na_allowed: false
+      criterion_url: https://www.bestpractices.dev/en/criteria/0#0.delivery_mitm
+      group: Security / Secured delivery against man-in-the-middle (MITM) attacks
+      status: Met
+      kind: implementation
+      evidence:
+        public_urls:
+        - https://github.com/autonomio/wrangle
+        - https://pypi.org/project/wrangle/
+        local_paths:
+        - wrangle/docs/security/releases.md
+      justification: Source downloads from GitHub and packages from PyPI use HTTPS; users must 
+        retain the secure transport.
+      unresolved: []
+      after_publication:
+        candidate_status:
+        required_checks: []
+    delivery_unsigned:
+      requirement: MUST
+      na_allowed: false
+      criterion_url: https://www.bestpractices.dev/en/criteria/0#0.delivery_unsigned
+      group: Security / Secured delivery against man-in-the-middle (MITM) attacks
+      status: '?'
+      kind: public_history
+      evidence:
+        public_urls: []
+        local_paths:
+        - CHANGELOG.md
+        - .github/workflows/ci-deploy.yml
+        - wrangle/docs/security/releases.md
+      justification: The public repository and PyPI downloads use HTTPS, but complete delivery 
+        history and any published checksum instructions must be reviewed. Do not retrieve an 
+        unsigned checksum over HTTP.
+      unresolved:
+      - verify_checksum_distribution_and_delivery_history
+      after_publication:
+        candidate_status: Met
+        required_checks: []
+    vulnerabilities_fixed_60_days:
+      requirement: MUST
+      na_allowed: false
+      criterion_url: https://www.bestpractices.dev/en/criteria/0#0.vulnerabilities_fixed_60_days
+      group: Security / Publicly known vulnerabilities fixed
+      status: '?'
+      kind: public_history
+      evidence:
+        public_urls: []
+        local_paths:
+        - SECURITY.md
+      justification: No vulnerability-history conclusion is made from the absence of a public 
+        advisory alone. Review public advisories and maintainer records for any medium-or-higher 
+        issue unpatched for over 60 days.
+      unresolved:
+      - confirm_vulnerability_history_and_current_findings
+      after_publication:
+        candidate_status: Met
+        required_checks: []
+    vulnerabilities_critical_fixed:
+      requirement: SHOULD
+      na_allowed: false
+      criterion_url: https://www.bestpractices.dev/en/criteria/0#0.vulnerabilities_critical_fixed
+      group: Security / Publicly known vulnerabilities fixed
+      status: '?'
+      kind: public_history
+      evidence:
+        public_urls: []
+        local_paths:
+        - SECURITY.md
+      justification: The maintainer must confirm critical-vulnerability history and actual 
+        response/fix times. A newly written policy is not proof of past compliance.
+      unresolved:
+      - confirm_critical_vulnerability_history
+      after_publication:
+        candidate_status: Met
+        required_checks: []
+    no_leaked_credentials:
+      requirement: MUST
+      na_allowed: false
+      criterion_url: https://www.bestpractices.dev/en/criteria/0#0.no_leaked_credentials
+      group: Security / Other security issues
+      status: '?'
+      kind: public_history
+      evidence:
+        public_urls: []
+        local_paths:
+        - SECURITY.md
+        - .github/workflows/codeql.yml
+        - .github/workflows/dependency-audit.yml
+      justification: GitHub secret scanning configuration and a historical scan can help, but a 
+        valid private credential leak cannot be ruled out from source inspection or a policy alone.
+      unresolved:
+      - review_repository_history_for_credentials
+      - confirm_known_credential_leaks_remediated
+      after_publication:
+        candidate_status: Met
+        required_checks: []
+    static_analysis:
+      requirement: MUST
+      na_allowed: true
+      criterion_url: https://www.bestpractices.dev/en/criteria/0#0.static_analysis
+      group: Analysis / Static code analysis
+      status: '?'
+      kind: implementation
+      evidence:
+        public_urls: []
+        local_paths:
+        - .github/workflows/ci-push.yml
+        - .github/workflows/codeql.yml
+        - .github/workflows/dependency-audit.yml
+        - pyproject.toml
+        - CONTRIBUTING.md
+      justification: Ruff, Bandit and CodeQL are being added for release and recurring analysis. The
+        first clean run and published policy are still required.
+      unresolved:
+      - publish_current_evidence
+      - record_clean_static_analysis_runs
+      after_publication:
+        candidate_status: Met
+        required_checks:
+        - Verify the referenced files and checks exist, succeed, and are publicly accessible.
+        - record_clean_static_analysis_runs
+    static_analysis_common_vulnerabilities:
+      requirement: SUGGESTED
+      na_allowed: true
+      criterion_url: 
+        https://www.bestpractices.dev/en/criteria/0#0.static_analysis_common_vulnerabilities
+      group: Analysis / Static code analysis
+      status: '?'
+      kind: implementation
+      evidence:
+        public_urls: []
+        local_paths:
+        - .github/workflows/ci-push.yml
+        - .github/workflows/codeql.yml
+        - .github/workflows/dependency-audit.yml
+        - pyproject.toml
+      justification: Bandit and CodeQL provide Python security rules. Verify that the actual 
+        configuration analyzes the production package and has a clean reviewed run.
+      unresolved:
+      - publish_current_evidence
+      - record_clean_static_analysis_runs
+      after_publication:
+        candidate_status: Met
+        required_checks:
+        - Verify the referenced files and checks exist, succeed, and are publicly accessible.
+        - record_clean_static_analysis_runs
+    static_analysis_fixed:
+      requirement: MUST
+      na_allowed: true
+      criterion_url: https://www.bestpractices.dev/en/criteria/0#0.static_analysis_fixed
+      group: Analysis / Static code analysis
+      status: '?'
+      kind: maintainer_attestation
+      evidence:
+        public_urls: []
+        local_paths:
+        - .github/workflows/ci-push.yml
+        - .github/workflows/codeql.yml
+        - .github/workflows/dependency-audit.yml
+        - pyproject.toml
+        - SECURITY.md
+      justification: Classify confirmed exploitable findings and record their timely remediation; no
+        all-clear is inferred before running and reviewing the selected tools.
+      unresolved:
+      - review_static_analysis_findings_and_remediation_history
+      after_publication:
+        candidate_status: Met
+        required_checks: []
+    static_analysis_often:
+      requirement: SUGGESTED
+      na_allowed: true
+      criterion_url: https://www.bestpractices.dev/en/criteria/0#0.static_analysis_often
+      group: Analysis / Static code analysis
+      status: '?'
+      kind: implementation
+      evidence:
+        public_urls: []
+        local_paths:
+        - .github/workflows/codeql.yml
+        - .github/workflows/dependency-audit.yml
+      justification: The security workflow is intended to run on pushes, pull requests and a 
+        schedule. Verify its actual triggers and public execution.
+      unresolved:
+      - publish_current_evidence
+      - record_clean_static_analysis_runs
+      after_publication:
+        candidate_status: Met
+        required_checks:
+        - Verify the referenced files and checks exist, succeed, and are publicly accessible.
+        - record_clean_static_analysis_runs
+    dynamic_analysis:
+      requirement: SUGGESTED
+      na_allowed: false
+      criterion_url: https://www.bestpractices.dev/en/criteria/0#0.dynamic_analysis
+      group: Analysis / Dynamic code analysis
+      status: '?'
+      kind: implementation
+      evidence:
+        public_urls: []
+        local_paths:
+        - pyproject.toml
+        - tests/
+        - CONTRIBUTING.md
+        - .github/workflows/ci-push.yml
+      justification: Coverage.py instruments production-code execution while pytest exercises 
+        untrusted inputs and failure/recovery paths. The coverage command and actual result must be 
+        verified as part of release checks; functional test count alone is not dynamic-analysis 
+        evidence.
+      unresolved:
+      - publish_current_evidence
+      - record_coverage_result
+      after_publication:
+        candidate_status: Met
+        required_checks:
+        - Verify the referenced files and checks exist, succeed, and are publicly accessible.
+        - Verify runtime coverage instrumentation executes before each production release.
+    dynamic_analysis_unsafe:
+      requirement: SUGGESTED
+      na_allowed: true
+      criterion_url: https://www.bestpractices.dev/en/criteria/0#0.dynamic_analysis_unsafe
+      group: Analysis / Dynamic code analysis
+      status: '?'
+      kind: implementation
+      evidence:
+        public_urls: []
+        local_paths:
+        - pyproject.toml
+        - wrangle/docs/security.md
+      justification: The project produces Python software, not memory-unsafe native-language code. 
+        Polars and fastexcel are externally maintained dependencies, monitored separately; do not 
+        imply Wrangle sanitizes their compiled code.
+      unresolved:
+      - publish_current_evidence
+      after_publication:
+        candidate_status: N/A
+        required_checks:
+        - Verify the referenced files and checks exist, succeed, and are publicly accessible.
+    dynamic_analysis_enable_assertions:
+      requirement: SUGGESTED
+      na_allowed: false
+      criterion_url: 
+        https://www.bestpractices.dev/en/criteria/0#0.dynamic_analysis_enable_assertions
+      group: Analysis / Dynamic code analysis
+      status: '?'
+      kind: implementation
+      evidence:
+        public_urls: []
+        local_paths:
+        - tests/
+        - .github/workflows/ci-push.yml
+      justification: Pytest runtime checks run with ordinary Python assertions enabled; production 
+        must not be invoked with optimization when verifying these tests.
+      unresolved:
+      - publish_current_evidence
+      after_publication:
+        candidate_status: Met
+        required_checks:
+        - Verify the referenced files and checks exist, succeed, and are publicly accessible.
+    dynamic_analysis_fixed:
+      requirement: MUST
+      na_allowed: true
+      criterion_url: https://www.bestpractices.dev/en/criteria/0#0.dynamic_analysis_fixed
+      group: Analysis / Dynamic code analysis
+      status: '?'
+      kind: maintainer_attestation
+      evidence:
+        public_urls: []
+        local_paths:
+        - tests/
+        - SECURITY.md
+      justification: Review confirmed runtime security findings and their remediation times. Passing
+        functional tests alone does not establish the absence of exploitable findings.
+      unresolved:
+      - review_dynamic_analysis_findings_and_remediation_history
+      after_publication:
+        candidate_status: Met
+        required_checks: []
+  silver:
+    achieve_passing:
+      requirement: MUST
+      na_allowed: false
+      criterion_url: https://www.bestpractices.dev/en/criteria/1#1.achieve_passing
+      group: Basics / Prerequisites
+      status: Unmet
+      kind: prerequisite
+      evidence:
+        public_urls:
+        - https://www.bestpractices.dev/en/projects.json?url=https%3A%2F%2Fgithub.com%2Fautonomio%2Fwrangle
+        local_paths: []
+      justification: No OpenSSF Best Practices project is registered for this repository, and no 
+        Passing badge has been achieved.
+      unresolved:
+      - register_project
+      - complete_passing
+      after_publication:
+        candidate_status: Met
+        required_checks: []
+    contribution_requirements:
+      requirement: MUST
+      na_allowed: false
+      criterion_url: https://www.bestpractices.dev/en/criteria/1#1.contribution_requirements
+      group: Basics / Basic project website content
+      status: '?'
+      kind: implementation
+      evidence:
+        public_urls: []
+        local_paths:
+        - CONTRIBUTING.md
+        - .github/PULL_REQUEST_TEMPLATE.md
+        - pyproject.toml
+      justification: CONTRIBUTING.md will define accepted changes, coding checks, tests and the 
+        pull-request process; publish the exact requirements.
+      unresolved:
+      - publish_current_evidence
+      after_publication:
+        candidate_status: Met
+        required_checks:
+        - Verify the referenced files and checks exist, succeed, and are publicly accessible.
+    dco:
+      requirement: SHOULD
+      na_allowed: false
+      criterion_url: https://www.bestpractices.dev/en/criteria/1#1.dco
+      group: Basics / Project oversight
+      status: Unmet
+      kind: maintainer_attestation
+      evidence:
+        public_urls: []
+        local_paths:
+        - CONTRIBUTING.md
+        - GOVERNANCE.md
+        - LICENSE
+      justification: The project has no verified DCO or CLA mechanism covering non-trivial 
+        contributions. A new legal sign-off requirement is not imposed by this draft. The current 
+        small-maintainer model accepts MIT-licensed contributions through reviewed pull requests; 
+        explicit legal-origin attestations remain a considered limitation.
+      unresolved:
+      - maintainer_approve_unmet_should_justification
+      after_publication:
+        candidate_status: Unmet
+        required_checks: []
+    governance:
+      requirement: MUST
+      na_allowed: false
+      criterion_url: https://www.bestpractices.dev/en/criteria/1#1.governance
+      group: Basics / Project oversight
+      status: '?'
+      kind: implementation
+      evidence:
+        public_urls: []
+        local_paths:
+        - GOVERNANCE.md
+      justification: GOVERNANCE.md will identify project decision-making and release authority; a 
+        draft is not public evidence.
+      unresolved:
+      - publish_current_evidence
+      after_publication:
+        candidate_status: Met
+        required_checks:
+        - Verify the referenced files and checks exist, succeed, and are publicly accessible.
+    code_of_conduct:
+      requirement: MUST
+      na_allowed: false
+      criterion_url: https://www.bestpractices.dev/en/criteria/1#1.code_of_conduct
+      group: Basics / Project oversight
+      status: '?'
+      kind: implementation
+      evidence:
+        public_urls: []
+        local_paths:
+        - CODE_OF_CONDUCT.md
+        - GOVERNANCE.md
+      justification: The project is adopting a published code of conduct with an actual 
+        reporting/enforcement contact.
+      unresolved:
+      - publish_current_evidence
+      - confirm_conduct_reporting_contact
+      after_publication:
+        candidate_status: Met
+        required_checks:
+        - Verify the referenced files and checks exist, succeed, and are publicly accessible.
+        - confirm_conduct_reporting_contact
+    roles_responsibilities:
+      requirement: MUST
+      na_allowed: false
+      criterion_url: https://www.bestpractices.dev/en/criteria/1#1.roles_responsibilities
+      group: Basics / Project oversight
+      status: '?'
+      kind: implementation
+      evidence:
+        public_urls: []
+        local_paths:
+        - GOVERNANCE.md
+      justification: GOVERNANCE.md must identify role responsibilities and the people currently 
+        holding them; do not infer a working backup from GitHub permissions.
+      unresolved:
+      - publish_current_evidence
+      - confirm_maintainer_roles
+      after_publication:
+        candidate_status: Met
+        required_checks:
+        - Verify the referenced files and checks exist, succeed, and are publicly accessible.
+        - confirm_maintainer_roles
+    access_continuity:
+      requirement: MUST
+      na_allowed: false
+      criterion_url: https://www.bestpractices.dev/en/criteria/1#1.access_continuity
+      group: Basics / Project oversight
+      status: '?'
+      kind: maintainer_attestation
+      evidence:
+        public_urls: []
+        local_paths:
+        - GOVERNANCE.md
+        - wrangle/docs/security/releases.md
+        owner_confirmation: backup_and_secure_development
+      justification: The project owner identifies EnergyGuy3 as the backup maintainer; GitHub 
+        administration rights were independently visible. The owner affirmation supports a 
+        continuity candidate. It does not establish that a release rehearsal was performed, nor 
+        independently verify package-publishing access and credential-recovery arrangements.
+      unresolved:
+      - publish_confirmed_maintainer_role
+      - verify_github_and_pypi_release_access
+      - confirm_continuity_recovery_within_one_week
+      after_publication:
+        candidate_status: Met
+        required_checks:
+        - Publish the confirmed backup role.
+        - Confirm that the owner’s continuity assertion includes issue handling, merging and release
+          within one week, including package publishing/recovery.
+        - Keep any independent rehearsal result distinct from the owner affirmation.
+      submission_answer:
+        status: '?'
+        justification: The owner designates EnergyGuy3 as the backup maintainer with existing GitHub
+          administration rights. Verify the specific one-week issue/merge/release and 
+          package-publishing recovery requirements before marking this criterion Met.
+    bus_factor:
+      requirement: SHOULD
+      na_allowed: false
+      criterion_url: https://www.bestpractices.dev/en/criteria/1#1.bus_factor
+      group: Basics / Project oversight
+      status: '?'
+      kind: maintainer_attestation
+      evidence:
+        public_urls: []
+        local_paths:
+        - GOVERNANCE.md
+        owner_confirmation: backup_and_secure_development
+      justification: The project owner identifies EnergyGuy3 as a backup with secure-development 
+        expertise, supplementing lead maintainer mikkokotila. This is an owner-affirmed two-person 
+        candidate; independent role familiarity and a recovery rehearsal are not claimed.
+      unresolved:
+      - publish_confirmed_maintainer_role
+      after_publication:
+        candidate_status: Met
+        required_checks:
+        - Publish the current owner-confirmed role assignments without claiming an unperformed 
+          rehearsal.
+    documentation_roadmap:
+      requirement: MUST
+      na_allowed: false
+      criterion_url: https://www.bestpractices.dev/en/criteria/1#1.documentation_roadmap
+      group: Basics / Documentation
+      status: '?'
+      kind: implementation
+      evidence:
+        public_urls: []
+        local_paths:
+        - ROADMAP.md
+      justification: ROADMAP.md will state planned and excluded work for at least the next year; 
+        publish dated scope and horizon.
+      unresolved:
+      - publish_current_evidence
+      after_publication:
+        candidate_status: Met
+        required_checks:
+        - Verify the referenced files and checks exist, succeed, and are publicly accessible.
+    documentation_architecture:
+      requirement: MUST
+      na_allowed: true
+      criterion_url: https://www.bestpractices.dev/en/criteria/1#1.documentation_architecture
+      group: Basics / Documentation
+      status: '?'
+      kind: implementation
+      evidence:
+        public_urls: []
+        local_paths:
+        - wrangle/docs/architecture.md
+        - AGENTS.md
+      justification: The architecture document will describe inspection, drafting, expression 
+        compilation, validation, execution, publication and evidence boundaries.
+      unresolved:
+      - publish_current_evidence
+      after_publication:
+        candidate_status: Met
+        required_checks:
+        - Verify the referenced files and checks exist, succeed, and are publicly accessible.
+    documentation_security:
+      requirement: MUST
+      na_allowed: true
+      criterion_url: https://www.bestpractices.dev/en/criteria/1#1.documentation_security
+      group: Basics / Documentation
+      status: '?'
+      kind: implementation
+      evidence:
+        public_urls: []
+        local_paths:
+        - wrangle/docs/security.md
+        - SECURITY.md
+      justification: The security document will define intended guarantees and limits, including 
+        that hashes are not authentication and global operations are not a bounded-memory promise.
+      unresolved:
+      - publish_current_evidence
+      after_publication:
+        candidate_status: Met
+        required_checks:
+        - Verify the referenced files and checks exist, succeed, and are publicly accessible.
+    documentation_quick_start:
+      requirement: MUST
+      na_allowed: true
+      criterion_url: https://www.bestpractices.dev/en/criteria/1#1.documentation_quick_start
+      group: Basics / Documentation
+      status: '?'
+      kind: implementation
+      evidence:
+        public_urls: []
+        local_paths:
+        - README.md
+        - wrangle/docs/getting_started.md
+        - wrangle/docs/human_workflow.py
+        - wrangle/docs/start_workflow.py
+      justification: The README and shipped start guide give a minimal CLI/Python path and runnable 
+        synthetic examples. Publish verified release-matched content.
+      unresolved:
+      - publish_current_evidence
+      after_publication:
+        candidate_status: Met
+        required_checks:
+        - Verify the referenced files and checks exist, succeed, and are publicly accessible.
+    documentation_current:
+      requirement: MUST
+      na_allowed: true
+      criterion_url: https://www.bestpractices.dev/en/criteria/1#1.documentation_current
+      group: Basics / Documentation
+      status: '?'
+      kind: implementation
+      evidence:
+        public_urls: []
+        local_paths:
+        - scripts/build_catalog.py
+        - scripts/verify_distribution.py
+        - .github/ISSUE_TEMPLATE/bug-report.md
+        - .github/PULL_REQUEST_TEMPLATE.md
+      justification: Generated catalog checks and installed-workflow execution help keep engine 
+        interfaces and docs aligned. Legacy issue/PR templates must be updated before claiming 
+        current documentation.
+      unresolved:
+      - publish_current_evidence
+      after_publication:
+        candidate_status: Met
+        required_checks:
+        - Verify the referenced files and checks exist, succeed, and are publicly accessible.
+    documentation_achievements:
+      requirement: MUST
+      na_allowed: false
+      criterion_url: https://www.bestpractices.dev/en/criteria/1#1.documentation_achievements
+      group: Basics / Documentation
+      status: '?'
+      kind: prerequisite
+      evidence:
+        public_urls: []
+        local_paths:
+        - README.md
+        - wrangle/docs/security/releases.md
+      justification: No badge has yet been achieved. Link each genuine recognition from the 
+        repository front page within 48 hours after it becomes public; never display an earned level
+        before the service awards it.
+      unresolved:
+      - register_project
+      - link_actual_achievement_when_awarded
+      after_publication:
+        candidate_status: Met
+        required_checks: []
+    accessibility_best_practices:
+      requirement: SHOULD
+      na_allowed: true
+      criterion_url: https://www.bestpractices.dev/en/criteria/1#1.accessibility_best_practices
+      group: Basics / Accessibility and internationalization
+      status: '?'
+      kind: implementation
+      evidence:
+        public_urls: []
+        local_paths:
+        - wrangle/_presentation.py
+        - wrangle/_cli.py
+        - wrangle/docs/getting_started.md
+      justification: The modern CLI uses plain text, keyboard interaction and stable errors; docs 
+        include complete textual examples and notebook tables use headers. Review accessibility and 
+        document supported paths without claiming unperformed researcher trials.
+      unresolved:
+      - publish_current_evidence
+      - review_accessibility_and_document_limitations
+      after_publication:
+        candidate_status: Met
+        required_checks:
+        - Verify the referenced files and checks exist, succeed, and are publicly accessible.
+        - review_accessibility_and_document_limitations
+    internationalization:
+      requirement: SHOULD
+      na_allowed: true
+      criterion_url: https://www.bestpractices.dev/en/criteria/1#1.internationalization
+      group: Basics / Accessibility and internationalization
+      status: Unmet
+      kind: implementation
+      evidence:
+        public_urls: []
+        local_paths:
+        - wrangle/_presentation.py
+        - wrangle/_cli.py
+        - wrangle/docs/security.md
+      justification: The human CLI and guides are English and do not yet have a localization 
+        framework. The supported audience currently uses English research workflows; maintaining a 
+        small, consistent interface and stable language-independent error codes takes priority. 
+        Unicode source names and data remain supported. This is a considered SHOULD exception, not 
+        N/A.
+      unresolved:
+      - maintainer_approve_unmet_should_justification
+      after_publication:
+        candidate_status: Unmet
+        required_checks: []
+    sites_password_security:
+      requirement: MUST
+      na_allowed: true
+      criterion_url: https://www.bestpractices.dev/en/criteria/1#1.sites_password_security
+      group: Basics / Other
+      status: '?'
+      kind: maintainer_attestation
+      evidence:
+        public_urls: []
+        local_paths:
+        - SECURITY.md
+        - wrangle/docs/security.md
+      justification: GitHub and PyPI authenticate site users; Wrangle does not operate its own 
+        password database. Verify host-side security documentation or provide an appropriate 
+        third-party-service justification rather than claiming Wrangle controls hosted password 
+        storage.
+      unresolved:
+      - verify_hosted_site_password_storage_evidence
+      after_publication:
+        candidate_status: Met
+        required_checks: []
+    maintenance_or_update:
+      requirement: MUST
+      na_allowed: true
+      criterion_url: https://www.bestpractices.dev/en/criteria/1#1.maintenance_or_update
+      group: Change Control / Previous versions
+      status: '?'
+      kind: implementation
+      evidence:
+        public_urls: []
+        local_paths:
+        - wrangle/docs/migration.md
+        - SECURITY.md
+        - CHANGELOG.md
+      justification: The migration document maps legacy APIs and changed scientific behavior to the 
+        Polars recipe path. The security support policy must define supported release lines and the 
+        upgrade route.
+      unresolved:
+      - publish_current_evidence
+      after_publication:
+        candidate_status: Met
+        required_checks:
+        - Verify the referenced files and checks exist, succeed, and are publicly accessible.
+    report_tracker:
+      requirement: MUST
+      na_allowed: true
+      criterion_url: https://www.bestpractices.dev/en/criteria/1#1.report_tracker
+      group: Reporting / Bug-reporting process
+      status: Met
+      kind: implementation
+      evidence:
+        public_urls:
+        - https://github.com/autonomio/wrangle/issues
+        local_paths: []
+      justification: The public GitHub issue tracker records individual project issues.
+      unresolved: []
+      after_publication:
+        candidate_status:
+        required_checks: []
+    vulnerability_report_credit:
+      requirement: MUST
+      na_allowed: true
+      criterion_url: https://www.bestpractices.dev/en/criteria/1#1.vulnerability_report_credit
+      group: Reporting / Vulnerability report process
+      status: '?'
+      kind: public_history
+      evidence:
+        public_urls: []
+        local_paths:
+        - SECURITY.md
+        - CHANGELOG.md
+      justification: The maintainer must confirm resolved vulnerability reports in the last twelve 
+        months and reporter credit or anonymity requests. Select N/A only after confirming none were
+        resolved.
+      unresolved:
+      - confirm_resolved_vulnerability_history_and_reporter_credit
+      after_publication:
+        candidate_status:
+        required_checks: []
+    vulnerability_response_process:
+      requirement: MUST
+      na_allowed: false
+      criterion_url: https://www.bestpractices.dev/en/criteria/1#1.vulnerability_response_process
+      group: Reporting / Vulnerability report process
+      status: '?'
+      kind: implementation
+      evidence:
+        public_urls: []
+        local_paths:
+        - SECURITY.md
+        - GOVERNANCE.md
+      justification: SECURITY.md will describe acknowledgment, private triage, severity, 
+        remediation, coordinated disclosure, credit and release communication. Verify the actual 
+        responsible maintainer and active route.
+      unresolved:
+      - publish_current_evidence
+      - confirm_active_vulnerability_response_owner
+      after_publication:
+        candidate_status: Met
+        required_checks:
+        - Verify the referenced files and checks exist, succeed, and are publicly accessible.
+        - confirm_active_vulnerability_response_owner
+    coding_standards:
+      requirement: MUST
+      na_allowed: true
+      criterion_url: https://www.bestpractices.dev/en/criteria/1#1.coding_standards
+      group: Quality / Coding standards
+      status: '?'
+      kind: implementation
+      evidence:
+        public_urls: []
+        local_paths:
+        - CONTRIBUTING.md
+        - pyproject.toml
+      justification: CONTRIBUTING.md and pyproject.toml will define the selected Python style and 
+        lint rules, with justified local exclusions only.
+      unresolved:
+      - publish_current_evidence
+      after_publication:
+        candidate_status: Met
+        required_checks:
+        - Verify the referenced files and checks exist, succeed, and are publicly accessible.
+    coding_standards_enforced:
+      requirement: MUST
+      na_allowed: true
+      criterion_url: https://www.bestpractices.dev/en/criteria/1#1.coding_standards_enforced
+      group: Quality / Coding standards
+      status: '?'
+      kind: implementation
+      evidence:
+        public_urls: []
+        local_paths:
+        - CONTRIBUTING.md
+        - pyproject.toml
+        - .github/workflows/ci-push.yml
+      justification: Ruff checks and formatting verification are being enforced by CI. Verify the 
+        full production package is checked and failures stop the job.
+      unresolved:
+      - publish_current_evidence
+      - record_clean_lint_and_warning_runs
+      after_publication:
+        candidate_status: Met
+        required_checks:
+        - Verify the referenced files and checks exist, succeed, and are publicly accessible.
+        - record_clean_lint_and_warning_runs
+    build_standard_variables:
+      requirement: MUST
+      na_allowed: true
+      criterion_url: https://www.bestpractices.dev/en/criteria/1#1.build_standard_variables
+      group: Quality / Working build system
+      status: '?'
+      kind: implementation
+      evidence:
+        public_urls: []
+        local_paths:
+        - pyproject.toml
+        - wrangle/docs/architecture.md
+      justification: Wrangle ships Python source and does not compile native binaries. Compiled 
+        dependencies are maintained and built by their own projects.
+      unresolved:
+      - publish_current_evidence
+      after_publication:
+        candidate_status: N/A
+        required_checks:
+        - Verify the referenced files and checks exist, succeed, and are publicly accessible.
+    build_preserve_debug:
+      requirement: SHOULD
+      na_allowed: true
+      criterion_url: https://www.bestpractices.dev/en/criteria/1#1.build_preserve_debug
+      group: Quality / Working build system
+      status: '?'
+      kind: implementation
+      evidence:
+        public_urls: []
+        local_paths:
+        - pyproject.toml
+        - scripts/verify_distribution.py
+      justification: Wrangle does not strip its Python source or debugging information. The source 
+        distributions and wheels retain the Python files.
+      unresolved:
+      - publish_current_evidence
+      after_publication:
+        candidate_status: Met
+        required_checks:
+        - Verify the referenced files and checks exist, succeed, and are publicly accessible.
+    build_non_recursive:
+      requirement: MUST
+      na_allowed: true
+      criterion_url: https://www.bestpractices.dev/en/criteria/1#1.build_non_recursive
+      group: Quality / Working build system
+      status: '?'
+      kind: implementation
+      evidence:
+        public_urls: []
+        local_paths:
+        - pyproject.toml
+      justification: Hatchling packages a single Python project; the build does not recursively 
+        compile subdirectories with cross-dependencies.
+      unresolved:
+      - publish_current_evidence
+      after_publication:
+        candidate_status: Met
+        required_checks:
+        - Verify the referenced files and checks exist, succeed, and are publicly accessible.
+    build_repeatable:
+      requirement: MUST
+      na_allowed: true
+      criterion_url: https://www.bestpractices.dev/en/criteria/1#1.build_repeatable
+      group: Quality / Working build system
+      status: '?'
+      kind: maintainer_attestation
+      evidence:
+        public_urls: []
+        local_paths:
+        - pyproject.toml
+        - scripts/build_catalog.py
+        - scripts/verify_distribution.py
+      justification: Python source is interpreted, but catalog generation and wheel/sdist creation 
+        do occur. Do not claim N/A simply because the package is Python. Compare independently built
+        deliverables and generated catalogs under controlled SOURCE_DATE_EPOCH and dependency 
+        versions.
+      unresolved:
+      - verify_bit_for_bit_generated_catalog_and_build_repetition
+      after_publication:
+        candidate_status: Met
+        required_checks: []
+    installation_common:
+      requirement: MUST
+      na_allowed: true
+      criterion_url: https://www.bestpractices.dev/en/criteria/1#1.installation_common
+      group: Quality / Installation system
+      status: Met
+      kind: implementation
+      evidence:
+        public_urls:
+        - https://github.com/autonomio/wrangle/blob/166e4a41e4dd071ddb333d0ef2158d723ff02b99/pyproject.toml
+        - https://pypi.org/project/wrangle/
+        local_paths:
+        - pyproject.toml
+        - README.md
+      justification: The public package follows Python packaging conventions and is installable and 
+        uninstallable with pip.
+      unresolved: []
+      after_publication:
+        candidate_status:
+        required_checks: []
+    installation_standard_variables:
+      requirement: MUST
+      na_allowed: true
+      criterion_url: https://www.bestpractices.dev/en/criteria/1#1.installation_standard_variables
+      group: Quality / Installation system
+      status: '?'
+      kind: implementation
+      evidence:
+        public_urls: []
+        local_paths:
+        - pyproject.toml
+        - scripts/verify_distribution.py
+      justification: Installation uses pip and virtual environments, including conventional 
+        --target/--prefix placement, rather than a bespoke installer.
+      unresolved:
+      - publish_current_evidence
+      after_publication:
+        candidate_status: Met
+        required_checks:
+        - Verify the referenced files and checks exist, succeed, and are publicly accessible.
+    installation_development_quick:
+      requirement: MUST
+      na_allowed: true
+      criterion_url: https://www.bestpractices.dev/en/criteria/1#1.installation_development_quick
+      group: Quality / Installation system
+      status: '?'
+      kind: implementation
+      evidence:
+        public_urls: []
+        local_paths:
+        - pyproject.toml
+        - CONTRIBUTING.md
+      justification: The standard .[dev,excel] extra installs the development/test tools; 
+        contribution instructions will give complete commands.
+      unresolved:
+      - publish_current_evidence
+      after_publication:
+        candidate_status: Met
+        required_checks:
+        - Verify the referenced files and checks exist, succeed, and are publicly accessible.
+    external_dependencies:
+      requirement: MUST
+      na_allowed: true
+      criterion_url: https://www.bestpractices.dev/en/criteria/1#1.external_dependencies
+      group: Quality / Externally-maintained components
+      status: Met
+      kind: implementation
+      evidence:
+        public_urls:
+        - https://github.com/autonomio/wrangle/blob/166e4a41e4dd071ddb333d0ef2158d723ff02b99/pyproject.toml
+        local_paths:
+        - pyproject.toml
+      justification: Public pyproject.toml lists runtime dependencies in computer-processable Python
+        project metadata. Modern dependencies and development/security tooling still need 
+        publication.
+      unresolved: []
+      after_publication:
+        candidate_status:
+        required_checks: []
+    dependency_monitoring:
+      requirement: MUST
+      na_allowed: true
+      criterion_url: https://www.bestpractices.dev/en/criteria/1#1.dependency_monitoring
+      group: Quality / Externally-maintained components
+      status: '?'
+      kind: implementation
+      evidence:
+        public_urls: []
+        local_paths:
+        - .github/dependabot.yml
+        - .github/workflows/codeql.yml
+        - .github/workflows/dependency-audit.yml
+        - SECURITY.md
+        - pyproject.toml
+      justification: Dependabot and scheduled pip-audit are being added. Verify all runtime and 
+        optional dependencies are included, results are reviewed and exploitable findings are 
+        corrected or justified.
+      unresolved:
+      - publish_current_evidence
+      - record_dependency_audit_result
+      - confirm_dependency_triage_owner
+      after_publication:
+        candidate_status: Met
+        required_checks:
+        - Verify the referenced files and checks exist, succeed, and are publicly accessible.
+        - record_dependency_audit_result
+        - confirm_dependency_triage_owner
+    updateable_reused_components:
+      requirement: MUST
+      na_allowed: true
+      criterion_url: https://www.bestpractices.dev/en/criteria/1#1.updateable_reused_components
+      group: Quality / Externally-maintained components
+      status: Met
+      kind: implementation
+      evidence:
+        public_urls:
+        - https://github.com/autonomio/wrangle/blob/166e4a41e4dd071ddb333d0ef2158d723ff02b99/pyproject.toml
+        local_paths:
+        - pyproject.toml
+      justification: Dependencies are standard separately installed Python packages, not vendored 
+        convenience copies, and can be identified and updated through package metadata.
+      unresolved: []
+      after_publication:
+        candidate_status:
+        required_checks: []
+    interfaces_current:
+      requirement: SHOULD
+      na_allowed: true
+      criterion_url: https://www.bestpractices.dev/en/criteria/1#1.interfaces_current
+      group: Quality / Externally-maintained components
+      status: '?'
+      kind: implementation
+      evidence:
+        public_urls: []
+        local_paths:
+        - pyproject.toml
+        - wrangle/docs/migration.md
+        - .github/workflows/ci-push.yml
+      justification: The modern engine uses current native Polars expressions and supported Python 
+        packaging interfaces, with a migration path for intentionally unsupported legacy 
+        model-building APIs.
+      unresolved:
+      - publish_current_evidence
+      after_publication:
+        candidate_status: Met
+        required_checks:
+        - Verify the referenced files and checks exist, succeed, and are publicly accessible.
+    automated_integration_testing:
+      requirement: MUST
+      na_allowed: false
+      criterion_url: https://www.bestpractices.dev/en/criteria/1#1.automated_integration_testing
+      group: Quality / Automated test suite
+      status: Met
+      kind: implementation
+      evidence:
+        public_urls:
+        - https://github.com/autonomio/wrangle/blob/166e4a41e4dd071ddb333d0ef2158d723ff02b99/.github/workflows/ci-push.yml
+        local_paths:
+        - .github/workflows/ci-push.yml
+      justification: The publicly committed CI workflow runs its suite on each push and the job 
+        outcome reports success or failure. The replacement 1.0 matrix still needs a public 
+        successful run.
+      unresolved: []
+      after_publication:
+        candidate_status:
+        required_checks: []
+    regression_tests_added50:
+      requirement: MUST
+      na_allowed: true
+      criterion_url: https://www.bestpractices.dev/en/criteria/1#1.regression_tests_added50
+      group: Quality / Automated test suite
+      status: '?'
+      kind: public_history
+      evidence:
+        public_urls: []
+        local_paths:
+        - tests/
+        - CHANGELOG.md
+      justification: The new suite includes regression tests, but a list of bugs fixed in the last 
+        six months must be mapped to tests to establish the required proportion. Do not derive it 
+        from total test count.
+      unresolved:
+      - map_last_six_months_bug_fixes_to_regression_tests
+      after_publication:
+        candidate_status: Met
+        required_checks: []
+    test_statement_coverage80:
+      requirement: MUST
+      na_allowed: true
+      criterion_url: https://www.bestpractices.dev/en/criteria/1#1.test_statement_coverage80
+      group: Quality / Automated test suite
+      status: '?'
+      kind: implementation
+      evidence:
+        public_urls: []
+        local_paths:
+        - pyproject.toml
+        - .github/workflows/ci-push.yml
+        - tests/
+      justification: Statement coverage measurement and an 80% failure threshold are being added. 
+        Publish the actual production-package result with meaningful omissions, including CLI 
+        subprocess coverage where applicable.
+      unresolved:
+      - publish_current_evidence
+      - record_coverage_result_at_least_80_percent
+      after_publication:
+        candidate_status: Met
+        required_checks:
+        - Verify the referenced files and checks exist, succeed, and are publicly accessible.
+        - record_coverage_result_at_least_80_percent
+    test_policy_mandated:
+      requirement: MUST
+      na_allowed: true
+      criterion_url: https://www.bestpractices.dev/en/criteria/1#1.test_policy_mandated
+      group: Quality / New functionality testing
+      status: '?'
+      kind: implementation
+      evidence:
+        public_urls: []
+        local_paths:
+        - CONTRIBUTING.md
+      justification: CONTRIBUTING.md will require automated tests for major new functionality and 
+        scientifically meaningful regressions.
+      unresolved:
+      - publish_current_evidence
+      after_publication:
+        candidate_status: Met
+        required_checks:
+        - Verify the referenced files and checks exist, succeed, and are publicly accessible.
+    tests_documented_added:
+      requirement: MUST
+      na_allowed: true
+      criterion_url: https://www.bestpractices.dev/en/criteria/1#1.tests_documented_added
+      group: Quality / New functionality testing
+      status: '?'
+      kind: implementation
+      evidence:
+        public_urls: []
+        local_paths:
+        - CONTRIBUTING.md
+        - .github/PULL_REQUEST_TEMPLATE.md
+      justification: The contribution instructions and PR checklist will explicitly require 
+        automated tests for major new functionality.
+      unresolved:
+      - publish_current_evidence
+      after_publication:
+        candidate_status: Met
+        required_checks:
+        - Verify the referenced files and checks exist, succeed, and are publicly accessible.
+    warnings_strict:
+      requirement: MUST
+      na_allowed: true
+      criterion_url: https://www.bestpractices.dev/en/criteria/1#1.warnings_strict
+      group: Quality / Warning flags
+      status: '?'
+      kind: implementation
+      evidence:
+        public_urls: []
+        local_paths:
+        - .github/workflows/ci-push.yml
+        - .github/workflows/codeql.yml
+        - .github/workflows/dependency-audit.yml
+        - pyproject.toml
+        - CONTRIBUTING.md
+      justification: Selected lint rules, configured lint checks and pytest warnings-as-errors are 
+        intended to run in CI. Verify clean results and review any necessary precise exceptions.
+      unresolved:
+      - publish_current_evidence
+      - record_clean_lint_and_warning_runs
+      after_publication:
+        candidate_status: Met
+        required_checks:
+        - Verify the referenced files and checks exist, succeed, and are publicly accessible.
+        - record_clean_lint_and_warning_runs
+    implement_secure_design:
+      requirement: MUST
+      na_allowed: true
+      criterion_url: https://www.bestpractices.dev/en/criteria/1#1.implement_secure_design
+      group: Security / Secure development knowledge
+      status: '?'
+      kind: implementation
+      evidence:
+        public_urls: []
+        local_paths:
+        - wrangle/docs/security/assurance.md
+        - wrangle/_protocol.py
+        - wrangle/_api.py
+        - wrangle/_publication.py
+        - wrangle/_sources.py
+        - tests/
+      justification: The assurance case will connect explicit allowlists, fail-closed decisions, 
+        native operations, exclusive publication and source/receipt checks to applicable secure 
+        design principles. Review claims against actual implementation and tests.
+      unresolved:
+      - publish_current_evidence
+      after_publication:
+        candidate_status: Met
+        required_checks:
+        - Verify the referenced files and checks exist, succeed, and are publicly accessible.
+    crypto_weaknesses:
+      requirement: MUST
+      na_allowed: true
+      criterion_url: https://www.bestpractices.dev/en/criteria/1#1.crypto_weaknesses
+      group: Security / Use basic good cryptographic practices
+      status: '?'
+      kind: implementation
+      evidence:
+        public_urls: []
+        local_paths:
+        - wrangle/_api.py
+        - wrangle/_sources.py
+        - wrangle/_storage.py
+        - wrangle/docs/security.md
+      justification: The modern engine uses SHA-256 evidence hashes rather than SHA-1 or weak 
+        ciphers; document the absence of authentication guarantees for unsigned receipts.
+      unresolved:
+      - publish_current_evidence
+      after_publication:
+        candidate_status: Met
+        required_checks:
+        - Verify the referenced files and checks exist, succeed, and are publicly accessible.
+    crypto_algorithm_agility:
+      requirement: SHOULD
+      na_allowed: true
+      criterion_url: https://www.bestpractices.dev/en/criteria/1#1.crypto_algorithm_agility
+      group: Security / Use basic good cryptographic practices
+      status: Unmet
+      kind: implementation
+      evidence:
+        public_urls: []
+        local_paths:
+        - wrangle/_api.py
+        - wrangle/_sources.py
+        - wrangle/_storage.py
+        - wrangle/docs/security.md
+      justification: The evidence format fixes SHA-256 so hashes and receipt identity remain 
+        consistent across Python and CLI. There is no configurable alternate digest today. A future 
+        hash-format version can migrate algorithms if a practical break is established; an ad hoc 
+        selector would complicate verified historical evidence. This is a considered SHOULD 
+        exception, not N/A.
+      unresolved:
+      - maintainer_approve_unmet_should_justification
+      after_publication:
+        candidate_status: Unmet
+        required_checks: []
+    crypto_credential_agility:
+      requirement: MUST
+      na_allowed: true
+      criterion_url: https://www.bestpractices.dev/en/criteria/1#1.crypto_credential_agility
+      group: Security / Use basic good cryptographic practices
+      status: '?'
+      kind: implementation
+      evidence:
+        public_urls: []
+        local_paths:
+        - wrangle/_sources.py
+        - wrangle/docs/security.md
+      justification: Wrangle processes local scientific files and no authentication credentials or 
+        private cryptographic keys. Release-service credentials belong to the external publishing 
+        workflow, not the package runtime.
+      unresolved:
+      - publish_current_evidence
+      after_publication:
+        candidate_status: N/A
+        required_checks:
+        - Verify the referenced files and checks exist, succeed, and are publicly accessible.
+    crypto_used_network:
+      requirement: SHOULD
+      na_allowed: true
+      criterion_url: https://www.bestpractices.dev/en/criteria/1#1.crypto_used_network
+      group: Security / Use basic good cryptographic practices
+      status: '?'
+      kind: implementation
+      evidence:
+        public_urls: []
+        local_paths:
+        - wrangle/_sources.py
+        - wrangle/docs/security.md
+      justification: The modern package runtime does not implement network communications; sources 
+        are local and remote sources are rejected.
+      unresolved:
+      - publish_current_evidence
+      after_publication:
+        candidate_status: N/A
+        required_checks:
+        - Verify the referenced files and checks exist, succeed, and are publicly accessible.
+    crypto_tls12:
+      requirement: SHOULD
+      na_allowed: true
+      criterion_url: https://www.bestpractices.dev/en/criteria/1#1.crypto_tls12
+      group: Security / Use basic good cryptographic practices
+      status: '?'
+      kind: implementation
+      evidence:
+        public_urls: []
+        local_paths:
+        - wrangle/_sources.py
+        - wrangle/docs/security.md
+      justification: The modern package runtime does not implement TLS.
+      unresolved:
+      - publish_current_evidence
+      after_publication:
+        candidate_status: N/A
+        required_checks:
+        - Verify the referenced files and checks exist, succeed, and are publicly accessible.
+    crypto_certificate_verification:
+      requirement: MUST
+      na_allowed: true
+      criterion_url: https://www.bestpractices.dev/en/criteria/1#1.crypto_certificate_verification
+      group: Security / Use basic good cryptographic practices
+      status: '?'
+      kind: implementation
+      evidence:
+        public_urls: []
+        local_paths:
+        - wrangle/_sources.py
+        - wrangle/docs/security.md
+      justification: The modern package runtime does not implement TLS or HTTP transport.
+      unresolved:
+      - publish_current_evidence
+      after_publication:
+        candidate_status: N/A
+        required_checks:
+        - Verify the referenced files and checks exist, succeed, and are publicly accessible.
+    crypto_verification_private:
+      requirement: MUST
+      na_allowed: true
+      criterion_url: https://www.bestpractices.dev/en/criteria/1#1.crypto_verification_private
+      group: Security / Use basic good cryptographic practices
+      status: '?'
+      kind: implementation
+      evidence:
+        public_urls: []
+        local_paths:
+        - wrangle/_sources.py
+        - wrangle/docs/security.md
+      justification: The modern package runtime does not send HTTP headers or authentication data.
+      unresolved:
+      - publish_current_evidence
+      after_publication:
+        candidate_status: N/A
+        required_checks:
+        - Verify the referenced files and checks exist, succeed, and are publicly accessible.
+    signed_releases:
+      requirement: MUST
+      na_allowed: true
+      criterion_url: https://www.bestpractices.dev/en/criteria/1#1.signed_releases
+      group: Security / Secure release
+      status: Unmet
+      kind: release
+      evidence:
+        public_urls:
+        - https://github.com/autonomio/wrangle/releases
+        - https://pypi.org/project/wrangle/
+        local_paths:
+        - CHANGELOG.md
+        - .github/workflows/ci-deploy.yml
+        - wrangle/docs/security/releases.md
+      justification: Current public releases have no verified artifact signature/provenance 
+        evidence. A signing workflow and verification guide are being prepared, but the criterion 
+        requires an actual signed release and usable verification evidence for separately 
+        distributed wheels and sdists.
+      unresolved:
+      - publish_signing_and_verification_process
+      - configure_trusted_publisher
+      - publish_actual_signed_release
+      - verify_artifact_signatures_with_documented_trust_root
+      after_publication:
+        candidate_status: Met
+        required_checks: []
+    version_tags_signed:
+      requirement: SUGGESTED
+      na_allowed: false
+      criterion_url: https://www.bestpractices.dev/en/criteria/1#1.version_tags_signed
+      group: Security / Secure release
+      status: '?'
+      kind: release
+      evidence:
+        public_urls: []
+        local_paths:
+        - CHANGELOG.md
+        - .github/workflows/ci-deploy.yml
+        - wrangle/docs/security/releases.md
+      justification: Public tag names are known but their cryptographic verification was not 
+        established. Important release tags may be signed by an authorized maintainer; a build 
+        attestation is not automatically a tag signature.
+      unresolved:
+      - verify_existing_tags_or_sign_new_important_tags
+      after_publication:
+        candidate_status: Met
+        required_checks: []
+    input_validation:
+      requirement: MUST
+      na_allowed: true
+      criterion_url: https://www.bestpractices.dev/en/criteria/1#1.input_validation
+      group: Security / Other security issues
+      status: '?'
+      kind: implementation
+      evidence:
+        public_urls: []
+        local_paths:
+        - wrangle/_protocol.py
+        - wrangle/_api.py
+        - wrangle/_sources.py
+        - wrangle/_start.py
+        - wrangle/_recipe_expressions.py
+        - wrangle/_recipe_join.py
+        - tests/
+      justification: The modern engine rejects unsupported recipe/source/expression options through 
+        explicit allowlists and stable errors, validates guided decision consistency and enforces 
+        schema/identity/join contracts using Polars.
+      unresolved:
+      - publish_current_evidence
+      after_publication:
+        candidate_status: Met
+        required_checks:
+        - Verify the referenced files and checks exist, succeed, and are publicly accessible.
+    hardening:
+      requirement: SHOULD
+      na_allowed: true
+      criterion_url: https://www.bestpractices.dev/en/criteria/1#1.hardening
+      group: Security / Other security issues
+      status: '?'
+      kind: implementation
+      evidence:
+        public_urls: []
+        local_paths:
+        - wrangle/docs/security.md
+        - wrangle/docs/security/assurance.md
+        - wrangle/_publication.py
+        - wrangle/_sources.py
+      justification: The package uses Python, bounded recipe grammar, native Polars operations, 
+        temporary workspaces and atomic no-replace publication. Document operating-system/library 
+        limits and resource-exhaustion boundaries; do not promise a sandbox.
+      unresolved:
+      - publish_current_evidence
+      after_publication:
+        candidate_status: Met
+        required_checks:
+        - Verify the referenced files and checks exist, succeed, and are publicly accessible.
+    assurance_case:
+      requirement: MUST
+      na_allowed: false
+      criterion_url: https://www.bestpractices.dev/en/criteria/1#1.assurance_case
+      group: Security / Other security issues
+      status: '?'
+      kind: implementation
+      evidence:
+        public_urls: []
+        local_paths:
+        - wrangle/docs/security/assurance.md
+        - wrangle/docs/security.md
+        - tests/
+      justification: The assurance case must state assets, attacker capabilities and trust 
+        boundaries, then justify secure design and common-weakness defenses using actual code/tests.
+        Review the full argument before publication.
+      unresolved:
+      - publish_current_evidence
+      - review_assurance_case_against_current_implementation
+      after_publication:
+        candidate_status: Met
+        required_checks:
+        - Verify the referenced files and checks exist, succeed, and are publicly accessible.
+        - review_assurance_case_against_current_implementation
+    static_analysis_common_vulnerabilities:
+      requirement: MUST
+      na_allowed: true
+      criterion_url: 
+        https://www.bestpractices.dev/en/criteria/1#1.static_analysis_common_vulnerabilities
+      group: Analysis / Static code analysis
+      status: '?'
+      kind: implementation
+      evidence:
+        public_urls: []
+        local_paths:
+        - .github/workflows/ci-push.yml
+        - .github/workflows/codeql.yml
+        - .github/workflows/dependency-audit.yml
+        - pyproject.toml
+      justification: Bandit and CodeQL are being configured with Python security checks. Confirm 
+        production coverage, clean reviewed results and recurring execution.
+      unresolved:
+      - publish_current_evidence
+      - record_clean_static_analysis_runs
+      after_publication:
+        candidate_status: Met
+        required_checks:
+        - Verify the referenced files and checks exist, succeed, and are publicly accessible.
+        - record_clean_static_analysis_runs
+    dynamic_analysis_unsafe:
+      requirement: MUST
+      na_allowed: true
+      criterion_url: https://www.bestpractices.dev/en/criteria/1#1.dynamic_analysis_unsafe
+      group: Analysis / Dynamic code analysis
+      status: '?'
+      kind: implementation
+      evidence:
+        public_urls: []
+        local_paths:
+        - pyproject.toml
+        - wrangle/docs/security.md
+      justification: Wrangle produces Python software; Polars and fastexcel compiled implementations
+        are externally maintained dependencies rather than native code produced by this project. 
+        Dependency monitoring and integration tests remain applicable.
+      unresolved:
+      - publish_current_evidence
+      after_publication:
+        candidate_status: N/A
+        required_checks:
+        - Verify the referenced files and checks exist, succeed, and are publicly accessible.
+owner_confirmations:
+  backup_and_secure_development:
+    confirmed_on: '2026-10-01'
+    source: Direct project-owner answer in this task, relayed by the root agent.
+    person: EnergyGuy3
+    scope: Owner identified EnergyGuy3 in response to the combined backup-maintainer and 
+      secure-development-expertise question.
+    verification: Owner affirmation, not an independent rehearsal or inspection of private 
+      account/recovery records.
+registration_draft:
+  name: Wrangle
+  description: Wrangle prepares scientific data with native Polars. Researchers and agents use the 
+    same compact YAML protocols to make observation keys, units, missingness, exclusions and 
+    metadata matching explicit. Preparation checks the declared contracts and saves a table, 
+    readable report and verifiable evidence. Python and CLI use the same engine.
+  homepage_url: https://github.com/autonomio/wrangle
+  repo_url: https://github.com/autonomio/wrangle
+  license: MIT
+  entry_locale: en
+  current_project_id:
+  submission_state: draft_only_not_submitted
+repository_controls:
+  verified_on: '2026-10-01'
+  private_vulnerability_reporting: enabled
+  secret_scanning: enabled
+  secret_scanning_push_protection: enabled
+  default_workflow_permissions: read
+  workflow_can_approve_reviews: false
+  verification: GitHub REST repository settings read back after applying; no credential values 
+    accessed.
+  open_secret_scanning_alerts: 0
+  repository_security_advisories: 0
+  public_non_pr_issues_created_since_2025_10_01: 0
+local_measurements:
+  repeat_build: Two consecutive wheel/sdist builds produced identical SHA-256 hashes in the same 
+    environment. scripts/check_reproducible_build.py enforces this with a fixed SOURCE_DATE_EPOCH 
+    and PYTHONHASHSEED. Re-run after changes; this does not assert cross-platform identity.
+  runtime_statement_coverage_percent: 89.6
+  coverage_scope: wrangle production package; only duplicated executable documentation excluded. 
+    Await final successful suite/public CI.
+  runtime_suite:
+    passed: 977
+    warnings: errors
+    statement_coverage_percent: 89.6
+    minimum_statement_coverage_percent: 80
+    public_ci: pending

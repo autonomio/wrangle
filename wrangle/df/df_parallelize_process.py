@@ -1,20 +1,16 @@
+from .._core import operation
+import polars as pl
+from .._core import frame, finish, WrangleError
+from ._expressions import require_native
+
+
+@operation(returns=('table',), recipe='never')
 def df_parallelize_process(data, func, threads=16):
-    
-    '''Parallelize data processing on a dataframe.
-    
-    data | DataFrame | a pandas dataframe with the data
-    func | function | the function to be applied onto the input data
-    threads | int | number of threads to be used (max 2x your cores)
-    '''
-    
-    from numpy import array_split
-    from pandas import concat
-    from multiprocessing import Pool
-    
-    df_split = array_split(data, threads)
-    pool = Pool(threads)
-    df = concat(pool.map(func, df_split))
-    pool.close()
-    pool.join()
-    
-    return df
+    """Execute native expressions; Polars manages parallelism. Python callbacks are rejected."""
+    expressions = [func] if isinstance(func, pl.Expr) else func
+    if not isinstance(expressions, (list, tuple)) or not all(isinstance(expr, pl.Expr) for expr in expressions):
+        raise WrangleError("UNSUPPORTED_CALLBACK", "Pass a Polars expression or list of expressions; arbitrary Python callbacks cannot run inside Wrangle plans.")
+    require_native(expressions)
+    if not isinstance(threads, int) or isinstance(threads, bool) or threads < 1:
+        raise WrangleError("INVALID_OPTION", "threads must be a positive integer; Polars manages its thread pool.")
+    return finish(frame(data).with_columns(expressions), data)

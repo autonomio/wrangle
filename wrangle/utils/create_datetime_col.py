@@ -1,46 +1,22 @@
-import pandas as pd
+"""Calendar datetime ranges checked against the observation count."""
+from .._core import operation
+from datetime import datetime
+import polars as pl
+from .._core import frame, WrangleError
+
+_INTERVALS = {"year": "1y", "month": "1mo", "week": "1w", "day": "1d", "hour": "1h", "minute": "1m", "second": "1s"}
 
 
+@operation(returns=('series',), recipe='never')
 def create_datetime_col(data, start, end, freq):
-
-    '''DATETIME GENERATOR
-    Takes in a series or dataframe, and based on the length creates
-    a datetime series with a desired frequency. It's important to
-    provide the start and end time precisely, together with the time
-    unit, as otherwise there will be a mismatch of the valuesself.
-    1.USE
-    =====
-    generate_datetime(data, '1999-02-12','1999-03-05', 'hour')
-    This example will generate datetimes with hourly frequency starting
-    from midnight on the 12th of February (1999) up until midnight of
-    5th of March.
-    generate_datetime(data, '1999-02-12-09:00','1999-03-05', 'hour')
-    This example will do the same, but will start on 9:00 am instead.
-    start :: the startime of the data (first observation timestamp)
-    end :: the endtime of the data (last observation timestamp)
-    freq :: This should be the frequency of observations in the dataset.
-            Can be either pd.date_range frequency parameter, or:
-            'year', 'month', 'day', 'hour', 'minute', 'second'
-    '''
-
-    if freq == 'year':
-        freq = '365D'
-    elif freq == 'month':
-        freq = '30D'
-    elif freq == 'day':
-        freq = '1D'
-    elif freq == 'hour':
-        freq = '60Min'
-    elif freq == 'minute':
-        freq = '1Min'
-    elif freq == 'second':
-        freq = '1S'
-
-    out = pd.Series(pd.date_range(start, end, freq=freq))
-
-    if len(out) > len(data):
-        print("Too many observation for the selected parameters.")
-    elif len(out) < len(data):
-        print("Not enough observations for the selected parameters.")
-
-    return out
+    """Return an inclusive datetime Series; reject ranges whose length differs from data. Use ISO start/end and Polars interval syntax."""
+    try:
+        start = datetime.fromisoformat(start) if isinstance(start, str) else start
+        end = datetime.fromisoformat(end) if isinstance(end, str) else end
+        result = pl.datetime_range(start, end, interval=_INTERVALS.get(freq, freq), eager=True).alias("timestamp")
+    except (ValueError, TypeError, pl.exceptions.PolarsError) as error:
+        raise WrangleError("INVALID_DATETIME", str(error)) from error
+    count = frame(data).select(pl.len()).collect().item()
+    if len(result) != count:
+        raise WrangleError("ROW_ALIGNMENT", "Datetime range must match the observation count.", {"rows": count, "timestamps": len(result)})
+    return result

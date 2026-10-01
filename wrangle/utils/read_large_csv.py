@@ -1,49 +1,37 @@
-def read_large_csv(file_path, n, cols=None, chunks=None, dtype='float64'):
+"""Native CSV scanning; absent source rows are never fabricated."""
+from .._core import operation
+from pathlib import Path
+import polars as pl
+from .._core import require_columns, WrangleError
+from ..array._native import positive_int
 
-    '''Handles reading a very large CSV file in
-    a highly memory efficient way. Returns a numpy
-    array.
+_TYPES = {"float64": pl.Float64, "float32": pl.Float32, "int64": pl.Int64, "int32": pl.Int32, "str": pl.String, "string": pl.String}
 
-    file_path : str
-        Location to the file either local or remote.
-    n : int
-        Number of samples to be drawn from the file.
-    cols : None or list
-        Accepts a list of columns to be drawn from the file.
-    chunks : None or int
-        Unless a value is provided, 1/100 of n will be set as
-        a the chunksize.
-    dtype : str
-        A numpy datatype. Default is 'float64'.
-    '''
 
-    import gc
-    import numpy as np
-    import pandas as pd
-    from tqdm import tqdm
-
-    if chunks is None:
-        chunks = int(n / 100)
-
-    if cols is None:
-        cols = pd.read_csv(file_path, nrows=2)
-        cols_n = cols.shape[1]
-        cols = cols.columns
-    else:
-        cols_n = len(cols)
-
-    out = np.zeros([n, cols_n], dtype)
-
-    start = 0
-    end = chunks
-
-    for chunk in tqdm(pd.read_csv(file_path, chunksize=chunks, nrows=n)):
-
-        out[start:end] = chunk[cols].values
-
-        start += chunks
-        end += chunks
-
-        gc.collect()
-
-    return out
+@operation(returns=('table',), recipe='never')
+def read_large_csv(file_path, n, cols=None, chunks=None, dtype=None):
+    """Return a LazyFrame containing up to n real rows. dtype=None preserves CSV text, including identifiers and leading zeros; explicit casts are strict. chunks is a retained validation-only argument."""
+    positive_int(n, "n", allow_zero=True)
+    if chunks is not None:
+        positive_int(chunks, "chunks")
+    if "://" in str(file_path):
+        raise WrangleError("LOCAL_SOURCE_REQUIRED", "CSV input must be an explicit local file; download external sources separately.")
+    path = Path(file_path).expanduser()
+    if not path.is_file():
+        raise WrangleError("SOURCE_NOT_FOUND", "CSV source does not exist.", {"path": str(path)})
+    try:
+        plan = pl.scan_csv(path, infer_schema=False).head(n)
+        plan.collect_schema()
+    except pl.exceptions.PolarsError as error:
+        raise WrangleError("SOURCE_PARSE_ERROR", "CSV header/schema cannot be read.", {"path": str(path)}) from error
+    if cols is not None:
+        require_columns(plan, cols)
+        plan = plan.select(cols)
+    if dtype is not None:
+        dtype = _TYPES.get(dtype, dtype) if isinstance(dtype, str) else dtype
+        try:
+            plan = plan.select(pl.all().cast(dtype, strict=True))
+            plan.collect_schema()
+        except (TypeError, ValueError, pl.exceptions.PolarsError) as error:
+            raise WrangleError("INVALID_DTYPE", "Declare a supported Polars datatype.") from error
+    return plan

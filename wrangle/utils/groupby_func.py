@@ -1,67 +1,56 @@
-def groupby_func(data, func):
+"""Native grouped aggregation without arbitrary Python callbacks."""
+from .._core import operation
+import polars as pl
+from polars.dataframe.group_by import GroupBy
+from polars.lazyframe.group_by import LazyGroupBy
+from .._core import WrangleError, require_native
+from ..array._native import checked_seed
 
-    '''Streamlines the process of creating various
-    groupby elements in Pandas. Takes in a dataframe
-    and one of the supported functions as a string:
 
-    data : pandas groupby
-         A Pandas groupby object
-    func : str
-        The function to be used for grouping by
+@operation(returns=('table',), recipe='never', aggregates=True)
+def groupby_func(data, func, *, seed=0):
+    """Aggregate a Polars GroupBy/LazyGroupBy using a named native reducer or pl.Expr. Entropy is normalized nonnegative mass entropy (nats)."""
+    if not isinstance(data, (GroupBy, LazyGroupBy)):
+        raise WrangleError("INVALID_INPUT", "Use a native Polars GroupBy/LazyGroupBy.")
+    is_lazy = isinstance(data, LazyGroupBy)
+    if not is_lazy:
+        grouped = data.df.lazy().group_by(*data.by, **data.named_by, maintain_order=data.maintain_order)
+        if getattr(data, "predicates", None):
+            grouped = grouped.having(data.predicates)
+    else:
+        grouped = data
+    if isinstance(func, pl.Expr):
+        require_native(func)
+        plan = grouped.agg(func)
+        require_native(plan)
+        return plan if is_lazy else plan.collect()
+    if callable(func):
+        raise WrangleError("NATIVE_EXPRESSION_REQUIRED", "Use a Polars expression; Python callbacks are not executed.")
+    column = pl.all()
+    basic = {"median", "mean", "first", "last", "std", "max", "min", "sum"}
+    if func in basic:
+        expression = getattr(column, func)()
+    elif func == "random":
+        expression = column.sample(n=1, seed=checked_seed(seed)).first()
+    elif func == "freq":
+        expression = column.mode().sort().first()
+    elif func == "string":
+        expression = column.cast(pl.String).str.join(" ")
+    elif func == "entropy":
+        prefix = "__wr_entropy_invalid_"
+        try:
+            checks = grouped.agg((column.is_null().any() | (~column.is_finite()).any() | (column < 0).any() | (column.sum() <= 0)).name.prefix(prefix))
+            require_native(checks)
+            checks = checks.collect()
+        except pl.exceptions.PolarsError as error:
+            raise WrangleError("INVALID_ENTROPY", "Entropy requires finite nonnegative numeric masses with positive group totals.") from error
+        flags = [name for name in checks.columns if name.startswith(prefix)]
+        if flags and checks.select(pl.any_horizontal(flags).any()).item():
+            raise WrangleError("INVALID_ENTROPY", "Entropy requires finite nonnegative numeric masses with positive group totals.")
+        expression = column.entropy(base=2.718281828459045, normalize=True)
 
-    'median'
-    'mean'
-    'first'
-    'last'
-    'std'
-    'max'
-    'min'
-    'sum'
-    'random'
-    'freq'
-    'string'
-    'entropy'
-
-    ...or you can simply input any custom function.
-
-    '''
-
-    import numpy as np
-    import pandas as pd
-    import scipy as sc
-
-    if func == 'median':
-        out = data.median()
-    elif func == 'mean':
-        out = data.mean()
-    elif func == 'first':
-        out = data.first()
-    elif func == 'last':
-        out = data.last()
-    elif func == 'std':
-        out = data.std()
-    elif func == 'max':
-        out = data.max()
-    elif func == 'min':
-        out = data.min()
-    elif func == 'sum':
-        out = data.sum()
-    elif func == 'random':
-        out = data.agg(np.random.choice)
-    elif func == 'freq':
-        out = data.agg(lambda x: x.value_counts().index[0])
-    elif func == 'string':
-        out = data.apply(lambda x: "%s" % ' '.join(x))
-        out = pd.DataFrame(out).reset_index()
-    elif func == 'entropy':
-        out = data.apply(lambda x: sc.stats.entropy(x)[0])
-    elif callable(func):
-        out = data.apply(func)
-
-    if isinstance(out, type(pd.Series())):
-        out = pd.DataFrame(out)
-        out.columns = [1]
-
-    out.reset_index(inplace=True)
-
-    return out
+    else:
+        raise WrangleError("INVALID_AGGREGATION", "Declare a supported native aggregation.")
+    plan = grouped.agg(expression)
+    require_native(plan)
+    return plan if is_lazy else plan.collect()

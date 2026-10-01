@@ -1,0 +1,80 @@
+# Example protocol: these scientific decisions were supplied for this demonstration.
+# Change them to match your study before using your own files.
+version: 1
+name: Specimen mass with instrument quality control
+input: measurements
+
+# Each row is one sample. Missing or repeated sample identifiers are errors.
+key: sample_id
+units:
+  mass_mg: mg
+descriptions:
+  sample_id: Sample identifier
+  mass_mg: Specimen mass
+  qc: Instrument quality-control result
+source_contracts:
+  metadata:
+    key: sample_id
+    descriptions:
+      group: Study group
+
+steps:
+  # Only measurement values become numbers; identifiers such as "001" stay text.
+  - op: cast
+    columns:
+      mass_mg: Float64
+
+  # Match metadata by sample identifier, keeping the measurement-file order.
+  # Every sample needs a match; metadata must contain at most one match per sample.
+  - op: join
+    source: metadata
+    on: sample_id
+    how: left
+    cardinality: "m:1"
+    maintain_order: left
+    unmatched:
+      left: error
+      right: drop
+    nulls: error
+    overlap: error
+    coalesce: true
+
+  # The supplied protocol accepts only samples with instrument QC = pass.
+  # The reason is recorded beside the identifiers of excluded samples.
+  - op: filter
+    where:
+      eq: [{col: qc}, pass]
+    nulls: error
+    reason: Predefined instrument QC acceptance rule
+
+  # The researcher supplied this conversion: grams = milligrams * 0.001.
+  - op: convert_unit
+    column: mass_mg
+    from_unit: mg
+    to_unit: g
+    factor: 0.001
+
+  # The new column name makes the output measurement unit visible.
+  - op: rename
+    columns:
+      mass_mg: mass_g
+
+# These checks describe the intended output; never loosen them just to finish a run.
+checks:
+  required: [sample_id, mass_g, qc, group]
+  schema:
+    sample_id: String
+    mass_g: Float64
+    qc: String
+    group: String
+  extra_columns: error
+  ranges:
+    mass_g: {min: 0}
+  allowed:
+    qc: [pass]
+    group: [control, treated]
+  row_count: {min: 1}
+  protocol:
+    key: true
+    units: [mass_g]
+    descriptions: [sample_id, mass_g, qc, group]

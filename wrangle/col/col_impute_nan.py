@@ -1,55 +1,29 @@
-import numpy as np
-import random
+from .._core import operation
+from .._core import WrangleError, as_series
+from ._expressions import clean, numeric, seed_value
 
 
-def col_impute_nan(data, impute_mode='mean_by_std'):
+@operation(returns=('series',), recipe='never')
+def col_impute_nan(data, impute_mode="mean_by_std", *, seed=0):
+    """Return a Series with missing values filled using observed values only.
 
-    '''Impute NaN values in a DataFrame column
-
-    Provides five different options for imputing nan
-    values within a a series / array of data.
-
-    USE: nan_imputer(titanic.Age,'mean')
-
-    OPTIONS: The default is 'mean_by_std', with other
-    options 'mean', 'median', 'mode', and 'common'.
-
-    '''
-
-    l = []
-
-    if impute_mode == 'mean':
-        val = data.mean()
-
-    if impute_mode == 'median':
-        val = data.median()
-
-    if impute_mode == 'mode':
-        val = data.mode()
-
-    if impute_mode == 'common':
-        val = data.value_counts().index[0]
-
-    if impute_mode == 'mean_by_std':
-        val = data.mean()
-        std = data.std()
-        lo = val - std
-        hi = val + std
-
-    else:
-        # create dummmy values for random pick
-        lo = val
-        hi = val
-
-    c = len(data)
-
-    for i in range(c):
-
-        if np.isnan(data[i]) is True:
-
-            l.append(random.randint(int(lo), int(hi)))
-
-        else:
-            l.append(data[i])
-
-    return l
+    mean/median require numbers. mode/common choose the smallest tied mode.
+    mean_by_std draws seeded continuous uniform values from mean +/- sample std;
+    a singleton uses its observed value. Existing observations remain unchanged.
+    All-missing input raises. Fit imputation parameters on training data only.
+    """
+    if impute_mode not in {"mean", "median", "mode", "common", "mean_by_std"}:
+        raise WrangleError("INVALID_MODE", "Unknown imputation mode.")
+    seed_value(seed)
+    series = as_series(data)
+    name = series.name or "value"
+    table = series.rename(name).to_frame()
+    value = clean(table, name)
+    if table.select(value.count()).item() == 0:
+        raise WrangleError("NO_OBSERVATIONS", "Cannot impute a column without observed values.")
+    if impute_mode not in {"mode", "common"}:
+        numeric(table, name, float64=True)
+    # Imported when called to keep the legacy package namespaces acyclic.
+    from ..df._expressions import impute_expr
+    result = impute_expr(name, table.schema[name], impute_mode, seed=seed)
+    return table.select(result.alias(series.name)).to_series()

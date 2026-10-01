@@ -1,0 +1,3 @@
+# Runtime plus the optional scientific Excel reader; audit transitive packages too.
+-r requirements.txt
+fastexcel>=0.12,<1

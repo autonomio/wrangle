@@ -1,60 +1,46 @@
-import pandas as pd
+from .._core import operation
+import math
+import polars as pl
+from .._core import reject_destructive, WrangleError, finish, frame, require_columns
+from ._expressions import clean, numeric
 
 
-def col_to_binary(data, col, func='median', destructive=False):
+@operation(returns=('table',), recipe='yes')
+def col_to_binary(data, col, func="median", destructive=False):
+    """Encode a column using an explicit threshold or deterministic categories.
 
-    '''Takes in a continuous feature and transforms into
-    a binary class.
-
-    df : pandas dataframe
-        A pandas dataframe with the column to be converted
-    col : str
-        The column with the multiclass values
-    func : str, float, or int
-        'mean','median','mode',int (ge), string for
-        interquartile range for binary conversion. 'cat_string'
-        for converting strings in to categorical labels, and
-        'cat_int' for doing the same with integer values.
-    destructive : bool
-        If set to True, will make changes directly to the dataframe which
-        may be useful with very large dataframes instead of making a copy.
-    '''
-
-    if destructive is False:
-        data = data.copy(deep=True)
-
-    # if user input 'int' then function will be "greater than value"
-    # if user input 'float' then function will be IQR range
-
-    # below is for case where prediction is true or false
-    # but the y-feature is in different format (e.g continuous)
-
-    if func == 'mean':
-        data[col] = data[col] >= data[col].mean()
-    elif func == 'median':
-        data[col] = data[col] >= data[col].median()
-    elif func == 'mode':
-        data[col] = data[col] >= data[col].mode()[0]
+    mean/median/mode compare >= a fitted statistic; integer func is a literal
+    threshold; float func is a quantile in [0,1]. cat_string produces sorted
+    dense codes from 0; cat_numeric/cat_int produce five quantile bins from 0.
+    Missing values stay null. 'none' passes through. Fit on training data only.
+    """
+    reject_destructive(destructive)
+    require_columns(data, [col])
+    if not isinstance(func, (str, int, float)):
+        raise WrangleError("INVALID_MODE", "func must be a supported mode, integer threshold, or float quantile.")
+    value = clean(data, col)
+    if func == "none":
+        return finish(frame(data), data)
+    if func == "cat_string":
+        result = value.rank("dense").cast(pl.Int64) - 1
+    elif func in {"cat_numeric", "cat_int"}:
+        value = numeric(data, col, float64=True)
+        # Dense codes avoid empty intervals after repeated quantile boundaries.
+        bins = value.qcut(5, labels=[str(i) for i in range(5)], allow_duplicates=True).cast(pl.String).cast(pl.Int64)
+        result = bins.rank("dense").cast(pl.Int64) - 1
+    elif isinstance(func, bool):
+        raise WrangleError("INVALID_PARAMETER", "Boolean func is not a threshold.")
     elif isinstance(func, int):
-        data[col] = data[col] >= func
+        result = numeric(data, col) >= func
     elif isinstance(func, float):
-        data[col] = data[col] >= data[col].quantile(func)
-
-    # below is for case where the y-feature is converted in
-    # to a categorical, either if it's a number or string.
-
-    elif func == 'cat_string':
-        data[col] = pd.Categorical(data[col])
-        data[col] = data[col].cat.codes
-
-    elif func == 'cat_numeric':
-        data[col] = pd.qcut(data[col], 5, duplicates='drop')
-        data[col] = data[col].cat.codes
-
-    # for cases when y-feature is already in the format
-    # where the prediction output will be.
-
-    elif func == 'none':
-        pass
-
-    return data
+        if not math.isfinite(func) or not 0 <= func <= 1:
+            raise WrangleError("INVALID_PARAMETER", "A float func must be a quantile in [0, 1].")
+        value = numeric(data, col, float64=True)
+        result = value >= value.quantile(func, interpolation="linear")
+    elif func in {"mean", "median", "mode"}:
+        value = numeric(data, col, float64=True)
+        threshold = value.drop_nulls().mode().sort().first() if func == "mode" else getattr(value, func)()
+        result = value >= threshold
+    else:
+        raise WrangleError("INVALID_MODE", "Unsupported binary conversion mode.")
+    return finish(frame(data).with_columns(result.alias(col)), data)

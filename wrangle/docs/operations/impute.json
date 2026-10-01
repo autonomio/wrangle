@@ -1,0 +1,325 @@
+{
+  "boundary_validation": [
+    {
+      "code": "DUPLICATE_COLUMNS",
+      "precondition": "Column names must be unique."
+    },
+    {
+      "code": "IMMUTABLE_INPUT",
+      "precondition": "Wrangle never mutates input data; use the returned table."
+    },
+    {
+      "code": "INVALID_INPUT",
+      "precondition": "A column needs a consistent native dtype."
+    },
+    {
+      "code": "INVALID_INPUT",
+      "precondition": "Data fields need consistent native types; declare casts explicitly."
+    },
+    {
+      "code": "INVALID_INPUT",
+      "precondition": "Each data row must have the same number of fields."
+    },
+    {
+      "code": "INVALID_INPUT",
+      "precondition": "Nested list fields need consistent native types."
+    },
+    {
+      "code": "INVALID_INPUT",
+      "precondition": "Nested object fields need consistent native types."
+    },
+    {
+      "code": "INVALID_INPUT",
+      "precondition": "Record fields must have string names; names are never coerced."
+    },
+    {
+      "code": "INVALID_INPUT",
+      "precondition": "Record tables require one mapping per row; use null field values for missingness."
+    },
+    {
+      "code": "INVALID_INPUT",
+      "precondition": "Rows without any fields cannot retain observation identity; supply at least one field."
+    },
+    {
+      "code": "INVALID_INPUT",
+      "precondition": "Rows without any fields cannot retain observation identity; supply at least one named field."
+    },
+    {
+      "code": "INVALID_INPUT",
+      "precondition": "This operation requires exactly one column."
+    },
+    {
+      "code": "INVALID_INPUT",
+      "precondition": "Use a Polars Series, one-column table, or list of values."
+    },
+    {
+      "code": "INVALID_INPUT",
+      "precondition": "Use a Polars table, series, Python records, or a local CSV/Parquet path."
+    },
+    {
+      "code": "INVALID_INPUT",
+      "precondition": "Use native Polars values; opaque Python objects cannot represent research data."
+    },
+    {
+      "code": "LOSSY_CAST",
+      "precondition": "Mixed integers and floats exceed the safe Float64 integer range; declare a dtype explicitly."
+    },
+    {
+      "code": "UNKNOWN_COLUMN",
+      "precondition": "The requested columns are absent."
+    },
+    {
+      "code": "UNSUPPORTED_CALLBACK",
+      "precondition": "Python UDFs are not native Polars operations."
+    },
+    {
+      "code": "UNSUPPORTED_CALLBACK",
+      "precondition": "The plan must be native and serializable; Python callbacks cannot execute."
+    },
+    {
+      "code": "UNSUPPORTED_CALLBACK",
+      "precondition": "Use native Polars expressions and plans."
+    }
+  ],
+  "expression_grammar": {
+    "$ref": "docs/operations.json#/expression_grammar"
+  },
+  "guided_start": {
+    "$ref": "docs/operations.json#/guided_start"
+  },
+  "navigation": {
+    "architecture": "docs/architecture.md",
+    "checks": "_contracts.py",
+    "cli": "_cli.py:main",
+    "contributing": "docs/project/CONTRIBUTING.md",
+    "decision_validation": "_start.py:validate_decisions",
+    "disk_execution": "_storage.py",
+    "disk_workflow": "docs/disk_preparation.py",
+    "draft_protocol": "_start.py:draft",
+    "entrypoint": "AGENTS.md",
+    "executable_workflow": "docs/research_batch.py",
+    "execution_contracts": "_execution.py",
+    "expression_workflow": "docs/expression_workflow.py",
+    "governance": "docs/project/GOVERNANCE.md",
+    "guided_workflow": "docs/start_workflow.py",
+    "human_start": "docs/getting_started.md",
+    "human_workflow": "docs/human_workflow.py",
+    "inspection_workflow": "docs/inspection_workflow.py",
+    "migration": "docs/migration.md",
+    "openssf_evidence": "docs/security/openssf-evidence.yaml",
+    "paths_relative_to": "Path(wrangle.__file__).parent",
+    "preparation_workflows": "docs/preparation_workflows.py",
+    "publish_protocol": "_start.py:publish",
+    "recipe_grammar": "docs/recipes.md",
+    "recipe_loader": "_protocol.py:load_recipe",
+    "release_verification": "docs/security/releases.md",
+    "security": "docs/security.md",
+    "security_assurance": "docs/security/assurance.md",
+    "security_reporting": "docs/project/SECURITY.md",
+    "select_operation": "Choose the task in docs/recipes.md. Read returns/recipe eligibility, then exact arguments, literal argument_constraints and validation. Resolve symbol or open source at line. Minimal workflows in navigation assert expected data and receipts. Signatures, choice constraints and failures come from engine definitions.",
+    "source_contracts": "_sources.py",
+    "starter_recipe": "docs/starter/recipe.yaml",
+    "statistics_workflow": "docs/frozen_parameters.py"
+  },
+  "operations": [
+    {
+      "argument_constraints": [],
+      "arguments": [
+        {
+          "kind": "positional_or_keyword",
+          "name": "data",
+          "required": true,
+          "type": "pl.LazyFrame"
+        },
+        {
+          "kind": "positional_or_keyword",
+          "name": "columns",
+          "required": true,
+          "type": "list[str]"
+        },
+        {
+          "kind": "keyword_only",
+          "name": "method",
+          "required": true,
+          "type": "str"
+        },
+        {
+          "default": null,
+          "kind": "keyword_only",
+          "name": "parameters",
+          "required": false,
+          "type": "dict | None"
+        },
+        {
+          "default": null,
+          "kind": "keyword_only",
+          "name": "seed",
+          "required": false,
+          "type": "int | None"
+        }
+      ],
+      "boundary_validation": {
+        "$ref": "#/boundary_validation"
+      },
+      "description": "Impute explicit fields using mean/median/mode or seeded uniform mean +/- sample std.\n\nmean/median/uniform output Float64 after exact input-cast checks. mode retains\nthe scalar dtype; tied text/category modes use lexical order, Enum uses its\ndeclared order, and other scalars use native order. Missing means null\nor floating NaN. Fitting all-missing fields fails; supplied parameters reuse\nthe recorded replacements/moments without refitting, and require matching\ninput dtypes. uniform requires seed and independent field/row streams; other\nmethods reject unused seeds. A singleton uniform fit uses its observed value.",
+      "group": "_recipe_statistics",
+      "line": 312,
+      "manual": "docs/operations/impute.json",
+      "name": "impute",
+      "recipe": {
+        "aggregates": false,
+        "eligibility": "yes"
+      },
+      "retired": false,
+      "returns": [
+        "table"
+      ],
+      "source": "_recipe_statistics.py",
+      "symbol": "wrangle._recipe_statistics.impute",
+      "validation": [
+        {
+          "code": "ARITHMETIC_OVERFLOW",
+          "precondition": "Computed preparation statistics must be representable as finite Float64."
+        },
+        {
+          "code": "ARITHMETIC_OVERFLOW",
+          "precondition": "Resolved replacements overflow floating arithmetic."
+        },
+        {
+          "code": "DTYPE_MISMATCH",
+          "precondition": "Frozen preparation parameters require the same declared field dtype."
+        },
+        {
+          "code": "INSUFFICIENT_OBSERVATIONS",
+          "precondition": "Nonconstant fields need more observed values than ddof."
+        },
+        {
+          "code": "INSUFFICIENT_OBSERVATIONS",
+          "precondition": "Positive sample scales need count greater than ddof."
+        },
+        {
+          "code": "INVALID_ARGUMENT",
+          "precondition": "columns must be a nonempty list of distinct field names."
+        },
+        {
+          "code": "INVALID_FILL_VALUE",
+          "precondition": "Decimal replacements require finite fixed-point strings."
+        },
+        {
+          "code": "INVALID_FILL_VALUE",
+          "precondition": "Numeric fills require numbers; Decimal also accepts exact strings."
+        },
+        {
+          "code": "INVALID_FILL_VALUE",
+          "precondition": "Replacement cannot be represented in the declared field dtype."
+        },
+        {
+          "code": "INVALID_FILL_VALUE",
+          "precondition": "Replacement type must match the declared field dtype."
+        },
+        {
+          "code": "INVALID_FILL_VALUE",
+          "precondition": "Replacements must be finite JSON scalars."
+        },
+        {
+          "code": "INVALID_FILL_VALUE",
+          "precondition": "Temporal fill values require a typed physical scalar; Date also accepts YYYY-MM-DD."
+        },
+        {
+          "code": "INVALID_OPTION",
+          "precondition": "method must be mean, median, mode or uniform."
+        },
+        {
+          "code": "INVALID_PARAMETERS",
+          "precondition": "A fitted replacement must be observed and nonnull."
+        },
+        {
+          "code": "INVALID_PARAMETERS",
+          "precondition": "Frozen parameter fields do not match the declared method."
+        },
+        {
+          "code": "INVALID_PARAMETERS",
+          "precondition": "Frozen parameters belong to a different method or ddof."
+        },
+        {
+          "code": "INVALID_PARAMETERS",
+          "precondition": "Frozen parameters must name exactly the selected fields."
+        },
+        {
+          "code": "INVALID_PARAMETERS",
+          "precondition": "Parameters must be exact finite JSON values."
+        },
+        {
+          "code": "INVALID_PARAMETERS",
+          "precondition": "Resolved observation counts must be positive integers."
+        },
+        {
+          "code": "INVALID_PARAMETERS",
+          "precondition": "Resolved standard deviations must be nonnegative."
+        },
+        {
+          "code": "INVALID_PARAMETERS",
+          "precondition": "Resolved units must be a fixed nonempty physical-unit string or null."
+        },
+        {
+          "code": "INVALID_PARAMETERS",
+          "precondition": "Temporal resolved values require exact integer physical units."
+        },
+        {
+          "code": "INVALID_SEED",
+          "precondition": "A seed applies only to uniform imputation."
+        },
+        {
+          "code": "INVALID_SEED",
+          "precondition": "seed must be an integer from 0 through 2**64 - 1."
+        },
+        {
+          "code": "LOSSY_CAST",
+          "precondition": "Observed values cannot be represented exactly as Float64; use an exact arithmetic analysis environment."
+        },
+        {
+          "code": "LOSSY_CAST",
+          "precondition": "Resolved statistics must be representable exactly as Float64."
+        },
+        {
+          "code": "LOSSY_FILL",
+          "precondition": "Decimal replacements exceed native precision."
+        },
+        {
+          "code": "LOSSY_FILL",
+          "precondition": "Replacement would lose precision in the declared field dtype."
+        },
+        {
+          "code": "NONFINITE_RESULT",
+          "precondition": "Observed infinite values cannot define a finite imputation replacement."
+        },
+        {
+          "code": "NONFINITE_RESULT",
+          "precondition": "Observed infinite values cannot define preparation statistics."
+        },
+        {
+          "code": "NON_NUMERIC_COLUMN",
+          "precondition": "This method requires explicitly selected numeric fields."
+        },
+        {
+          "code": "NON_SCALAR_COLUMN",
+          "precondition": "Preparation parameters require scalar numeric, text, category or temporal fields."
+        },
+        {
+          "code": "NO_OBSERVATIONS",
+          "precondition": "Cannot compute preparation parameters without observed values."
+        },
+        {
+          "code": "STATISTIC_UNDERFLOW",
+          "precondition": "Distinct observations have no representable positive standard deviation."
+        }
+      ]
+    }
+  ],
+  "recipe_contract": "Author recipe files in strict YAML (.yaml/.yml) using mappings, lists, strings, Boolean/null values and finite numbers; programmatic Python mappings share the same contract. Canonical JSON is internal receipt/hash serialization. Guided pending_decisions block execution before source access; recorded research_decisions must be complete and agree with controlled preparation steps. Conditional legacy operations require table-returning arguments. Existing keys retain identity; declare step.key for an explicit checked transition. Canonical grain operations require step.key even without an input key. Exclusions require reasons, expansion requires allow_expand, and incompatible measurement units cannot be reconciled by annotations.",
+  "recovery": "Read operation validation plus shared_validation and boundary_validation. Use WrangleError.code/details to correct that declared precondition and rerun the same protocol; never silently substitute a method or discard observations.",
+  "shared_validation": {
+    "$ref": "docs/operations.json#/shared_validation"
+  },
+  "version": 1
+}

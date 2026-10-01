@@ -1,24 +1,13 @@
+from .._core import operation
+import polars as pl
+from .._core import frame, finish, require_columns
+from ._expressions import names
+
+
+@operation(returns=('table',), recipe='yes')
 def df_to_lower(data, cols=None):
-
-    '''Convert all string values to lowercase
-
-    data : pandas dataframe
-        The dataframe to be cleaned
-    cols : str, list, or None
-        If None, an attempt will be made to turn
-        all string columns into lowercase.
-
-    '''
-
-    if isinstance(cols, str):
-        cols = [cols]
-    elif cols is None:
-        cols = data.columns
-
-    for col in cols:
-        try:
-            data[col] = data[col].str.lower()
-        except AttributeError:
-            pass
-
-    return data
+    """Lowercase selected string columns; preserve numeric and null values."""
+    schema = frame(data).collect_schema()
+    selected = names(cols, default=schema)
+    require_columns(data, selected)
+    return finish(frame(data).with_columns(pl.col(name).str.to_lowercase() for name in selected if schema[name] == pl.String), data)

@@ -1,31 +1,16 @@
-import numpy as np
-import pandas as pd
+from .._core import operation
+from .._core import reject_destructive
+from .._core import frame, finish, numeric_columns, require_columns
+from ._expressions import names, clean, domain
 
 
+@operation(returns=('table',), recipe='yes')
 def df_rescale_sqrt(data, retain_cols=None, destructive=False):
-
-    '''
-    data : pandas dataframe
-         A dataframe to be rescaled
-    retain_cols : str or list
-         The columns that should be excluded from rescaling
-    destructive : bool
-        If set to True, will make changes directly to the dataframe which
-        may be useful with very large dataframes instead of making a copy.
-    '''
-
-    if destructive is False:
-        data = data.copy(deep=True)
-
-    if retain_cols is not None:
-        data = data.drop(retain_cols, axis=1)
-        temp = data[retain_cols]
-
-    numeric = data.select_dtypes(include=['int', 'float']).columns
-
-    data[numeric] = data[numeric].apply(np.sqrt)
-
-    if retain_cols is not None:
-        return pd.merge(data, temp, left_index=True, right_index=True)
-    else:
-        return data
+    """Square-root numeric columns; negative observed values fail explicitly."""
+    reject_destructive(destructive)
+    retained = names(retain_cols)
+    require_columns(data, retained)
+    selected = [name for name in numeric_columns(data) if name not in retained]
+    domain(data, selected, 0)
+    schema = frame(data).collect_schema()
+    return finish(frame(data).with_columns(clean(name, schema[name]).sqrt().alias(name) for name in selected), data)

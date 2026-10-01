@@ -1,10 +1,9 @@
-import socket
+"""Compatibility name for an explicit bounded connectivity probe."""
+from .._core import operation
+from .network_check import network_check
 
 
-def is_connected():
-    try:
-        socket.create_connection(("www.google.com", 80))
-        return True
-    except OSError:
-        pass
-    return False
+@operation(returns=('scalar',), recipe='never')
+def is_connected(host="www.google.com", port=80, timeout=2.0):
+    """Call an explicit network probe; importing Wrangle never opens a connection."""
+    return network_check(host=host, port=port, timeout=timeout)

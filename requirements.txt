@@ -1,6 +1,2 @@
-pandas
-numpy
-scipy
-statsmodels
-scikit-learn
-keras
+polars>=1.34,<2
+ruamel.yaml>=0.18.6,<0.20

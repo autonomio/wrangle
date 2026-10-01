@@ -7,3 +7,8 @@ dist/
 wrangle.egg-info
 .idea
 .coverage
+.venv/
+.pytest_cache/
+*.egg-info/
+!wrangle/docs/starter/samples.csv
+!wrangle/docs/starter/metadata.csv

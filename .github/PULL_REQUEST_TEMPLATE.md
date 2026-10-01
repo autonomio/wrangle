@@ -1,18 +1,11 @@
-## You want to make a PR to Wrangle
+Describe the problem, resulting behavior and any compatibility changes.
+Explain the scientific choices affected and show a minimal before/after example
+when that helps a reviewer.
 
-Thanks so much :) First, please take a moment to carefully check through
-the below items:
+- [ ] Native Polars expressions/plans perform transformations and data checks.
+- [ ] Major new features have meaningful tests; bug fixes include regressions when feasible.
+- [ ] Required checks in CONTRIBUTING.md pass; generated manuals and examples are current.
+- [ ] Sources and existing outputs remain protected; unresolved scientific choices stop execution.
 
-#### Sanity
-
-- [ ] I'm aware of the implications of the proposed changes
-- [ ] Code is [PEP8](https://www.python.org/dev/peps/pep-0008/)
-- [ ] I'm making the PR to `master`
-
-#### Tests
-
-- [ ] Changes have gone through actual use testing
-- [ ] All local tests have passed (`python test_script.py`)
-- [ ] Tests have been updated to reflect the changes
-
-<hr>
+Record validation results and material limitations. Target `master`.
+Report vulnerabilities privately through SECURITY.md.

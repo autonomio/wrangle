@@ -1,0 +1,496 @@
+{
+  "boundary_validation": [
+    {
+      "code": "DUPLICATE_COLUMNS",
+      "precondition": "Column names must be unique."
+    },
+    {
+      "code": "IMMUTABLE_INPUT",
+      "precondition": "Wrangle never mutates input data; use the returned table."
+    },
+    {
+      "code": "INVALID_INPUT",
+      "precondition": "A column needs a consistent native dtype."
+    },
+    {
+      "code": "INVALID_INPUT",
+      "precondition": "Data fields need consistent native types; declare casts explicitly."
+    },
+    {
+      "code": "INVALID_INPUT",
+      "precondition": "Each data row must have the same number of fields."
+    },
+    {
+      "code": "INVALID_INPUT",
+      "precondition": "Nested list fields need consistent native types."
+    },
+    {
+      "code": "INVALID_INPUT",
+      "precondition": "Nested object fields need consistent native types."
+    },
+    {
+      "code": "INVALID_INPUT",
+      "precondition": "Record fields must have string names; names are never coerced."
+    },
+    {
+      "code": "INVALID_INPUT",
+      "precondition": "Record tables require one mapping per row; use null field values for missingness."
+    },
+    {
+      "code": "INVALID_INPUT",
+      "precondition": "Rows without any fields cannot retain observation identity; supply at least one field."
+    },
+    {
+      "code": "INVALID_INPUT",
+      "precondition": "Rows without any fields cannot retain observation identity; supply at least one named field."
+    },
+    {
+      "code": "INVALID_INPUT",
+      "precondition": "This operation requires exactly one column."
+    },
+    {
+      "code": "INVALID_INPUT",
+      "precondition": "Use a Polars Series, one-column table, or list of values."
+    },
+    {
+      "code": "INVALID_INPUT",
+      "precondition": "Use a Polars table, series, Python records, or a local CSV/Parquet path."
+    },
+    {
+      "code": "INVALID_INPUT",
+      "precondition": "Use native Polars values; opaque Python objects cannot represent research data."
+    },
+    {
+      "code": "LOSSY_CAST",
+      "precondition": "Mixed integers and floats exceed the safe Float64 integer range; declare a dtype explicitly."
+    },
+    {
+      "code": "UNKNOWN_COLUMN",
+      "precondition": "The requested columns are absent."
+    },
+    {
+      "code": "UNSUPPORTED_CALLBACK",
+      "precondition": "Python UDFs are not native Polars operations."
+    },
+    {
+      "code": "UNSUPPORTED_CALLBACK",
+      "precondition": "The plan must be native and serializable; Python callbacks cannot execute."
+    },
+    {
+      "code": "UNSUPPORTED_CALLBACK",
+      "precondition": "Use native Polars expressions and plans."
+    }
+  ],
+  "expression_grammar": {
+    "$ref": "docs/operations.json#/expression_grammar"
+  },
+  "guided_start": {
+    "$ref": "docs/operations.json#/guided_start"
+  },
+  "navigation": {
+    "architecture": "docs/architecture.md",
+    "checks": "_contracts.py",
+    "cli": "_cli.py:main",
+    "contributing": "docs/project/CONTRIBUTING.md",
+    "decision_validation": "_start.py:validate_decisions",
+    "disk_execution": "_storage.py",
+    "disk_workflow": "docs/disk_preparation.py",
+    "draft_protocol": "_start.py:draft",
+    "entrypoint": "AGENTS.md",
+    "executable_workflow": "docs/research_batch.py",
+    "execution_contracts": "_execution.py",
+    "expression_workflow": "docs/expression_workflow.py",
+    "governance": "docs/project/GOVERNANCE.md",
+    "guided_workflow": "docs/start_workflow.py",
+    "human_start": "docs/getting_started.md",
+    "human_workflow": "docs/human_workflow.py",
+    "inspection_workflow": "docs/inspection_workflow.py",
+    "migration": "docs/migration.md",
+    "openssf_evidence": "docs/security/openssf-evidence.yaml",
+    "paths_relative_to": "Path(wrangle.__file__).parent",
+    "preparation_workflows": "docs/preparation_workflows.py",
+    "publish_protocol": "_start.py:publish",
+    "recipe_grammar": "docs/recipes.md",
+    "recipe_loader": "_protocol.py:load_recipe",
+    "release_verification": "docs/security/releases.md",
+    "security": "docs/security.md",
+    "security_assurance": "docs/security/assurance.md",
+    "security_reporting": "docs/project/SECURITY.md",
+    "select_operation": "Choose the task in docs/recipes.md. Read returns/recipe eligibility, then exact arguments, literal argument_constraints and validation. Resolve symbol or open source at line. Minimal workflows in navigation assert expected data and receipts. Signatures, choice constraints and failures come from engine definitions.",
+    "source_contracts": "_sources.py",
+    "starter_recipe": "docs/starter/recipe.yaml",
+    "statistics_workflow": "docs/frozen_parameters.py"
+  },
+  "operations": [
+    {
+      "argument_constraints": [],
+      "arguments": [
+        {
+          "kind": "positional_or_keyword",
+          "name": "data",
+          "required": true,
+          "type": "pl.LazyFrame"
+        },
+        {
+          "kind": "positional_or_keyword",
+          "name": "where",
+          "required": true,
+          "type": "Any"
+        },
+        {
+          "default": "error",
+          "kind": "positional_or_keyword",
+          "name": "nulls",
+          "required": false,
+          "type": "str"
+        }
+      ],
+      "boundary_validation": {
+        "$ref": "#/boundary_validation"
+      },
+      "description": "Apply an explicit predicate; missing truth values require a declared policy.",
+      "group": "recipe",
+      "line": 321,
+      "manual": "docs/operations/filter.json",
+      "name": "filter",
+      "recipe": {
+        "aggregates": false,
+        "eligibility": "yes"
+      },
+      "retired": false,
+      "returns": [
+        "table"
+      ],
+      "source": "_api.py",
+      "symbol": "wrangle._api._filter",
+      "validation": [
+        {
+          "code": "DATETIME_OVERFLOW",
+          "precondition": "Calendar shift exceeds the native calendar's supported year domain."
+        },
+        {
+          "code": "DATETIME_OVERFLOW",
+          "precondition": "Native timestamp arithmetic cannot represent the requested calendar date."
+        },
+        {
+          "code": "DATETIME_OVERFLOW",
+          "precondition": "The local wall timestamp exceeds the declared temporal representation."
+        },
+        {
+          "code": "DATETIME_OVERFLOW",
+          "precondition": "The shifted observation exceeds its declared temporal representation."
+        },
+        {
+          "code": "DATETIME_PRECISION_LOSS",
+          "precondition": "Observed fractions exceed the declared time precision; choose a finer unit or explicitly truncate."
+        },
+        {
+          "code": "DATETIME_RANGE",
+          "precondition": "Observed timestamps exceed exact native nanosecond range."
+        },
+        {
+          "code": "DTYPE_MISMATCH",
+          "precondition": "Branches need compatible native types; declare casts explicitly."
+        },
+        {
+          "code": "DTYPE_MISMATCH",
+          "precondition": "Membership values must match the tested field type."
+        },
+        {
+          "code": "INTEGER_OVERFLOW",
+          "precondition": "Integer arithmetic must fit signed 64-bit values; no wrapped result is permitted."
+        },
+        {
+          "code": "INTEGER_OVERFLOW",
+          "precondition": "The integer power exceeds signed 64-bit arithmetic."
+        },
+        {
+          "code": "INVALID_ARGUMENT",
+          "precondition": "Filter nulls must be error, keep, or drop."
+        },
+        {
+          "code": "INVALID_ARGUMENT",
+          "precondition": "columns must be a nonempty list of distinct field names."
+        },
+        {
+          "code": "INVALID_CAST",
+          "precondition": "Some observed values cannot be represented in the requested dtype."
+        },
+        {
+          "code": "INVALID_DATETIME",
+          "precondition": "Datetime format, time zone, or DST policy cannot parse the observed values."
+        },
+        {
+          "code": "INVALID_DATETIME",
+          "precondition": "Observed text does not match the declared datetime format."
+        },
+        {
+          "code": "INVALID_DATETIME_FORMAT",
+          "precondition": "Declare a nonempty exact datetime format."
+        },
+        {
+          "code": "INVALID_DATETIME_FORMAT",
+          "precondition": "Declare exactly one variable fractional-second field."
+        },
+        {
+          "code": "INVALID_DATETIME_FORMAT",
+          "precondition": "Use numeric offsets or an explicit IANA zone; timezone abbreviations are ambiguous."
+        },
+        {
+          "code": "INVALID_DATETIME_FORMAT",
+          "precondition": "time_zone must be an explicit nonempty IANA zone or None."
+        },
+        {
+          "code": "INVALID_DATETIME_SHIFT",
+          "precondition": "Calendar shift reaches an ambiguous or nonexistent local timestamp or unsupported calendar value."
+        },
+        {
+          "code": "INVALID_DATETIME_SHIFT",
+          "precondition": "The calendar target lacks the original day; declare month_end='clip' deliberately."
+        },
+        {
+          "code": "INVALID_DOMAIN",
+          "precondition": "Clip lower bounds exceed upper bounds."
+        },
+        {
+          "code": "INVALID_DOMAIN",
+          "precondition": "Integer powers require exponents from 0 to 63; declare floating arithmetic for other powers."
+        },
+        {
+          "code": "INVALID_DTYPE",
+          "precondition": "Datetime parsing requires String fields."
+        },
+        {
+          "code": "INVALID_EXPRESSION",
+          "precondition": "A filter must evaluate to booleans."
+        },
+        {
+          "code": "INVALID_EXPRESSION",
+          "precondition": "A pattern requires 1..4096 literal characters."
+        },
+        {
+          "code": "INVALID_EXPRESSION",
+          "precondition": "Arithmetic requires numeric expressions."
+        },
+        {
+          "code": "INVALID_EXPRESSION",
+          "precondition": "Calendar shifts accept d/w/mo/q/y; use elapsed for fixed subday durations."
+        },
+        {
+          "code": "INVALID_EXPRESSION",
+          "precondition": "Clip bounds require numeric expressions or explicit unbounded null."
+        },
+        {
+          "code": "INVALID_EXPRESSION",
+          "precondition": "Conditional predicates must be Boolean."
+        },
+        {
+          "code": "INVALID_EXPRESSION",
+          "precondition": "Date literals require ISO YYYY-MM-DD syntax."
+        },
+        {
+          "code": "INVALID_EXPRESSION",
+          "precondition": "Date/clock components require an appropriate native temporal dtype."
+        },
+        {
+          "code": "INVALID_EXPRESSION",
+          "precondition": "Datetime literals require exact ISO date/time syntax."
+        },
+        {
+          "code": "INVALID_EXPRESSION",
+          "precondition": "Each expression node must have exactly one operator."
+        },
+        {
+          "code": "INVALID_EXPRESSION",
+          "precondition": "Elapsed shifts require a fixed duration; Date accepts d/w and month_end must be error."
+        },
+        {
+          "code": "INVALID_EXPRESSION",
+          "precondition": "Expression leaves must be a column reference or JSON scalar."
+        },
+        {
+          "code": "INVALID_EXPRESSION",
+          "precondition": "Literal value type must agree with its declared numeric/boolean dtype; use cast for conversion."
+        },
+        {
+          "code": "INVALID_EXPRESSION",
+          "precondition": "Membership values require a list of JSON scalars."
+        },
+        {
+          "code": "INVALID_EXPRESSION",
+          "precondition": "Parse temporal text with parse_datetime and an exact format before deriving components."
+        },
+        {
+          "code": "INVALID_EXPRESSION",
+          "precondition": "Replacement capture reference is unclosed."
+        },
+        {
+          "code": "INVALID_EXPRESSION",
+          "precondition": "Replacement needs explicit literal/group expansion and first/all policies."
+        },
+        {
+          "code": "INVALID_EXPRESSION",
+          "precondition": "Replacement refers to an absent regex capture."
+        },
+        {
+          "code": "INVALID_EXPRESSION",
+          "precondition": "Requested capture does not exist in the declared pattern."
+        },
+        {
+          "code": "INVALID_EXPRESSION",
+          "precondition": "Text operations require String expressions; cast explicitly."
+        },
+        {
+          "code": "INVALID_EXPRESSION",
+          "precondition": "The native expression cannot satisfy its declared shape or type policies."
+        },
+        {
+          "code": "INVALID_EXPRESSION",
+          "precondition": "Typed literals contain JSON values only."
+        },
+        {
+          "code": "INVALID_EXPRESSION",
+          "precondition": "Typed literals must contain finite JSON values."
+        },
+        {
+          "code": "INVALID_EXPRESSION",
+          "precondition": "Use a documented expression operator and arity."
+        },
+        {
+          "code": "INVALID_EXPRESSION",
+          "precondition": "Use a scalar supported by native Polars dtypes."
+        },
+        {
+          "code": "INVALID_EXPRESSION",
+          "precondition": "and/or require Boolean expressions."
+        },
+        {
+          "code": "INVALID_EXPRESSION",
+          "precondition": "case requires 1..128 declared branches."
+        },
+        {
+          "code": "INVALID_EXPRESSION",
+          "precondition": "clip requires numeric observations."
+        },
+        {
+          "code": "INVALID_EXPRESSION",
+          "precondition": "coalesce requires 2..128 ordered expressions."
+        },
+        {
+          "code": "INVALID_EXPRESSION",
+          "precondition": "col requires a column name."
+        },
+        {
+          "code": "INVALID_EXPRESSION",
+          "precondition": "concat requires 2..128 strings and a literal separator."
+        },
+        {
+          "code": "INVALID_EXPRESSION",
+          "precondition": "convert_time_zone requires a zoned Datetime and an explicit IANA zone; localize naive timestamps first."
+        },
+        {
+          "code": "INVALID_EXPRESSION",
+          "precondition": "datetime_shift duration magnitude exceeds the supported integer domain."
+        },
+        {
+          "code": "INVALID_EXPRESSION",
+          "precondition": "datetime_shift requires Date or Datetime observations."
+        },
+        {
+          "code": "INVALID_EXPRESSION",
+          "precondition": "datetime_shift requires one signed integer duration and a documented unit."
+        },
+        {
+          "code": "INVALID_EXPRESSION",
+          "precondition": "extract group must be a nonnegative integer."
+        },
+        {
+          "code": "INVALID_EXPRESSION",
+          "precondition": "f\"{name} requires one of {', '.join(values)}.\""
+        },
+        {
+          "code": "INVALID_EXPRESSION",
+          "precondition": "f'{operator} requires exactly its documented fields.'"
+        },
+        {
+          "code": "INVALID_EXPRESSION",
+          "precondition": "lit requires a JSON scalar."
+        },
+        {
+          "code": "INVALID_EXPRESSION",
+          "precondition": "literal pattern policy must be boolean."
+        },
+        {
+          "code": "INVALID_EXPRESSION",
+          "precondition": "not requires a Boolean expression."
+        },
+        {
+          "code": "INVALID_EXPRESSION",
+          "precondition": "round decimals requires an integer 0..38."
+        },
+        {
+          "code": "INVALID_EXPRESSION",
+          "precondition": "round requires a numeric expression."
+        },
+        {
+          "code": "INVALID_EXPRESSION",
+          "precondition": "slice requires integer offset and nonnegative length."
+        },
+        {
+          "code": "INVALID_EXPRESSION",
+          "precondition": "split requires a nonempty literal separator and max_splits integer 0..128."
+        },
+        {
+          "code": "INVALID_POLICY",
+          "precondition": "Date parsing cannot apply timezone, datetime precision, or DST policies."
+        },
+        {
+          "code": "INVALID_POLICY",
+          "precondition": "Nondefault DST policies require naive text and an explicit localization time_zone."
+        },
+        {
+          "code": "INVALID_POLICY",
+          "precondition": "f'{name} must be one of {sorted(choices, key=str)!r}.'"
+        },
+        {
+          "code": "INVALID_TIME_ZONE",
+          "precondition": "Declare a valid IANA output time zone."
+        },
+        {
+          "code": "LOSSY_CAST",
+          "precondition": "Expression conversion changes observed precision; declare precision='allow' deliberately."
+        },
+        {
+          "code": "LOSSY_CAST",
+          "precondition": "Floating arithmetic would lose integer precision; resolve the measurement dtype explicitly."
+        },
+        {
+          "code": "LOSSY_CAST",
+          "precondition": "The elapsed duration cannot be represented in the timestamp unit; declare precision='allow' to truncate toward zero."
+        },
+        {
+          "code": "NONFINITE_RESULT",
+          "precondition": "Resolve infinite source measurements before deriving or filtering them."
+        },
+        {
+          "code": "UNDECLARED_TIME_ZONE",
+          "precondition": "Offset-bearing text requires an explicit output time_zone."
+        },
+        {
+          "code": "UNRESOLVED_EXPRESSION",
+          "precondition": "Missing expression values require an explicit permitted null policy."
+        },
+        {
+          "code": "UNRESOLVED_FILTER",
+          "precondition": "The filter is unknown for missing values; declare nulls=keep or drop."
+        }
+      ]
+    }
+  ],
+  "recipe_contract": "Author recipe files in strict YAML (.yaml/.yml) using mappings, lists, strings, Boolean/null values and finite numbers; programmatic Python mappings share the same contract. Canonical JSON is internal receipt/hash serialization. Guided pending_decisions block execution before source access; recorded research_decisions must be complete and agree with controlled preparation steps. Conditional legacy operations require table-returning arguments. Existing keys retain identity; declare step.key for an explicit checked transition. Canonical grain operations require step.key even without an input key. Exclusions require reasons, expansion requires allow_expand, and incompatible measurement units cannot be reconciled by annotations.",
+  "recovery": "Read operation validation plus shared_validation and boundary_validation. Use WrangleError.code/details to correct that declared precondition and rerun the same protocol; never silently substitute a method or discard observations.",
+  "shared_validation": {
+    "$ref": "docs/operations.json#/shared_validation"
+  },
+  "version": 1
+}

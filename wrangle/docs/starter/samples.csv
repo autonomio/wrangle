@@ -1,0 +1,4 @@
+sample_id,mass_mg,qc
+001,1000,pass
+002,2000,fail
+003,3000,pass

@@ -1,27 +1,15 @@
+from .._core import operation
+from .._core import reject_destructive
+from .._core import frame, finish, require_columns, columns, WrangleError
+
+
+@operation(returns=('table',), recipe='yes')
 def df_rename_col(data, col, rename_to, destructive=False):
-
-    """Rename a single column
-
-    data : pandas DataFrame
-        Pandas dataframe with the column to be renamed.
-    col : str
-        Column to be renamed
-    rename_to : str
-        New name for the column to be renamed
-
-    destructive : bool
-        If set to True, will make changes directly to the dataframe which
-        may be useful with very large dataframes instead of making a copy.
-
-    """
-
-    if destructive is False:
-        data = data.copy(deep=True)
-
-    cols = list(data.columns)
-    loc = cols.index(col)
-    cols.insert(loc, rename_to)
-    cols.remove(col)
-    data.columns = cols
-
-    return data
+    """Rename one column without changing its position or values."""
+    reject_destructive(destructive)
+    require_columns(data, [col])
+    if not isinstance(rename_to, str) or not rename_to:
+        raise WrangleError("INVALID_OPTION", "rename_to must be a nonempty string.")
+    if rename_to != col and rename_to in columns(data):
+        raise WrangleError("COLUMN_COLLISION", "Destination column already exists.", {"column": rename_to})
+    return finish(frame(data).rename({col: rename_to}), data)

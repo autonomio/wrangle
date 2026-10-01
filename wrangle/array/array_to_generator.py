@@ -1,23 +1,18 @@
-import numpy as np
+"""Aligned native Polars batches."""
+from .._core import operation
+from .._core import frame, WrangleError
+from ._native import aligned, positive_int, restore
 
 
-def array_to_generator(x, y, batch_size):
-
-    '''Creates a data generator for Keras fit_generator(). '''
-
-    samples_per_epoch = x.shape[0]
-    number_of_batches = samples_per_epoch / batch_size
-    counter = 0
-
-    while 1:
-
-        x_batch = np.array(x[batch_size*counter:batch_size*(counter+1)])
-        x_batch = x_batch.astype('float32')
-        y_batch = np.array(y[batch_size*counter:batch_size*(counter+1)])
-        y_batch = y_batch.astype('float32')
-        counter += 1
-
-        yield x_batch, y_batch
-
-        if counter >= number_of_batches:
-            counter = 0
+@operation(returns=('generator',), recipe='never')
+def array_to_generator(x, y, batch_size, *, repeat=True):
+    """Yield every row, including a short final batch. repeat=True retains the legacy infinite generator."""
+    count = aligned(x, y)
+    positive_int(batch_size, "batch_size")
+    if not count:
+        raise WrangleError("EMPTY_DATA", "Batch generation requires observations.")
+    while True:
+        for offset in range(0, count, batch_size):
+            yield restore(frame(x).slice(offset, batch_size), x), restore(frame(y).slice(offset, batch_size), y)
+        if not repeat:
+            return

@@ -1,17 +1,10 @@
-def df_print_values(data, n=5):
-    
-    '''Shows the most common values for each column
-    in a dataframe.
-    
-    data | DataFrame | a pandas dataframe with the data
-    n | int | Number of most common values to show
-    '''
+from .._core import operation
+from .._core import frame, columns
+from ._expressions import positive_n
 
-    for col in data.columns:
-        
-        length = len(col)
-        dashes = "-" * length
-        
-        print("%s \n%s" % (col, dashes))
-        print(data[col].value_counts().head(n))
-        print("\n")
+
+@operation(returns=('dictionary',), recipe='never', aggregates=True)
+def df_print_values(data, n=5):
+    """Return most frequent values by column; agent-visible data replaces print side effects."""
+    positive_n(n)
+    return {name: frame(data).group_by(name, maintain_order=True).len().sort('len', descending=True, maintain_order=True).head(n).collect() for name in columns(data)}

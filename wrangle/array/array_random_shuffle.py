@@ -1,67 +1,17 @@
-def array_random_shuffle(x, y=None, multi_input=False):
+"""Reproducible row shuffling, without input mutation."""
+from .._core import operation
+from .._core import WrangleError
+from ._native import aligned, shuffled, checked_seed
 
-    '''Shuffles single or multi-input data. Note that
-    only x can be multi-input and x has to be more than one
-    column of data.
 
-    x | array or list | the x data to be shuffled
-    y | array | the y data to be shuffled (optional)
-    multi_input | bool | set to True if multi-input model data
-    '''
-
-    import numpy as np
-
-    rng = np.random.default_rng()
-    state = rng.bit_generator.state
-
-    # data input is list but multi_input is not set to True
-    if isinstance(x, list) and multi_input == False:
-
-        raise TypeError("For multi-input x, set multi_input to True")
-
-    # data input is list and multi_input is set to True
-    elif isinstance(x, list) and multi_input == True:
-
-        x_out = []
-
-        for ar in x:
-
-            rng.bit_generator.state = state
-            rng.shuffle(ar, axis=0)
-            x_out.append(ar)
-
-        x = x_out
-
-        if y is not None:
-            rng.bit_generator.state = state
-
-            try:
-                y.shape[1]
-                rng.shuffle(y, axis=0)
-            except IndexError:
-                rng.shuffle(y)
-
-            return x, y
-
-        else:
-            return x
-
-    # data input is assumably an array (not multi-input)
-    elif isinstance(x, list) == False:
-
-        rng.bit_generator.state = state
-        rng.shuffle(x, axis=0)
-
-        if y is not None:
-            rng.bit_generator.state = state
-
-            try:
-                y.shape[1]
-                rng.shuffle(y, axis=0)
-            except IndexError:
-                rng.shuffle(y)
-
-            return x, y
-
-        else:
-            return x
+@operation(returns=('sequence', 'series', 'table', 'tuple'), recipe='conditional')
+def array_random_shuffle(x, y=None, multi_input=False, *, seed=0):
+    """Return equally permuted inputs. Multi-input lists require explicit multi_input=True; seed defaults to 0."""
+    checked_seed(seed)
+    inputs = list(x) if multi_input else [x]
+    if not inputs:
+        raise WrangleError("INVALID_INPUT", "At least one feature input is required.")
+    aligned(*inputs, *([] if y is None else [y]))
+    result = [shuffled(item, seed) for item in inputs]
+    x_out = result if multi_input else result[0]
+    return x_out if y is None else (x_out, shuffled(y, seed))

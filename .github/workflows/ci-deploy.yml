@@ -1,25 +1,90 @@
-name: Upload Python Package
+name: Verified release artifacts
 
 on:
   release:
-    types: [created]
+    types: [published]
 
+permissions:
+  contents: read
+
+# PyPI publication stays disabled until a maintainer verifies a trusted publisher
+# bound to this repository, workflow and release environment. No API-token fallback.
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
+    env:
+      SOURCE_DATE_EPOCH: "946684800"
+      PYTHONHASHSEED: "0"
+    timeout-minutes: 30
     steps:
-    - uses: actions/checkout@v1
-    - name: Set up Python
-      uses: actions/setup-python@v1
-      with:
-        python-version: '3.x'
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install hatch
-    - name: Build and publish
-      env:
-        PYPI_API_TOKEN: ${{ secrets.PYPI_API_TOKEN }}
-      run: |
-        hatch build
-        hatch publish --user __token__ --auth $PYPI_API_TOKEN
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.13'
+      - run: python -m pip install --upgrade pip
+      - run: python -m pip install -c requirements-ci.txt '.[dev,excel]'
+      - run: python -m pytest -W error
+      - run: python -m ruff check wrangle scripts
+      - run: python -m bandit -c pyproject.toml -r wrangle scripts/check_release.py -q
+      - run: python -m pip_audit -r requirements-audit.txt -r requirements-ci.txt
+      - run: python scripts/build_catalog.py --check
+      - run: python -m build --no-isolation
+      - run: python scripts/check_reproducible_build.py
+      - run: python scripts/verify_distribution.py
+      - run: python -m twine check --strict dist/*
+      - run: python scripts/check_release.py --require-tag
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: release-distributions
+          path: dist/*
+          if-no-files-found: error
+          retention-days: 90
+  attest-and-attach:
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write
+      attestations: write
+      id-token: write
+    steps:
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: release-distributions
+          path: dist
+      - name: Verify the transferred wheel and source archive against their checksums
+        run: sha256sum --check SHA256SUMS
+        working-directory: dist
+      - uses: actions/attest@1e69f48acb82d1966a394da916b4c1698aa569d6 # v4.2.2
+        id: attest
+        with:
+          subject-path: dist/*
+          create-storage-record: false
+      - name: Verify trusted repository, workflow, commit and SLSA provenance
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RELEASE_COMMIT: ${{ github.sha }}
+          RELEASE_REF: ${{ github.ref }}
+          ATTESTATION_BUNDLE: ${{ steps.attest.outputs.bundle-path }}
+        run: |
+          for artifact in dist/*.whl dist/*.tar.gz dist/SHA256SUMS; do
+            gh attestation verify "$artifact" --bundle "$ATTESTATION_BUNDLE" \
+              --repo "$GH_REPO" --signer-workflow "$GH_REPO/.github/workflows/ci-deploy.yml" \
+              --signer-digest "$RELEASE_COMMIT" --source-digest "$RELEASE_COMMIT" --source-ref "$RELEASE_REF" \
+              --predicate-type https://slsa.dev/provenance/v1 \
+              --cert-oidc-issuer https://token.actions.githubusercontent.com --deny-self-hosted-runners
+          done
+      - name: Attach immutable distributions, checksums and the attestation bundle
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+          ATTESTATION_BUNDLE: ${{ steps.attest.outputs.bundle-path }}
+        run: |
+          cp "$ATTESTATION_BUNDLE" dist/attestation.json
+          gh release upload "$RELEASE_TAG" dist/* --repo "$GH_REPO"
