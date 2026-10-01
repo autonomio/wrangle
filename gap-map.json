@@ -1,0 +1,1072 @@
+{
+  "title": "Wrangle scientific preparation gap map",
+  "audit_date": "2026-10-01",
+  "status": "Implemented and verified with guided real-file protocol drafting, YAML-only recipe authoring, shared human/agent workflows, explicit memory/disk execution and native stateful-operation limits; pre-implementation audit evidence retained.",
+  "scope": "Everyday data preparation for researchers and agents; native Polars transformations and checks, Python orchestration/files/receipts. Model building is excluded.",
+  "repository_roots": {
+    "wrangle": "/Users/mikkokotila/dev/wrangle",
+    "limen": "/Users/mikkokotila/dev/Limen"
+  },
+  "coverage": {
+    "catalog_entries": 123,
+    "non_retired_entries": 117,
+    "entries_tagged_recipe_yes_or_conditional": 85,
+    "canonical_recipe_operations": [
+      "aggregate",
+      "cast",
+      "clean_text",
+      "concat",
+      "convert_unit",
+      "deduplicate",
+      "derive",
+      "encode",
+      "explode",
+      "fill",
+      "filter",
+      "impute",
+      "join",
+      "join_asof",
+      "normalize_missing",
+      "parse_datetime",
+      "partition",
+      "pivot",
+      "recode",
+      "rename",
+      "sample",
+      "select",
+      "sort",
+      "standardize",
+      "unnest",
+      "unpivot",
+      "window"
+    ],
+    "expression_operators": 21,
+    "qualification": "Canonical workflows execute expected-data and evidence assertions. Legacy output kinds/eligibility remain explicit; native Python helpers are not declarative recipe steps."
+  },
+  "namespace_proposal": {
+    "top_level": [
+      "wrangle.inspect(source)",
+      "wrangle.prepare(sources, recipe)"
+    ],
+    "principle": "Grow the intent vocabulary inside recipes and the existing expression/check grammar; do not mirror every Polars method with a root-level function.",
+    "new_recipe_operations": [
+      "normalize_missing",
+      "clean_text",
+      "parse_datetime",
+      "recode",
+      "sort",
+      "deduplicate",
+      "concat",
+      "pivot",
+      "unpivot",
+      "explode",
+      "unnest",
+      "aggregate",
+      "join_asof",
+      "window",
+      "sample",
+      "partition"
+    ],
+    "extend_existing": [
+      "derive/filter expressions",
+      "cast/source declarations",
+      "encode",
+      "join",
+      "checks",
+      "inspect",
+      "resolved parameters",
+      "prepared sources and receipts"
+    ],
+    "legacy_policy": "Preserve compatibility names where useful; use one canonical operation for each new intent and reuse the existing native implementation.",
+    "implemented_new_recipe_operations": [
+      "normalize_missing",
+      "clean_text",
+      "parse_datetime",
+      "recode",
+      "sort",
+      "deduplicate",
+      "concat",
+      "pivot",
+      "unpivot",
+      "explode",
+      "unnest",
+      "aggregate",
+      "join_asof",
+      "window",
+      "sample",
+      "partition",
+      "fill",
+      "impute",
+      "standardize"
+    ]
+  },
+  "priorities": {
+    "0": "Correctness and observation contracts that must precede dependent operations.",
+    "1": "Routine preparation and agent usability.",
+    "2": "Longitudinal, sampling, interoperability and larger-data workflows."
+  },
+  "gaps": [
+    {
+      "id": "nested-finite-values",
+      "priority": 0,
+      "gap_and_proposal": "Recursively profile and validate supported nested numeric fields using native expressions, or reject unsupported nested schemas explicitly. This is a validation defect, not a missing convenience function.",
+      "researcher_decisions": "Declare whether NaN is missing; infinity must never pass a finite-measurement contract unnoticed.",
+      "before_implementation": "Flat float columns are checked. A diagnostic prepare call accepted List(Float64) values containing NaN and infinity.",
+      "audit_evidence": [
+        {
+          "repository": "wrangle",
+          "path": "wrangle/_api.py",
+          "symbol": "_finite_output",
+          "line": 175
+        },
+        {
+          "repository": "wrangle",
+          "path": "wrangle/_api.py",
+          "symbol": "inspect",
+          "line": 111
+        }
+      ],
+      "resolution": {
+        "status": "implemented",
+        "description": "Recursive native finite checks/profiles; explicit selected nested NaN normalization preserves shape and parent nulls.",
+        "paths": [
+          "wrangle/_core.py",
+          "wrangle/_recipe_fields.py"
+        ],
+        "verification": [
+          "tests/test_nested_missing.py",
+          "tests/test_profiles.py"
+        ]
+      }
+    },
+    {
+      "id": "recipe-catalog-truth",
+      "priority": 0,
+      "gap_and_proposal": "Make recipe eligibility include JSON argument representability. Publish argument schemas, permitted values and conditional return constraints from engine definitions. Native Python expression helpers remain direct calls.",
+      "researcher_decisions": "None; agent selection must accurately describe executable capabilities.",
+      "before_implementation": "df_parallelize_process is tagged recipe=yes but requires pl.Expr objects that finite JSON recipes cannot supply; a JSON expression probe fails UNSUPPORTED_CALLBACK.",
+      "audit_evidence": [
+        {
+          "repository": "wrangle",
+          "path": "wrangle/df/df_parallelize_process.py",
+          "symbol": "df_parallelize_process",
+          "line": 8
+        },
+        {
+          "repository": "wrangle",
+          "path": "wrangle/_catalog.py",
+          "symbol": "operation_contract",
+          "line": 98
+        },
+        {
+          "repository": "wrangle",
+          "path": "wrangle/_api.py",
+          "symbol": "prepare",
+          "line": 515
+        }
+      ],
+      "resolution": {
+        "status": "implemented",
+        "description": "Native expression-only helper is excluded from recipes. Signatures, literal choices, failures and compact operation documents come from execution definitions.",
+        "paths": [
+          "wrangle/_catalog.py"
+        ],
+        "verification": [
+          "tests/test_agent_manual.py"
+        ]
+      }
+    },
+    {
+      "id": "observation-grain-and-identity",
+      "priority": 0,
+      "gap_and_proposal": "Add explicit input and output observation-key contracts with checked lineage for aggregation, reshape, append, expansion and identifier normalization. Support deliberate duplicate cleanup before asserting the final key. Preserve strict identity checks by default; distinguish aggregation from exclusions.",
+      "researcher_decisions": "What one row means before and after; output key; permitted identity mapping; collision and exclusion policy.",
+      "before_implementation": "Input keys are checked before any step. Declared key values and dtypes cannot change. Aggregate-tagged operations are rejected when a key is present.",
+      "audit_evidence": [
+        {
+          "repository": "wrangle",
+          "path": "wrangle/_api.py",
+          "symbol": "prepare",
+          "line": 515
+        },
+        {
+          "repository": "wrangle",
+          "path": "wrangle/_api.py",
+          "symbol": "_checks",
+          "line": 409
+        }
+      ],
+      "resolution": {
+        "status": "implemented",
+        "description": "Explicit output keys, checked parents/element/draw identities, one-to-one corrections, balanced exclusions/expansion, and full/right source introductions.",
+        "paths": [
+          "wrangle/_execution.py"
+        ],
+        "verification": [
+          "tests/test_observation_contracts.py",
+          "tests/test_outer_lineage.py"
+        ]
+      }
+    },
+    {
+      "id": "protocol-completeness",
+      "priority": 1,
+      "gap_and_proposal": "Extend checks to require the declarations needed by a specified research protocol. Require explicit meaning-changing methods, thresholds, category domains and sampling units in canonical recipes rather than inheriting scientific choices from legacy defaults. Report unresolved decisions consistently; never interpret a technical pass as evidence that scientific meaning is correct.",
+      "researcher_decisions": "Required observation identity, measurement meanings, units, missingness and admissible exclusions.",
+      "before_implementation": "Keys and units are optional. Undeclared units and variable descriptions are recorded as unresolved rather than rejected.",
+      "audit_evidence": [
+        {
+          "repository": "wrangle",
+          "path": "wrangle/_api.py",
+          "symbol": "inspect",
+          "line": 111
+        },
+        {
+          "repository": "wrangle",
+          "path": "wrangle/_api.py",
+          "symbol": "prepare",
+          "line": 515
+        }
+      ],
+      "resolution": {
+        "status": "implemented",
+        "description": "Protocol can require keys/units/descriptions. Canonical choices are explicit; technical checks do not establish the scientific truth of declarations.",
+        "paths": [
+          "wrangle/_contracts.py"
+        ],
+        "verification": [
+          "tests/test_research_checks.py"
+        ]
+      }
+    },
+    {
+      "id": "source-options-and-types",
+      "priority": 1,
+      "gap_and_proposal": "Add structured source declarations for TSV and CSV dialects and explicit parsing options. Add dtype descriptors where needed for Decimal, temporal precision/timezone, Enum and nested fields. Optional Excel ingestion should use declared sheets and Polars readers; keep Polars as the computation engine.",
+      "researcher_decisions": "File format, delimiter, encoding, header, sheet, schema and precision. Preserve identifiers and reject unintended loss.",
+      "before_implementation": "prepare reads local CSV, Parquet, IPC and NDJSON. CSV preserves strings. Delimiter, encoding, header and spreadsheet-sheet options are absent; cast accepts simple dtype names.",
+      "audit_evidence": [
+        {
+          "repository": "wrangle",
+          "path": "wrangle/_api.py",
+          "symbol": "_source",
+          "line": 73
+        },
+        {
+          "repository": "wrangle",
+          "path": "wrangle/_api.py",
+          "symbol": "_cast",
+          "line": 287
+        },
+        {
+          "repository": "wrangle",
+          "path": "wrangle/utils/read_large_csv.py",
+          "symbol": "read_large_csv",
+          "line": 12
+        }
+      ],
+      "resolution": {
+        "status": "implemented",
+        "description": "Declared CSV/TSV options, native type descriptors and optional real Excel sheet/identifier/blank-row decoding checks.",
+        "paths": [
+          "wrangle/_sources.py",
+          "wrangle/_core.py"
+        ],
+        "verification": [
+          "tests/test_ingestion.py",
+          "tests/test_excel_source.py"
+        ]
+      }
+    },
+    {
+      "id": "conditional-derived-fields",
+      "priority": 1,
+      "gap_and_proposal": "Extend the same expression grammar with when/case, coalesce, membership, text predicates, date components, rounding and bounded clipping. Fixed interval labels can use case expressions; add bin only if a dedicated intent operation proves materially clearer.",
+      "researcher_decisions": "Branch order, null behavior, bin boundaries, precision, clipping bounds and output units. No Python callbacks or eval.",
+      "before_implementation": "derive and filter support scalar arithmetic, comparisons, Boolean operators, null predicates, abs, sqrt and log1p.",
+      "audit_evidence": [
+        {
+          "repository": "wrangle",
+          "path": "wrangle/_api.py",
+          "symbol": "_expression",
+          "line": 211
+        },
+        {
+          "repository": "wrangle",
+          "path": "wrangle/_api.py",
+          "symbol": "_derive",
+          "line": 328
+        },
+        {
+          "repository": "wrangle",
+          "path": "wrangle/_api.py",
+          "symbol": "_filter",
+          "line": 340
+        }
+      ],
+      "resolution": {
+        "status": "implemented",
+        "description": "21 bounded native extension operators for conditions, typed literals/casts, text and temporal preparation.",
+        "paths": [
+          "wrangle/_recipe_expressions.py"
+        ],
+        "verification": [
+          "tests/test_recipe_join.py",
+          "wrangle/docs/expression_workflow.py"
+        ]
+      }
+    },
+    {
+      "id": "missing-value-codes",
+      "priority": 1,
+      "gap_and_proposal": "Add normalize_missing with typed codes per field and replacement counts. Add per-column fill declarations to the canonical recipe surface, reusing existing native fill logic rather than duplicating it.",
+      "researcher_decisions": "Exact missing codes, distinction between unmeasured and zero, null/NaN policy, explicit fill or imputation method.",
+      "before_implementation": "Null/NaN filling and observed-data imputation exist. Finite sentinels and text missing codes cannot be normalized through the current JSON expression grammar.",
+      "audit_evidence": [
+        {
+          "repository": "wrangle",
+          "path": "wrangle/col/col_fill_nan.py",
+          "symbol": "col_fill_nan",
+          "line": 34
+        },
+        {
+          "repository": "wrangle",
+          "path": "wrangle/df/df_impute_nan.py",
+          "symbol": "df_impute_nan",
+          "line": 8
+        },
+        {
+          "repository": "wrangle",
+          "path": "wrangle/_api.py",
+          "symbol": "_expression",
+          "line": 211
+        }
+      ],
+      "resolution": {
+        "status": "implemented",
+        "description": "Typed codes/replacement counts, declared fills and computed physical-unit-bound imputation.",
+        "paths": [
+          "wrangle/_recipe_fields.py",
+          "wrangle/_recipe_statistics.py"
+        ],
+        "verification": [
+          "tests/test_recipe_fields.py",
+          "tests/test_nested_missing.py",
+          "tests/test_resolved_parameters.py"
+        ]
+      }
+    },
+    {
+      "id": "selected-text-cleaning",
+      "priority": 1,
+      "gap_and_proposal": "Add clean_text for selected-field trim/case/Unicode normalization; use derive expression operators for extract, replace, split and concatenation. Preserve unaffected fields and distinguish changed identifiers from ordinary text.",
+      "researcher_decisions": "Selected fields, exact transformations, literal versus regex matching, null policy and identifier collision handling.",
+      "before_implementation": "Legacy lowercase and blank filling exist, but targeted trim, Unicode normalization, regex extraction/replacement and splitting are incomplete in recipes.",
+      "audit_evidence": [
+        {
+          "repository": "wrangle",
+          "path": "wrangle/df/df_to_lower.py",
+          "symbol": "df_to_lower",
+          "line": 8
+        },
+        {
+          "repository": "wrangle",
+          "path": "wrangle/df/df_fill_empty.py",
+          "symbol": "df_fill_empty",
+          "line": 7
+        },
+        {
+          "repository": "wrangle",
+          "path": "wrangle/_api.py",
+          "symbol": "_expression",
+          "line": 211
+        }
+      ],
+      "resolution": {
+        "status": "implemented",
+        "description": "Selected trim/case/Unicode and bounded extract/replace/split/concat; changed identifiers require explicit checked transitions.",
+        "paths": [
+          "wrangle/_recipe_fields.py",
+          "wrangle/_recipe_expressions.py"
+        ],
+        "verification": [
+          "tests/test_recipe_fields.py",
+          "tests/test_recipe_join.py"
+        ]
+      }
+    },
+    {
+      "id": "dates-and-times",
+      "priority": 1,
+      "gap_and_proposal": "Add parse_datetime with declared format, timezone, time unit and invalid-value behavior. Expose timezone conversion and date/duration expressions through the shared grammar.",
+      "researcher_decisions": "Format and day/month interpretation, source timezone, precision, ambiguous/nonexistent local times and output timezone.",
+      "before_implementation": "Temporal casts and date utilities exist. Recipes have no explicit formatted parser, timezone or daylight-saving resolution contract.",
+      "audit_evidence": [
+        {
+          "repository": "wrangle",
+          "path": "wrangle/_api.py",
+          "symbol": "_cast",
+          "line": 287
+        },
+        {
+          "repository": "wrangle",
+          "path": "wrangle/utils/datetime_handler.py",
+          "symbol": "datetime_handler",
+          "line": 14
+        }
+      ],
+      "resolution": {
+        "status": "implemented",
+        "description": "Explicit format/timezone/precision/DST parsing, timezone conversion, checked single-unit calendar/elapsed shifts.",
+        "paths": [
+          "wrangle/_recipe_fields.py",
+          "wrangle/_recipe_expressions.py"
+        ],
+        "verification": [
+          "tests/test_recipe_fields.py",
+          "tests/test_recipe_join.py"
+        ]
+      }
+    },
+    {
+      "id": "categorical-domains",
+      "priority": 1,
+      "gap_and_proposal": "Add recode for typed declared value mappings. Extend encode with fixed-domain one-hot output and stable names. Reject unknown categories or apply an explicitly declared policy; record actual mappings.",
+      "researcher_decisions": "Allowed values, aliases, reference category, output domain, missing category and unknown-category policy.",
+      "before_implementation": "encode uses a fixed string-to-integer mapping. Legacy category and one-hot functions discover domains from each batch.",
+      "audit_evidence": [
+        {
+          "repository": "wrangle",
+          "path": "wrangle/_api.py",
+          "symbol": "_encode",
+          "line": 366
+        },
+        {
+          "repository": "wrangle",
+          "path": "wrangle/df/df_to_multiclass.py",
+          "symbol": "df_to_multiclass",
+          "line": 8
+        },
+        {
+          "repository": "wrangle",
+          "path": "wrangle/col/col_to_multilabel.py",
+          "symbol": "col_to_multilabel",
+          "line": 8
+        }
+      ],
+      "resolution": {
+        "status": "implemented",
+        "description": "Typed recodes, fixed ordinal maps and fixed-domain one-hot output; explicit unknown/null policies.",
+        "paths": [
+          "wrangle/_recipe_fields.py"
+        ],
+        "verification": [
+          "tests/test_recipe_fields.py"
+        ]
+      }
+    },
+    {
+      "id": "ordering-and-duplicates",
+      "priority": 1,
+      "gap_and_proposal": "Add sort with direction, null position and explicit tie handling. Add deduplicate with conflict checks, survivor criteria and deterministic ordering, using the observation-key transition contract where needed.",
+      "researcher_decisions": "Ordering columns, tie breakers, exact versus conflicting duplicates, survivor rule and reason for discarded observations.",
+      "before_implementation": "No canonical sort operation. df_drop_duplicates keeps the first row in source order; input-key preflight can prevent duplicate cleanup.",
+      "audit_evidence": [
+        {
+          "repository": "wrangle",
+          "path": "wrangle/_api.py",
+          "symbol": "prepare",
+          "line": 515
+        },
+        {
+          "repository": "wrangle",
+          "path": "wrangle/df/df_drop_duplicates.py",
+          "symbol": "df_drop_duplicates",
+          "line": 6
+        }
+      ],
+      "resolution": {
+        "status": "implemented",
+        "description": "Declared directions/ties, duplicate conflicts/survivors and raw cleanup before establishing the first key.",
+        "paths": [
+          "wrangle/_recipe_tables.py"
+        ],
+        "verification": [
+          "tests/test_recipe_tables.py",
+          "tests/test_observation_contracts.py"
+        ]
+      }
+    },
+    {
+      "id": "combine-batches",
+      "priority": 1,
+      "gap_and_proposal": "Add concat with named sources, strict or explicitly reconciled schemas, units/domain compatibility and optional provenance column. Reject overlapping identities unless the declared batch-aware key resolves them.",
+      "researcher_decisions": "Source order, schema reconciliation, observation key, batch provenance and semantic compatibility.",
+      "before_implementation": "Named sources can be joined, but there is no recipe operation that appends multiple batches.",
+      "audit_evidence": [
+        {
+          "repository": "wrangle",
+          "path": "wrangle/_api.py",
+          "symbol": "prepare",
+          "line": 515
+        },
+        {
+          "repository": "wrangle",
+          "path": "wrangle/_api.py",
+          "symbol": "_join",
+          "line": 378
+        }
+      ],
+      "resolution": {
+        "status": "implemented",
+        "description": "Strict/union append with provenance, exact common dtypes, symmetric known-unit compatibility and checked grain.",
+        "paths": [
+          "wrangle/_recipe_tables.py",
+          "wrangle/_execution.py"
+        ],
+        "verification": [
+          "tests/test_observation_contracts.py"
+        ]
+      }
+    },
+    {
+      "id": "reshape-and-nested-fields",
+      "priority": 1,
+      "gap_and_proposal": "Add pivot and unpivot with declared identifier/value columns and output schema. Add explode and unnest for instrument and record data, with parent identity retained and recursive validation.",
+      "researcher_decisions": "Output grain/key, pivot domains, duplicate-cell aggregation or error, absent-cell null versus zero, empty-list policy, field collisions, compatible units and lossless dtype reconciliation. Unpivot must reject incompatible measurements or retain an explicit variable-to-unit mapping.",
+      "before_implementation": "col_to_cols provides a discovered-category summed pivot with zero for absent cells. General unpivot, explode and unnest are absent.",
+      "audit_evidence": [
+        {
+          "repository": "wrangle",
+          "path": "wrangle/col/col_to_cols.py",
+          "symbol": "col_to_cols",
+          "line": 8
+        },
+        {
+          "repository": "wrangle",
+          "path": "wrangle/df/df_restructure_values.py",
+          "symbol": "df_restructure_values",
+          "line": 7
+        },
+        {
+          "repository": "wrangle",
+          "path": "wrangle/_api.py",
+          "symbol": "prepare",
+          "line": 515
+        }
+      ],
+      "resolution": {
+        "status": "implemented",
+        "description": "Fixed-domain pivot, unit-aware unpivot, indexed explode and unnest with recursive validation.",
+        "paths": [
+          "wrangle/_recipe_tables.py",
+          "wrangle/_execution.py"
+        ],
+        "verification": [
+          "tests/test_recipe_workflows.py",
+          "tests/test_nested_missing.py"
+        ]
+      }
+    },
+    {
+      "id": "grouped-summaries",
+      "priority": 1,
+      "gap_and_proposal": "Add aggregate with named reductions over explicit group keys. Cover row/non-null counts, sum, mean, median, min/max, standard deviation and declared quantiles; use existing native reducers where their semantics fit.",
+      "researcher_decisions": "Grouping unit, count denominator, null and all-missing behavior, ddof, quantile interpolation, output units and group order.",
+      "before_implementation": "Group reducers and descriptive-statistic helpers exist, but there is no general named multi-column aggregation recipe with a declared output grain.",
+      "audit_evidence": [
+        {
+          "repository": "wrangle",
+          "path": "wrangle/df/df_to_groupby.py",
+          "symbol": "df_to_groupby",
+          "line": 8
+        },
+        {
+          "repository": "wrangle",
+          "path": "wrangle/col/col_groupby_stats.py",
+          "symbol": "col_groupby_stats",
+          "line": 8
+        },
+        {
+          "repository": "wrangle",
+          "path": "wrangle/df/_expressions.py",
+          "symbol": "aggregation",
+          "line": 146
+        }
+      ],
+      "resolution": {
+        "status": "implemented",
+        "description": "Explicit reducers, denominators/minimum counts/ddof/quantiles, calendar groups and compatible measurement units.",
+        "paths": [
+          "wrangle/_recipe_tables.py",
+          "wrangle/_execution.py"
+        ],
+        "verification": [
+          "tests/test_recipe_tables.py",
+          "tests/test_observation_contracts.py"
+        ]
+      }
+    },
+    {
+      "id": "join-coverage",
+      "priority": 2,
+      "gap_and_proposal": "Extend join with distinct left/right key names, semi/anti/right/full joins and explicit overlapping-field policy. Add join_asof for temporal alignment. Preserve Polars ordering and cardinality controls plus research checks.",
+      "researcher_decisions": "Cardinality, unmatched rows on each side, output identity, field collisions, temporal subject/device partition keys, ordering within partitions, direction/tolerance, timezone and duplicate timestamps. Never match across independent subjects or instruments implicitly.",
+      "before_implementation": "Canonical join supports left/inner, same-named keys, explicit cardinality and unmatched policy. Legacy df_merge supports additional join shapes; no general as-of recipe exists.",
+      "audit_evidence": [
+        {
+          "repository": "wrangle",
+          "path": "wrangle/_api.py",
+          "symbol": "_join",
+          "line": 378
+        },
+        {
+          "repository": "wrangle",
+          "path": "wrangle/df/df_merge.py",
+          "symbol": "df_merge",
+          "line": 8
+        }
+      ],
+      "resolution": {
+        "status": "implemented",
+        "description": "Requested native join modes, paired axes, overlaps/coalescing, cardinality/order and unmatched-side contracts/evidence.",
+        "paths": [
+          "wrangle/_recipe_join.py",
+          "wrangle/_execution.py"
+        ],
+        "verification": [
+          "tests/test_recipe_join.py",
+          "tests/test_outer_lineage.py",
+          "tests/test_preparation_regressions.py"
+        ]
+      }
+    },
+    {
+      "id": "longitudinal-preparation",
+      "priority": 2,
+      "gap_and_proposal": "Add window for partitioned lag/lead, change, cumulative and rolling calculations, including explicitly bounded forward/backward fill. Extend aggregate for calendar/time windows. Interpolation is optional and must require a specified method and maximum gap.",
+      "researcher_decisions": "Subject/group keys, temporal ordering/ties, closed interval and labels, calendar versus fixed duration, minimum observations, gap bounds and future-data use.",
+      "before_implementation": "A single-value fixed-minute resampler exists. There is no canonical grouped lag/change/rolling or calendar-window recipe.",
+      "audit_evidence": [
+        {
+          "repository": "wrangle",
+          "path": "wrangle/col/col_resample_interval.py",
+          "symbol": "col_resample_interval",
+          "line": 8
+        },
+        {
+          "repository": "wrangle",
+          "path": "wrangle/df/df_parallelize_process.py",
+          "symbol": "df_parallelize_process",
+          "line": 8
+        }
+      ],
+      "resolution": {
+        "status": "implemented_with_explicit_boundary",
+        "description": "Partitioned lag/lead/change/cumulative/rolling and bounded forward/backward fill; calendar aggregation. General interpolation remains optional future work requiring method and maximum gap.",
+        "paths": [
+          "wrangle/_recipe_tables.py"
+        ],
+        "verification": [
+          "tests/test_recipe_tables.py",
+          "tests/test_bounded_fill.py"
+        ]
+      }
+    },
+    {
+      "id": "sampling-and-partitions",
+      "priority": 2,
+      "gap_and_proposal": "Add sample for declared row/subject/cluster sampling and extend existing stratification behavior. Add partition as a retained assignment column for grouped, stratified or chronological splits; validate no subject crosses forbidden boundaries.",
+      "researcher_decisions": "Sampling unit, weight field and interpretation, seed, strata, target sizes/proportions, replacement-draw identity, insufficient strata and permitted chronology.",
+      "before_implementation": "Seeded balanced and ID-based resampling and weighted sampling with replacement exist. Direct split/fold functions return multiple outputs rather than one preparation table.",
+      "audit_evidence": [
+        {
+          "repository": "wrangle",
+          "path": "wrangle/df/df_resample_stratified.py",
+          "symbol": "df_resample_stratified",
+          "line": 8
+        },
+        {
+          "repository": "wrangle",
+          "path": "wrangle/df/df_resample_id.py",
+          "symbol": "df_resample_id",
+          "line": 8
+        },
+        {
+          "repository": "wrangle",
+          "path": "wrangle/array/array_split.py",
+          "symbol": "array_split",
+          "line": 9
+        },
+        {
+          "repository": "wrangle",
+          "path": "wrangle/array/array_random_weighted.py",
+          "symbol": "array_random_weighted",
+          "line": 9
+        }
+      ],
+      "resolution": {
+        "status": "implemented",
+        "description": "Seeded row/whole-group/stratified weighted sampling and repeated draw identity; retained random/chronological group-disjoint assignments.",
+        "paths": [
+          "wrangle/_recipe_tables.py"
+        ],
+        "verification": [
+          "tests/test_recipe_tables.py",
+          "tests/test_recipe_workflows.py"
+        ]
+      }
+    },
+    {
+      "id": "quality-checks-and-profiling",
+      "priority": 1,
+      "gap_and_proposal": "Extend checks with exact schema/dtypes, allowed values, patterns, missing fractions, temporal bounds/order, cross-field assertions, foreign keys and group counts. Extend inspect with requested bounded distributions/group summaries and explicit baseline schema comparison.",
+      "researcher_decisions": "Domains, acceptable missingness, permitted schema drift, denominators and consistency rules. Report observations without choosing thresholds.",
+      "before_implementation": "Checks cover required values, unique/composite keys, numeric ranges and row counts. inspect reports schema, missing/finite/distinct counts and bounded examples.",
+      "audit_evidence": [
+        {
+          "repository": "wrangle",
+          "path": "wrangle/_api.py",
+          "symbol": "_validate_rules",
+          "line": 149
+        },
+        {
+          "repository": "wrangle",
+          "path": "wrangle/_api.py",
+          "symbol": "_checks",
+          "line": 409
+        },
+        {
+          "repository": "wrangle",
+          "path": "wrangle/_api.py",
+          "symbol": "inspect",
+          "line": 111
+        }
+      ],
+      "resolution": {
+        "status": "implemented",
+        "description": "Schema/domains/patterns/missingness/temporal/order/assertions/foreign keys/group counts; bounded descriptive/group profiles and baseline schema changes.",
+        "paths": [
+          "wrangle/_contracts.py",
+          "wrangle/_profile.py"
+        ],
+        "verification": [
+          "tests/test_research_checks.py",
+          "tests/test_profiles.py"
+        ]
+      }
+    },
+    {
+      "id": "reusable-resolved-parameters",
+      "priority": 1,
+      "gap_and_proposal": "Record computed scalar statistics and maps as resolved parameters; permit explicit reuse in another recipe. Reuse the same native transform logic and reject incompatible domains. This does not require an estimator or model-training framework.",
+      "researcher_decisions": "Reference batch/cohort, method, fitted field scope and whether parameters must remain frozen across batches.",
+      "before_implementation": "Receipts record resolved call arguments, but imputation values, scale statistics and inferred category maps are not captured for replay on subsequent batches.",
+      "audit_evidence": [
+        {
+          "repository": "wrangle",
+          "path": "wrangle/_api.py",
+          "symbol": "prepare",
+          "line": 515
+        },
+        {
+          "repository": "wrangle",
+          "path": "wrangle/df/_expressions.py",
+          "symbol": "impute_expr",
+          "line": 90
+        },
+        {
+          "repository": "wrangle",
+          "path": "wrangle/df/df_rescale_meanzero.py",
+          "symbol": "df_rescale_meanzero",
+          "line": 8
+        },
+        {
+          "repository": "wrangle",
+          "path": "wrangle/df/df_to_multiclass.py",
+          "symbol": "df_to_multiclass",
+          "line": 8
+        }
+      ],
+      "resolution": {
+        "status": "implemented",
+        "description": "Actual replacements/moments reapplied without refitting; dtype, physical-unit, precision and zero-scale domains checked.",
+        "paths": [
+          "wrangle/_recipe_statistics.py"
+        ],
+        "verification": [
+          "tests/test_resolved_parameters.py",
+          "tests/test_preparation_regressions.py",
+          "wrangle/docs/frozen_parameters.py"
+        ]
+      }
+    },
+    {
+      "id": "prepared-source-lineage-and-output",
+      "priority": 2,
+      "gap_and_proposal": "Accept verified Prepared objects and saved bundles as sources, retaining parent receipt hashes, units and meanings. Let inspect verify bundle consistency. Add explicit export options only when needed for analysis tools, always recording the published format and preserving the evidence bundle.",
+      "researcher_decisions": "Parent protocol compatibility, unit conversions, output format and null/precision representation. Hash consistency is not proof of authenticity.",
+      "before_implementation": "Prepared results can publish atomic Parquet/recipe/receipt bundles. Passing Prepared.data loses parent receipt lineage; bundle verification/loading and analysis-tool export are absent.",
+      "audit_evidence": [
+        {
+          "repository": "wrangle",
+          "path": "wrangle/_api.py",
+          "symbol": "_source",
+          "line": 73
+        },
+        {
+          "repository": "wrangle",
+          "path": "wrangle/_api.py",
+          "symbol": "Prepared.write",
+          "line": 466
+        },
+        {
+          "repository": "wrangle",
+          "path": "wrangle/_api.py",
+          "symbol": "prepare",
+          "line": 515
+        }
+      ],
+      "resolution": {
+        "status": "implemented_with_explicit_boundary",
+        "description": "Verified Prepared/bundle parents and logical snapshot hashes; atomic typed Parquet/recipe/receipt publication. Other analysis formats remain conditional on a concrete requirement.",
+        "paths": [
+          "wrangle/_sources.py",
+          "wrangle/_api.py"
+        ],
+        "verification": [
+          "tests/test_source_contracts.py"
+        ]
+      }
+    },
+    {
+      "id": "agent-workflow-documents",
+      "priority": 1,
+      "gap_and_proposal": "Add task selection, JSON argument constraints, identity/order/units effects and verified minimal recipe examples to operation definitions. Generate catalog and CLI help from those definitions. Cover batch append, reshape, temporal alignment and frozen-parameter reuse in installed-package workflow checks.",
+      "researcher_decisions": "Examples must state the research decisions; an agent must not infer them from a function name or observed data.",
+      "before_implementation": "The entry manual, generated operation catalog and one executable batch workflow are shipped. Catalog presence does not establish every JSON invocation or research task workflow.",
+      "audit_evidence": [
+        {
+          "repository": "wrangle",
+          "path": "wrangle/_catalog.py",
+          "symbol": "catalog",
+          "line": 111
+        },
+        {
+          "repository": "wrangle",
+          "path": "tests/test_agent_manual.py",
+          "symbol": "test_catalog_identifies_outputs_and_pipeline_use_before_execution",
+          "line": 13
+        }
+      ],
+      "resolution": {
+        "status": "implemented",
+        "description": "20-line shipped entrypoint, 123 compact generated contracts, eight executable workflows, readable CLI by default and explicit structured --json presentation; all use the same Python preparation engine.",
+        "paths": [
+          "AGENTS.md",
+          "wrangle/_catalog.py",
+          "wrangle/_cli.py",
+          "scripts/build_catalog.py",
+          "wrangle/_start.py"
+        ],
+        "verification": [
+          "tests/test_agent_manual.py",
+          "tests/test_cli.py",
+          "scripts/verify_distribution.py",
+          "tests/test_human_cli.py",
+          "tests/test_yaml_bundles.py",
+          "tests/test_start.py",
+          "tests/test_start_cli.py",
+          "tests/test_decision_gate.py",
+          "wrangle/docs/start_workflow.py"
+        ]
+      }
+    },
+    {
+      "id": "large-data-boundary",
+      "priority": 2,
+      "gap_and_proposal": "State the current memory boundary. Add bounded/streaming execution only after checks, ordering, snapshot identity and receipts can preserve their guarantees; do not expose a streaming flag that silently weakens them.",
+      "researcher_decisions": "Input size/resource limit, partition boundaries and the required reproducibility target.",
+      "before_implementation": "Sources and every intermediate step are collected into DataFrames; receipts hash complete IPC snapshots. A LazyFrame input does not make prepare an out-of-core pipeline.",
+      "audit_evidence": [
+        {
+          "repository": "wrangle",
+          "path": "wrangle/_api.py",
+          "symbol": "_source",
+          "line": 73
+        },
+        {
+          "repository": "wrangle",
+          "path": "wrangle/_api.py",
+          "symbol": "_digest",
+          "line": 37
+        },
+        {
+          "repository": "wrangle",
+          "path": "wrangle/_api.py",
+          "symbol": "prepare",
+          "line": 515
+        }
+      ],
+      "resolution": {
+        "status": "implemented_with_explicit_boundary",
+        "description": "Explicit execution=disk keeps source and step snapshots in Parquet, uses native streaming execution and scalar checks, hashes logical values incrementally, and publishes complete hashed exclusion/identity evidence. All 27 canonical recipes retain scientific checks. Disk mode requires output and returns LazyFrame data. Stateful Polars nodes can still require RAM; no fixed peak-memory bound. inspect, legacy recipe aliases, Excel, NDJSON and non-UTF8 parsing remain memory mode.",
+        "paths": [
+          "wrangle/_storage.py",
+          "wrangle/_api.py",
+          "wrangle/_sources.py",
+          "wrangle/_execution.py",
+          "wrangle/_contracts.py",
+          "wrangle/_cli.py",
+          "wrangle/docs/disk_preparation.py",
+          "wrangle/docs/recipes.md"
+        ],
+        "verification": [
+          "tests/test_disk_prepare.py",
+          "tests/test_disk_sources.py",
+          "tests/test_disk_execution_contracts.py",
+          "tests/test_disk_native.py",
+          "scripts/measure_disk_memory.py"
+        ]
+      }
+    }
+  ],
+  "cli_proposal": {
+    "judgment": "Build it. A recipe-driven shell interface gives agents and researchers repeatable dataset preparation with the same contracts and evidence as Python.",
+    "precedent": {
+      "repository": "https://github.com/Vaquum/Limen",
+      "pattern": "Installed command group -> declarative file -> shared parser/validator/compiler -> result directory retaining the declaration.",
+      "evidence": [
+        {
+          "repository": "limen",
+          "path": "limen/cli/main.py",
+          "symbol": "cli",
+          "line": 10
+        },
+        {
+          "repository": "limen",
+          "path": "limen/cli/commands/_load_yaml.py",
+          "symbol": "load_and_validate",
+          "line": 10
+        },
+        {
+          "repository": "limen",
+          "path": "limen/cli/commands/run.py",
+          "symbol": "run_experiment",
+          "line": 19
+        }
+      ]
+    },
+    "implementation": "Use a thin standard-library argparse adapter and console entry point. Dispatch to existing inspect, prepare and generated catalog; maintain one execution/validation engine.",
+    "io_contract": "Readable results on stdout and actionable stable errors on stderr by default. Explicit --json produces structured results/errors independent of TTY. Exit 0 success, 1 preparation failure, 2 invalid CLI invocation. No prompts during execution. Guided start prompts only in a human terminal (or explicit --interactive); --json and redirected input do not prompt by default.",
+    "output_contract": "With --output, atomically publish data.parquet, recipe.yaml, report.txt and receipt.json to a new directory; disk execution additionally retains complete Parquet evidence. Without --output, execute full checks and return the receipt/summary without publication. Never overwrite existing results.",
+    "validation_boundary": "Do not label static recipe parsing as dataset validation or dry-run preparation. Add a separate planning/validation command only after it has a shared, precisely documented engine implementation.",
+    "acceptance": [
+      "Python and CLI produce equivalent prepared data and engine receipts for identical sources/recipe/environment.",
+      "Multiple sources and filenames with spaces work; duplicate source names are rejected.",
+      "Failures expose the same engine code/details and leave no published result.",
+      "Installed wheel commands and examples are verified through readable and --json presentations, including exact shared receipts and reports."
+    ],
+    "limen_transfer_limits": "Transfer declarative dispatch and retained intent. Wrangle needs machine-readable output, truthful command effects and atomic publication; do not import experiment search, Git/project lifecycle or checkpoint machinery.",
+    "commands_available": [
+      "wrangle start measurements.csv --metadata metadata.csv --output my-protocol",
+      "wrangle example my-study",
+      "wrangle inspect data.csv",
+      "wrangle catalog [operation]",
+      "wrangle prepare recipe.yaml --source data=data.csv --output prepared/run1",
+      "wrangle prepare recipe.yaml --source measurements=raw.csv --source metadata=metadata.csv --output prepared/run1"
+    ],
+    "status": "Implemented; console and module invocations execute the same engine and evidence contract, with explicit human/agent presentation."
+  },
+  "external_context": {
+    "source": "https://github.com/pola-rs/polars-cli",
+    "verified_fact": "Polars provided a SQL CLI; the official repository was archived on 2025-09-27.",
+    "implication": "The differentiator is research-aware recipes, contracts and receipts, not CLI existence alone."
+  },
+  "delivery_order": [
+    "Correct catalog eligibility and nested finite-value validation; specify observation-key transitions.",
+    "Ship the thin inspect/catalog/prepare CLI over the current engine.",
+    "Close routine field, batch, reshape, summary and quality-check gaps with verified scientific contracts.",
+    "Add temporal, partition, lineage and bounded-execution capabilities as their contracts are implemented."
+  ],
+  "reproducibility_boundary": "Declare input/recipe identity, ordering, seed and supported execution environment. Receipts record versions and threads; this alone does not establish bitwise equivalence across Polars releases, hardware or reordered inputs. Disk/memory execution engine is recorded; arbitrary floating reductions are not promised bitwise equal across engines.",
+  "verification": {
+    "polars_versions": [
+      "1.34.0",
+      "1.44.2"
+    ],
+    "full_suite_cases": 963,
+    "warnings": "Full suites pass with warnings treated as errors.",
+    "catalog": "scripts/build_catalog.py --check",
+    "distribution": "Wheel/sdist built; actual installed wheel catalog, compact operation files, eight workflows and console/module CLI verified by scripts/verify_distribution.py, including blocked draft, answered protocol and shared human/agent preparation evidence.",
+    "note": "Audit source-line anchors describe the prior snapshot; current navigation is generated from engine definitions.",
+    "yaml_parser_versions": [
+      "0.18.6",
+      "0.19.1"
+    ],
+    "python_versions": [
+      "3.10.16",
+      "3.13.2"
+    ]
+  },
+  "disk_execution": {
+    "python": "wrangle.prepare(sources, recipe, execution=\"disk\", output=\"new-directory\")",
+    "cli": "wrangle prepare recipe.yaml --source data=data.csv --execution disk --output new-directory",
+    "storage": "Immutable raw input copies and Parquet checkpoints, incrementally hashed canonical values, full file-backed evidence, atomic publication, native LazyFrame result.",
+    "boundary": "Stateful native operations and fallback nodes can still need substantial working RAM. Memory execution remains default; no fixed RAM bound is claimed. inspect remains eager.",
+    "observed_memory_comparison": {
+      "platform": "Darwin",
+      "polars_version": "1.44.2",
+      "polars_threads": 2,
+      "input_bytes": 206288901,
+      "rows": 100000,
+      "payload_width": 2048,
+      "memory_peak_rss_bytes": 5522325504,
+      "disk_peak_rss_bytes": 814317568,
+      "equal_output_snapshots": true,
+      "reproduce": "python scripts/measure_disk_memory.py",
+      "interpretation": "Synthetic cast/filter workload measurement; not a guarantee for other datasets or recipes."
+    },
+    "publication": "Exclusive atomic new-directory publication rejects existing destinations, including the final rename race; unsupported filesystems fail explicitly."
+  },
+  "yaml_and_human_workflow": {
+    "recipe_files": "Strict .yaml/.yml only; Python mappings remain supported. Canonical JSON is internal hashing, receipt, catalog and explicit machine-output serialization.",
+    "identity": "Comments, indentation and quoting do not change canonical recipe identity; Boolean/integer/float substitutions do. Duplicate keys, aliases, tags, multidoc, nonfinite values and ambiguous leading zeros fail explicitly.",
+    "human": "wrangle start observes real files and asks plain scientific questions, publishing commented recipe.yaml, answers.yaml and exact next commands; wrangle example supplies a synthetic study. Both share readable inspection, recovery, units/conversions/exclusions, report.txt and notebook summaries.",
+    "agent": "Same files, declarations and ordinary Python or CLI execution; request --json for structured results/errors. Package ships a compact entrypoint and generated operation contracts.",
+    "publication": "YAML protocol and readable report are retained with checked data and receipt; altered metadata/reports are detected before bundle reuse. Historical saved JSON-recipe bundles remain verified read-only sources.",
+    "verification": [
+      "tests/test_yaml_protocol.py",
+      "tests/test_yaml_bundles.py",
+      "tests/test_human_cli.py",
+      "wrangle/docs/human_workflow.py",
+      "scripts/verify_distribution.py",
+      "tests/test_start.py",
+      "tests/test_start_cli.py",
+      "tests/test_decision_gate.py",
+      "wrangle/docs/start_workflow.py"
+    ]
+  },
+  "guided_first_protocol": {
+    "human": "wrangle start measurements.csv --metadata metadata.csv --output my-protocol",
+    "agent": "Same guide with --json and researcher-approved YAML --answers; ordinary Python draft/publish helpers expose the same questions.",
+    "required_decisions": [
+      "observation meaning",
+      "unique observation columns",
+      "measurement numeric representations and supplied units",
+      "exact missing codes and allowed missingness",
+      "metadata matching/cardinality/unmatched/overlap policies",
+      "approved QC retention rule and reason"
+    ],
+    "safety": "Pending decisions block before reading preparation sources. Completed recorded answers must agree with controlled steps and order. Draft publication never validates a dataset; preparation performs native checks. Publication rejects altered proposal status/questions/output schema.",
+    "scope": "One local observation file plus optional metadata; no expanded metadata matches, inferred scientific decisions, filling or unit conversion in the guide. Ordinary recipes handle later approved operations and checks. Guided inspection is eager and can require substantial RAM; a resolved protocol may use supported disk preparation.",
+    "retained_files": [
+      "recipe.yaml",
+      "answers.yaml",
+      "README.md"
+    ],
+    "workflow": "wrangle/docs/start_workflow.py",
+    "researcher_trial": "Not yet performed. The verified workflow and interactive tests use synthetic data; a real study/researcher remains to be selected.",
+    "recovery": "Printed next commands preserve quoted paths. Selected measurement fields and completed representation/unit choices persist across uncertainty and EOF; confirmed subfields are shown without reasking. All incomplete choices remain blocked."
+  }
+}

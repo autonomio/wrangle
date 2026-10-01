@@ -1,0 +1,239 @@
+{
+  "boundary_validation": [
+    {
+      "code": "DUPLICATE_COLUMNS",
+      "precondition": "Column names must be unique."
+    },
+    {
+      "code": "IMMUTABLE_INPUT",
+      "precondition": "Wrangle never mutates input data; use the returned table."
+    },
+    {
+      "code": "INVALID_INPUT",
+      "precondition": "A column needs a consistent native dtype."
+    },
+    {
+      "code": "INVALID_INPUT",
+      "precondition": "Data fields need consistent native types; declare casts explicitly."
+    },
+    {
+      "code": "INVALID_INPUT",
+      "precondition": "Each data row must have the same number of fields."
+    },
+    {
+      "code": "INVALID_INPUT",
+      "precondition": "Nested list fields need consistent native types."
+    },
+    {
+      "code": "INVALID_INPUT",
+      "precondition": "Nested object fields need consistent native types."
+    },
+    {
+      "code": "INVALID_INPUT",
+      "precondition": "Record fields must have string names; names are never coerced."
+    },
+    {
+      "code": "INVALID_INPUT",
+      "precondition": "Record tables require one mapping per row; use null field values for missingness."
+    },
+    {
+      "code": "INVALID_INPUT",
+      "precondition": "Rows without any fields cannot retain observation identity; supply at least one field."
+    },
+    {
+      "code": "INVALID_INPUT",
+      "precondition": "Rows without any fields cannot retain observation identity; supply at least one named field."
+    },
+    {
+      "code": "INVALID_INPUT",
+      "precondition": "This operation requires exactly one column."
+    },
+    {
+      "code": "INVALID_INPUT",
+      "precondition": "Use a Polars Series, one-column table, or list of values."
+    },
+    {
+      "code": "INVALID_INPUT",
+      "precondition": "Use a Polars table, series, Python records, or a local CSV/Parquet path."
+    },
+    {
+      "code": "INVALID_INPUT",
+      "precondition": "Use native Polars values; opaque Python objects cannot represent research data."
+    },
+    {
+      "code": "LOSSY_CAST",
+      "precondition": "Mixed integers and floats exceed the safe Float64 integer range; declare a dtype explicitly."
+    },
+    {
+      "code": "UNKNOWN_COLUMN",
+      "precondition": "The requested columns are absent."
+    },
+    {
+      "code": "UNSUPPORTED_CALLBACK",
+      "precondition": "Python UDFs are not native Polars operations."
+    },
+    {
+      "code": "UNSUPPORTED_CALLBACK",
+      "precondition": "The plan must be native and serializable; Python callbacks cannot execute."
+    },
+    {
+      "code": "UNSUPPORTED_CALLBACK",
+      "precondition": "Use native Polars expressions and plans."
+    }
+  ],
+  "expression_grammar": {
+    "$ref": "docs/operations.json#/expression_grammar"
+  },
+  "guided_start": {
+    "$ref": "docs/operations.json#/guided_start"
+  },
+  "navigation": {
+    "architecture": "docs/architecture.md",
+    "checks": "_contracts.py",
+    "cli": "_cli.py:main",
+    "contributing": "docs/project/CONTRIBUTING.md",
+    "decision_validation": "_start.py:validate_decisions",
+    "disk_execution": "_storage.py",
+    "disk_workflow": "docs/disk_preparation.py",
+    "draft_protocol": "_start.py:draft",
+    "entrypoint": "AGENTS.md",
+    "executable_workflow": "docs/research_batch.py",
+    "execution_contracts": "_execution.py",
+    "expression_workflow": "docs/expression_workflow.py",
+    "governance": "docs/project/GOVERNANCE.md",
+    "guided_workflow": "docs/start_workflow.py",
+    "human_start": "docs/getting_started.md",
+    "human_workflow": "docs/human_workflow.py",
+    "inspection_workflow": "docs/inspection_workflow.py",
+    "migration": "docs/migration.md",
+    "openssf_evidence": "docs/security/openssf-evidence.yaml",
+    "paths_relative_to": "Path(wrangle.__file__).parent",
+    "preparation_workflows": "docs/preparation_workflows.py",
+    "publish_protocol": "_start.py:publish",
+    "recipe_grammar": "docs/recipes.md",
+    "recipe_loader": "_protocol.py:load_recipe",
+    "release_verification": "docs/security/releases.md",
+    "security": "docs/security.md",
+    "security_assurance": "docs/security/assurance.md",
+    "security_reporting": "docs/project/SECURITY.md",
+    "select_operation": "Choose the task in docs/recipes.md. Read returns/recipe eligibility, then exact arguments, literal argument_constraints and validation. Resolve symbol or open source at line. Minimal workflows in navigation assert expected data and receipts. Signatures, choice constraints and failures come from engine definitions.",
+    "source_contracts": "_sources.py",
+    "starter_recipe": "docs/starter/recipe.yaml",
+    "statistics_workflow": "docs/frozen_parameters.py"
+  },
+  "operations": [
+    {
+      "argument_constraints": [],
+      "arguments": [
+        {
+          "kind": "positional_or_keyword",
+          "name": "data",
+          "required": true
+        },
+        {
+          "kind": "positional_or_keyword",
+          "name": "seq_len",
+          "required": true
+        },
+        {
+          "default": false,
+          "kind": "positional_or_keyword",
+          "name": "normalise_window",
+          "required": false
+        },
+        {
+          "default": 0.1,
+          "kind": "keyword_only",
+          "name": "validation_split",
+          "required": false
+        },
+        {
+          "default": true,
+          "kind": "keyword_only",
+          "name": "shuffled",
+          "required": false
+        },
+        {
+          "default": 0,
+          "kind": "keyword_only",
+          "name": "seed",
+          "required": false
+        }
+      ],
+      "boundary_validation": {
+        "$ref": "#/boundary_validation"
+      },
+      "description": "Return x_train, y_train, x_test, y_test as Polars Series; tensor elements are singleton feature lists.",
+      "group": "array",
+      "line": 34,
+      "manual": "docs/operations/array_reshape_lstm.json",
+      "name": "array_reshape_lstm",
+      "recipe": {
+        "aggregates": false,
+        "eligibility": "never"
+      },
+      "retired": false,
+      "returns": [
+        "sequence"
+      ],
+      "source": "array/array_reshape_lstm.py",
+      "symbol": "wrangle.array.array_reshape_lstm.array_reshape_lstm",
+      "validation": [
+        {
+          "code": "EMPTY_SPLIT",
+          "precondition": "Sequence length and split must leave both partitions nonempty."
+        },
+        {
+          "code": "INVALID_ARGUMENT",
+          "precondition": "f\"{name} must be {('nonnegative' if allow_zero else 'positive')} integer.\""
+        },
+        {
+          "code": "INVALID_INPUT",
+          "precondition": "At least one feature input is required."
+        },
+        {
+          "code": "INVALID_INPUT",
+          "precondition": "Normalization requires a Series of numeric lists."
+        },
+        {
+          "code": "INVALID_INPUT",
+          "precondition": "Normalization requires nonempty windows with finite, non-null values."
+        },
+        {
+          "code": "INVALID_INPUT",
+          "precondition": "Normalization requires numeric list elements."
+        },
+        {
+          "code": "INVALID_INPUT",
+          "precondition": "Normalization requires numeric list windows."
+        },
+        {
+          "code": "INVALID_INPUT",
+          "precondition": "Sequence data must be finite, non-null numeric observations."
+        },
+        {
+          "code": "INVALID_SEED",
+          "precondition": "Declare an integer seed in [0, 2**64)."
+        },
+        {
+          "code": "INVALID_SPLIT",
+          "precondition": "Validation fraction must be strictly between zero and one."
+        },
+        {
+          "code": "ROW_ALIGNMENT",
+          "precondition": "All inputs must have the same row count."
+        },
+        {
+          "code": "ZERO_BASELINE",
+          "precondition": "Window normalization cannot divide by a zero baseline."
+        }
+      ]
+    }
+  ],
+  "recipe_contract": "Author recipe files in strict YAML (.yaml/.yml) using mappings, lists, strings, Boolean/null values and finite numbers; programmatic Python mappings share the same contract. Canonical JSON is internal receipt/hash serialization. Guided pending_decisions block execution before source access; recorded research_decisions must be complete and agree with controlled preparation steps. Conditional legacy operations require table-returning arguments. Existing keys retain identity; declare step.key for an explicit checked transition. Canonical grain operations require step.key even without an input key. Exclusions require reasons, expansion requires allow_expand, and incompatible measurement units cannot be reconciled by annotations.",
+  "recovery": "Read operation validation plus shared_validation and boundary_validation. Use WrangleError.code/details to correct that declared precondition and rerun the same protocol; never silently substitute a method or discard observations.",
+  "shared_validation": {
+    "$ref": "docs/operations.json#/shared_validation"
+  },
+  "version": 1
+}

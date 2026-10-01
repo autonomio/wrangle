@@ -1,0 +1,326 @@
+{
+  "boundary_validation": [
+    {
+      "code": "DUPLICATE_COLUMNS",
+      "precondition": "Column names must be unique."
+    },
+    {
+      "code": "IMMUTABLE_INPUT",
+      "precondition": "Wrangle never mutates input data; use the returned table."
+    },
+    {
+      "code": "INVALID_INPUT",
+      "precondition": "A column needs a consistent native dtype."
+    },
+    {
+      "code": "INVALID_INPUT",
+      "precondition": "Data fields need consistent native types; declare casts explicitly."
+    },
+    {
+      "code": "INVALID_INPUT",
+      "precondition": "Each data row must have the same number of fields."
+    },
+    {
+      "code": "INVALID_INPUT",
+      "precondition": "Nested list fields need consistent native types."
+    },
+    {
+      "code": "INVALID_INPUT",
+      "precondition": "Nested object fields need consistent native types."
+    },
+    {
+      "code": "INVALID_INPUT",
+      "precondition": "Record fields must have string names; names are never coerced."
+    },
+    {
+      "code": "INVALID_INPUT",
+      "precondition": "Record tables require one mapping per row; use null field values for missingness."
+    },
+    {
+      "code": "INVALID_INPUT",
+      "precondition": "Rows without any fields cannot retain observation identity; supply at least one field."
+    },
+    {
+      "code": "INVALID_INPUT",
+      "precondition": "Rows without any fields cannot retain observation identity; supply at least one named field."
+    },
+    {
+      "code": "INVALID_INPUT",
+      "precondition": "This operation requires exactly one column."
+    },
+    {
+      "code": "INVALID_INPUT",
+      "precondition": "Use a Polars Series, one-column table, or list of values."
+    },
+    {
+      "code": "INVALID_INPUT",
+      "precondition": "Use a Polars table, series, Python records, or a local CSV/Parquet path."
+    },
+    {
+      "code": "INVALID_INPUT",
+      "precondition": "Use native Polars values; opaque Python objects cannot represent research data."
+    },
+    {
+      "code": "LOSSY_CAST",
+      "precondition": "Mixed integers and floats exceed the safe Float64 integer range; declare a dtype explicitly."
+    },
+    {
+      "code": "UNKNOWN_COLUMN",
+      "precondition": "The requested columns are absent."
+    },
+    {
+      "code": "UNSUPPORTED_CALLBACK",
+      "precondition": "Python UDFs are not native Polars operations."
+    },
+    {
+      "code": "UNSUPPORTED_CALLBACK",
+      "precondition": "The plan must be native and serializable; Python callbacks cannot execute."
+    },
+    {
+      "code": "UNSUPPORTED_CALLBACK",
+      "precondition": "Use native Polars expressions and plans."
+    }
+  ],
+  "expression_grammar": {
+    "$ref": "docs/operations.json#/expression_grammar"
+  },
+  "guided_start": {
+    "$ref": "docs/operations.json#/guided_start"
+  },
+  "navigation": {
+    "architecture": "docs/architecture.md",
+    "checks": "_contracts.py",
+    "cli": "_cli.py:main",
+    "contributing": "docs/project/CONTRIBUTING.md",
+    "decision_validation": "_start.py:validate_decisions",
+    "disk_execution": "_storage.py",
+    "disk_workflow": "docs/disk_preparation.py",
+    "draft_protocol": "_start.py:draft",
+    "entrypoint": "AGENTS.md",
+    "executable_workflow": "docs/research_batch.py",
+    "execution_contracts": "_execution.py",
+    "expression_workflow": "docs/expression_workflow.py",
+    "governance": "docs/project/GOVERNANCE.md",
+    "guided_workflow": "docs/start_workflow.py",
+    "human_start": "docs/getting_started.md",
+    "human_workflow": "docs/human_workflow.py",
+    "inspection_workflow": "docs/inspection_workflow.py",
+    "migration": "docs/migration.md",
+    "openssf_evidence": "docs/security/openssf-evidence.yaml",
+    "paths_relative_to": "Path(wrangle.__file__).parent",
+    "preparation_workflows": "docs/preparation_workflows.py",
+    "publish_protocol": "_start.py:publish",
+    "recipe_grammar": "docs/recipes.md",
+    "recipe_loader": "_protocol.py:load_recipe",
+    "release_verification": "docs/security/releases.md",
+    "security": "docs/security.md",
+    "security_assurance": "docs/security/assurance.md",
+    "security_reporting": "docs/project/SECURITY.md",
+    "select_operation": "Choose the task in docs/recipes.md. Read returns/recipe eligibility, then exact arguments, literal argument_constraints and validation. Resolve symbol or open source at line. Minimal workflows in navigation assert expected data and receipts. Signatures, choice constraints and failures come from engine definitions.",
+    "source_contracts": "_sources.py",
+    "starter_recipe": "docs/starter/recipe.yaml",
+    "statistics_workflow": "docs/frozen_parameters.py"
+  },
+  "operations": [
+    {
+      "argument_constraints": [],
+      "arguments": [
+        {
+          "kind": "positional_or_keyword",
+          "name": "data",
+          "required": true,
+          "type": "pl.LazyFrame"
+        },
+        {
+          "kind": "positional_or_keyword",
+          "name": "column",
+          "required": true,
+          "type": "str"
+        },
+        {
+          "default": null,
+          "kind": "positional_or_keyword",
+          "name": "mapping",
+          "required": false,
+          "type": "dict[str, int] | list[list[Any]] | None"
+        },
+        {
+          "default": null,
+          "kind": "keyword_only",
+          "name": "categories",
+          "required": false,
+          "type": "list[Any] | None"
+        },
+        {
+          "default": null,
+          "kind": "keyword_only",
+          "name": "names",
+          "required": false,
+          "type": "list[str] | None"
+        },
+        {
+          "default": "ordinal",
+          "kind": "keyword_only",
+          "name": "mode",
+          "required": false,
+          "type": "str"
+        },
+        {
+          "default": "error",
+          "kind": "keyword_only",
+          "name": "unknown",
+          "required": false,
+          "type": "str"
+        },
+        {
+          "default": "preserve",
+          "kind": "keyword_only",
+          "name": "nulls",
+          "required": false,
+          "type": "str"
+        },
+        {
+          "default": true,
+          "kind": "keyword_only",
+          "name": "drop",
+          "required": false,
+          "type": "bool"
+        }
+      ],
+      "boundary_validation": {
+        "$ref": "#/boundary_validation"
+      },
+      "description": "Encode a fixed declared domain; codes and generated indicators never refit.\n\nOrdinal mode uses distinct integer mapping codes, or categories in their\ndeclared order with codes from zero. nulls=preserve/error/category; category\nrequires an explicit null level/key. One-hot mode requires categories and\nexactly matching unique output names; categories absent in a batch still\nproduce zero columns. Missing values yield null indicators unless an explicit\nnull category is declared. unknown=error/null; unknown-null yields null codes\nor indicators. drop applies only to one-hot source retention. Row order stays.",
+      "group": "_recipe_fields",
+      "line": 343,
+      "manual": "docs/operations/encode.json",
+      "name": "encode",
+      "recipe": {
+        "aggregates": false,
+        "eligibility": "yes"
+      },
+      "retired": false,
+      "returns": [
+        "table"
+      ],
+      "source": "_recipe_fields.py",
+      "symbol": "wrangle._recipe_fields.encode",
+      "validation": [
+        {
+          "code": "CATEGORY_DOMAIN",
+          "precondition": "Recoded values are outside the declared output domain."
+        },
+        {
+          "code": "COLUMN_COLLISION",
+          "precondition": "One-hot outputs would overwrite existing fields."
+        },
+        {
+          "code": "DUPLICATE_MAPPING",
+          "precondition": "Category levels must be unique."
+        },
+        {
+          "code": "DUPLICATE_MAPPING",
+          "precondition": "Each source code must appear exactly once."
+        },
+        {
+          "code": "DUPLICATE_MAPPING",
+          "precondition": "Output domain values must be unique."
+        },
+        {
+          "code": "INVALID_ARGUMENT",
+          "precondition": "columns must be a nonempty list of distinct field names."
+        },
+        {
+          "code": "INVALID_ARGUMENT",
+          "precondition": "drop must be true or false."
+        },
+        {
+          "code": "INVALID_DTYPE",
+          "precondition": "Declare a supported scalar output dtype."
+        },
+        {
+          "code": "INVALID_DTYPE",
+          "precondition": "This operation requires a scalar string, numeric, or boolean field."
+        },
+        {
+          "code": "INVALID_MAPPING",
+          "precondition": "A code's type must match the declared field type."
+        },
+        {
+          "code": "INVALID_MAPPING",
+          "precondition": "Codes and mapping values must be finite JSON scalars."
+        },
+        {
+          "code": "INVALID_MAPPING",
+          "precondition": "One-hot encoding requires a fixed nonempty categories list and no ordinal mapping."
+        },
+        {
+          "code": "INVALID_MAPPING",
+          "precondition": "One-hot names must provide one distinct nonempty name per declared category."
+        },
+        {
+          "code": "INVALID_MAPPING",
+          "precondition": "Ordinal codes must be distinct integers."
+        },
+        {
+          "code": "INVALID_MAPPING",
+          "precondition": "Ordinal encoding requires exactly one mapping or categories declaration, without one-hot names."
+        },
+        {
+          "code": "INVALID_MAPPING",
+          "precondition": "The code cannot be represented in the declared field type."
+        },
+        {
+          "code": "INVALID_MAPPING",
+          "precondition": "The declared domain needs one consistent scalar type."
+        },
+        {
+          "code": "INVALID_MAPPING",
+          "precondition": "Use a nonempty string-keyed object or list of typed [old, new] pairs."
+        },
+        {
+          "code": "INVALID_MAPPING",
+          "precondition": "categories must be a nonempty list of literal levels."
+        },
+        {
+          "code": "INVALID_MAPPING",
+          "precondition": "domain must be a nonempty list of allowed nonnull output values."
+        },
+        {
+          "code": "INVALID_POLICY",
+          "precondition": "A null category requires nulls=category, and that policy requires an explicit null level."
+        },
+        {
+          "code": "INVALID_POLICY",
+          "precondition": "A null mapping key requires nulls=map, and nulls=map requires that key."
+        },
+        {
+          "code": "INVALID_POLICY",
+          "precondition": "Keeping unmapped values requires the same source and output dtype."
+        },
+        {
+          "code": "INVALID_POLICY",
+          "precondition": "f'{name} must be one of {sorted(choices, key=str)!r}.'"
+        },
+        {
+          "code": "LOSSY_CAST",
+          "precondition": "The code cannot be represented exactly in the declared field type."
+        },
+        {
+          "code": "MISSING_CATEGORY",
+          "precondition": "Missing category values require an explicit permitted null policy."
+        },
+        {
+          "code": "UNKNOWN_CATEGORY",
+          "precondition": "Observed values are absent from the declared mapping or domain."
+        }
+      ]
+    }
+  ],
+  "recipe_contract": "Author recipe files in strict YAML (.yaml/.yml) using mappings, lists, strings, Boolean/null values and finite numbers; programmatic Python mappings share the same contract. Canonical JSON is internal receipt/hash serialization. Guided pending_decisions block execution before source access; recorded research_decisions must be complete and agree with controlled preparation steps. Conditional legacy operations require table-returning arguments. Existing keys retain identity; declare step.key for an explicit checked transition. Canonical grain operations require step.key even without an input key. Exclusions require reasons, expansion requires allow_expand, and incompatible measurement units cannot be reconciled by annotations.",
+  "recovery": "Read operation validation plus shared_validation and boundary_validation. Use WrangleError.code/details to correct that declared precondition and rerun the same protocol; never silently substitute a method or discard observations.",
+  "shared_validation": {
+    "$ref": "docs/operations.json#/shared_validation"
+  },
+  "version": 1
+}

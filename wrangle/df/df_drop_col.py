@@ -1,10 +1,13 @@
+from .._core import operation
+from .._core import reject_destructive
+from .._core import frame, finish, require_columns
+from ._expressions import names
+
+
+@operation(returns=('table',), recipe='yes')
 def df_drop_col(data, cols, destructive=False):
-
-    '''Drops one or more columns from a dataframe'''
-
-    if destructive is False:
-        data = data.copy(deep=True)
-
-    data.drop(cols, axis=1, inplace=True)
-
-    return data
+    """Remove declared columns; unknown columns fail explicitly."""
+    reject_destructive(destructive)
+    cols = names(cols)
+    require_columns(data, cols)
+    return finish(frame(data).drop(cols), data)

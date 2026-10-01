@@ -1,38 +1,21 @@
-def create_time_sequence(periods,
-                         start_year,
-                         start_month,
-                         start_date=1,
-                         time_format='%m-%Y',
-                         period='month'):
+"""Calendar-aware timestamp sequences via native offset expressions."""
+from .._core import operation
+from datetime import datetime
+import polars as pl
+from .._core import WrangleError
+from ..array._native import positive_int
 
-    '''Creates a time sequence and outputs a list with the string
-    timestamps.
+_INTERVALS = {"year": "y", "month": "mo", "week": "w", "day": "d", "hour": "h", "minute": "m", "second": "s"}
 
-    periods | int | Number of periods/timestamps in the output
-    start_year | int | The year to start the periods on
-    start_month | int | The month to start the periods on
-    start_date | int | The day to start the periods on
-    time_format | str | A python datetime string format
-    period | str | 'month', 'week', or 'day'
 
-    '''
-
-    import datetime
-    from dateutil.relativedelta import relativedelta
-
-    dt = datetime.datetime(start_year, start_month, 1)
-
-    result = []
-
-    for i in range(periods):
-
-        result.append(dt.strftime(time_format))
-
-        if period == 'month':
-            dt += relativedelta(months=+1)
-        elif period == 'week':
-            dt += relativedelta(weeks=+1)
-        elif period == 'day':
-            dt += relativedelta(days=+1)
-
-    return result
+@operation(returns=('series',), recipe='never')
+def create_time_sequence(periods, start_year, start_month, start_date=1, time_format="%m-%Y", period="month"):
+    """Return a formatted Polars Series; start_date is honored and calendar months/years are anchored to the start."""
+    positive_int(periods, "periods", allow_zero=True)
+    if period not in _INTERVALS:
+        raise WrangleError("INVALID_FREQUENCY", "Use year, month, week, day, hour, minute, or second.")
+    try:
+        start = datetime(start_year, start_month, start_date)
+    except (ValueError, TypeError) as error:
+        raise WrangleError("INVALID_DATETIME", str(error)) from error
+    return pl.select(pl.int_range(0, periods).alias("offset")).select(pl.lit(start).dt.offset_by(pl.col("offset").cast(pl.String) + _INTERVALS[period]).dt.strftime(time_format).alias("timestamp")).to_series()

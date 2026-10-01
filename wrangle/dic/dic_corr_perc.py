@@ -1,49 +1,38 @@
-def dic_corr_perc(data, y):
+"""Bucketwise binary outcome percentages across named Polars tables."""
+from .._core import operation
+import polars as pl
+from .._core import frame, require_columns, numeric_columns, WrangleError
+from ..col.col_to_buckets import col_to_buckets
+from ..col.col_corr_category import col_corr_category
 
-    """Performans a cut/bucket based correlation of values of all columns
-    across multiple dataframes stored in a dictionary.
 
-    USE: dict_corr_perc(dfs, y)
-
-    data : dict
-        A dictionary where each key corresponds to a Pandas DataFrame.
-    y : str
-        A shared outcome feature that is available in all the dataframes.
-
-    """
-
-    import pandas as pd
-    import wrangle as wr
-
-    final = pd.DataFrame()
-
-    for label in list(data.keys()):
-        for col in data[label].columns:
-            if col != y:
-
-                # avoid destruction
-                buckets = wr.col_to_buckets(data[label], col)
-                temp_df = pd.DataFrame({col: buckets, y: data[label][y]})
-
-                # create a temp dataframe with correlation values
-                temp_corrs = wr.col_corr_category(temp_df, col, y)
-                temp_corrs = temp_corrs.reset_index()
-                temp_corrs.columns = ['index', y]
-
-                # create a temp dataframe with sample counts
-                temp_count = temp_df[col].value_counts().reset_index()
-                temp_count.columns = ['index', 'samples']
-                temp_count['index'] = temp_count['index'].astype('O')
-
-                # combine correlation values and sample counts
-                out = pd.merge(temp_corrs, temp_count,
-                               left_on='index', right_on='index')
-
-                # add handle columns
-                out['metric'] = col
-                out['metric_context'] = label
-
-                # append to the output dataframe
-                final = final.append(out)
-
-    return final
+@operation(returns=('table',), recipe='never', aggregates=True)
+def dic_corr_perc(data, y, *, cuts=5, warning_threshold=40):
+    """Return bucket label, outcome percentage, samples, low_sample, metric and metric_context; require a binary y and numeric predictors."""
+    if not isinstance(data, dict):
+        raise WrangleError("INVALID_INPUT", "Use a dictionary of named Polars tables.")
+    outputs = []
+    reserved = {"index", "samples", "metric", "metric_context", "low_sample"}
+    if y in reserved or y.startswith("__wr_"):
+        raise WrangleError("RESERVED_COLUMN", "Outcome name conflicts with percentage-report fields.")
+    for label, table in data.items():
+        require_columns(table, y)
+        dtype = frame(table).collect_schema()[y]
+        value = pl.col(y).cast(pl.UInt8) if dtype == pl.Boolean else pl.col(y)
+        if dtype.is_float():
+            value = value.fill_nan(None)
+        try:
+            invalid = frame(table).select((value.is_not_null() & ~value.is_in([0, 1])).any()).collect().item()
+        except pl.exceptions.PolarsError as error:
+            raise WrangleError("NON_BINARY_OUTCOME", "Outcome values must be zero, one, or missing.", {"column": y}) from error
+        if invalid:
+            raise WrangleError("NON_BINARY_OUTCOME", "Outcome values must be zero, one, or missing.", {"column": y})
+        predictors = [name for name in numeric_columns(table) if name != y]
+        for name in predictors:
+            buckets = col_to_buckets(table, name, cuts=cuts)
+            subset = frame(table).select(pl.col(y)).with_columns(buckets.rename("__wr_bucket"))
+            result = frame(col_corr_category(subset, "__wr_bucket", y, warning_threshold=warning_threshold)).rename({"__wr_bucket": "index", "n": "samples"}).with_columns(pl.lit(name).alias("metric"), pl.lit(str(label)).alias("metric_context"))
+            outputs.append(result)
+    if not outputs:
+        return pl.DataFrame(schema={"index": pl.String, y: pl.Float64, "samples": pl.UInt32, "low_sample": pl.Boolean, "metric": pl.String, "metric_context": pl.String})
+    return pl.concat(outputs, how="vertical_relaxed").collect()

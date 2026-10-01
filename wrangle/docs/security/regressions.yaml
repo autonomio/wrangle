@@ -1,0 +1,93 @@
+format: wrangle-regression-inventory-v1
+assessed_on: '2026-10-01'
+window_start: '2026-04-01'
+scope: Known behavior corrections in the first public native 1.0 development change and its Windows
+  portability fix. No public project changes occurred earlier in this six-month window. Feature
+  additions, retired modeling scope, input/output type migration and test-only portability
+  adjustments are not counted as bug fixes. This is an inventory of corrections, not the total test
+  count. Review it when a new fix is made.
+source_changes:
+- https://github.com/autonomio/wrangle/pull/46
+- ../migration.md#corrected-behavior-that-can-change-results
+known_fixes: 20
+fixes_with_regression: 20
+mapping:
+- id: fold-remainder
+  corrected_behavior: K-fold division lost remainder observations.
+  regression: tests/test_arrays_utils.py::test_folds_cover_every_observation_and_no_remainders_lost
+- id: aligned-shuffle-split
+  corrected_behavior: Array shuffling changed the supplied feature and outcome arrays in place.
+  regression: tests/test_arrays_utils.py::test_shuffle_reproducible_aligned_and_immutable
+- id: requested-imputation
+  corrected_behavior: Dataframe imputation failed to forward impute_mode; non-random column
+    imputation truncated fractional values to integers.
+  regression:
+    tests/test_frames.py::test_imputation_uses_requested_method_and_preserves_fractional_values
+- id: continuous-imputation
+  corrected_behavior: mean_by_std drew integers instead of the declared continuous interval.
+  regression: tests/test_columns.py::test_seeded_imputation_has_declared_distribution_and_replays
+- id: missingness-threshold
+  corrected_behavior: Zero missingness threshold did not remove every affected column.
+  regression: tests/test_frames.py::test_missingness_drop_threshold_and_imputation
+- id: outlier-threshold
+  corrected_behavior: Outlier filtering ignored requested thresholds or used incorrect IQR fences.
+  regression: tests/test_columns.py::test_outliers_respect_threshold_and_iqr_fences
+- id: empirical-distributions
+  corrected_behavior: PDF and CDF returned the same cumulative complement.
+  regression: tests/test_columns.py::test_empirical_pdf_cdf_are_distinct
+- id: observed-denominator
+  corrected_behavior: Missing outcomes could contaminate observed probability denominators.
+  regression: tests/test_columns.py::test_category_percentage_and_stats_use_observed_denominator
+- id: rename-retention
+  corrected_behavior: Renaming could lose retained columns or introduce name collisions.
+  regression: tests/test_frames.py::test_names_preserve_excluded_values_and_reject_collisions
+- id: scale-retention
+  corrected_behavior: Log scaling dropped retained columns before attempting to read their values,
+    raising instead of preserving them.
+  regression: tests/test_frames.py::test_scaling_preserves_identity_nulls_and_constants
+- id: empty-string-types
+  corrected_behavior: Filling empty text affected unrelated numeric column types.
+  regression: tests/test_frames.py::test_text_cleanup_retains_numeric_types_and_mixed_strings
+- id: selected-score-metric
+  corrected_behavior: Score columns used a hardcoded F1 field rather than the requested metric.
+  regression: tests/test_frames.py::test_score_uses_declared_metric_and_missing_is_not_a_tie
+- id: equal-ols-coefficients
+  corrected_behavior: Equal category means received unequal encodings.
+  regression:
+    tests/test_frames.py::test_ols_mapping_preserves_equal_category_means_and_binary_target
+- id: datetime-length-identity
+  corrected_behavior: Datetime generation could return the wrong length after merely printing a
+    warning.
+  regression:
+    tests/test_arrays_utils.py::test_datetime_schema_detection_and_sequence_preserve_row_identity
+- id: calendar-sequences
+  corrected_behavior: Calendar sequences ignored the supplied start_date and always constructed day
+    1.
+  regression: tests/test_arrays_utils.py::test_calendar_sequences_honor_start_day_and_leap_year
+- id: csv-padding
+  corrected_behavior: Large CSV reading could fabricate padded rows and lose textual identifiers.
+  regression:
+    tests/test_arrays_utils.py::test_csv_scanning_never_fabricates_rows_or_casts_without_request
+- id: report-newlines
+  corrected_behavior: Windows text translation invalidated a newly written preparation bundle.
+  regression: tests/test_yaml_bundles.py::test_report_bytes_ignore_platform_text_newline_translation
+- id: timezone-database
+  corrected_behavior: Named timezone handling failed when the operating system lacked an IANA
+    database.
+  regression:
+    tests/test_platform_boundaries.py::test_named_time_zone_round_trip_without_system_iana_database
+- id: portable-evidence-paths
+  corrected_behavior: Windows disk evidence manifests could not be verified and reused on POSIX.
+  regression:
+    tests/test_disk_prepare.py::test_disk_evidence_manifest_is_portable_between_windows_and_posix
+- id: unicode-cli-output
+  corrected_behavior: Windows CLI pipes could not emit scientific labels and paths outside the
+    legacy locale encoding.
+  regression: tests/test_platform_boundaries.py::test_cli_pipes_use_utf8_under_legacy_locale
+execution_evidence: The current local 991-test suite passes with warnings as errors. The earlier
+  980-test suite passed on current and minimum Polars; 111 affected tests, including the byte-level
+  UTF-8 regressions, pass on minimum Polars. All eight standalone examples execute. Public OS matrix
+  validation is pending.
+review_basis: Legacy correction rows were checked against source at
+  166e4a41e4dd071ddb333d0ef2158d723ff02b99. Pairwise Pearson behavior was already provided by pandas
+  and is excluded from the bug denominator; its native replacement remains tested.

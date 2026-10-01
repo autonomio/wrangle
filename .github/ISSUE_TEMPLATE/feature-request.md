@@ -1,29 +1,10 @@
 ---
-name: Feature Request
-about: I want to suggest a new feature
-
+name: Research workflow request
+about: Explain a concrete data preparation need
 ---
 
-Thanks a lot for suggesting a feature to Wrangle. Please take a moment to go through the below checklist to provide context in a way that makes it easy to take your request forward.
-
-#### 1) I think Wrangle should add...
-
-*A description of the feature with as much detail as you believe is valuable*
-
-#### 2) Once implemented, I can see how this feature will...
-
-*Explain how researchers will benefit from having this feature in Talos**
-
-#### 3) I believe this feature is... (choose one)
-
-- [ ] ...critically important
-- [ ] ...must have
-- [ ] ...nice to have
-
-#### 4) Given the chance, I'd be happy to make a PR for this feature...
-
-- [ ] ...definitely
-- [ ] ...possibly
-- [ ] ...unlikely
-
--------------------------------------------------------------------------
+What research task is difficult today, and what result would help?
+Provide a small synthetic before/after dataset and the current workflow.
+State scientific decisions the researcher must supply, including identity, units,
+missingness, exclusions, ordering and statistical assumptions when relevant.
+Do not include confidential research data.

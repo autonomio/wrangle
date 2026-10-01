@@ -1,0 +1,331 @@
+{
+  "boundary_validation": [
+    {
+      "code": "DUPLICATE_COLUMNS",
+      "precondition": "Column names must be unique."
+    },
+    {
+      "code": "IMMUTABLE_INPUT",
+      "precondition": "Wrangle never mutates input data; use the returned table."
+    },
+    {
+      "code": "INVALID_INPUT",
+      "precondition": "A column needs a consistent native dtype."
+    },
+    {
+      "code": "INVALID_INPUT",
+      "precondition": "Data fields need consistent native types; declare casts explicitly."
+    },
+    {
+      "code": "INVALID_INPUT",
+      "precondition": "Each data row must have the same number of fields."
+    },
+    {
+      "code": "INVALID_INPUT",
+      "precondition": "Nested list fields need consistent native types."
+    },
+    {
+      "code": "INVALID_INPUT",
+      "precondition": "Nested object fields need consistent native types."
+    },
+    {
+      "code": "INVALID_INPUT",
+      "precondition": "Record fields must have string names; names are never coerced."
+    },
+    {
+      "code": "INVALID_INPUT",
+      "precondition": "Record tables require one mapping per row; use null field values for missingness."
+    },
+    {
+      "code": "INVALID_INPUT",
+      "precondition": "Rows without any fields cannot retain observation identity; supply at least one field."
+    },
+    {
+      "code": "INVALID_INPUT",
+      "precondition": "Rows without any fields cannot retain observation identity; supply at least one named field."
+    },
+    {
+      "code": "INVALID_INPUT",
+      "precondition": "This operation requires exactly one column."
+    },
+    {
+      "code": "INVALID_INPUT",
+      "precondition": "Use a Polars Series, one-column table, or list of values."
+    },
+    {
+      "code": "INVALID_INPUT",
+      "precondition": "Use a Polars table, series, Python records, or a local CSV/Parquet path."
+    },
+    {
+      "code": "INVALID_INPUT",
+      "precondition": "Use native Polars values; opaque Python objects cannot represent research data."
+    },
+    {
+      "code": "LOSSY_CAST",
+      "precondition": "Mixed integers and floats exceed the safe Float64 integer range; declare a dtype explicitly."
+    },
+    {
+      "code": "UNKNOWN_COLUMN",
+      "precondition": "The requested columns are absent."
+    },
+    {
+      "code": "UNSUPPORTED_CALLBACK",
+      "precondition": "Python UDFs are not native Polars operations."
+    },
+    {
+      "code": "UNSUPPORTED_CALLBACK",
+      "precondition": "The plan must be native and serializable; Python callbacks cannot execute."
+    },
+    {
+      "code": "UNSUPPORTED_CALLBACK",
+      "precondition": "Use native Polars expressions and plans."
+    }
+  ],
+  "expression_grammar": {
+    "$ref": "docs/operations.json#/expression_grammar"
+  },
+  "guided_start": {
+    "$ref": "docs/operations.json#/guided_start"
+  },
+  "navigation": {
+    "architecture": "docs/architecture.md",
+    "checks": "_contracts.py",
+    "cli": "_cli.py:main",
+    "contributing": "docs/project/CONTRIBUTING.md",
+    "decision_validation": "_start.py:validate_decisions",
+    "disk_execution": "_storage.py",
+    "disk_workflow": "docs/disk_preparation.py",
+    "draft_protocol": "_start.py:draft",
+    "entrypoint": "AGENTS.md",
+    "executable_workflow": "docs/research_batch.py",
+    "execution_contracts": "_execution.py",
+    "expression_workflow": "docs/expression_workflow.py",
+    "governance": "docs/project/GOVERNANCE.md",
+    "guided_workflow": "docs/start_workflow.py",
+    "human_start": "docs/getting_started.md",
+    "human_workflow": "docs/human_workflow.py",
+    "inspection_workflow": "docs/inspection_workflow.py",
+    "migration": "docs/migration.md",
+    "openssf_evidence": "docs/security/openssf-evidence.yaml",
+    "paths_relative_to": "Path(wrangle.__file__).parent",
+    "preparation_workflows": "docs/preparation_workflows.py",
+    "publish_protocol": "_start.py:publish",
+    "recipe_grammar": "docs/recipes.md",
+    "recipe_loader": "_protocol.py:load_recipe",
+    "release_verification": "docs/security/releases.md",
+    "security": "docs/security.md",
+    "security_assurance": "docs/security/assurance.md",
+    "security_reporting": "docs/project/SECURITY.md",
+    "select_operation": "Choose the task in docs/recipes.md. Read returns/recipe eligibility, then exact arguments, literal argument_constraints and validation. Resolve symbol or open source at line. Minimal workflows in navigation assert expected data and receipts. Signatures, choice constraints and failures come from engine definitions.",
+    "source_contracts": "_sources.py",
+    "starter_recipe": "docs/starter/recipe.yaml",
+    "statistics_workflow": "docs/frozen_parameters.py"
+  },
+  "operations": [
+    {
+      "argument_constraints": [],
+      "arguments": [
+        {
+          "kind": "positional_or_keyword",
+          "name": "data",
+          "required": true
+        },
+        {
+          "kind": "positional_or_keyword",
+          "name": "source",
+          "required": true
+        },
+        {
+          "default": null,
+          "kind": "keyword_only",
+          "name": "cardinality",
+          "required": false
+        },
+        {
+          "default": "error",
+          "kind": "keyword_only",
+          "name": "unmatched",
+          "required": false
+        },
+        {
+          "default": null,
+          "kind": "keyword_only",
+          "name": "on",
+          "required": false
+        },
+        {
+          "default": null,
+          "kind": "keyword_only",
+          "name": "left_on",
+          "required": false
+        },
+        {
+          "default": null,
+          "kind": "keyword_only",
+          "name": "right_on",
+          "required": false
+        },
+        {
+          "default": "left",
+          "kind": "keyword_only",
+          "name": "how",
+          "required": false
+        },
+        {
+          "default": "_right",
+          "kind": "keyword_only",
+          "name": "suffix",
+          "required": false
+        },
+        {
+          "default": "suffix",
+          "kind": "keyword_only",
+          "name": "overlap",
+          "required": false
+        },
+        {
+          "default": "left",
+          "kind": "keyword_only",
+          "name": "maintain_order",
+          "required": false
+        },
+        {
+          "default": "error",
+          "kind": "keyword_only",
+          "name": "nulls",
+          "required": false
+        },
+        {
+          "default": null,
+          "kind": "keyword_only",
+          "name": "coalesce",
+          "required": false
+        },
+        {
+          "default": null,
+          "kind": "keyword_only",
+          "name": "validate",
+          "required": false
+        }
+      ],
+      "boundary_validation": {
+        "$ref": "#/boundary_validation"
+      },
+      "description": "Join exact typed keys under declared cardinality and unmatched-side policies.\n\nScalar unmatched applies to the left; the right permits unused rows for\nleft/inner/semi/anti and retains unmatched rows for right/full. An object\ndeclares both sides. keep requires an outer side; anti requires left keep.\nnulls='drop' excludes missing-key rows on both sides, never matches nulls.\nright/full require explicit combined source order. Shared on keys coalesce\nby default; paired differently named keys remain separate unless declared.\ncardinality aliases legacy validate; their declarations must agree.",
+      "group": "_recipe_join",
+      "line": 128,
+      "manual": "docs/operations/join.json",
+      "name": "join",
+      "recipe": {
+        "aggregates": false,
+        "eligibility": "yes"
+      },
+      "retired": false,
+      "returns": [
+        "table"
+      ],
+      "source": "_recipe_join.py",
+      "symbol": "wrangle._recipe_join.join",
+      "validation": [
+        {
+          "code": "DTYPE_MISMATCH",
+          "precondition": "Join key dtypes differ; cast both sources explicitly before matching."
+        },
+        {
+          "code": "INVALID_ARGUMENT",
+          "precondition": "Choose a deterministic Polars source-order policy."
+        },
+        {
+          "code": "INVALID_ARGUMENT",
+          "precondition": "Choose overlap='error'/'suffix' and a nonempty suffix."
+        },
+        {
+          "code": "INVALID_ARGUMENT",
+          "precondition": "Join nulls require error or explicit drop; null keys never match."
+        },
+        {
+          "code": "INVALID_ARGUMENT",
+          "precondition": "Unknown join options."
+        },
+        {
+          "code": "INVALID_ARGUMENT",
+          "precondition": "Unmatched policies require error, drop or keep."
+        },
+        {
+          "code": "INVALID_ARGUMENT",
+          "precondition": "Unmatched retention must agree with the join mode; anti requires left keep."
+        },
+        {
+          "code": "INVALID_ARGUMENT",
+          "precondition": "Use either on or paired left_on/right_on."
+        },
+        {
+          "code": "INVALID_ARGUMENT",
+          "precondition": "cardinality and legacy validate aliases must agree."
+        },
+        {
+          "code": "INVALID_ARGUMENT",
+          "precondition": "cardinality requires 1:1, 1:m, m:1 or m:m."
+        },
+        {
+          "code": "INVALID_ARGUMENT",
+          "precondition": "coalesce must be boolean when declared."
+        },
+        {
+          "code": "INVALID_ARGUMENT",
+          "precondition": "f'{name} must contain distinct nonempty column names.'"
+        },
+        {
+          "code": "INVALID_ARGUMENT",
+          "precondition": "how requires inner, left, right, full, semi or anti."
+        },
+        {
+          "code": "INVALID_ARGUMENT",
+          "precondition": "left_on and right_on require equally many key fields."
+        },
+        {
+          "code": "INVALID_ARGUMENT",
+          "precondition": "right/full joins require explicit left_right or right_left order for both sources."
+        },
+        {
+          "code": "INVALID_ARGUMENT",
+          "precondition": "semi/anti joins retain left observations and require left source ordering."
+        },
+        {
+          "code": "INVALID_ARGUMENT",
+          "precondition": "unmatched requires a left policy or an object with exactly left/right policies."
+        },
+        {
+          "code": "JOIN_CARDINALITY",
+          "precondition": "Join keys violate the declared cardinality."
+        },
+        {
+          "code": "JOIN_FAILED",
+          "precondition": "The native join cannot satisfy its declared keys and policies."
+        },
+        {
+          "code": "NULL_KEY",
+          "precondition": "Join keys require observed values; declare explicit exclusion before matching."
+        },
+        {
+          "code": "OUTPUT_COLLISION",
+          "precondition": "The join suffix creates an existing or repeated output field; rename the source or change suffix."
+        },
+        {
+          "code": "OVERLAPPING_COLUMNS",
+          "precondition": "Declare a suffix or rename overlapping right payload fields."
+        },
+        {
+          "code": "UNMATCHED_KEYS",
+          "precondition": "Some observations have no matching key on the other side."
+        }
+      ]
+    }
+  ],
+  "recipe_contract": "Author recipe files in strict YAML (.yaml/.yml) using mappings, lists, strings, Boolean/null values and finite numbers; programmatic Python mappings share the same contract. Canonical JSON is internal receipt/hash serialization. Guided pending_decisions block execution before source access; recorded research_decisions must be complete and agree with controlled preparation steps. Conditional legacy operations require table-returning arguments. Existing keys retain identity; declare step.key for an explicit checked transition. Canonical grain operations require step.key even without an input key. Exclusions require reasons, expansion requires allow_expand, and incompatible measurement units cannot be reconciled by annotations.",
+  "recovery": "Read operation validation plus shared_validation and boundary_validation. Use WrangleError.code/details to correct that declared precondition and rerun the same protocol; never silently substitute a method or discard observations.",
+  "shared_validation": {
+    "$ref": "docs/operations.json#/shared_validation"
+  },
+  "version": 1
+}
