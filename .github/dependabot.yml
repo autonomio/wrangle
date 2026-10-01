@@ -18,5 +18,7 @@ updates:
       time: "07:30"
     open-pull-requests-limit: 5
     groups:
+      research-runtime:
+        patterns: [polars, ruamel.yaml, tzdata, fastexcel]
       ci-tools:
         patterns: [build, hatchling, pytest, pytest-cov, coverage, ruff, bandit, pip-audit, twine]

@@ -1,8 +1,31 @@
-# Criterion answers are drafts; project 15135 is registered, no badge attainment claimed.
+# Criterion answers retain the initial assessment; verified_publication records subsequent evidence.
+# Project 15135 is registered; no Best Practices badge attainment is claimed.
 # OpenSSF Best Practices answer draft. No form has been submitted.
 # IDs/categories come from the pinned official criteria; explanations are Wrangle-specific.
 format: wrangle-openssf-evidence-draft-v1
 assessed_on: '2026-10-01'
+verified_publication:
+  revision: b6f5354caf3e428ef23325a41e87ac9d1e767eff
+  merged_pr: https://github.com/autonomio/wrangle/pull/46
+  validated_pr_revision: 8f255f379b068410d1a907edbed3b4dbfdbae083
+  identical_validated_and_merged_trees: true
+  research_contracts: https://github.com/autonomio/wrangle/actions/runs/36910861626
+  codeql: https://github.com/autonomio/wrangle/actions/runs/36910861622
+  dependency_audit: https://github.com/autonomio/wrangle/actions/runs/36910861649
+  tests_passed: 991
+  scorecard:
+    assessed_at: '2026-10-01T19:03:38Z'
+    score: 6.2
+    result: https://api.scorecard.dev/projects/github.com/autonomio/wrangle
+    workflow: https://github.com/autonomio/wrangle/actions/runs/36911464800
+  signed_release:
+    tag: v1.0.0
+    release: https://github.com/autonomio/wrangle/releases/tag/v1.0.0
+    workflow: https://github.com/autonomio/wrangle/actions/runs/36911858005
+    independently_verified_subjects: [wrangle-1.0.0-py3-none-any.whl, wrangle-1.0.0.tar.gz, SHA256SUMS]
+    attestation_bundle: attestation.json
+    verified_identity: repository, release workflow, source/signer revision, tag, GitHub OIDC issuer, hosted runner
+    verification_instructions: wrangle/docs/security/releases.md
 project:
   name: Wrangle
   repository: https://github.com/autonomio/wrangle
