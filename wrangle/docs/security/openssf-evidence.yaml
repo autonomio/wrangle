@@ -10,7 +10,7 @@ project:
   homepage: https://github.com/autonomio/wrangle
   registered_project_id: 15135
   registration_state: registered_criteria_submission_pending
-  registration_lookup: 
+  registration_lookup:
     https://www.bestpractices.dev/en/projects.json?url=https%3A%2F%2Fgithub.com%2Fautonomio%2Fwrangle
   public_revision: 166e4a41e4dd071ddb333d0ef2158d723ff02b99
   public_release: v0.7.6
@@ -18,7 +18,7 @@ project:
   local_candidate_version: 1.0.0
   badge_page: https://www.bestpractices.dev/en/projects/15135
 official_criteria:
-  source_url: 
+  source_url:
     https://raw.githubusercontent.com/ossf/best-practices-badge/e1b85623fd6ccad3283943db5957f3130e6bb84b/criteria/criteria.yml
   source_revision: e1b85623fd6ccad3283943db5957f3130e6bb84b
   source_sha256: ca39078ee02032152210f0816add8b096a78d5c6d2f31f90e1de948ec190b1b9
@@ -27,43 +27,43 @@ official_criteria:
   passing_url: https://www.bestpractices.dev/en/criteria/0?details=true&rationale=true
   silver_url: https://www.bestpractices.dev/en/criteria/1?details=true&rationale=true
 interpretation:
-  purpose: Human-reviewed answer draft, not a submitted certification or a claim that any badge has 
+  purpose: Human-reviewed answer draft, not a submitted certification or a claim that any badge has
     been achieved.
-  status_scope: Status evaluates currently available public evidence or explicitly unresolved 
+  status_scope: Status evaluates currently available public evidence or explicitly unresolved
     history. Unpublished files cannot promote a criterion to Met.
-  candidate_scope: after_publication.candidate_status is a review proposal, not a result. Complete 
+  candidate_scope: after_publication.candidate_status is a review proposal, not a result. Complete
     required checks, publish evidence and obtain required human confirmations before promotion.
-  path_base: Checkout root. Paths beginning wrangle/docs/ refer to documents shipped in the 
+  path_base: Checkout root. Paths beginning wrangle/docs/ refer to documents shipped in the
     installed package.
-  local_documents: Some referenced documents/workflows are being added in this change. Verify their 
+  local_documents: Some referenced documents/workflows are being added in this change. Verify their
     existence and contents; their mention is not evidence of completion.
   submission_values:
   - Met
   - Unmet
   - N/A
   - '?'
-  passing_rule: Meet every MUST; meet each SHOULD or give an acceptable unmet justification; 
+  passing_rule: Meet every MUST; meet each SHOULD or give an acceptable unmet justification;
     consider every SUGGESTED.
-  silver_rule: Achieve Passing and meet the additional Silver criteria. Do not substitute 
+  silver_rule: Achieve Passing and meet the additional Silver criteria. Do not substitute
     documentation for actual coverage, release signatures or continuity access.
   na_rule: Use N/A only where official criteria allow it and the applicability argument is verified.
-  legal_policy: This draft does not adopt a DCO, impose retroactive sign-off, assert contributor 
+  legal_policy: This draft does not adopt a DCO, impose retroactive sign-off, assert contributor
     legal authority or make a new maintainer commitment.
-  assessment_windows: Recompute rolling report/vulnerability/bug-fix windows at submission time. 
+  assessment_windows: Recompute rolling report/vulnerability/bug-fix windows at submission time.
     Confirm private records with the maintainer.
 priority_blockers:
 - id: publish_current_evidence
-  action: Publish the reviewed modernization, docs, tests and CI; replace draft URLs with a stable 
+  action: Publish the reviewed modernization, docs, tests and CI; replace draft URLs with a stable
     public revision.
 - id: register_project
   action: Registered as project 15135; questionnaire answers remain drafts until submitted.
   state: complete
 - id: confirm_continuity_person_and_consent
-  action: EnergyGuy3 is owner-confirmed. Verify one-week continuity scope and publishing/recovery 
+  action: EnergyGuy3 is owner-confirmed. Verify one-week continuity scope and publishing/recovery
     access; do not claim an independent rehearsal.
   state: person_owner_confirmed_access_recovery_pending
 - id: primary_developer_secure_design_confirmation
-  action: Owner identifies EnergyGuy3 as the backup maintainer with secure-development expertise; 
+  action: Owner identifies EnergyGuy3 as the backup maintainer with secure-development expertise;
     publish the role and retain the owner-affirmed basis.
   state: owner_confirmed
 - id: confirm_vulnerability_history_and_current_findings
@@ -77,7 +77,7 @@ priority_blockers:
 - id: verify_bit_for_bit_generated_catalog_and_build_repetition
   action: Verify repeated generated catalogs and builds with controlled timestamps and dependencies.
 - id: publish_actual_signed_release
-  action: Publish a real signed release, then independently verify the wheel/sdist and document 
+  action: Publish a real signed release, then independently verify the wheel/sdist and document
     trust roots and identity checks.
 levels:
   passing:
@@ -93,8 +93,8 @@ levels:
         - https://github.com/autonomio/wrangle/blob/166e4a41e4dd071ddb333d0ef2158d723ff02b99/README.md
         local_paths:
         - README.md
-      justification: The public README describes the data preparation problem in ordinary language. 
-        Its deep-learning scope describes the legacy release; the 1.0 wording must be published 
+      justification: The public README describes the data preparation problem in ordinary language.
+        Its deep-learning scope describes the legacy release; the 1.0 wording must be published
         before it is used as evidence.
       unresolved: []
       after_publication:
@@ -113,7 +113,7 @@ levels:
         - README.md
         - CONTRIBUTING.md
         - .github/ISSUE_TEMPLATE/bug-report.md
-      justification: The local README and contribution instructions will link installation, issue 
+      justification: The local README and contribution instructions will link installation, issue
         reporting and pull requests. Public legacy instructions do not establish the complete modern
         contribution path.
       unresolved:
@@ -154,7 +154,7 @@ levels:
         local_paths:
         - CONTRIBUTING.md
         - pyproject.toml
-      justification: The public pull-request template asks for PEP 8 code and updated tests. 
+      justification: The public pull-request template asks for PEP 8 code and updated tests.
         Replacement requirements must be published with 1.0.
       unresolved: []
       after_publication:
@@ -233,8 +233,8 @@ levels:
         - README.md
         - wrangle/docs/getting_started.md
         - wrangle/docs/security.md
-      justification: The modern README and shipped guide cover installation, starting with local 
-        files and preparation. Security expectations are being documented; none of these local 
+      justification: The modern README and shipped guide cover installation, starting with local
+        files and preparation. Security expectations are being documented; none of these local
         documents is yet public 1.0 evidence.
       unresolved:
       - publish_current_evidence
@@ -256,7 +256,7 @@ levels:
         - wrangle/docs/recipes.md
         - scripts/build_catalog.py
         - wrangle/_cli.py
-      justification: The generated operation catalog, recipe manual and CLI help describe inputs, 
+      justification: The generated operation catalog, recipe manual and CLI help describe inputs,
         outputs, errors and boundaries. Publish and verify the release-matched documentation.
       unresolved:
       - publish_current_evidence
@@ -278,7 +278,7 @@ levels:
         local_paths:
         - README.md
         - pyproject.toml
-      justification: GitHub and PyPI use HTTPS, but the public legacy pyproject and README still 
+      justification: GitHub and PyPI use HTTPS, but the public legacy pyproject and README still
         advertise http://autonom.io. Local metadata uses the HTTPS repository; publish it and verify
         every advertised project/download URL.
       unresolved:
@@ -300,7 +300,7 @@ levels:
         - https://github.com/autonomio/wrangle/issues
         - https://github.com/autonomio/wrangle/pulls
         local_paths: []
-      justification: Public GitHub issues and pull requests provide searchable URL-addressable 
+      justification: Public GitHub issues and pull requests provide searchable URL-addressable
         discussion without requiring installation of proprietary client software.
       unresolved: []
       after_publication:
@@ -320,7 +320,7 @@ levels:
         local_paths:
         - README.md
         - CONTRIBUTING.md
-      justification: The public documentation and issue/PR templates are English. Issues and code 
+      justification: The public documentation and issue/PR templates are English. Issues and code
         comments can be submitted in English.
       unresolved: []
       after_publication:
@@ -338,8 +338,8 @@ levels:
         local_paths:
         - GOVERNANCE.md
         - SECURITY.md
-      justification: Active local redevelopment is evidence of current work, but it is unpublished. 
-        The maintainer must confirm ongoing handling of significant defects and vulnerability 
+      justification: Active local redevelopment is evidence of current work, but it is unpublished.
+        The maintainer must confirm ongoing handling of significant defects and vulnerability
         reports.
       unresolved:
       - confirm_ongoing_maintenance
@@ -393,7 +393,7 @@ levels:
         - https://github.com/autonomio/wrangle
         - https://github.com/autonomio/wrangle/commits/master
         local_paths: []
-      justification: Public commit history contains intermediate changes and pull-request merges 
+      justification: Public commit history contains intermediate changes and pull-request merges
         between tagged releases.
       unresolved: []
       after_publication:
@@ -483,9 +483,9 @@ levels:
         - https://github.com/autonomio/wrangle/releases/tag/v0.7.6
         local_paths:
         - CHANGELOG.md
-      justification: CHANGELOG.md now documents every existing public release and version tag, plus 
-        the unreleased native 1.0 change. The previously empty v0.6.10 notes are explicitly 
-        reconstructed from its tagged source diff. Publish this evidence before claiming the 
+      justification: CHANGELOG.md now documents every existing public release and version tag, plus
+        the unreleased native 1.0 change. The previously empty v0.6.10 notes are explicitly
+        reconstructed from its tagged source diff. Publish this evidence before claiming the
         criterion.
       unresolved:
       - repair_missing_historical_release_notes
@@ -507,8 +507,8 @@ levels:
         local_paths:
         - CHANGELOG.md
         - SECURITY.md
-      justification: No public runtime advisory was established by this audit. The maintainer must 
-        determine whether any fixed publicly known runtime vulnerability already had a CVE or 
+      justification: No public runtime advisory was established by this audit. The maintainer must
+        determine whether any fixed publicly known runtime vulnerability already had a CVE or
         equivalent identifier when each release was made.
       unresolved:
       - confirm_public_vulnerability_and_release_history
@@ -563,8 +563,8 @@ levels:
         - https://github.com/autonomio/wrangle/issues?q=is%3Aissue+created%3A%3E%3D2025-10-01
         local_paths:
         - CONTRIBUTING.md
-      justification: GitHub issues are the public report channel. The repository API returns zero 
-        non-PR reports created since 2025-10-01, covering the current 2–12 month assessment window. 
+      justification: GitHub issues are the public report channel. The repository API returns zero
+        non-PR reports created since 2025-10-01, covering the current 2–12 month assessment window.
         There are no reports in that window on which to calculate a delayed-response rate. This does
         not assert private vulnerability response history.
       unresolved: []
@@ -583,8 +583,8 @@ levels:
         - https://github.com/autonomio/wrangle/issues?q=is%3Aissue+created%3A%3E%3D2025-10-01
         local_paths:
         - CONTRIBUTING.md
-      justification: GitHub issues are the public report channel. The repository API returns zero 
-        non-PR reports created since 2025-10-01, covering the current 2–12 month assessment window. 
+      justification: GitHub issues are the public report channel. The repository API returns zero
+        non-PR reports created since 2025-10-01, covering the current 2–12 month assessment window.
         There are no reports in that window on which to calculate a delayed-response rate. This does
         not assert private vulnerability response history.
       unresolved: []
@@ -620,7 +620,7 @@ levels:
         public_urls: []
         local_paths:
         - SECURITY.md
-      justification: SECURITY.md will document the reporting route and appropriate handling of 
+      justification: SECURITY.md will document the reporting route and appropriate handling of
         sensitive research data.
       unresolved:
       - publish_current_evidence
@@ -661,8 +661,8 @@ levels:
         public_urls: []
         local_paths:
         - SECURITY.md
-      justification: The maintainer must confirm whether any vulnerability reports arrived in the 
-        last six months and, if so, whether every initial response was within 14 days. N/A is 
+      justification: The maintainer must confirm whether any vulnerability reports arrived in the
+        last six months and, if so, whether every initial response was within 14 days. N/A is
         allowed only if none arrived.
       unresolved:
       - confirm_private_vulnerability_reports_and_response_times
@@ -682,8 +682,8 @@ levels:
         local_paths:
         - pyproject.toml
         - scripts/verify_distribution.py
-      justification: Public pyproject.toml selects the standard Hatchling Python build backend. The 
-        1.0 wheel/sdist and installed workflows have local verification that still needs public CI 
+      justification: Public pyproject.toml selects the standard Hatchling Python build backend. The
+        1.0 wheel/sdist and installed workflows have local verification that still needs public CI
         evidence.
       unresolved: []
       after_publication:
@@ -738,7 +738,7 @@ levels:
         - tests/
         - README.md
         - .github/workflows/ci-push.yml
-      justification: The public MIT-licensed test_script.py is an automated smoke-test suite and 
+      justification: The public MIT-licensed test_script.py is an automated smoke-test suite and
         public CI documents its invocation. The much larger modern pytest suite is local and must be
         published before it can be cited.
       unresolved: []
@@ -759,7 +759,7 @@ levels:
         - CONTRIBUTING.md
         - pyproject.toml
         - .github/workflows/ci-push.yml
-      justification: The modern suite uses the conventional python -m pytest command; the public 
+      justification: The modern suite uses the conventional python -m pytest command; the public
         legacy suite uses a project-specific script.
       unresolved:
       - publish_current_evidence
@@ -780,8 +780,8 @@ levels:
         - tests/
         - pyproject.toml
         - .github/workflows/ci-push.yml
-      justification: Local tests cover data contracts, preparation, guided decisions, source 
-        integrity and publication. Coverage measurement is being added; report real results, not an 
+      justification: Local tests cover data contracts, preparation, guided decisions, source
+        integrity and publication. Coverage measurement is being added; report real results, not an
         assumed percentage.
       unresolved:
       - publish_current_evidence
@@ -803,7 +803,7 @@ levels:
         - https://github.com/autonomio/wrangle/blob/166e4a41e4dd071ddb333d0ef2158d723ff02b99/.github/workflows/ci-push.yml
         local_paths:
         - .github/workflows/ci-push.yml
-      justification: The public workflow runs its automated suite on pushes. The modern matrix and 
+      justification: The public workflow runs its automated suite on pushes. The modern matrix and
         pull-request checks still need publication and a successful public run.
       unresolved: []
       after_publication:
@@ -840,8 +840,8 @@ levels:
         - tests/
         - CHANGELOG.md
         - .github/PULL_REQUEST_TEMPLATE.md
-      justification: The largest current change is the Polars/YAML/CLI port; its accompanying tests 
-        are local. Publish both the implementation and tests so major additions can be checked 
+      justification: The largest current change is the Polars/YAML/CLI port; its accompanying tests
+        are local. Publish both the implementation and tests so major additions can be checked
         together.
       unresolved:
       - publish_current_evidence
@@ -862,7 +862,7 @@ levels:
         local_paths:
         - CONTRIBUTING.md
         - .github/PULL_REQUEST_TEMPLATE.md
-      justification: The public pull-request checklist says tests must reflect the changes; the 
+      justification: The public pull-request checklist says tests must reflect the changes; the
         formal replacement remains pending publication.
       unresolved: []
       after_publication:
@@ -883,7 +883,7 @@ levels:
         - .github/workflows/codeql.yml
         - .github/workflows/dependency-audit.yml
         - pyproject.toml
-      justification: Public CI already invokes flake8 and fails on selected syntax errors and 
+      justification: Public CI already invokes flake8 and fails on selected syntax errors and
         undefined names. The new Ruff and strict warning configuration still needs publication.
       unresolved: []
       after_publication:
@@ -903,8 +903,8 @@ levels:
         - .github/workflows/codeql.yml
         - .github/workflows/dependency-audit.yml
         - pyproject.toml
-      justification: The new selected lint rules and Python warnings must have a clean documented 
-        run. Historical exit-zero lint reporting does not prove all relevant warnings were 
+      justification: The new selected lint rules and Python warnings must have a clean documented
+        run. Historical exit-zero lint reporting does not prove all relevant warnings were
         addressed.
       unresolved:
       - publish_current_evidence
@@ -952,8 +952,8 @@ levels:
         - GOVERNANCE.md
         - wrangle/docs/security/assurance.md
         owner_confirmation: backup_and_secure_development
-      justification: The project owner identifies EnergyGuy3 as the secure-development expertise 
-        contact and backup maintainer. This is an explicit owner attestation, not inferred from 
+      justification: The project owner identifies EnergyGuy3 as the secure-development expertise
+        contact and backup maintainer. This is an explicit owner attestation, not inferred from
         account permissions or automated testing.
       unresolved: []
       after_publication:
@@ -962,8 +962,8 @@ levels:
         - Publish the owner-confirmed role and secure-development responsibility in GOVERNANCE.md.
       submission_answer:
         status: Met
-        justification: The project owner confirms EnergyGuy3, an authorized project maintainer and 
-          designated backup, has secure-development expertise covering applicable secure design 
+        justification: The project owner confirms EnergyGuy3, an authorized project maintainer and
+          designated backup, has secure-development expertise covering applicable secure design
           principles and common vulnerability classes with their mitigations.
     know_common_errors:
       requirement: MUST
@@ -978,8 +978,8 @@ levels:
         - GOVERNANCE.md
         - wrangle/docs/security/assurance.md
         owner_confirmation: backup_and_secure_development
-      justification: The project owner identifies EnergyGuy3 as the secure-development expertise 
-        contact and backup maintainer. This is an explicit owner attestation, not inferred from 
+      justification: The project owner identifies EnergyGuy3 as the secure-development expertise
+        contact and backup maintainer. This is an explicit owner attestation, not inferred from
         account permissions or automated testing.
       unresolved: []
       after_publication:
@@ -988,8 +988,8 @@ levels:
         - Publish the owner-confirmed role and secure-development responsibility in GOVERNANCE.md.
       submission_answer:
         status: Met
-        justification: The project owner confirms EnergyGuy3, an authorized project maintainer and 
-          designated backup, has secure-development expertise covering applicable secure design 
+        justification: The project owner confirms EnergyGuy3, an authorized project maintainer and
+          designated backup, has secure-development expertise covering applicable secure design
           principles and common vulnerability classes with their mitigations.
     crypto_published:
       requirement: MUST
@@ -1005,8 +1005,8 @@ levels:
         - wrangle/_sources.py
         - wrangle/_storage.py
         - wrangle/docs/security.md
-      justification: The modern engine uses the standard SHA-256 algorithm for evidence hashes; no 
-        home-grown cryptographic protocol is used. Publish the actual implementation and its 
+      justification: The modern engine uses the standard SHA-256 algorithm for evidence hashes; no
+        home-grown cryptographic protocol is used. Publish the actual implementation and its
         documented integrity limits.
       unresolved:
       - publish_current_evidence
@@ -1028,7 +1028,7 @@ levels:
         - wrangle/_sources.py
         - wrangle/_storage.py
         - wrangle/docs/security.md
-      justification: The modern engine calls Python hashlib for SHA-256 instead of reimplementing 
+      justification: The modern engine calls Python hashlib for SHA-256 instead of reimplementing
         cryptography. Publish the actual implementation and its documented integrity limits.
       unresolved:
       - publish_current_evidence
@@ -1050,7 +1050,7 @@ levels:
         - wrangle/_sources.py
         - wrangle/_storage.py
         - wrangle/docs/security.md
-      justification: SHA-256 hashing is implemented through the FLOSS Python standard library. 
+      justification: SHA-256 hashing is implemented through the FLOSS Python standard library.
         Publish the actual implementation and its documented integrity limits.
       unresolved:
       - publish_current_evidence
@@ -1070,7 +1070,7 @@ levels:
         local_paths:
         - wrangle/_api.py
         - wrangle/docs/security.md
-      justification: Wrangle has no encryption, key agreement or user-configurable security key 
+      justification: Wrangle has no encryption, key agreement or user-configurable security key
         lengths; its SHA-256 content digests do not use cryptographic keys.
       unresolved:
       - publish_current_evidence
@@ -1092,8 +1092,8 @@ levels:
         - wrangle/_sources.py
         - wrangle/_storage.py
         - wrangle/docs/security.md
-      justification: The modern evidence format uses SHA-256 and does not depend on the broken 
-        algorithms named by the criterion. Publish the actual implementation and its documented 
+      justification: The modern evidence format uses SHA-256 and does not depend on the broken
+        algorithms named by the criterion. Publish the actual implementation and its documented
         integrity limits.
       unresolved:
       - publish_current_evidence
@@ -1115,7 +1115,7 @@ levels:
         - wrangle/_sources.py
         - wrangle/_storage.py
         - wrangle/docs/security.md
-      justification: The modern evidence mechanism uses SHA-256, with no SHA-1 or weak cipher 
+      justification: The modern evidence mechanism uses SHA-256, with no SHA-1 or weak cipher
         dependency. Publish the actual implementation and its documented integrity limits.
       unresolved:
       - publish_current_evidence
@@ -1173,7 +1173,7 @@ levels:
         local_paths:
         - wrangle/_api.py
         - wrangle/docs/security.md
-      justification: Wrangle creates no cryptographic keys or security nonces. Statistical sampling 
+      justification: Wrangle creates no cryptographic keys or security nonces. Statistical sampling
         seeds are not security credentials.
       unresolved:
       - publish_current_evidence
@@ -1194,7 +1194,7 @@ levels:
         - https://pypi.org/project/wrangle/
         local_paths:
         - wrangle/docs/security/releases.md
-      justification: Source downloads from GitHub and packages from PyPI use HTTPS; users must 
+      justification: Source downloads from GitHub and packages from PyPI use HTTPS; users must
         retain the secure transport.
       unresolved: []
       after_publication:
@@ -1213,8 +1213,8 @@ levels:
         - CHANGELOG.md
         - .github/workflows/ci-deploy.yml
         - wrangle/docs/security/releases.md
-      justification: The public repository and PyPI downloads use HTTPS, but complete delivery 
-        history and any published checksum instructions must be reviewed. Do not retrieve an 
+      justification: The public repository and PyPI downloads use HTTPS, but complete delivery
+        history and any published checksum instructions must be reviewed. Do not retrieve an
         unsigned checksum over HTTP.
       unresolved:
       - verify_checksum_distribution_and_delivery_history
@@ -1232,8 +1232,8 @@ levels:
         public_urls: []
         local_paths:
         - SECURITY.md
-      justification: No vulnerability-history conclusion is made from the absence of a public 
-        advisory alone. Review public advisories and maintainer records for any medium-or-higher 
+      justification: No vulnerability-history conclusion is made from the absence of a public
+        advisory alone. Review public advisories and maintainer records for any medium-or-higher
         issue unpatched for over 60 days.
       unresolved:
       - confirm_vulnerability_history_and_current_findings
@@ -1251,7 +1251,7 @@ levels:
         public_urls: []
         local_paths:
         - SECURITY.md
-      justification: The maintainer must confirm critical-vulnerability history and actual 
+      justification: The maintainer must confirm critical-vulnerability history and actual
         response/fix times. A newly written policy is not proof of past compliance.
       unresolved:
       - confirm_critical_vulnerability_history
@@ -1271,7 +1271,7 @@ levels:
         - SECURITY.md
         - .github/workflows/codeql.yml
         - .github/workflows/dependency-audit.yml
-      justification: GitHub secret scanning configuration and a historical scan can help, but a 
+      justification: GitHub secret scanning configuration and a historical scan can help, but a
         valid private credential leak cannot be ruled out from source inspection or a policy alone.
       unresolved:
       - review_repository_history_for_credentials
@@ -1307,7 +1307,7 @@ levels:
     static_analysis_common_vulnerabilities:
       requirement: SUGGESTED
       na_allowed: true
-      criterion_url: 
+      criterion_url:
         https://www.bestpractices.dev/en/criteria/0#0.static_analysis_common_vulnerabilities
       group: Analysis / Static code analysis
       status: '?'
@@ -1319,7 +1319,7 @@ levels:
         - .github/workflows/codeql.yml
         - .github/workflows/dependency-audit.yml
         - pyproject.toml
-      justification: Bandit and CodeQL provide Python security rules. Verify that the actual 
+      justification: Bandit and CodeQL provide Python security rules. Verify that the actual
         configuration analyzes the production package and has a clean reviewed run.
       unresolved:
       - publish_current_evidence
@@ -1363,7 +1363,7 @@ levels:
         local_paths:
         - .github/workflows/codeql.yml
         - .github/workflows/dependency-audit.yml
-      justification: The security workflow is intended to run on pushes, pull requests and a 
+      justification: The security workflow is intended to run on pushes, pull requests and a
         schedule. Verify its actual triggers and public execution.
       unresolved:
       - publish_current_evidence
@@ -1387,9 +1387,9 @@ levels:
         - tests/
         - CONTRIBUTING.md
         - .github/workflows/ci-push.yml
-      justification: Coverage.py instruments production-code execution while pytest exercises 
-        untrusted inputs and failure/recovery paths. The coverage command and actual result must be 
-        verified as part of release checks; functional test count alone is not dynamic-analysis 
+      justification: Coverage.py instruments production-code execution while pytest exercises
+        untrusted inputs and failure/recovery paths. The coverage command and actual result must be
+        verified as part of release checks; functional test count alone is not dynamic-analysis
         evidence.
       unresolved:
       - publish_current_evidence
@@ -1411,8 +1411,8 @@ levels:
         local_paths:
         - pyproject.toml
         - wrangle/docs/security.md
-      justification: The project produces Python software, not memory-unsafe native-language code. 
-        Polars and fastexcel are externally maintained dependencies, monitored separately; do not 
+      justification: The project produces Python software, not memory-unsafe native-language code.
+        Polars and fastexcel are externally maintained dependencies, monitored separately; do not
         imply Wrangle sanitizes their compiled code.
       unresolved:
       - publish_current_evidence
@@ -1423,7 +1423,7 @@ levels:
     dynamic_analysis_enable_assertions:
       requirement: SUGGESTED
       na_allowed: false
-      criterion_url: 
+      criterion_url:
         https://www.bestpractices.dev/en/criteria/0#0.dynamic_analysis_enable_assertions
       group: Analysis / Dynamic code analysis
       status: '?'
@@ -1433,7 +1433,7 @@ levels:
         local_paths:
         - tests/
         - .github/workflows/ci-push.yml
-      justification: Pytest runtime checks run with ordinary Python assertions enabled; production 
+      justification: Pytest runtime checks run with ordinary Python assertions enabled; production
         must not be invoked with optimization when verifying these tests.
       unresolved:
       - publish_current_evidence
@@ -1472,7 +1472,7 @@ levels:
         public_urls:
         - https://www.bestpractices.dev/en/projects.json?url=https%3A%2F%2Fgithub.com%2Fautonomio%2Fwrangle
         local_paths: []
-      justification: No OpenSSF Best Practices project is registered for this repository, and no 
+      justification: No OpenSSF Best Practices project is registered for this repository, and no
         Passing badge has been achieved.
       unresolved:
       - register_project
@@ -1493,7 +1493,7 @@ levels:
         - CONTRIBUTING.md
         - .github/PULL_REQUEST_TEMPLATE.md
         - pyproject.toml
-      justification: CONTRIBUTING.md will define accepted changes, coding checks, tests and the 
+      justification: CONTRIBUTING.md will define accepted changes, coding checks, tests and the
         pull-request process; publish the exact requirements.
       unresolved:
       - publish_current_evidence
@@ -1514,9 +1514,9 @@ levels:
         - CONTRIBUTING.md
         - GOVERNANCE.md
         - LICENSE
-      justification: The project has no verified DCO or CLA mechanism covering non-trivial 
-        contributions. A new legal sign-off requirement is not imposed by this draft. The current 
-        small-maintainer model accepts MIT-licensed contributions through reviewed pull requests; 
+      justification: The project has no verified DCO or CLA mechanism covering non-trivial
+        contributions. A new legal sign-off requirement is not imposed by this draft. The current
+        small-maintainer model accepts MIT-licensed contributions through reviewed pull requests;
         explicit legal-origin attestations remain a considered limitation.
       unresolved:
       - maintainer_approve_unmet_should_justification
@@ -1534,7 +1534,7 @@ levels:
         public_urls: []
         local_paths:
         - GOVERNANCE.md
-      justification: GOVERNANCE.md will identify project decision-making and release authority; a 
+      justification: GOVERNANCE.md will identify project decision-making and release authority; a
         draft is not public evidence.
       unresolved:
       - publish_current_evidence
@@ -1554,7 +1554,7 @@ levels:
         local_paths:
         - CODE_OF_CONDUCT.md
         - GOVERNANCE.md
-      justification: The project is adopting a published code of conduct with an actual 
+      justification: The project is adopting a published code of conduct with an actual
         reporting/enforcement contact.
       unresolved:
       - publish_current_evidence
@@ -1575,7 +1575,7 @@ levels:
         public_urls: []
         local_paths:
         - GOVERNANCE.md
-      justification: GOVERNANCE.md must identify role responsibilities and the people currently 
+      justification: GOVERNANCE.md must identify role responsibilities and the people currently
         holding them; do not infer a working backup from GitHub permissions.
       unresolved:
       - publish_current_evidence
@@ -1598,9 +1598,9 @@ levels:
         - GOVERNANCE.md
         - wrangle/docs/security/releases.md
         owner_confirmation: backup_and_secure_development
-      justification: The project owner identifies EnergyGuy3 as the backup maintainer; GitHub 
-        administration rights were independently visible. The owner affirmation supports a 
-        continuity candidate. It does not establish that a release rehearsal was performed, nor 
+      justification: The project owner identifies EnergyGuy3 as the backup maintainer; GitHub
+        administration rights were independently visible. The owner affirmation supports a
+        continuity candidate. It does not establish that a release rehearsal was performed, nor
         independently verify package-publishing access and credential-recovery arrangements.
       unresolved:
       - publish_confirmed_maintainer_role
@@ -1616,7 +1616,7 @@ levels:
       submission_answer:
         status: '?'
         justification: The owner designates EnergyGuy3 as the backup maintainer with existing GitHub
-          administration rights. Verify the specific one-week issue/merge/release and 
+          administration rights. Verify the specific one-week issue/merge/release and
           package-publishing recovery requirements before marking this criterion Met.
     bus_factor:
       requirement: SHOULD
@@ -1630,15 +1630,15 @@ levels:
         local_paths:
         - GOVERNANCE.md
         owner_confirmation: backup_and_secure_development
-      justification: The project owner identifies EnergyGuy3 as a backup with secure-development 
-        expertise, supplementing lead maintainer mikkokotila. This is an owner-affirmed two-person 
+      justification: The project owner identifies EnergyGuy3 as a backup with secure-development
+        expertise, supplementing lead maintainer mikkokotila. This is an owner-affirmed two-person
         candidate; independent role familiarity and a recovery rehearsal are not claimed.
       unresolved:
       - publish_confirmed_maintainer_role
       after_publication:
         candidate_status: Met
         required_checks:
-        - Publish the current owner-confirmed role assignments without claiming an unperformed 
+        - Publish the current owner-confirmed role assignments without claiming an unperformed
           rehearsal.
     documentation_roadmap:
       requirement: MUST
@@ -1651,7 +1651,7 @@ levels:
         public_urls: []
         local_paths:
         - ROADMAP.md
-      justification: ROADMAP.md will state planned and excluded work for at least the next year; 
+      justification: ROADMAP.md will state planned and excluded work for at least the next year;
         publish dated scope and horizon.
       unresolved:
       - publish_current_evidence
@@ -1671,7 +1671,7 @@ levels:
         local_paths:
         - wrangle/docs/architecture.md
         - AGENTS.md
-      justification: The architecture document will describe inspection, drafting, expression 
+      justification: The architecture document will describe inspection, drafting, expression
         compilation, validation, execution, publication and evidence boundaries.
       unresolved:
       - publish_current_evidence
@@ -1691,7 +1691,7 @@ levels:
         local_paths:
         - wrangle/docs/security.md
         - SECURITY.md
-      justification: The security document will define intended guarantees and limits, including 
+      justification: The security document will define intended guarantees and limits, including
         that hashes are not authentication and global operations are not a bounded-memory promise.
       unresolved:
       - publish_current_evidence
@@ -1713,7 +1713,7 @@ levels:
         - wrangle/docs/getting_started.md
         - wrangle/docs/human_workflow.py
         - wrangle/docs/start_workflow.py
-      justification: The README and shipped start guide give a minimal CLI/Python path and runnable 
+      justification: The README and shipped start guide give a minimal CLI/Python path and runnable
         synthetic examples. Publish verified release-matched content.
       unresolved:
       - publish_current_evidence
@@ -1735,8 +1735,8 @@ levels:
         - scripts/verify_distribution.py
         - .github/ISSUE_TEMPLATE/bug-report.md
         - .github/PULL_REQUEST_TEMPLATE.md
-      justification: Generated catalog checks and installed-workflow execution help keep engine 
-        interfaces and docs aligned. Legacy issue/PR templates must be updated before claiming 
+      justification: Generated catalog checks and installed-workflow execution help keep engine
+        interfaces and docs aligned. Legacy issue/PR templates must be updated before claiming
         current documentation.
       unresolved:
       - publish_current_evidence
@@ -1756,7 +1756,7 @@ levels:
         local_paths:
         - README.md
         - wrangle/docs/security/releases.md
-      justification: No badge has yet been achieved. Link each genuine recognition from the 
+      justification: No badge has yet been achieved. Link each genuine recognition from the
         repository front page within 48 hours after it becomes public; never display an earned level
         before the service awards it.
       unresolved:
@@ -1778,8 +1778,8 @@ levels:
         - wrangle/_presentation.py
         - wrangle/_cli.py
         - wrangle/docs/getting_started.md
-      justification: The modern CLI uses plain text, keyboard interaction and stable errors; docs 
-        include complete textual examples and notebook tables use headers. Review accessibility and 
+      justification: The modern CLI uses plain text, keyboard interaction and stable errors; docs
+        include complete textual examples and notebook tables use headers. Review accessibility and
         document supported paths without claiming unperformed researcher trials.
       unresolved:
       - publish_current_evidence
@@ -1802,10 +1802,10 @@ levels:
         - wrangle/_presentation.py
         - wrangle/_cli.py
         - wrangle/docs/security.md
-      justification: The human CLI and guides are English and do not yet have a localization 
-        framework. The supported audience currently uses English research workflows; maintaining a 
-        small, consistent interface and stable language-independent error codes takes priority. 
-        Unicode source names and data remain supported. This is a considered SHOULD exception, not 
+      justification: The human CLI and guides are English and do not yet have a localization
+        framework. The supported audience currently uses English research workflows; maintaining a
+        small, consistent interface and stable language-independent error codes takes priority.
+        Unicode source names and data remain supported. This is a considered SHOULD exception, not
         N/A.
       unresolved:
       - maintainer_approve_unmet_should_justification
@@ -1824,9 +1824,9 @@ levels:
         local_paths:
         - SECURITY.md
         - wrangle/docs/security.md
-      justification: GitHub and PyPI authenticate site users; Wrangle does not operate its own 
-        password database. Verify host-side security documentation or provide an appropriate 
-        third-party-service justification rather than claiming Wrangle controls hosted password 
+      justification: GitHub and PyPI authenticate site users; Wrangle does not operate its own
+        password database. Verify host-side security documentation or provide an appropriate
+        third-party-service justification rather than claiming Wrangle controls hosted password
         storage.
       unresolved:
       - verify_hosted_site_password_storage_evidence
@@ -1846,8 +1846,8 @@ levels:
         - wrangle/docs/migration.md
         - SECURITY.md
         - CHANGELOG.md
-      justification: The migration document maps legacy APIs and changed scientific behavior to the 
-        Polars recipe path. The security support policy must define supported release lines and the 
+      justification: The migration document maps legacy APIs and changed scientific behavior to the
+        Polars recipe path. The security support policy must define supported release lines and the
         upgrade route.
       unresolved:
       - publish_current_evidence
@@ -1883,7 +1883,7 @@ levels:
         local_paths:
         - SECURITY.md
         - CHANGELOG.md
-      justification: The maintainer must confirm resolved vulnerability reports in the last twelve 
+      justification: The maintainer must confirm resolved vulnerability reports in the last twelve
         months and reporter credit or anonymity requests. Select N/A only after confirming none were
         resolved.
       unresolved:
@@ -1903,8 +1903,8 @@ levels:
         local_paths:
         - SECURITY.md
         - GOVERNANCE.md
-      justification: SECURITY.md will describe acknowledgment, private triage, severity, 
-        remediation, coordinated disclosure, credit and release communication. Verify the actual 
+      justification: SECURITY.md will describe acknowledgment, private triage, severity,
+        remediation, coordinated disclosure, credit and release communication. Verify the actual
         responsible maintainer and active route.
       unresolved:
       - publish_current_evidence
@@ -1926,7 +1926,7 @@ levels:
         local_paths:
         - CONTRIBUTING.md
         - pyproject.toml
-      justification: CONTRIBUTING.md and pyproject.toml will define the selected Python style and 
+      justification: CONTRIBUTING.md and pyproject.toml will define the selected Python style and
         lint rules, with justified local exclusions only.
       unresolved:
       - publish_current_evidence
@@ -1947,7 +1947,7 @@ levels:
         - CONTRIBUTING.md
         - pyproject.toml
         - .github/workflows/ci-push.yml
-      justification: Ruff checks and formatting verification are being enforced by CI. Verify the 
+      justification: Ruff checks and formatting verification are being enforced by CI. Verify the
         full production package is checked and failures stop the job.
       unresolved:
       - publish_current_evidence
@@ -1969,7 +1969,7 @@ levels:
         local_paths:
         - pyproject.toml
         - wrangle/docs/architecture.md
-      justification: Wrangle ships Python source and does not compile native binaries. Compiled 
+      justification: Wrangle ships Python source and does not compile native binaries. Compiled
         dependencies are maintained and built by their own projects.
       unresolved:
       - publish_current_evidence
@@ -1989,7 +1989,7 @@ levels:
         local_paths:
         - pyproject.toml
         - scripts/verify_distribution.py
-      justification: Wrangle does not strip its Python source or debugging information. The source 
+      justification: Wrangle does not strip its Python source or debugging information. The source
         distributions and wheels retain the Python files.
       unresolved:
       - publish_current_evidence
@@ -2008,7 +2008,7 @@ levels:
         public_urls: []
         local_paths:
         - pyproject.toml
-      justification: Hatchling packages a single Python project; the build does not recursively 
+      justification: Hatchling packages a single Python project; the build does not recursively
         compile subdirectories with cross-dependencies.
       unresolved:
       - publish_current_evidence
@@ -2029,9 +2029,9 @@ levels:
         - pyproject.toml
         - scripts/build_catalog.py
         - scripts/verify_distribution.py
-      justification: Python source is interpreted, but catalog generation and wheel/sdist creation 
+      justification: Python source is interpreted, but catalog generation and wheel/sdist creation
         do occur. Do not claim N/A simply because the package is Python. Compare independently built
-        deliverables and generated catalogs under controlled SOURCE_DATE_EPOCH and dependency 
+        deliverables and generated catalogs under controlled SOURCE_DATE_EPOCH and dependency
         versions.
       unresolved:
       - verify_bit_for_bit_generated_catalog_and_build_repetition
@@ -2052,7 +2052,7 @@ levels:
         local_paths:
         - pyproject.toml
         - README.md
-      justification: The public package follows Python packaging conventions and is installable and 
+      justification: The public package follows Python packaging conventions and is installable and
         uninstallable with pip.
       unresolved: []
       after_publication:
@@ -2070,7 +2070,7 @@ levels:
         local_paths:
         - pyproject.toml
         - scripts/verify_distribution.py
-      justification: Installation uses pip and virtual environments, including conventional 
+      justification: Installation uses pip and virtual environments, including conventional
         --target/--prefix placement, rather than a bespoke installer.
       unresolved:
       - publish_current_evidence
@@ -2090,7 +2090,7 @@ levels:
         local_paths:
         - pyproject.toml
         - CONTRIBUTING.md
-      justification: The standard .[dev,excel] extra installs the development/test tools; 
+      justification: The standard .[dev,excel] extra installs the development/test tools;
         contribution instructions will give complete commands.
       unresolved:
       - publish_current_evidence
@@ -2111,7 +2111,7 @@ levels:
         local_paths:
         - pyproject.toml
       justification: Public pyproject.toml lists runtime dependencies in computer-processable Python
-        project metadata. Modern dependencies and development/security tooling still need 
+        project metadata. Modern dependencies and development/security tooling still need
         publication.
       unresolved: []
       after_publication:
@@ -2132,8 +2132,8 @@ levels:
         - .github/workflows/dependency-audit.yml
         - SECURITY.md
         - pyproject.toml
-      justification: Dependabot and scheduled pip-audit are being added. Verify all runtime and 
-        optional dependencies are included, results are reviewed and exploitable findings are 
+      justification: Dependabot and scheduled pip-audit are being added. Verify all runtime and
+        optional dependencies are included, results are reviewed and exploitable findings are
         corrected or justified.
       unresolved:
       - publish_current_evidence
@@ -2157,7 +2157,7 @@ levels:
         - https://github.com/autonomio/wrangle/blob/166e4a41e4dd071ddb333d0ef2158d723ff02b99/pyproject.toml
         local_paths:
         - pyproject.toml
-      justification: Dependencies are standard separately installed Python packages, not vendored 
+      justification: Dependencies are standard separately installed Python packages, not vendored
         convenience copies, and can be identified and updated through package metadata.
       unresolved: []
       after_publication:
@@ -2176,8 +2176,8 @@ levels:
         - pyproject.toml
         - wrangle/docs/migration.md
         - .github/workflows/ci-push.yml
-      justification: The modern engine uses current native Polars expressions and supported Python 
-        packaging interfaces, with a migration path for intentionally unsupported legacy 
+      justification: The modern engine uses current native Polars expressions and supported Python
+        packaging interfaces, with a migration path for intentionally unsupported legacy
         model-building APIs.
       unresolved:
       - publish_current_evidence
@@ -2197,8 +2197,8 @@ levels:
         - https://github.com/autonomio/wrangle/blob/166e4a41e4dd071ddb333d0ef2158d723ff02b99/.github/workflows/ci-push.yml
         local_paths:
         - .github/workflows/ci-push.yml
-      justification: The publicly committed CI workflow runs its suite on each push and the job 
-        outcome reports success or failure. The replacement 1.0 matrix still needs a public 
+      justification: The publicly committed CI workflow runs its suite on each push and the job
+        outcome reports success or failure. The replacement 1.0 matrix still needs a public
         successful run.
       unresolved: []
       after_publication:
@@ -2216,8 +2216,8 @@ levels:
         local_paths:
         - tests/
         - CHANGELOG.md
-      justification: The new suite includes regression tests, but a list of bugs fixed in the last 
-        six months must be mapped to tests to establish the required proportion. Do not derive it 
+      justification: The new suite includes regression tests, but a list of bugs fixed in the last
+        six months must be mapped to tests to establish the required proportion. Do not derive it
         from total test count.
       unresolved:
       - map_last_six_months_bug_fixes_to_regression_tests
@@ -2237,8 +2237,8 @@ levels:
         - pyproject.toml
         - .github/workflows/ci-push.yml
         - tests/
-      justification: Statement coverage measurement and an 80% failure threshold are being added. 
-        Publish the actual production-package result with meaningful omissions, including CLI 
+      justification: Statement coverage measurement and an 80% failure threshold are being added.
+        Publish the actual production-package result with meaningful omissions, including CLI
         subprocess coverage where applicable.
       unresolved:
       - publish_current_evidence
@@ -2259,7 +2259,7 @@ levels:
         public_urls: []
         local_paths:
         - CONTRIBUTING.md
-      justification: CONTRIBUTING.md will require automated tests for major new functionality and 
+      justification: CONTRIBUTING.md will require automated tests for major new functionality and
         scientifically meaningful regressions.
       unresolved:
       - publish_current_evidence
@@ -2279,7 +2279,7 @@ levels:
         local_paths:
         - CONTRIBUTING.md
         - .github/PULL_REQUEST_TEMPLATE.md
-      justification: The contribution instructions and PR checklist will explicitly require 
+      justification: The contribution instructions and PR checklist will explicitly require
         automated tests for major new functionality.
       unresolved:
       - publish_current_evidence
@@ -2302,7 +2302,7 @@ levels:
         - .github/workflows/dependency-audit.yml
         - pyproject.toml
         - CONTRIBUTING.md
-      justification: Selected lint rules, configured lint checks and pytest warnings-as-errors are 
+      justification: Selected lint rules, configured lint checks and pytest warnings-as-errors are
         intended to run in CI. Verify clean results and review any necessary precise exceptions.
       unresolved:
       - publish_current_evidence
@@ -2328,8 +2328,8 @@ levels:
         - wrangle/_publication.py
         - wrangle/_sources.py
         - tests/
-      justification: The assurance case will connect explicit allowlists, fail-closed decisions, 
-        native operations, exclusive publication and source/receipt checks to applicable secure 
+      justification: The assurance case will connect explicit allowlists, fail-closed decisions,
+        native operations, exclusive publication and source/receipt checks to applicable secure
         design principles. Review claims against actual implementation and tests.
       unresolved:
       - publish_current_evidence
@@ -2351,7 +2351,7 @@ levels:
         - wrangle/_sources.py
         - wrangle/_storage.py
         - wrangle/docs/security.md
-      justification: The modern engine uses SHA-256 evidence hashes rather than SHA-1 or weak 
+      justification: The modern engine uses SHA-256 evidence hashes rather than SHA-1 or weak
         ciphers; document the absence of authentication guarantees for unsigned receipts.
       unresolved:
       - publish_current_evidence
@@ -2373,10 +2373,10 @@ levels:
         - wrangle/_sources.py
         - wrangle/_storage.py
         - wrangle/docs/security.md
-      justification: The evidence format fixes SHA-256 so hashes and receipt identity remain 
-        consistent across Python and CLI. There is no configurable alternate digest today. A future 
-        hash-format version can migrate algorithms if a practical break is established; an ad hoc 
-        selector would complicate verified historical evidence. This is a considered SHOULD 
+      justification: The evidence format fixes SHA-256 so hashes and receipt identity remain
+        consistent across Python and CLI. There is no configurable alternate digest today. A future
+        hash-format version can migrate algorithms if a practical break is established; an ad hoc
+        selector would complicate verified historical evidence. This is a considered SHOULD
         exception, not N/A.
       unresolved:
       - maintainer_approve_unmet_should_justification
@@ -2395,8 +2395,8 @@ levels:
         local_paths:
         - wrangle/_sources.py
         - wrangle/docs/security.md
-      justification: Wrangle processes local scientific files and no authentication credentials or 
-        private cryptographic keys. Release-service credentials belong to the external publishing 
+      justification: Wrangle processes local scientific files and no authentication credentials or
+        private cryptographic keys. Release-service credentials belong to the external publishing
         workflow, not the package runtime.
       unresolved:
       - publish_current_evidence
@@ -2416,7 +2416,7 @@ levels:
         local_paths:
         - wrangle/_sources.py
         - wrangle/docs/security.md
-      justification: The modern package runtime does not implement network communications; sources 
+      justification: The modern package runtime does not implement network communications; sources
         are local and remote sources are rejected.
       unresolved:
       - publish_current_evidence
@@ -2496,9 +2496,9 @@ levels:
         - CHANGELOG.md
         - .github/workflows/ci-deploy.yml
         - wrangle/docs/security/releases.md
-      justification: Current public releases have no verified artifact signature/provenance 
-        evidence. A signing workflow and verification guide are being prepared, but the criterion 
-        requires an actual signed release and usable verification evidence for separately 
+      justification: Current public releases have no verified artifact signature/provenance
+        evidence. A signing workflow and verification guide are being prepared, but the criterion
+        requires an actual signed release and usable verification evidence for separately
         distributed wheels and sdists.
       unresolved:
       - publish_signing_and_verification_process
@@ -2521,8 +2521,8 @@ levels:
         - CHANGELOG.md
         - .github/workflows/ci-deploy.yml
         - wrangle/docs/security/releases.md
-      justification: Public tag names are known but their cryptographic verification was not 
-        established. Important release tags may be signed by an authorized maintainer; a build 
+      justification: Public tag names are known but their cryptographic verification was not
+        established. Important release tags may be signed by an authorized maintainer; a build
         attestation is not automatically a tag signature.
       unresolved:
       - verify_existing_tags_or_sign_new_important_tags
@@ -2546,8 +2546,8 @@ levels:
         - wrangle/_recipe_expressions.py
         - wrangle/_recipe_join.py
         - tests/
-      justification: The modern engine rejects unsupported recipe/source/expression options through 
-        explicit allowlists and stable errors, validates guided decision consistency and enforces 
+      justification: The modern engine rejects unsupported recipe/source/expression options through
+        explicit allowlists and stable errors, validates guided decision consistency and enforces
         schema/identity/join contracts using Polars.
       unresolved:
       - publish_current_evidence
@@ -2569,8 +2569,8 @@ levels:
         - wrangle/docs/security/assurance.md
         - wrangle/_publication.py
         - wrangle/_sources.py
-      justification: The package uses Python, bounded recipe grammar, native Polars operations, 
-        temporary workspaces and atomic no-replace publication. Document operating-system/library 
+      justification: The package uses Python, bounded recipe grammar, native Polars operations,
+        temporary workspaces and atomic no-replace publication. Document operating-system/library
         limits and resource-exhaustion boundaries; do not promise a sandbox.
       unresolved:
       - publish_current_evidence
@@ -2591,7 +2591,7 @@ levels:
         - wrangle/docs/security/assurance.md
         - wrangle/docs/security.md
         - tests/
-      justification: The assurance case must state assets, attacker capabilities and trust 
+      justification: The assurance case must state assets, attacker capabilities and trust
         boundaries, then justify secure design and common-weakness defenses using actual code/tests.
         Review the full argument before publication.
       unresolved:
@@ -2605,7 +2605,7 @@ levels:
     static_analysis_common_vulnerabilities:
       requirement: MUST
       na_allowed: true
-      criterion_url: 
+      criterion_url:
         https://www.bestpractices.dev/en/criteria/1#1.static_analysis_common_vulnerabilities
       group: Analysis / Static code analysis
       status: '?'
@@ -2617,7 +2617,7 @@ levels:
         - .github/workflows/codeql.yml
         - .github/workflows/dependency-audit.yml
         - pyproject.toml
-      justification: Bandit and CodeQL are being configured with Python security checks. Confirm 
+      justification: Bandit and CodeQL are being configured with Python security checks. Confirm
         production coverage, clean reviewed results and recurring execution.
       unresolved:
       - publish_current_evidence
@@ -2640,7 +2640,7 @@ levels:
         - pyproject.toml
         - wrangle/docs/security.md
       justification: Wrangle produces Python software; Polars and fastexcel compiled implementations
-        are externally maintained dependencies rather than native code produced by this project. 
+        are externally maintained dependencies rather than native code produced by this project.
         Dependency monitoring and integration tests remain applicable.
       unresolved:
       - publish_current_evidence
@@ -2653,15 +2653,15 @@ owner_confirmations:
     confirmed_on: '2026-10-01'
     source: Direct project-owner answer in this task, relayed by the root agent.
     person: EnergyGuy3
-    scope: Owner identified EnergyGuy3 in response to the combined backup-maintainer and 
+    scope: Owner identified EnergyGuy3 in response to the combined backup-maintainer and
       secure-development-expertise question.
-    verification: Owner affirmation, not an independent rehearsal or inspection of private 
+    verification: Owner affirmation, not an independent rehearsal or inspection of private
       account/recovery records.
 registration_draft:
   name: Wrangle
-  description: Wrangle prepares scientific data with native Polars. Researchers and agents use the 
-    same compact YAML protocols to make observation keys, units, missingness, exclusions and 
-    metadata matching explicit. Preparation checks the declared contracts and saves a table, 
+  description: Wrangle prepares scientific data with native Polars. Researchers and agents use the
+    same compact YAML protocols to make observation keys, units, missingness, exclusions and
+    metadata matching explicit. Preparation checks the declared contracts and saves a table,
     readable report and verifiable evidence. Python and CLI use the same engine.
   homepage_url: https://github.com/autonomio/wrangle
   repo_url: https://github.com/autonomio/wrangle
@@ -2676,17 +2676,17 @@ repository_controls:
   secret_scanning_push_protection: enabled
   default_workflow_permissions: read
   workflow_can_approve_reviews: false
-  verification: GitHub REST repository settings read back after applying; no credential values 
+  verification: GitHub REST repository settings read back after applying; no credential values
     accessed.
   open_secret_scanning_alerts: 0
   repository_security_advisories: 0
   public_non_pr_issues_created_since_2025_10_01: 0
 local_measurements:
-  repeat_build: Two consecutive wheel/sdist builds produced identical SHA-256 hashes in the same 
-    environment. scripts/check_reproducible_build.py enforces this with a fixed SOURCE_DATE_EPOCH 
+  repeat_build: Two consecutive wheel/sdist builds produced identical SHA-256 hashes in the same
+    environment. scripts/check_reproducible_build.py enforces this with a fixed SOURCE_DATE_EPOCH
     and PYTHONHASHSEED. Re-run after changes; this does not assert cross-platform identity.
   runtime_statement_coverage_percent: 89.6
-  coverage_scope: wrangle production package; only duplicated executable documentation excluded. 
+  coverage_scope: wrangle production package; only duplicated executable documentation excluded.
     Await final successful suite/public CI.
   runtime_suite:
     passed: 977
