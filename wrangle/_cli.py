@@ -4,6 +4,7 @@ from __future__ import annotations
 import argparse
 import csv
 import math
+import io
 from collections.abc import Sequence
 import json
 import os
@@ -389,6 +390,9 @@ def _write(value, stream):
 
 def main(argv: Sequence[str] | None = None) -> int:
     """Readable output by default; --json preserves engine structures and error codes."""
+    for stream in (sys.stdout, sys.stderr):
+        if type(stream) is io.TextIOWrapper:
+            stream.reconfigure(encoding="utf-8", errors=stream.errors)
     tokens = list(sys.argv[1:] if argv is None else argv)
     as_json = "--json" in tokens
     try:

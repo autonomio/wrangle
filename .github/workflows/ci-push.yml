@@ -13,6 +13,9 @@ jobs:
   test:
     runs-on: ${{ matrix.os }}
     timeout-minutes: 30
+    env:
+      # Standalone Polars examples print Unicode tables on every runner.
+      PYTHONUTF8: "1"
     strategy:
       fail-fast: false
       matrix:
