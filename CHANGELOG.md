@@ -1,6 +1,6 @@
 # Release notes
 
-## 1.0.0 — unreleased
+## 1.0.0
 
 Wrangle becomes native Polars data preparation for scientific researchers and
 agents. This is a breaking change from the legacy pandas/NumPy package; follow
@@ -26,7 +26,10 @@ agents. This is a breaking change from the legacy pandas/NumPy package; follow
 
 Model building and recipe callbacks are outside scope. Hash receipts are
 consistency evidence, not author signatures or proof of scientific correctness.
-No release date or badge attainment is asserted by these unreleased notes.
+Publication and verified assets are listed on the
+[GitHub releases page](https://github.com/autonomio/wrangle/releases).
+OpenSSF attainment is tracked separately on the
+[badge page](https://www.bestpractices.dev/en/projects/15135).
 
 ## 0.7.6 — 2024-04-20
 

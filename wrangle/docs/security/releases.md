@@ -13,12 +13,14 @@ attaching artifacts and `attestation.json` to the release. Assets are never
 silently replaced. A checksum establishes byte consistency; signed provenance
 establishes the release workflow identity. Neither establishes scientific validity.
 
-## Current publication status
+## Publication status
 
-The native 1.0.0 release is unreleased. The workflow above is configured locally;
-it does not establish that a signed public release exists. Legacy releases do not
-have this provenance. Do not claim signed releases or OpenSSF silver until the
-public workflow completes and all required evidence is verified.
+Check the [GitHub release](https://github.com/autonomio/wrangle/releases) and its
+completed artifact workflow. A release entry or workflow definition alone does
+not establish that signed assets exist: require the wheel, source archive,
+checksums and attestation bundle, then perform the verification below. Legacy
+0.x releases lack this provenance. OpenSSF attainment is assessed separately on
+the [badge page](https://www.bestpractices.dev/en/projects/15135).
 
 ## Download and verify
 

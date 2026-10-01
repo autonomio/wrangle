@@ -2695,17 +2695,22 @@ local_measurements:
   repeat_build: Two consecutive wheel/sdist builds produced identical SHA-256 hashes in the same
     environment. scripts/check_reproducible_build.py enforces this with a fixed SOURCE_DATE_EPOCH
     and PYTHONHASHSEED. Re-run after changes; this does not assert cross-platform identity.
-  runtime_statement_coverage_percent: 89.6
+  runtime_statement_coverage_percent: 89.59
   coverage_scope: Wrangle production package; only duplicated executable documentation excluded.
-    Coverage measurement below is the earlier 980-test revision; final public CI is pending.
+    Public quality job at 127a0f055b3fc28f61b398e496b87055048d48dd measured 89.59% statement
+    coverage with 991 tests.
   runtime_suite:
     passed: 991
     warnings: errors
     minimum_statement_coverage_percent: 80
-    public_ci: pending
+    public_ci: Quality, dependency audit and CodeQL passed. Windows, Linux and minimum Polars
+      passed; final macOS matrix completion pending.
     minimum_polars_affected_tests_passed: 111
     utf8_cli_piped_cases_passed: 8
     standalone_examples_passed: 8
+    public_quality_job:
+      https://github.com/autonomio/wrangle/actions/runs/36893350607/job/110474334527
+    statement_coverage_percent: 89.59
   branch_coverage_percent: 79.92334905660377
   branch_coverage_revision: Windows fixes before the final portable-evidence-path regression; 980
     tests passed. The 86.51% combined figure is not branch-only coverage.
