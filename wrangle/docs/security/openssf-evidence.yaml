@@ -1,6 +1,7 @@
 # Criterion answers are drafts; project 15135 is registered, no badge attainment claimed.
 # Criterion answers are drafts; project 15135 is registered, no badge attainment claimed.
 # Criterion answers are drafts; project 15135 is registered, no badge attainment claimed.
+# Criterion answers are drafts; project 15135 is registered, no badge attainment claimed.
 # OpenSSF Best Practices answer draft. No form has been submitted.
 # IDs/categories come from the pinned official criteria; explanations are Wrangle-specific.
 format: wrangle-openssf-evidence-draft-v1
@@ -2219,7 +2220,7 @@ levels:
         - tests/
         - CHANGELOG.md
         - wrangle/docs/security/regressions.yaml
-      justification: The six-month correction inventory maps 20 known behavior fixes to named,
+      justification: The six-month correction inventory maps 19 known behavior fixes to named,
         meaningful regression tests, including corrected legacy science behavior and Windows
         bundle/timezone defects. Feature/type migrations and test-only fixes are excluded from the
         denominator. Review the inventory and publish passing CI; do not infer this percentage from

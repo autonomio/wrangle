@@ -144,6 +144,9 @@ Read [migration](wrangle/docs/migration.md) when upgrading from older Wrangle.
 
 ## Development and security
 
+[OpenSSF Best Practices progress](https://www.bestpractices.dev/en/projects/15135)
+records the project assessment; badge attainment depends on verified evidence.
+
 [Contributing](CONTRIBUTING.md) covers installation, required checks and review;
 [governance](GOVERNANCE.md), [conduct](CODE_OF_CONDUCT.md), the [roadmap](ROADMAP.md)
 and [release notes](CHANGELOG.md) explain how the project is maintained.
