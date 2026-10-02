@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "wrangle"
-version = "1.0.0"
+version = "1.0.1"
 description = "Native Polars data preparation for scientific researchers and agents"
 readme = "README.md"
 license = "MIT"
@@ -39,7 +39,7 @@ packages = ["wrangle"]
 "AGENTS.md" = "wrangle/AGENTS.md"
 
 [tool.hatch.build.targets.sdist]
-include = ["/wrangle", "/tests", "/examples", "/scripts", "/README.md", "/AGENTS.md", "/LICENSE", "/pyproject.toml", "/requirements*.txt", "/.github", "/SECURITY.md", "/CONTRIBUTING.md", "/GOVERNANCE.md", "/CODE_OF_CONDUCT.md", "/ROADMAP.md", "/CHANGELOG.md"]
+include = ["/wrangle", "/tests", "/examples", "/scripts", "/README.md", "/AGENTS.md", "/LICENSE", "/pyproject.toml", "/requirements*.txt", "/requirements*.in", "/.github", "/SECURITY.md", "/CONTRIBUTING.md", "/GOVERNANCE.md", "/CODE_OF_CONDUCT.md", "/ROADMAP.md", "/CHANGELOG.md"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

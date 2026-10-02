@@ -39,12 +39,15 @@ jobs:
       - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
           python-version: ${{ matrix.python }}
-      - run: python -m pip install --upgrade pip
-      - run: python -m pip install -c requirements-ci.txt '.[dev,excel]'
+      - if: matrix.polars == 'latest'
+        run: |
+          python -m pip install --require-hashes --only-binary=:all: -r requirements-ci.txt -r requirements-audit.txt
       - if: matrix.polars != 'latest'
-        run: python -m pip install polars==${{ matrix.polars }}
-      - if: matrix.yaml != 'latest'
-        run: python -m pip install ruamel.yaml==${{ matrix.yaml }}
+        run: |
+          python -m pip install --require-hashes --only-binary=:all: -r requirements-ci.txt -r requirements-minimum.txt
+      - run: python -m pip install --no-deps --no-build-isolation -e '.[dev,excel]'
+      - run: python -m pip check
+      - run: python scripts/lock_dependencies.py --check
       - run: python -m pytest -W error
       - run: python scripts/build_catalog.py --check
       - run: python examples/research_batch.py
@@ -69,11 +72,14 @@ jobs:
       - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
           python-version: '3.13'
-      - run: python -m pip install --upgrade pip
-      - run: python -m pip install -c requirements-ci.txt '.[dev,excel]'
+      - run: |
+          python -m pip install --require-hashes --only-binary=:all: -r requirements-ci.txt -r requirements-audit.txt
+      - run: python -m pip install --no-deps --no-build-isolation -e '.[dev,excel]'
+      - run: python -m pip check
+      - run: python scripts/lock_dependencies.py --check
       - run: python -m ruff check wrangle scripts
       - run: python -m bandit -c pyproject.toml -r wrangle scripts/check_release.py -q
-      - run: python -m pip_audit -r requirements-audit.txt -r requirements-ci.txt
+      - run: python -m pip_audit --require-hashes -r requirements-audit.txt -r requirements-ci.txt
       - run: python scripts/check_reproducible_build.py
       - run: python -m pytest -W error --cov=wrangle --cov-report=term --cov-report=xml
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1

@@ -9,8 +9,11 @@ wheel and source archive all match the version in `pyproject.toml`.
 A separate job signs provenance for the wheel, source archive and `SHA256SUMS`
 using GitHub Actions OIDC and Sigstore through `actions/attest`. It verifies the
 repository, workflow, source commit, tag and hosted-runner identity before
-attaching artifacts and `attestation.json` to the release. Assets are never
-silently replaced. A checksum establishes byte consistency; signed provenance
+attaching artifacts, `attestation.json` and `provenance.intoto.jsonl` to the release.
+The JSONL file contains the unchanged signed DSSE envelope from the verified
+Sigstore bundle, making the existing SLSA provenance available in the standard
+in-toto distribution format. Keep the complete bundle for certificate and trust
+verification. Assets are never silently replaced. A checksum establishes byte consistency; signed provenance
 establishes the release workflow identity. Neither establishes scientific validity.
 
 ## Publication status

@@ -1,0 +1,5 @@
+when:
+  if: {col: flag}
+  then: {col: measurement}
+  else: 0.0
+  nulls: else

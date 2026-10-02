@@ -1,0 +1,4 @@
+is_in:
+  value: {col: text}
+  values: [' A ', null, 'β']
+  nulls: match

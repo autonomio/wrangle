@@ -1,5 +1,17 @@
 # Release notes
 
+## 1.0.1 — Unreleased
+
+- Preserve long measurement-field names, significant repeated spaces and escaped
+  Unicode characters when saving YAML protocols; text retains its exact values.
+- Add bounded continuous Atheris fuzzing for strict YAML and native expressions,
+  with retained corpora and an ordinary regression for the serialization defect.
+- Install complete CI, release, optional Excel and minimum-version dependency
+  plans with verified SHA-256 hashes; retain supported ranges for package users.
+- Require independent human approval, code-owner review and approval after the
+  last push, alongside existing up-to-date test/security checks and no bypass.
+- Export unchanged verified release provenance in standard in-toto JSONL form.
+
 ## 1.0.0
 
 Wrangle becomes native Polars data preparation for scientific researchers and

@@ -1,0 +1,56 @@
+name: Adversarial protocol fuzzing
+
+on:
+  push:
+    branches: [master]
+    paths: ['wrangle/**', 'scripts/*fuzz*.py', 'scripts/fuzz_corpus/**', 'requirements*', pyproject.toml, scripts/lock_dependencies.py, '.github/workflows/fuzzing.yml']
+  pull_request:
+    branches: [master]
+    paths: ['wrangle/**', 'scripts/*fuzz*.py', 'scripts/fuzz_corpus/**', 'requirements*', pyproject.toml, scripts/lock_dependencies.py, '.github/workflows/fuzzing.yml']
+  schedule:
+    - cron: '27 12 * * 2'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: fuzzing-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  fuzz:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      POLARS_MAX_THREADS: '1'
+      FUZZ_SECONDS: ${{ github.event_name == 'schedule' && '300' || '60' }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.13'
+      - run: |
+          python -m pip install --require-hashes --only-binary=:all: -r requirements-ci.txt -r requirements-audit.txt -r requirements-fuzz.txt
+      - run: python -m pip install --no-deps --no-build-isolation -e .
+      - run: python -m pip check
+      - run: python scripts/lock_dependencies.py --check
+      - name: Copy committed seeds into writable corpora
+        run: |
+          mkdir -p fuzz-results/protocol fuzz-results/expression
+          cp scripts/fuzz_corpus/protocol/* fuzz-results/protocol/
+          cp scripts/fuzz_corpus/expression/* fuzz-results/expression/
+      - name: Fuzz strict YAML and value-preserving round trips
+        run: python scripts/fuzz_protocol.py fuzz-results/protocol -artifact_prefix=fuzz-results/protocol/ -max_len=8192 -timeout=10 -rss_limit_mb=2048 -max_total_time="$FUZZ_SECONDS"
+      - name: Fuzz native expressions and preparation evidence
+        run: python scripts/fuzz_expression.py fuzz-results/expression -artifact_prefix=fuzz-results/expression/ -max_len=8192 -timeout=10 -rss_limit_mb=2048 -max_total_time="$FUZZ_SECONDS"
+      - name: Retain reproducing inputs and expanded corpora
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: fuzz-corpora-${{ github.run_id }}
+          path: fuzz-results/
+          if-no-files-found: ignore
+          retention-days: 14

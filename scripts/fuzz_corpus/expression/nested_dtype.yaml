@@ -1,0 +1,3 @@
+literal:
+  value: [1, 2]
+  dtype: {List: Int64}
