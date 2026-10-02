@@ -12,8 +12,8 @@ The live service is authoritative when this dated snapshot becomes stale.
 
 ## Controls
 
-- `master` requires successful tests, quality and CodeQL checks on an up-to-date
-  branch, one independent human approval, code-owner review and approval after
+- `master` requires successful tests, quality, CodeQL and fuzzing checks on an
+  up-to-date branch, one independent human approval, code-owner review and approval after
   the last push. No administrator bypass, force push or branch deletion is allowed.
   `.github/CODEOWNERS` identifies maintainers; an agent cannot supply human approval.
 - CI and release dependencies are exact versions with SHA-256 hashes. Installs

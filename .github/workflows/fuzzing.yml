@@ -3,10 +3,8 @@ name: Adversarial protocol fuzzing
 on:
   push:
     branches: [master]
-    paths: ['wrangle/**', 'scripts/*fuzz*.py', 'scripts/fuzz_corpus/**', 'requirements*', pyproject.toml, scripts/lock_dependencies.py, '.github/workflows/fuzzing.yml']
   pull_request:
     branches: [master]
-    paths: ['wrangle/**', 'scripts/*fuzz*.py', 'scripts/fuzz_corpus/**', 'requirements*', pyproject.toml, scripts/lock_dependencies.py, '.github/workflows/fuzzing.yml']
   schedule:
     - cron: '27 12 * * 2'
   workflow_dispatch:

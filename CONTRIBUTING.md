@@ -61,8 +61,8 @@ include real participant data, credentials, compiled files or unrelated changes.
 
 Every pull request requires one independent human approval, code-owner review
 and approval after the last push. `.github/CODEOWNERS` names the maintainers;
-authors cannot approve their own changes. Existing checks must pass on an
-up-to-date branch; administrators have no bypass. A reviewer checks the science
+authors cannot approve their own changes. Tests, quality, CodeQL and the bounded
+`fuzz` check must pass on an up-to-date branch; administrators have no bypass. A reviewer checks the science
 contract, source behavior, tests and compatibility. Resolve findings before merge;
 do not suppress a finding merely to pass CI. Agent analysis supplements human review. Security
 findings need a documented correction or specific reviewed non-exploitability

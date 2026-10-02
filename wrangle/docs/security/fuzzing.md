@@ -15,8 +15,10 @@ executable YAML tags, casts, regex replacements and arithmetic overflow.
 Rejected inputs may raise only the documented `WrangleError` boundary; unexpected
 exceptions, native panics and failed properties stop the run and retain input.
 
-`.github/workflows/fuzzing.yml` runs both targets for 60 seconds each on relevant
-pull requests and master changes, and for five minutes each every week. Jobs use
+`.github/workflows/fuzzing.yml` runs both targets for 60 seconds each on every
+pull request and master change, and for five minutes each every week. The `fuzz`
+check must pass before merging; triggers have no path filters so documentation
+changes also produce the required check. Jobs use
 one Polars thread, an 8 KiB input limit, a ten-second per-input timeout, a 2 GiB
 memory limit, a 15-minute job timeout and cancellation of superseded work. Each
 run retains its expanded corpora and failure artifacts for 14 days. Seeds are
