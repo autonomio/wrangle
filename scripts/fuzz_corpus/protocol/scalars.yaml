@@ -1,0 +1,7 @@
+name: "血液 assay"
+values: ["001", true, false, null, -0.0, 1e3, "2026-10-01", "yes"]
+steps:
+  - op: derive
+    columns:
+      concentration:
+        div: [{col: mass}, {col: volume}]

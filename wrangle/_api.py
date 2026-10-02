@@ -21,7 +21,7 @@ from ._core import WrangleError, dtype_spec, floating_count, require_columns
 from ._publication import publish_directory
 from ._storage import DiskTable, DiskWorkspace, collect, execution_context, file_digest, verify_evidence
 
-VERSION = "1.0.0"
+VERSION = "1.0.1"
 _RECIPE_KEYS = {"version", "name", "input", "key", "units", "steps", "checks", "descriptions", "source_options", "source_contracts", "pending_decisions", "research_decisions"}
 
 

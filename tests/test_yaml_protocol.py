@@ -246,3 +246,32 @@ def test_python_recipe_rejects_unsupported_values_before_execution(value):
     with pytest.raises(WrangleError) as caught:
         normalize_recipe({"value": value})
     assert caught.value.code in {"INVALID_RECIPE", "YAML_NONFINITE"}
+
+
+@pytest.mark.parametrize("length", [70, 90, 110, 128, 150, 1100])
+def test_long_measurement_field_names_round_trip_without_wrapped_simple_keys(tmp_path, length):
+    field = "sample_" + "a" * length + " [signal"
+    recipe = {"descriptions": {field: "Observed signal"}}
+    serialized = dump_recipe(recipe)
+    assert load_recipe(recipe_file(tmp_path, serialized)) == recipe
+
+
+@pytest.mark.parametrize("location", ["field", "name"])
+def test_long_plain_text_retains_significant_repeated_spaces(tmp_path, location):
+    value = "measurement_" + "a" * 90 + " " * 20 + "observed signal"
+    recipe = {"descriptions": {value: "Meaning"}} if location == "field" else {"name": value}
+    assert load_recipe(recipe_file(tmp_path, dump_recipe(recipe))) == recipe
+
+
+@pytest.mark.parametrize("location", ["field", "name"])
+@pytest.mark.parametrize("value", ["first\x85second", "a" * 90 + "\x85" + " " * 20 + "signal"])
+def test_yaml_nel_characters_are_escaped_without_folding_values(tmp_path, location, value):
+    recipe = {"descriptions": {value: "Meaning"}} if location == "field" else {"name": value}
+    assert load_recipe(recipe_file(tmp_path, dump_recipe(recipe))) == recipe
+
+
+@pytest.mark.parametrize("location", ["field", "name"])
+def test_long_quoted_text_does_not_gain_spaces_after_escaped_bom(tmp_path, location):
+    value = "sample_" + "a" * 90 + "\ufeff" + "b" * 60 + " [signal"
+    recipe = {"descriptions": {value: "Meaning"}} if location == "field" else {"name": value}
+    assert load_recipe(recipe_file(tmp_path, dump_recipe(recipe))) == recipe

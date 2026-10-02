@@ -1,0 +1,5 @@
+cast:
+  value: {col: measurement}
+  dtype: Int8
+  invalid: error
+  precision: exact

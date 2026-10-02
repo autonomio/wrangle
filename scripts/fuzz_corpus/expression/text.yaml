@@ -1,0 +1,7 @@
+replace:
+  value: {trim: {col: text}}
+  pattern: '(A)'
+  replacement: '$1'
+  literal: false
+  all: true
+  capture_groups: true

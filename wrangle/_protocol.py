@@ -9,6 +9,7 @@ import re
 from typing import Any
 
 from ruamel.yaml import YAML
+from ruamel.yaml.emitter import Emitter
 from ruamel.yaml.error import YAMLError
 from ruamel.yaml.events import (
     AliasEvent, DocumentStartEvent, MappingEndEvent, MappingStartEvent,
@@ -197,10 +198,35 @@ def normalize_recipe(recipe: Mapping[str, Any]) -> dict[str, Any]:
     return _plain(recipe if type(recipe) is dict else dict(recipe), set())
 
 
+class _RecipeEmitter(Emitter):
+    def choose_scalar_style(self):
+        # YAML folds a literal NEL; a quoted escape preserves the declared value.
+        if "\x85" in self.event.value:
+            return '"'
+        return super().choose_scalar_style()
+
+    def write_double_quoted(self, text, split=True):
+        # Reflow next to an escaped character can insert undeclared whitespace.
+        super().write_double_quoted(text, split=False)
+
+    def write_single_quoted(self, text, split=True):
+        super().write_single_quoted(text, split=False)
+
+    def write_plain(self, text, split=True):
+        # Wrapping plain text can invalidate keys or fold significant whitespace.
+        width = self.best_width
+        self.best_width = max(width, self.column + len(text) + 1)
+        try:
+            super().write_plain(text, split=False)
+        finally:
+            self.best_width = width
+
+
 def dump_recipe(recipe: Mapping[str, Any]) -> str:
     """Write readable YAML with the same values; comments are not execution state."""
     plain = normalize_recipe(recipe)
     emitter = YAML(typ="safe", pure=True)
+    emitter.Emitter = _RecipeEmitter
     emitter.default_flow_style = False
     emitter.sort_base_mapping_type_on_output = False
     emitter.allow_unicode = True

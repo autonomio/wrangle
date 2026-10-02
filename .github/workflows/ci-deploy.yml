@@ -23,12 +23,15 @@ jobs:
       - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
           python-version: '3.13'
-      - run: python -m pip install --upgrade pip
-      - run: python -m pip install -c requirements-ci.txt '.[dev,excel]'
+      - run: |
+          python -m pip install --require-hashes --only-binary=:all: -r requirements-ci.txt -r requirements-audit.txt
+      - run: python -m pip install --no-deps --no-build-isolation -e '.[dev,excel]'
+      - run: python -m pip check
+      - run: python scripts/lock_dependencies.py --check
       - run: python -m pytest -W error
       - run: python -m ruff check wrangle scripts
       - run: python -m bandit -c pyproject.toml -r wrangle scripts/check_release.py -q
-      - run: python -m pip_audit -r requirements-audit.txt -r requirements-ci.txt
+      - run: python -m pip_audit --require-hashes -r requirements-audit.txt -r requirements-ci.txt
       - run: python scripts/build_catalog.py --check
       - run: python -m build --no-isolation
       - run: python scripts/check_reproducible_build.py
@@ -79,6 +82,12 @@ jobs:
               --predicate-type https://slsa.dev/provenance/v1 \
               --cert-oidc-issuer https://token.actions.githubusercontent.com --deny-self-hosted-runners
           done
+      - name: Export the verified signed in-toto provenance
+        env:
+          ATTESTATION_BUNDLE: ${{ steps.attest.outputs.bundle-path }}
+        run: |
+          jq -ce '.dsseEnvelope | select(.payloadType == "application/vnd.in-toto+json" and (.signatures | length) > 0)' \
+            "$ATTESTATION_BUNDLE" > dist/provenance.intoto.jsonl
       - name: Attach immutable distributions, checksums and the attestation bundle
         env:
           GH_TOKEN: ${{ github.token }}
