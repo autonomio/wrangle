@@ -106,7 +106,24 @@ def test_release_privilege_is_separate_from_running_package_code():
     for policy in ('--repo', '--signer-workflow', '--signer-digest', '--source-digest', '--source-ref', '--predicate-type https://slsa.dev/provenance/v1', '--cert-oidc-issuer', '--deny-self-hosted-runners'):
         assert policy in operations
     assert 'dist/*.whl dist/*.tar.gz dist/SHA256SUMS' in operations
-    assert 'PYPI_API_TOKEN' not in (ROOT/'.github/workflows/ci-deploy.yml').read_text()
+    pypi = workflow['jobs']['publish-pypi']
+    assert pypi['needs'] == 'attest-and-attach'
+    assert pypi['permissions'] == {'contents': 'read'}
+    assert pypi['environment']['name'] == 'release'
+    assert pypi['environment']['url'] == 'https://pypi.org/project/wrangle/'
+    assert not any(step.get('uses', '').startswith('actions/checkout@') for step in pypi['steps'])
+    publication = next(step for step in pypi['steps'] if step.get('uses', '').startswith('pypa/gh-action-pypi-publish@'))
+    assert publication['with']['user'] == '__token__'
+    assert publication['with']['password'] == '${{ secrets.PYPI_API_TOKEN }}'
+    assert publication['with']['attestations'] is False
+    assert publication['with']['packages-dir'] == 'packages/'
+    verification = next(step for step in pypi['steps'] if step.get('working-directory') == 'verified')
+    assert 'sha256sum --check SHA256SUMS' in verification['run']
+    assert 'gh attestation verify' in verification['run']
+    for policy in ('--repo', '--signer-workflow', '--signer-digest', '--source-digest', '--source-ref', '--predicate-type https://slsa.dev/provenance/v1', '--cert-oidc-issuer', '--deny-self-hosted-runners'):
+        assert policy in verification['run']
+    assert pypi['steps'].index(verification) < pypi['steps'].index(publication)
+    assert 'secrets.PYPI' not in str(build) and 'secrets.PYPI' not in str(publish)
 
 
 def test_scorecard_publication_obeys_official_restrictions():

@@ -63,17 +63,16 @@ arguments, preconditions, and stable failures.
 
 ## First successful preparation
 
-This README describes the **1.0 API in this repository**. Historical 0.7 releases
-on PyPI use a different interface. Start from the current source checkout:
+Use Python 3.10 or later. Install Wrangle from PyPI:
 
 ```sh
-git clone https://github.com/autonomio/wrangle.git
-cd wrangle
-python -m pip install .
+python -m pip install --upgrade wrangle
 ```
 
-Use Python 3.10 or later. Installation supplies Polars and the strict YAML parser.
-For Excel, install `python -m pip install '.[excel]'` from the checkout and select
+Installation supplies Polars and the strict YAML parser. Version 1.0 replaces the
+historical 0.x interface; follow the [migration guide](wrangle/docs/migration.md)
+before upgrading existing code.
+For Excel, install `python -m pip install 'wrangle[excel]'` and select
 a worksheet explicitly. Choose new directories for examples and outputs;
 existing destinations are rejected.
 

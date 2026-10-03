@@ -16,10 +16,19 @@ in-toto distribution format. Keep the complete bundle for certificate and trust
 verification. Assets are never silently replaced. A checksum establishes byte consistency; signed provenance
 establishes the release workflow identity. Neither establishes scientific validity.
 
+A third job, bound to the GitHub `release` environment, downloads those signed
+assets and repeats checksum and provenance verification before publishing the
+same wheel and source archive to the `wrangle` PyPI project. Only this job
+receives the existing organization `PYPI_API_TOKEN` secret. Build jobs cannot
+obtain publishing credentials; publication does not check out or execute
+Wrangle source. Token-based upload does not produce PyPI index attestations;
+the verified GitHub/Sigstore release provenance remains available with the assets.
+
 ## Publication status
 
 Check the [GitHub release](https://github.com/autonomio/wrangle/releases) and its
-completed artifact workflow. A release entry or workflow definition alone does
+completed artifact and publication workflow. Confirm the version and matching
+file hashes on [PyPI](https://pypi.org/project/wrangle/#files). A release entry or workflow definition alone does
 not establish that signed assets exist: require the wheel, source archive,
 checksums and attestation bundle, then perform the verification below. Legacy
 0.x releases lack this provenance. OpenSSF attainment is assessed separately on
@@ -32,7 +41,7 @@ and copy its full commit SHA from the repository, independently of the downloade
 artifacts. Replace the two values below with that tag and commit:
 
 ```sh
-release_tag=v1.0.0
+release_tag=v1.0.1
 release_commit=REPLACE_WITH_FULL_RELEASE_COMMIT_SHA
 mkdir wrangle-release-verification
 cd wrangle-release-verification
@@ -65,6 +74,7 @@ Different operating systems or tool versions may produce different bytes. Build 
 never add credentials or participant data to a release. Version tags are immutable.
 Create release notes describing behavior, compatibility and any disclosed security
 fixes. The artifact workflow uses short-lived GitHub credentials with separate
-read-only build and restricted signing/publication jobs. PyPI publication is not
-configured by this workflow; any future trusted publisher must be verified against
-the intended repository, workflow and environment before enabling it.
+read-only build and restricted signing/publication jobs. The organization
+publication token must be available to Wrangle as `PYPI_API_TOKEN`; never print
+or copy its value into source or logs. A failed upload is not a published release; inspect
+PyPI before retrying, because uploaded distribution filenames cannot be replaced.

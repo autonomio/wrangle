@@ -5,9 +5,9 @@ is measured separately from the [Best Practices Silver badge](https://www.bestpr
 Check its timestamp and scanned commit. A proposed workflow, local result or
 projected score is not evidence that the public score has changed.
 
-The 2026-10-02 06:15 UTC published scan measured **7.3**, with signed releases
-at 10/10 and branch protection at 8/10. Hash pinning and Atheris are new source
-changes; their local Scorecard results do not yet establish a published score.
+The 2026-10-02 07:07 UTC published scan measured **8.7**, with signed releases,
+hash-pinned dependencies and fuzzing at 10/10, and branch protection at 8/10.
+The scanned commit was `9571e6d61af66a4be86cb9df3916d85d2da433f1`.
 The live service is authoritative when this dated snapshot becomes stale.
 
 ## Controls
@@ -44,5 +44,5 @@ passing checks or unrelated activity to increase a score.
 One independent approval is the practical current review gate. Two independent
 approvals would require two available reviewers for every change and are not
 currently required. Fuzzing adds adversarial coverage, not a proof that a parser
-has no defects. PyPI publication remains a separate release decision; it is not
-enabled merely to obtain packaging points.
+has no defects. PyPI publication follows explicit release authorization and verification; it is
+not enabled merely to obtain packaging points.
