@@ -19,6 +19,8 @@ interface; follow [the migration guide](../migration.md) before upgrading.
   plans with verified SHA-256 hashes; retain supported ranges for package users.
 - Require independent human approval, code-owner review and approval after the
   last push, alongside existing up-to-date test/security checks and no bypass.
+- Separate the human-review requirement from code ownership so the authorized
+  automated code owner cannot satisfy the human-maintainer approval gate.
 - Export unchanged verified release provenance in standard in-toto JSONL form.
 
 ## 1.0.0

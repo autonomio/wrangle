@@ -60,12 +60,16 @@ Keep source, generated catalog, examples and migration notes consistent. Do not
 include real participant data, credentials, compiled files or unrelated changes.
 
 Every pull request requires one independent human approval, code-owner review
-and approval after the last push. `.github/CODEOWNERS` names the maintainers;
-authors cannot approve their own changes. Tests, quality, CodeQL and the bounded
-`fuzz` check must pass on an up-to-date branch; administrators have no bypass. A reviewer checks the science
-contract, source behavior, tests and compatibility. Resolve findings before merge;
-do not suppress a finding merely to pass CI. Agent analysis supplements human review. Security
-findings need a documented correction or specific reviewed non-exploitability
+and approval after the last push. `.github/CODEOWNERS` includes the human
+maintainers and `bit-mis`, an automated reviewer. A separate required-reviewer rule
+requires one approval from `@autonomio/wrangle-human-reviewers` (`mikkokotila` and
+`EnergyGuy3`); bit-mis approval cannot satisfy that rule. Authors cannot approve
+their own changes, including work submitted through another account or agent.
+Tests, quality, CodeQL and the bounded `fuzz` check must pass on an up-to-date
+branch; administrators have no bypass. A reviewer checks the science contract,
+source behavior, tests and compatibility. Resolve findings before merge; do not
+suppress a finding merely to pass CI. Agent analysis supplements human review.
+Security findings need a documented correction or specific reviewed non-exploitability
 justification. Releases use the [verification process](../security/releases.md).
 
 Contributions use the existing MIT license. A separate CLA or compulsory DCO

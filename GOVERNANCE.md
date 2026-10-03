@@ -12,6 +12,7 @@ neural-network construction and generic workflow infrastructure are outside scop
 | Lead maintainer | Scope, compatibility, issue triage, releases, dependency/security response and access review. | Mikko Kotila (`mikkokotila`). |
 | Reviewing maintainer | Review scientific contracts, implementation and validation; accept or reject a change with reasons. | Repository maintainers acting on a particular pull request. |
 | Backup maintainer | Continuity for issue triage, merges, releases and security response within one week. | `EnergyGuy3`, confirmed by the project owner. |
+| Automated reviewer | Review changes and report findings; code-owner approval does not replace independent human review. | `bit-mis`, authorized by the project owner. |
 | Contributor | Submit focused changes, scientific assumptions, documentation and meaningful regression tests; address review findings. | The author of a contribution. |
 | Security reporter | Report privately, coordinate reproduction/disclosure and choose whether to receive public credit. | The reporter of an issue. |
 
@@ -19,7 +20,12 @@ A maintainer records significant scope or compatibility decisions in an issue or
 pull request. The lead maintainer resolves disagreements after considering the
 research use case and documented alternatives. Approval never substitutes for
 tests or scientific decisions. AI assistance does not count as independent human
-review. Changes to this governance model use the same public review process.
+review. The protected-branch rules separately require an approval from
+`@autonomio/wrangle-human-reviewers`, containing only `mikkokotila` and
+`EnergyGuy3`. GitHub rejects the pull-request author's approval; reviewers must not
+approve their own work submitted through another account or agent. Human review
+means personally examining the change, not running an approval command through
+author tooling. Changes to this governance model use the same public review process.
 
 The maintainer may delegate specific review or release responsibilities to an
 existing authorized collaborator. New repository or publishing access requires

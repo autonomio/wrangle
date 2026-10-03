@@ -15,7 +15,13 @@ The live service is authoritative when this dated snapshot becomes stale.
 - `master` requires successful tests, quality, CodeQL and fuzzing checks on an
   up-to-date branch, one independent human approval, code-owner review and approval after
   the last push. No administrator bypass, force push or branch deletion is allowed.
-  `.github/CODEOWNERS` identifies maintainers; an agent cannot supply human approval.
+  `.github/CODEOWNERS` includes maintainers and the automated reviewer `bit-mis`.
+  A separate native required-reviewer rule requires an approval from
+  `@autonomio/wrangle-human-reviewers` (`mikkokotila`, `EnergyGuy3`) for all paths;
+  bit-mis is excluded. Human maintainers personally review changes and cannot
+  approve their own work submitted through another account or agent. GitHub
+  enforces account membership and prevents pull-request author approval; it cannot
+  establish who operated an account or whether they personally performed review.
 - CI and release dependencies are exact versions with SHA-256 hashes. Installs
   reject missing or mismatched hashes and use wheels; the local checkout installs
   without fetching dependencies or isolated build tools. Package consumers retain

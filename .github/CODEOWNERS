@@ -1,3 +1,3 @@
-# Each change needs an independent maintainer review, including scientific contracts.
-# The author cannot approve their own change; another code owner must review.
+# Human maintainers and the authorized automated reviewer own all paths.
+# A separate required-team rule enforces human approval; bit-mis cannot satisfy it.
 * @mikkokotila @EnergyGuy3 @bit-mis
