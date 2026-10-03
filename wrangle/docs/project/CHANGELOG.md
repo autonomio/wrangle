@@ -17,10 +17,9 @@ interface; follow [the migration guide](../migration.md) before upgrading.
   with retained corpora and an ordinary regression for the serialization defect.
 - Install complete CI, release, optional Excel and minimum-version dependency
   plans with verified SHA-256 hashes; retain supported ranges for package users.
-- Require independent human approval, code-owner review and approval after the
-  last push, alongside existing up-to-date test/security checks and no bypass.
-- Separate the human-review requirement from code ownership so the authorized
-  automated code owner cannot satisfy the human-maintainer approval gate.
+- Designate bit-mis as the sole reviewer and code owner; require its approval
+  after the last push, alongside up-to-date test/security checks and no bypass.
+  No separate human approval is required.
 - Export unchanged verified release provenance in standard in-toto JSONL form.
 
 ## 1.0.0

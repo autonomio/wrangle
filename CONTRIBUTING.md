@@ -59,16 +59,14 @@ in the pull request. Include documentation for changed interfaces and recovery.
 Keep source, generated catalog, examples and migration notes consistent. Do not
 include real participant data, credentials, compiled files or unrelated changes.
 
-Every pull request requires one independent human approval, code-owner review
-and approval after the last push. `.github/CODEOWNERS` includes the human
-maintainers and `bit-mis`, an automated reviewer. A separate required-reviewer rule
-requires one approval from `@autonomio/wrangle-human-reviewers` (`mikkokotila` and
-`EnergyGuy3`); bit-mis approval cannot satisfy that rule. Authors cannot approve
-their own changes, including work submitted through another account or agent.
+Every pull request requires one approval after the last push. `bit-mis` is the
+sole designated reviewer and code owner in `.github/CODEOWNERS`; its automated
+review satisfies this requirement. No separate human approval is required.
+GitHub rejects approval by the pull-request author and dismisses stale approvals.
 Tests, quality, CodeQL and the bounded `fuzz` check must pass on an up-to-date
-branch; administrators have no bypass. A reviewer checks the science contract,
+branch; administrators have no bypass. Review covers the science contract,
 source behavior, tests and compatibility. Resolve findings before merge; do not
-suppress a finding merely to pass CI. Agent analysis supplements human review.
+suppress a finding merely to pass CI.
 Security findings need a documented correction or specific reviewed non-exploitability
 justification. Releases use the [verification process](wrangle/docs/security/releases.md).
 

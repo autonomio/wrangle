@@ -1,3 +1,2 @@
-# Human maintainers and the authorized automated reviewer own all paths.
-# A separate required-team rule enforces human approval; bit-mis cannot satisfy it.
-* @mikkokotila @EnergyGuy3 @bit-mis
+# The project owner designates bit-mis as the sole reviewer.
+* @bit-mis

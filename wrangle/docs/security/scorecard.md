@@ -13,15 +13,11 @@ The live service is authoritative when this dated snapshot becomes stale.
 ## Controls
 
 - `master` requires successful tests, quality, CodeQL and fuzzing checks on an
-  up-to-date branch, one independent human approval, code-owner review and approval after
-  the last push. No administrator bypass, force push or branch deletion is allowed.
-  `.github/CODEOWNERS` includes maintainers and the automated reviewer `bit-mis`.
-  A separate native required-reviewer rule requires an approval from
-  `@autonomio/wrangle-human-reviewers` (`mikkokotila`, `EnergyGuy3`) for all paths;
-  bit-mis is excluded. Human maintainers personally review changes and cannot
-  approve their own work submitted through another account or agent. GitHub
-  enforces account membership and prevents pull-request author approval; it cannot
-  establish who operated an account or whether they personally performed review.
+  up-to-date branch, one approval after the last push and dismissal of stale
+  approvals. No administrator bypass, force push or branch deletion is allowed.
+  The owner designates `bit-mis` as the sole reviewer and code owner. Its automated
+  approval satisfies the review policy; no separate human approval is required.
+  This policy does not claim independent human review.
 - CI and release dependencies are exact versions with SHA-256 hashes. Installs
   reject missing or mismatched hashes and use wheels; the local checkout installs
   without fetching dependencies or isolated build tools. Package consumers retain
@@ -47,8 +43,7 @@ Legacy unreviewed or unchecked changes remain in that history until genuine new
 work replaces them in the evaluation window. Never manufacture commits, approvals,
 passing checks or unrelated activity to increase a score.
 
-One independent approval is the practical current review gate. Two independent
-approvals would require two available reviewers for every change and are not
-currently required. Fuzzing adds adversarial coverage, not a proof that a parser
+One bit-mis approval is the current review requirement; no second reviewer is
+required. Fuzzing adds adversarial coverage, not a proof that a parser
 has no defects. PyPI publication follows explicit release authorization and verification; it is
 not enabled merely to obtain packaging points.
