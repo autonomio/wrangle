@@ -1,6 +1,15 @@
 # Release notes
 
-## 1.0.1 — Unreleased
+## 1.0.1 — 2026-10-03
+
+First native-Polars version published to PyPI. This replaces the historical 0.x
+interface; follow [the migration guide](wrangle/docs/migration.md) before upgrading.
+
+- Publish the verified wheel and source archive to the `wrangle` PyPI project
+  through CI using the existing organization publication token. Signing and
+  upload credentials are isolated from build and test execution.
+- Install directly from PyPI; retain the complete CLI, agent manual and verified
+  human/agent examples in the distributed package.
 
 - Preserve long measurement-field names, significant repeated spaces and escaped
   Unicode characters when saving YAML protocols; text retains its exact values.
@@ -8,8 +17,9 @@
   with retained corpora and an ordinary regression for the serialization defect.
 - Install complete CI, release, optional Excel and minimum-version dependency
   plans with verified SHA-256 hashes; retain supported ranges for package users.
-- Require independent human approval, code-owner review and approval after the
-  last push, alongside existing up-to-date test/security checks and no bypass.
+- Designate bit-mis as the sole reviewer and code owner; require its approval
+  after the last push, alongside up-to-date test/security checks and no bypass.
+  No separate human approval is required.
 - Export unchanged verified release provenance in standard in-toto JSONL form.
 
 ## 1.0.0

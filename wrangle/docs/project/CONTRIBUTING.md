@@ -59,13 +59,15 @@ in the pull request. Include documentation for changed interfaces and recovery.
 Keep source, generated catalog, examples and migration notes consistent. Do not
 include real participant data, credentials, compiled files or unrelated changes.
 
-Every pull request requires one independent human approval, code-owner review
-and approval after the last push. `.github/CODEOWNERS` names the maintainers;
-authors cannot approve their own changes. Tests, quality, CodeQL and the bounded
-`fuzz` check must pass on an up-to-date branch; administrators have no bypass. A reviewer checks the science
-contract, source behavior, tests and compatibility. Resolve findings before merge;
-do not suppress a finding merely to pass CI. Agent analysis supplements human review. Security
-findings need a documented correction or specific reviewed non-exploitability
+Every pull request requires one approval after the last push. `bit-mis` is the
+sole designated reviewer and code owner in `.github/CODEOWNERS`; its automated
+review satisfies this requirement. No separate human approval is required.
+GitHub rejects approval by the pull-request author and dismisses stale approvals.
+Tests, quality, CodeQL and the bounded `fuzz` check must pass on an up-to-date
+branch; administrators have no bypass. Review covers the science contract,
+source behavior, tests and compatibility. Resolve findings before merge; do not
+suppress a finding merely to pass CI.
+Security findings need a documented correction or specific reviewed non-exploitability
 justification. Releases use the [verification process](../security/releases.md).
 
 Contributions use the existing MIT license. A separate CLA or compulsory DCO

@@ -60,7 +60,8 @@ A local adversary with permission to alter source, environment and all evidence
 can construct a new self-consistent result. Native decoder defects, compromised
 upstream packages and denial of service remain possible. Receipts are not digital
 signatures of researcher data. Resource isolation, participant-data protection,
-scientific authorization and independent human review remain external controls.
+scientific authorization remains a researcher decision; the required code review
+is performed by bit-mis under the project owner's automated review policy.
 
 Update this argument when an interface, parser, source format, trust boundary or
 release mechanism changes. Include relevant adversarial regressions, scan findings

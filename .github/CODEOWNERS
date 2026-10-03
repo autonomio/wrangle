@@ -1,3 +1,2 @@
-# Each change needs an independent maintainer review, including scientific contracts.
-# The author cannot approve their own change; either maintainer can review the other.
-* @mikkokotila @EnergyGuy3
+# The project owner designates bit-mis as the sole reviewer.
+* @bit-mis

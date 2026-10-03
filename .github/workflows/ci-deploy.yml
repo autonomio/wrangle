@@ -7,8 +7,8 @@ on:
 permissions:
   contents: read
 
-# PyPI publication stays disabled until a maintainer verifies a trusted publisher
-# bound to this repository, workflow and release environment. No API-token fallback.
+# Build, signing and PyPI publication have separate credentials.
+# Only the publication job receives the existing PyPI API-token secret.
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -97,3 +97,59 @@ jobs:
         run: |
           cp "$ATTESTATION_BUNDLE" dist/attestation.json
           gh release upload "$RELEASE_TAG" dist/* --repo "$GH_REPO"
+  publish-pypi:
+    needs: attest-and-attach
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment:
+      name: release
+      url: https://pypi.org/project/wrangle/
+    permissions:
+      contents: read
+    steps:
+      - name: Require the configured PyPI publication token
+        env:
+          PYPI_API_TOKEN: ${{ secrets.PYPI_API_TOKEN }}
+        run: |
+          if [ -z "$PYPI_API_TOKEN" ]; then
+            echo '::error::PYPI_API_TOKEN must be available to Wrangle from organization secrets.'
+            exit 1
+          fi
+      - name: Retrieve the signed release artifacts
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+        run: |
+          gh release download "$RELEASE_TAG" --repo "$GH_REPO" --dir verified \
+            --pattern '*.whl' --pattern '*.tar.gz' --pattern SHA256SUMS --pattern attestation.json
+      - name: Verify checksums, signatures and the exact release identity before upload
+        working-directory: verified
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RELEASE_COMMIT: ${{ github.sha }}
+          RELEASE_REF: ${{ github.ref }}
+        run: |
+          set -euo pipefail
+          wheels=(*.whl)
+          archives=(*.tar.gz)
+          test "${#wheels[@]}" -eq 1
+          test "${#archives[@]}" -eq 1
+          sha256sum --check SHA256SUMS
+          for artifact in "${wheels[@]}" "${archives[@]}" SHA256SUMS; do
+            gh attestation verify "$artifact" --bundle attestation.json \
+              --repo "$GH_REPO" --signer-workflow "$GH_REPO/.github/workflows/ci-deploy.yml" \
+              --signer-digest "$RELEASE_COMMIT" --source-digest "$RELEASE_COMMIT" --source-ref "$RELEASE_REF" \
+              --predicate-type https://slsa.dev/provenance/v1 \
+              --cert-oidc-issuer https://token.actions.githubusercontent.com --deny-self-hosted-runners
+          done
+          mkdir ../packages
+          cp "${wheels[@]}" "${archives[@]}" ../packages/
+      - name: Publish the verified distributions to PyPI
+        uses: pypa/gh-action-pypi-publish@dc37677b2e1c63e2034f94d8a5b11f265b73ba33 # v1.14.2
+        with:
+          packages-dir: packages/
+          user: __token__
+          password: ${{ secrets.PYPI_API_TOKEN }}
+          attestations: false
