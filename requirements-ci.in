@@ -1,7 +1,7 @@
 # Reviewed tool versions; scripts/lock_dependencies.py adds their full dependency closure.
 # Runtime ranges remain in pyproject.toml; CI and releases use the committed hashes.
 pip==26.2.1
-uv==0.12.22
+uv==0.13.0
 build==1.6.1
 hatchling==1.32.4
 editables==0.5
