@@ -46,7 +46,7 @@ jobs:
         run: python scripts/fuzz_expression.py fuzz-results/expression -artifact_prefix=fuzz-results/expression/ -max_len=8192 -timeout=10 -rss_limit_mb=2048 -max_total_time="$FUZZ_SECONDS"
       - name: Retain reproducing inputs and expanded corpora
         if: always()
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: fuzz-corpora-${{ github.run_id }}
           path: fuzz-results/
