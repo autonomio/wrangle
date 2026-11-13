@@ -22,7 +22,7 @@ except ImportError:
     import tomli as tomllib
 
 ROOT = Path(__file__).resolve().parents[1]
-UV_VERSION = "0.12.22"
+UV_VERSION = "0.13.4"
 HASH_LINE = re.compile(r"    --hash=sha256:[0-9a-f]{64}(?: \\\s*)?$")
 
 
